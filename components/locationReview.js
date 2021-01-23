@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
+
 class LocationReview extends Component{
+    //this component returns a list of location reviews
     constructor(props)
     {
         super(props);
@@ -19,7 +21,7 @@ class LocationReview extends Component{
                 <Text>Cleanliness Rating: {locationReview.clenliness_rating}</Text>
                 <Text>Review: {locationReview.review_body}</Text>
                 <Text>Likes: {locationReview.likes}</Text>
-               
+                <Text>     </Text>
             </View>
         )
     }
