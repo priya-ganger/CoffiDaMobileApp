@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, Image, StyleSheet } from 'react-native';
 import LocationReview from './locationReview';
+
+
 
 class Location extends Component{
     // This component returns a location with a list of reviews.
     constructor(props)
     {
         super(props);
+
+        // this.state= {
+        //     displayImg: true
+        //   }
     }
+
+    
+
+    // onErrorLoadingImg = () => {
+    //     this.setState({displayImg: false})
+    // }
 
     render(){
         const location = this.props.data;
+
+        
       
 
         return(
+            
             <View>
                 <Text>Location ID: {location.location_id}</Text>
                 <Text>Location Name: {location.location_name}</Text>
@@ -34,12 +49,16 @@ class Location extends Component{
                     renderItem={({item}) => (<LocationReview data={item} />
                         )}
                     keyExtractor={(item) => item.review_id.toString()}
-                 />
-               
-          
-               
+                 /> 
+
+
+
+
             </View>
-        )
-    }
+               
+           
+
+        );
+     }
 }
 export default Location;
