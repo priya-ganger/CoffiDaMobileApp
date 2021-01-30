@@ -13,8 +13,8 @@ class Contact extends Component{
             <View>
                 <Text>This is the Contact screen </Text>
 
-                 <Button title="Go back"
-                onPress={() => navigation.goBack()} /> 
+                 {/* <Button title="Go back"
+                onPress={() => navigation.goBack()} />  */}
             </View>
 
             

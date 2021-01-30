@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer, StackActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs';
 
 import React, { Component } from 'react';
 import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
 
 const stack = createStackNavigator();
 const drawer = createDrawerNavigator();
+const tab = createBottomTabNavigator ();
 
 class App extends Component {
 
@@ -181,18 +183,24 @@ class App extends Component {
 render(){
   return (
     <NavigationContainer>
-       <stack.Navigator>
+       {/* <stack.Navigator>
         <stack.Screen name="Home" component={Home} />
-        <stack.Screen name="About" component={About} />
+        <stack.Screen name="About" component={About}  options={{title:"Our Story"}}/>
         <stack.Screen name="Contact" component={Contact} />
-      </stack.Navigator> 
+      </stack.Navigator>  */}
 
-      {/* <drawer.Navigator>
+      {/* <tab.Navigator>
+        <tab.Screen name="Home" component={Home} />
+        <tab.Screen name="About" component={About} />
+        <tab.Screen name="Contacct" component={Contact} />
+      </tab.Navigator> */}
+
+       <drawer.Navigator>
         <drawer.Screen name="Home" component={Home} />
         <drawer.Screen name="About" component={About} />
         <drawer.Screen name="Contact" component={Contact} />
-        <View><text>Hello</text></View>
-      </drawer.Navigator> */}
+       
+      </drawer.Navigator> 
       
       {/* <View>
          <LocationReview data={this.state.locationReview} />
