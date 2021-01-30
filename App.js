@@ -1,8 +1,19 @@
+import 'react-native-gesture-handler';
+
+import { NavigationContainer, StackActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 import React, { Component } from 'react';
 import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
+
 import LocationReview from './components/locationReview';
 import Location from './components/location'
 import User from './components/user'
+
+import Home from './components/home'
+import About from './components/about'
+import Contact from './components/contact'
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +24,9 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
+
+const stack = createStackNavigator();
+const drawer = createDrawerNavigator();
 
 class App extends Component {
 
@@ -25,7 +39,7 @@ class App extends Component {
         "first_name": "Priya",
         "last_name": "Ganger",
         "email": "priya.ganger@mmu.ac.uk",
-          "favourite_locations": [
+        "favourite_locations": [
             {
               "location_id": 73,
               "location_name": "Aunt Mary's Great Coffee Shop",
@@ -166,11 +180,25 @@ class App extends Component {
 
 render(){
   return (
-      // <View>
-      //   <LocationReview data={this.state.locationReview} />
-      // </View>
+    <NavigationContainer>
+       <stack.Navigator>
+        <stack.Screen name="Home" component={Home} />
+        <stack.Screen name="About" component={About} />
+        <stack.Screen name="Contact" component={Contact} />
+      </stack.Navigator> 
 
-      <View>
+      {/* <drawer.Navigator>
+        <drawer.Screen name="Home" component={Home} />
+        <drawer.Screen name="About" component={About} />
+        <drawer.Screen name="Contact" component={Contact} />
+        <View><text>Hello</text></View>
+      </drawer.Navigator> */}
+      
+      {/* <View>
+         <LocationReview data={this.state.locationReview} />
+       </View> */}
+      
+      {/* <View>
         <User data={this.state.user} />
         <Location data={this.state.location} />
         <FlatList
@@ -178,7 +206,7 @@ render(){
            renderItem={({item}) => (<LocationReview data={item} />
            )}
            keyExtractor={(item) => item.review_id.toString()}
-        />   
+        />    */}
 
         {/* <View style={styles.container}>
                 <Image
@@ -186,11 +214,8 @@ render(){
                   source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
                 />
         </View> */}
-
-
-
-
-      </View>
+      {/* </View> */}
+      </NavigationContainer>
 
 
         );
@@ -198,34 +223,3 @@ render(){
 }
 
 export default App;
-
-//Test data
-    //   locationReviews: [{
-    //     "review_id": 1,
-    //     "overall_rating": 5,
-    //     "price_rating": 4,
-    //     "quality_rating": 3,
-    //     "clenliness_rating": 5,
-    //     "review_body": "Delicious coffee, would recommend!",
-    //     "likes": 5000
-    //   },
-
-    //  {
-    //     "review_id": 2,
-    //     "overall_rating": 5,
-    //     "price_rating": 4,
-    //     "quality_rating": 3,
-    //     "clenliness_rating": 5,
-    //     "review_body": "Boring!",
-    //     "likes": 50001
-    //   },
-
-    //   {
-    //     "review_id": 3,
-    //     "overall_rating": 5,
-    //     "price_rating": 4,
-    //     "quality_rating": 3,
-    //     "clenliness_rating": 5,
-    //     "review_body": "Yay!",
-    //     "likes": 50002
-    //   }], 
