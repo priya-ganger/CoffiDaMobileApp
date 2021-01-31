@@ -10,12 +10,14 @@ class Home extends Component{
 
         return(
             <View>
-              <Text>This is the home screennn</Text>
-                 {/* <Button title="About"
+              <Text>This is the home screnn</Text>
+                  
+                  
+                  {/* <Button title="About"
                 onPress={() => navigation.navigate('About')} />
 
                 <Button title="Contact"
-                onPress={() => navigation.navigate('Contact')} />  */}
+                onPress={() => navigation.navigate('Contact')} />    */}
             </View>
         )
     }

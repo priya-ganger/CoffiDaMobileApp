@@ -12,8 +12,8 @@ class About extends Component{
                 <Text>This is the About screen </Text>
 
                 
-                {/* <Button title="Go back"
-                onPress={() => navigation.goBack()} />  */}
+                 <Button title="Go back"
+                onPress={() => navigation.goBack()} />  
             </View>
         )
     }

@@ -12,9 +12,17 @@ import LocationReview from './components/locationReview';
 import Location from './components/location'
 import User from './components/user'
 
-import Home from './components/home'
-import About from './components/about'
-import Contact from './components/contact'
+import Home from './screens/home'
+import Login from './screens/login'
+import LogOut from './screens/logout'
+import SignUp from './screens/signup'
+import Settings from './screens/settings'
+
+import Search from './screens/search'
+import Favourites from './screens/favourites'
+import Reviews from './screens/reviews'
+import Profile from './screens/profile'
+
 
 const styles = StyleSheet.create({
   container: {
@@ -26,9 +34,22 @@ const styles = StyleSheet.create({
   },
 });
 
-const stack = createStackNavigator();
-const drawer = createDrawerNavigator();
-const tab = createBottomTabNavigator ();
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator ();
+
+
+const AppTabs = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name="Favourites" component={Favourites} />
+      <Tab.Screen name="Reviews" component={Reviews} />
+      <Tab.Screen name="Profile" component={Profile} />
+    </Tab.Navigator>
+  );
+}
+
 
 class App extends Component {
 
@@ -180,52 +201,22 @@ class App extends Component {
      }
   }
 
+
+
 render(){
   return (
     <NavigationContainer>
-       {/* <stack.Navigator>
-        <stack.Screen name="Home" component={Home} />
-        <stack.Screen name="About" component={About}  options={{title:"Our Story"}}/>
-        <stack.Screen name="Contact" component={Contact} />
-      </stack.Navigator>  */}
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Login" component={Login} />
+        <Drawer.Screen name="Sign Up" component={SignUp} />
+        <Drawer.Screen name="Settings" component={Settings} />
+        <Drawer.Screen name="Log Out" component={LogOut} />
 
-      {/* <tab.Navigator>
-        <tab.Screen name="Home" component={Home} />
-        <tab.Screen name="About" component={About} />
-        <tab.Screen name="Contacct" component={Contact} />
-      </tab.Navigator> */}
-
-       <drawer.Navigator>
-        <drawer.Screen name="Home" component={Home} />
-        <drawer.Screen name="About" component={About} />
-        <drawer.Screen name="Contact" component={Contact} />
-       
-      </drawer.Navigator> 
-      
-      {/* <View>
-         <LocationReview data={this.state.locationReview} />
-       </View> */}
-      
-      {/* <View>
-        <User data={this.state.user} />
-        <Location data={this.state.location} />
-        <FlatList
-           data={this.state.locationReviews}
-           renderItem={({item}) => (<LocationReview data={item} />
-           )}
-           keyExtractor={(item) => item.review_id.toString()}
-        />    */}
-
-        {/* <View style={styles.container}>
-                <Image
-                  style={styles.tinyLogo}
-                  source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
-                />
-        </View> */}
-      {/* </View> */}
-      </NavigationContainer>
-
-
+        <AppTabs />
+      </Drawer.Navigator>   
+   </NavigationContainer>
+     
         );
     }
 }
