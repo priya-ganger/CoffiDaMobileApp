@@ -1,29 +1,25 @@
-// import { NavigationContainer } from '@react-navigation/native';
-// import React, { Component } from 'react';
-// import { Text, View, Button } from 'react-native';
+import React from "react";
+import { View, Button, Text, StyleSheet } from "react-native";
 
+const Home = ({ navigation }) => {
+  return (
+    <View style={styles.center}>
+      <Text>This is the home screen</Text>
+      <Button
+        title="Go to Profile Screen"
+        onPress={() => navigation.navigate("Profile")} // added an onPress event which would navigate to the Profile screen
+      />
+    </View>
+  );
+};
 
-// class Home extends Component{
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+});
 
-//     render(){
-        
-//         const navigation = this.props.navigation;
-      
-//         return(
-//             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//               <Text style={{ fontSize: 20 }}>This is the home screen</Text>
-                  
-//                <Button title="Profile"
-//                 onPress={() => this.props.navigation.navigate('Profile', {userId:1, userName: 'Priya'})} />
-
-
-//                    <Button title="Settings"
-//                 onPress={() => navigation.navigate('Settings')} />
-
-                
-
-//             </View>
-//         )
-//     }
-// }
-// export default Home;
+export default Home;

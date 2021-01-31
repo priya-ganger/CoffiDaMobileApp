@@ -1,28 +1,21 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import React from "react";
+import { View, StyleSheet, Text } from "react-native";
 
-class Settings extends Component{
+const Settings = () => {
+  return (
+    <View style={styles.center}>
+      <Text>This is the Settings screen</Text>
+    </View>
+  );
+};
 
-    render(){
-        
-        const navigation = this.props.navigation;
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+});
 
-        return(
-
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontSize: 20 }}>This is the Settings Screen</Text>
-
-            <Button title="Go back"
-                onPress={() => navigation.goBack()} />  
-            </View>
-            
-                  
-            //       {/* <Button title="About"
-            //     onPress={() => navigation.navigate('About')} />
-
-            
-        )
-    }
-}
 export default Settings;
