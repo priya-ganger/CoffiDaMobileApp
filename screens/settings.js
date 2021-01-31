@@ -9,16 +9,19 @@ class Settings extends Component{
         const navigation = this.props.navigation;
 
         return(
-            <View>
-              <Text>This is the Settings screnn</Text>
-                  
-                  
-                  {/* <Button title="About"
-                onPress={() => navigation.navigate('About')} />
 
-                <Button title="Contact"
-                onPress={() => navigation.navigate('Contact')} />    */}
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontSize: 20 }}>This is the Settings Screen</Text>
+
+            <Button title="Go back"
+                onPress={() => navigation.goBack()} />  
             </View>
+            
+                  
+            //       {/* <Button title="About"
+            //     onPress={() => navigation.navigate('About')} />
+
+            
         )
     }
 }

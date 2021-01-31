@@ -1,25 +1,29 @@
-import { NavigationContainer } from '@react-navigation/native';
-import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+// import { NavigationContainer } from '@react-navigation/native';
+// import React, { Component } from 'react';
+// import { Text, View, Button } from 'react-native';
 
-class Home extends Component{
 
-    render(){
+// class Home extends Component{
+
+//     render(){
         
-        const navigation = this.props.navigation;
-
-        return(
-            <View>
-              <Text>This is the home screnn</Text>
+//         const navigation = this.props.navigation;
+      
+//         return(
+//             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//               <Text style={{ fontSize: 20 }}>This is the home screen</Text>
                   
-                  
-                  {/* <Button title="About"
-                onPress={() => navigation.navigate('About')} />
+//                <Button title="Profile"
+//                 onPress={() => this.props.navigation.navigate('Profile', {userId:1, userName: 'Priya'})} />
 
-                <Button title="Contact"
-                onPress={() => navigation.navigate('Contact')} />    */}
-            </View>
-        )
-    }
-}
-export default Home;
+
+//                    <Button title="Settings"
+//                 onPress={() => navigation.navigate('Settings')} />
+
+                
+
+//             </View>
+//         )
+//     }
+// }
+// export default Home;

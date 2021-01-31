@@ -12,7 +12,7 @@ import LocationReview from './components/locationReview';
 import Location from './components/location'
 import User from './components/user'
 
-import Home from './screens/home'
+//import Home from './screens/home'
 import Login from './screens/login'
 import LogOut from './screens/logout'
 import SignUp from './screens/signup'
@@ -26,30 +26,30 @@ import Profile from './screens/profile'
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
-  },
-  photo: {
-    width: 50,
-    height: 50,
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
-const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator ();
-
-
-const AppTabs = () => {
+function Home() {
   return (
+    //  <View>
+    //  <Text style={{ fontSize: 20 }}>This is the home screen</Text>
     <Tab.Navigator>
       <Tab.Screen name="Search" component={Search} />
       <Tab.Screen name="Favourites" component={Favourites} />
       <Tab.Screen name="Reviews" component={Reviews} />
       <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
+    // </View>
   );
 }
 
+const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator ();
 
 class App extends Component {
 
@@ -201,20 +201,50 @@ class App extends Component {
      }
   }
 
+  
+
 
 
 render(){
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Sign Up" component={SignUp} />
-        <Drawer.Screen name="Settings" component={Settings} />
-        <Drawer.Screen name="Log Out" component={LogOut} />
+      {/* <Stack.Navigator
+      // this will change all the headers. or can style indiviudually (see the home one)
+      // screenOptions={{
+      //   headerStyle: {
+      //     backgroundColor: '#1ACB97',
+      //   },
+      //   headerTintColor: '#fff',
+      //   headerTitleStyle: {
+      //     fontWeight: 'bold',
+      //   },
+      // }}
+      >
+        <Stack.Screen name="Home" component={Home} options={{ title: 'This is the Home Screen!', headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }} />
 
-        <AppTabs />
-      </Drawer.Navigator>   
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Settings" component={Settings} />
+        
+        {/* <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Sign Up" component={SignUp} />
+        <Stack.Screen name="Log Out" component={LogOut} /> */}
+
+       
+      {/* </Stack.Navigator>    */} 
+
+      <Drawer.Navigator initialRouteName="Home">
+				<Drawer.Screen name="Home" component={Home} />
+				<Drawer.Screen name="Settings" component={Settings} />
+        
+			</Drawer.Navigator>
+      
    </NavigationContainer>
      
         );
