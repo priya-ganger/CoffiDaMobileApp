@@ -1,29 +1,44 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MainStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, SettingsStackNavigator,  } from "./StackNavigator";
-
-// import { MainStackNavigator, SearchStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator,  ProfileStackNavigator } from "./StackNavigator";
+import { MainStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, SettingsStackNavigator, ProfileStackNavigator  } from "./StackNavigator";
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Search') {
+          iconName = focused ? 'search': 'search-outline';
+        } else if (route.name === 'Favourites') {
+          iconName = focused ? 'heart' : 'heart-outline';
+        }
+        else if (route.name === 'Reviews') {
+          iconName = focused ? 'clipboard' : 'clipboard-outline';
+        }
+        else if (route.name === 'Settings') {
+          iconName = focused ? 'cog' : 'cog-outline';
+        }
+        else if (route.name === 'Profile') {
+          iconName = focused ? 'person' : 'person-outline';
+        }
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+    })}
+    tabBarOptions={{
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+    }}
+    >
       <Tab.Screen name="Search" component={MainStackNavigator} />
       <Tab.Screen name="Favourites" component={FavouritesStackNavigator} />
       <Tab.Screen name="Reviews" component={ReviewsStackNavigator} />
       <Tab.Screen name="Settings" component={SettingsStackNavigator} /> 
-      
-      
-
-
-      {/* 
-
-     
-      <Tab.Screen name="Reviews" component={ReviewsStackNavigator} />
       <Tab.Screen name="Profile" component={ProfileStackNavigator} /> 
-      
-      */}
     </Tab.Navigator>
   );
 };

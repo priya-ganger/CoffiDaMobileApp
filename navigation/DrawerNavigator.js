@@ -1,5 +1,4 @@
 import React from "react";
-
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { SettingsStackNavigator } from "./StackNavigator";
 import TabNavigator from "./TabNavigator";
@@ -11,10 +10,6 @@ const DrawerNavigator = () => {
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={TabNavigator} />
      <Drawer.Screen name="Settings" component={SettingsStackNavigator} />
-
-     
-
-
     </Drawer.Navigator>
   );
 }

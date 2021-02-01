@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-
 import Home from "../screens/home";
 import Search from "../screens/search";
 import Favourites from "../screens/favourites";
@@ -51,25 +50,12 @@ const ReviewsStackNavigator = () => {
   );
 }
 
-export { MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator };
+const ProfileStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Navigator>
+  );
+}
 
-
-// const FavouritesStackNavigator = () => {
-//   return (
-//     <Stack.Navigator screenOptions={screenOptionStyle}>
-//       <Stack.Screen name="Favourites" component={Favourites} />
-//     </Stack.Navigator>
-//   );
-// }
-
-
-
-// const ProfileStackNavigator = () => {
-//   return (
-//     <Stack.Navigator screenOptions={screenOptionStyle}>
-//       <Stack.Screen name="Profile" component={Profile} />
-//     </Stack.Navigator>
-//   );
-// }
-
-// export { MainStackNavigator, SearchStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator,  ProfileStackNavigator};
+export { MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator };
