@@ -6,6 +6,8 @@ import Favourites from "../screens/favourites";
 import Reviews  from "../screens/reviews";
 import Profile  from "../screens/profile";
 import Settings  from "../screens/settings";
+import Login  from "../screens/login";
+import SignUp  from "../screens/signup";
 
 const Stack = createStackNavigator();
 
@@ -58,4 +60,20 @@ const ProfileStackNavigator = () => {
   );
 }
 
-export { MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator };
+const LoginStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Login" component={Login} />
+    </Stack.Navigator>
+  );
+}
+
+const SignUpStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="SignUp" component={SignUp} />
+    </Stack.Navigator>
+  );
+}
+
+export { MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, LoginStackNavigator, SignUpStackNavigator };

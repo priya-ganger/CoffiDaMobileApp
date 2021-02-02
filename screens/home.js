@@ -1,17 +1,42 @@
-import React from "react";
-import { View, Button, Text, StyleSheet } from "react-native";
+import React, { Component } from "react";
+import { View, Button, Text, StyleSheet, navigation } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Home = ({ navigation }) => {
+
+class Home extends Component {
+
+  // componentDidMount() {
+  //   this.unsubscribe = this.props.navigation.addListener('focus', () => {
+  //     this.checkLoggedIn();
+  //   });
+  // }
+  
+
+  // componentWillMount() {
+  //   this.unsubscribe();
+  // }
+
+  // checkLoggedIn = async () => {
+  //   const value = await AsyncStorage.getItem('@session_token');
+  //   if(value == null) {
+  //     this.props.navigation.navigate('Login');
+  //   }
+  // };
+
+render(){
+  const navigation = this.props.navigation;
   return (
     <View style={styles.center}>
       <Text>This is the home screen</Text>
       <Button
         title="Go to Profile Screen"
-        onPress={() => navigation.navigate("Profile")} // added an onPress event which would navigate to the Profile screen
+        onPress={() => navigation.navigate("Profile")}
       />
     </View>
   );
 };
+}
+
 
 const styles = StyleSheet.create({
   center: {

@@ -13,12 +13,6 @@ class Search extends Component{
               <Text>This is the Search screen</Text>
               <Button title="Go back"
                 onPress={() => navigation.goBack()} />  
-                  
-                  {/* <Button title="About"
-                onPress={() => navigation.navigate('About')} />
-
-                <Button title="Contact"
-                onPress={() => navigation.navigate('Contact')} />    */}
             </View>
         )
     }
