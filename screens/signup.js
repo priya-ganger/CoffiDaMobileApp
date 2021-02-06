@@ -1,3 +1,4 @@
+
 import { NavigationContainer } from '@react-navigation/native';
 import React, { Component } from 'react';
 import { Text, View, Button, ToastAndroid, TextInput } from 'react-native';
@@ -18,7 +19,7 @@ class SignUp extends Component{
     signUp = () => {
         //need to add some validation. make sure email + pw are valid
 
-        return fetch("http://10.0.2.2.3333/api/1.0.0/user", {
+        return fetch("http://10.0.2.2:3333/api/1.0.0/user", {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -26,8 +27,20 @@ class SignUp extends Component{
             body: JSON.stringify(this.state)
 
         })
-        .then(async(responseJson) => {
+        .then((response) => {
+            if(response.status === 201){
+               return response.json()
+            }
+            else if(response.status === 400){
+                throw 'Failed validation';
+            }
+            else{
+                throw 'Something went wrong';
+            }
+        })
+        .then((responseJson) => {
             console.log("User created", responseJson);
+            ToastAndroid.show("Account created", ToastAndroid.SHORT);
             this.props.navigation.navigate("Login");
 
         })
@@ -63,14 +76,14 @@ class SignUp extends Component{
                 placeholder="Email"
                 onChangeText={(email)=>this.setState({email})}
                 value={this.state.email}
-                />
+             />
 
-                <TextInput 
+             <TextInput 
                 placeholder="Password"
-                onChangeText={(password)=>this.setState({password})}
+                onChangeText={(password) => this.setState({password})}
                 value={this.state.password}
                 secureTextEntry={true}
-                />
+             />
 
                 <Button 
                 title="Create an account"

@@ -76,4 +76,4 @@ const SignUpStackNavigator = () => {
   );
 }
 
-export { MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, LoginStackNavigator, SignUpStackNavigator };
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, SignUpStackNavigator };
