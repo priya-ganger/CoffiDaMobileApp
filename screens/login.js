@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Text, View, Button, TouchableOpacity, StyleSheet, ToastAndroid, TextInput } from 'react-native';
+import { Text, View, Button, TouchableOpacity, StyleSheet, ToastAndroid, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Login extends Component{
@@ -44,6 +44,11 @@ class Login extends Component{
             console.log(responseJson);
             await AsyncStorage.setItem('@session_token', responseJson.token);
             this.props.navigation.navigate("Home");
+            await AsyncStorage.setItem('@session_id', JSON.stringify(responseJson.id));
+            console.log("This is the user id " +responseJson.id)
+            this.props.navigation.navigate("Home", {userId: JSON.stringify(responseJson.id)});
+           
+            Alert.alert("Id: " + responseJson.id + " Token: " + responseJson.token);
 
         })
         .catch((error) => {

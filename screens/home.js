@@ -1,18 +1,24 @@
 import React, { Component } from "react";
-import { View, Button, Text, StyleSheet, navigation } from "react-native";
+import { View, Button, Text, StyleSheet, navigation, ActivityIndicator, ToastAndroid, FlatList } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import Location from '../components/location';
 
 class Home extends Component {
 
+  constructor(props)
+  {
+      super(props);
+
+      this.state = {
+          isLoading: true,
+          locationData: []
+  };
+}
+
   componentDidMount() {
     // this.unsubscribe = this.props.navigation.addListener('focus', () => {
-    //   this.checkLoggedIn();
 
     this.props.navigation.addListener('focus', () => {
-        this.checkLoggedIn();
-
-
     });
   }
   
@@ -20,27 +26,24 @@ class Home extends Component {
   //   this.unsubscribe();
   // }
 
-  checkLoggedIn = async () => {
-    const value = await AsyncStorage.getItem('@session_token');
-    if(value == null) {
-      this.props.navigation.navigate('Login');
-    }
-  };
-
 render(){
   const navigation = this.props.navigation;
-  return (
-    <View style={styles.center}>
-      <Text>This is the home screen</Text>
-      <Button
-        title="Go to Profile Screen"
-        onPress={() => navigation.navigate("Profile")}
-      />
-    </View>
-  );
-};
-}
+  const item = this.state.locationData;
 
+        return(
+      <View><Text>This is the home screen</Text>
+     
+     <Button
+       title="Go to Profile Screen"
+       onPress={() => navigation.navigate("Profile")}
+     /> 
+     
+     <Location/>  
+     </View>
+       
+        )
+            }
+          }
 
 const styles = StyleSheet.create({
   center: {
