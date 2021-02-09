@@ -3,6 +3,7 @@ import { View, Button, Text, StyleSheet, navigation, ActivityIndicator, ToastAnd
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Location from '../components/location';
 
+
 class Home extends Component {
 
   constructor(props)
@@ -31,19 +32,19 @@ render(){
   const item = this.state.locationData;
 
         return(
-      <View><Text>This is the home screen</Text>
-     
-     <Button
-       title="Go to Profile Screen"
-       onPress={() => navigation.navigate("Profile")}
-     /> 
-     
-     <Location/>  
-     </View>
+            <View><Text>This is the home screen</Text>
+          
+          <Button
+            title="Go to Profile Screen"
+            onPress={() => navigation.navigate("Profile")}
+          /> 
+          
+          <Location/>  
+          </View>
        
         )
-            }
-          }
+     }
+ }
 
 const styles = StyleSheet.create({
   center: {
