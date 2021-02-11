@@ -13,6 +13,9 @@ class Profile extends Component {
           isLoading: true,
           userData: [],
 
+         // userId: AsyncStorage.getItem('user_id'),
+        //  token: AsyncStorage.getItem('session_token'),
+
           first_name: '',
           last_name: '',
           email: '',
@@ -20,36 +23,32 @@ class Profile extends Component {
   };
 }
 
-updateUserInfo(){
+updateUserInfo = async() =>{
+
   let sendData = {};
 
-  if(this.state.userData.first_name != ''){
+  if(this.state.first_name != ''){
     sendData['first_name'] = this.state.first_name;
-
   }
 
-  if(this.state.userData.last_name != ''){
+  if(this.state.last_name != ''){
     sendData['last_name'] = this.state.last_name;
-
   }
 
-  if(this.state.userData.email != ''){
+  if(this.state.email != ''){
     sendData['email'] = this.state.email;
-
   }
 
   if(this.state.password != ''){
     sendData['password'] = this.state.password;
-
   }
 
  console.log(sendData);
-    
 
-  const token = AsyncStorage.getItem('session_token');
-  const userId = AsyncStorage.getItem('user_id');
+  const userId = await AsyncStorage.getItem('user_id');
+  const token = await AsyncStorage.getItem('session_token');
   console.log("Trying to get user data")
-  return fetch('http://10.0.2.2:3333/api/1.0.0/user/'+userId, {
+  fetch('http://10.0.2.2:3333/api/1.0.0/user/'+ userId, {
     method: 'patch',
     headers: {
         'Content-Type': 'application/json',
@@ -57,16 +56,37 @@ updateUserInfo(){
 
     },
     body: JSON.stringify(sendData)
-
 })
 .then((response) => {
   if(response.status === 200){
-    Alert.alert("User info updated" + token + userId);
-    return response.json()
+   // Alert.alert("User info updated" + token + userId);
+    return response.JSON
+    
   }
   else if(response.status === 401){
+    console.log("Checking token " + token);
     Alert.alert("Id: " + userId + " Token: " + token);
     throw 'Unauthorised'
+  }
+  else if(response.status === 400){
+    console.log("Checking token " + token);
+    Alert.alert("Id: " + userId + " Token: " + token);
+    throw 'Bad request'
+  }
+  else if(response.status === 403){
+    console.log("Checking token " + token);
+    Alert.alert("Id: " + userId + " Token: " + token);
+    throw 'Forbidden'
+  }
+  else if(response.status === 404){
+    console.log("Checking token " + token);
+    Alert.alert("Id: " + userId + " Token: " + token);
+    throw 'Not Found'
+  }
+  else if(response.status === 400){
+    console.log("Checking token " + token);
+    Alert.alert("Id: " + userId + " Token: " + token);
+    throw 'Server Error'
   }
   else{
     Alert.alert("Id: " + userId + " Token: " + token);
@@ -79,6 +99,7 @@ updateUserInfo(){
     ToastAndroid.show(error, ToastAndroid.SHORT);
 })
 }
+ 
 
   render(){
     const navigation = this.props.navigation;
