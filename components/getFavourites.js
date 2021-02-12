@@ -1,48 +1,44 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Image, StyleSheet, ActivityIndicator, ToastAndroid, Alert, ScrollView } from 'react-native';
-import LocationReview from './locationReview';
+import { Text, View, ActivityIndicator, ToastAndroid, Alert, FlatList, Image } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-class Location extends Component{
-    // This component returns all locations
+class GetFavourites extends Component{
+    // This component returns a user's favourite locations.
+    //Can refactor this later
     constructor(props)
     {
         super(props);
 
         this.state = {
             isLoading: true,
-            locationData: [],
-
-            displayImg: true,
-            key: '',
-            review: ''
-          };
-    }
-
-    errorLoadingImg = () => {
-      this.setState({displayImg: false})
+            userData: [],
+            locationData: []
+        };
     }
 
     componentDidMount(){
-        this.getLocationData();
+        this.getUserData();
       }
 
-      getLocationData = async () => {
-        const value = await AsyncStorage.getItem('session_token');
-        console.log("Trying to get data")
-        return fetch('http://10.0.2.2:3333/api/1.0.0/find',{
+      getUserData = async () => {
+        const token = await AsyncStorage.getItem('session_token');
+        const userId = await AsyncStorage.getItem('user_id');
+        console.log("Trying to get user data")
+        return fetch('http://10.0.2.2:3333/api/1.0.0/user/'+userId,{
           'headers': {
-            'X-Authorization': value
+            'X-Authorization': token
           }
         })
         .then((response) => {
         if(response.status === 200){
-            return response.json()
+          return response.json()
         }
         else if(response.status === 401){
-          throw 'testing';
+          throw 'Unauthorised';
         }
         else{
+          Alert.alert("Id: " + userId + " Token: " + token);
+          console.log(response.json());
           throw 'something went wrong';
         }
       })
@@ -50,7 +46,7 @@ class Location extends Component{
          console.log(responseJson);
           this.setState({
             isLoading: false,
-            locationData: responseJson
+            userData: responseJson
           })
         })
         .catch((error) => {
@@ -60,30 +56,22 @@ class Location extends Component{
       }
 
     render(){
-        //         <FlatList
-        //             data={location.location_reviews}
-        //             renderItem={({item}) => (<LocationReview data={item} />
-        //                 )}
-        //             keyExtractor={(item) => item.review_id.toString()}
-        //          /> 
-
-        // const locationReview = this.props.data;
 
         const navigation = this.props.navigation;
-        const item = this.state.locationData;
+        const item = this.state.userData;
 
-            if(this.state.isLoading){
-                return(
-                <View>
-                <ActivityIndicator/>
-                </View>
-            );
-            }else{
-            return (
-                <View>
-                
-                <FlatList
-                data={this.state.locationData}
+        if(this.state.isLoading){
+          return(
+          <View>
+          <ActivityIndicator/>
+          </View>
+      );
+      }else{
+      return (
+          <View>
+            <FlatList
+            
+                data={this.state.userData.favourite_locations}
                 renderItem={({item}) => (
                     <View>
                         <Text>Location ID:{item.location_id}</Text>
@@ -125,39 +113,20 @@ class Location extends Component{
                             <Text> Review body: {review.review_body}  </Text>
                             <Text> Likes: {review.likes}  </Text>
                              {/* keyExtractor={(item,index) => item.review_id.toString()} */}
-                           
-                           
                            </Text>
                         ))} 
-                            
-                         
-                       
-                         {/* {item.reviews.map(test =>(
-                            <Text>
-                              <Text>Location Reviews:</Text>
-                              <Text>  </Text>
-                            <Text>Review ID: {test.review_id}</Text>
-                            <Text> </Text>
-                            <Text> Overall rating: {test.overall_rating} </Text>
-                            <Text> Price Rating: {test.price_rating} </Text>
-                            <Text> Quality Rating: {test.quality_rating}</Text>
-                            <Text> Cleanliness Rating: {test.clenliness_rating} </Text>
-                            <Text> Review body: {test.review_body}  </Text>
-                            <Text> Likes: {test.likes}  </Text>
-                           
-                           </Text>
-                        ))} 
-                         <Text> </Text> */}
-
-
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
                 />
-               
-            </View>
-        );
+
+
+
+
+      </View>
+
+            )
+        }
      }
-  }
 }
-export default Location;
+export default GetFavourites;

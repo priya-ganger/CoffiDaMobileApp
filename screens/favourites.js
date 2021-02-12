@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { View, StyleSheet, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button, ScrollView} from 'react-native';
+import GetFavourites from '../components/getFavourites';
 
 class Favourites extends Component{
 
@@ -10,15 +11,10 @@ class Favourites extends Component{
 
         return(
             <View>
-              <Text>This is the Favourites screen</Text>
+              <Text>This is a list of your favourite locations</Text>
+              <GetFavourites/>
               <Button title="Go back"
                 onPress={() => navigation.goBack()} />  
-                  
-                  {/* <Button title="About"
-                onPress={() => navigation.navigate('About')} />
-
-                <Button title="Contact"
-                onPress={() => navigation.navigate('Contact')} />    */}
             </View>
         )
     }
