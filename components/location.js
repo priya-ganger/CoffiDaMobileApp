@@ -12,9 +12,15 @@ class Location extends Component{
         this.state = {
             isLoading: true,
             locationData: [],
-    };
 
+            displayImg: true
+          };
     }
+
+    errorLoadingImg = () => {
+      this.setState({displayImg: false})
+    }
+
     componentDidMount(){
         this.getLocationData();
       }
@@ -83,7 +89,19 @@ class Location extends Component{
                         <Text>Location Town: {item.location_town}</Text>
                         <Text>Location Latitude: {item.latitude}</Text>
                         <Text>Location Longitude:  {item.longitude}</Text>
-                        <Text>Location Photo:  {item.photo_path}</Text>
+                        <Text>Location Photo   {item.photo_path}</Text>
+                         {/* {this.state.displayImg ? ( 
+                          */}
+                          <Image 
+                           source={{uri: item.photo_path}}
+                          //source={{uri: 'https://tr-images.condecdn.net/image/vOkb7Jmdv2L/crop/1020/f/1kaffeine-london-mar19-pr.jpg'}}
+                          style={{width: 200, height: 200}}
+                          onError={this.errorLoadingImg}
+                          />
+              
+                        {/* //   ) : (
+                        //    <View></View>
+                        //  )} */}
                         <Text>Location Average Overall Rating:{item.avg_overall_rating}</Text>
                         <Text>Location Price Rating:{item.avg_price_rating}</Text>
                         <Text>Location Quality Rating:{item.avg_quality_rating}</Text>
@@ -91,7 +109,7 @@ class Location extends Component{
                         <Text>  </Text>
                         
 
-                        {item.location_reviews.map(review =>(
+                        {/* {item.location_reviews.map(review =>(
                             <Text>
                               <Text>Location Reviews:</Text>
                               <Text>  </Text>
@@ -106,7 +124,27 @@ class Location extends Component{
                            
                            </Text>
                         ))} 
-                         <Text> </Text>
+                         <Text> </Text> */}
+
+                       
+                         {/* {item.reviews.map(test =>(
+                            <Text>
+                              <Text>Location Reviews:</Text>
+                              <Text>  </Text>
+                            <Text>Review ID: {test.review_id}</Text>
+                            <Text> </Text>
+                            <Text> Overall rating: {test.overall_rating} </Text>
+                            <Text> Price Rating: {test.price_rating} </Text>
+                            <Text> Quality Rating: {test.quality_rating}</Text>
+                            <Text> Cleanliness Rating: {test.clenliness_rating} </Text>
+                            <Text> Review body: {test.review_body}  </Text>
+                            <Text> Likes: {test.likes}  </Text>
+                           
+                           </Text>
+                        ))} 
+                         <Text> </Text> */}
+
+
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
