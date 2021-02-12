@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Image, StyleSheet, ActivityIndicator, ToastAndroid } from 'react-native';
+import { Text, View, FlatList, Image, StyleSheet, ActivityIndicator, ToastAndroid, Alert, ScrollView } from 'react-native';
 import LocationReview from './locationReview';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class Location extends Component{
-    // This component returns a location with a list of Locations.
+    // This component returns locations
     constructor(props)
     {
         super(props);
 
         this.state = {
             isLoading: true,
-            locationData: []
+            locationData: [],
     };
 
-        // this.state= {
-        //     displayImg: true
-        //   }
     }
     componentDidMount(){
         this.getLocationData();
@@ -53,9 +50,6 @@ class Location extends Component{
           ToastAndroid.show(error, ToastAndroid.SHORT);
         });
       }
-    // onErrorLoadingImg = () => {
-    //     this.setState({displayImg: false})
-    // }
 
     render(){
         //         <FlatList
@@ -95,17 +89,32 @@ class Location extends Component{
                         <Text>Location Quality Rating:{item.avg_quality_rating}</Text>
                         <Text>Location Cleanliness Rating:{item.avg_clenliness_rating}</Text>
                         <Text>  </Text>
-                        <Text>Location Reviews:</Text>
-                        <Text>  </Text>
                         
+
+                        {item.location_reviews.map(review =>(
+                            <Text>
+                              <Text>Location Reviews:</Text>
+                              <Text>  </Text>
+                            <Text>Review ID: {review.review_id}</Text>
+                            <Text> </Text>
+                            <Text> Overall rating: {review.overall_rating} </Text>
+                            <Text> Price Rating: {review.price_rating} </Text>
+                            <Text> Quality Rating: {review.quality_rating}</Text>
+                            <Text> Cleanliness Rating: {review.clenliness_rating} </Text>
+                            <Text> Review body: {review.review_body}  </Text>
+                            <Text> Likes: {review.likes}  </Text>
+                           
+                           </Text>
+                        ))} 
+                         <Text> </Text>
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
                 />
+               
             </View>
         );
      }
-}
-
+  }
 }
 export default Location;
