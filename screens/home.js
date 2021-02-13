@@ -32,12 +32,12 @@ render(){
   const item = this.state.locationData;
 
         return(
-            <View><Text>This is the home screen</Text>
+            <View><Text>All Locations</Text>
           
-          <Button
+          {/* <Button
             title="Go to Profile Screen"
             onPress={() => navigation.navigate("Profile")}
-          /> 
+          />  */}
           
           <Location/>  
           </View>

@@ -13,6 +13,7 @@ class Favourites extends Component{
             <View>
               <Text>This is a list of your favourite locations</Text>
               <GetFavourites/>
+
               <Button title="Go back"
                 onPress={() => navigation.goBack()} />  
             </View>
