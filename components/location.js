@@ -151,6 +151,55 @@ class Location extends Component{
         })
     }
 
+    deleteReview = async (location_id, review_id) => {
+      const token = await AsyncStorage.getItem('session_token');
+      return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id, {
+        method: 'delete',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify(this.state)
+        
+    })
+    
+    .then((response) => {
+        if(response.status === 200){
+          Alert.alert("Review Deleted! Id: " + location_id + " Token: " + token + "Review ID" + review_id);
+           
+           //need to refresh data
+           this.getLocationData();
+        }
+        else if(response.status === 400){
+            throw 'Bad Request';
+        }
+        else if(response.status === 401){
+          throw 'Unauthorised';
+        }
+        else if(response.status === 403){
+          throw 'Forbidden';
+        }
+        else if(response.status === 404){
+          Alert.alert("TEST: " + location_id + " Token: " + token + "Review ID" + review_id);
+          throw 'Not Found';
+        }
+        else if(response.status === 500){
+          throw 'Server Error';
+        }
+        else{
+            throw 'Something went wrong';
+        }
+    })
+    .then(async (responseJson) => {
+        console.log(responseJson);
+    
+    })
+    .catch((error) => {
+        console.log(error);
+        ToastAndroid.show(error, ToastAndroid.SHORT);
+    })
+    }
+
 
 
     render(){
@@ -199,8 +248,9 @@ class Location extends Component{
                         <Text>Location Reviews:</Text>
 
                          {item.location_reviews.map((review, key)=> (
-                              
+                             
                             <Text>
+                              
                               <Text key = {review.review_id}>
                                 Review ID: {review.review_id}
                                 Overall rating: {review.overall_rating}
@@ -209,6 +259,16 @@ class Location extends Component{
                                 Cleanliness Rating: {review.clenliness_rating}
                                 Review body: {review.review_body}
                                 Likes: {review.likes}
+
+                               Testing: {item.location_id} {review.review_id}
+
+                                <Button 
+                                  title="Delete Review"
+                                  onPress={() => this.deleteReview(item.location_id, review.review_id)}
+                                  
+                                 ></Button>
+
+
                             </Text>
                             
                            </Text>

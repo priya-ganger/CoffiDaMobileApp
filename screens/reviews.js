@@ -28,9 +28,7 @@ addReview = async () => {
     review_body: this.state.review_body,
   };
 
-  //need to add some validation. make sure email + pw are valid
   const token = await AsyncStorage.getItem('session_token');
-  const userId = await AsyncStorage.getItem('user_id');
   return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.location_id+"/review", {
       method: 'post',
       headers: {
@@ -42,8 +40,8 @@ addReview = async () => {
   })
   .then((response) => {
       if(response.status === 201){
-         return response.json()
-        //  throw 'Created';
+       Alert.alert("Review Added! Id: " + this.state.location_id + " Token: " + token);
+       // need to refresh data
       }
       else if(response.status === 400){
         Alert.alert("Id: " + this.state.location_id + " Token: " + token);
@@ -63,7 +61,7 @@ addReview = async () => {
       }
   })
   .then((responseJson) => {
-      console.log("User created", responseJson);
+      console.log("Review created", responseJson);
       ToastAndroid.show("Review created", ToastAndroid.SHORT);
 
   })
@@ -73,6 +71,51 @@ addReview = async () => {
   })
 }
 
+// deleteReview = async (location_id, review_id) => {
+//   const value = await AsyncStorage.getItem('session_token');
+//   return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id, {
+//     method: 'delete',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'X-Authorization': value
+//     },
+//     body: JSON.stringify(this.state)
+    
+// })
+
+// .then((response) => {
+//     if(response.status === 200){
+      
+//         return response.json();
+//     }
+//     else if(response.status === 400){
+//         throw 'Bad Request';
+//     }
+//     else if(response.status === 401){
+//       throw 'Unauthorised';
+//     }
+//     else if(response.status === 403){
+//       throw 'Forbidden';
+//     }
+//     else if(response.status === 404){
+//       throw 'Not Found';
+//     }
+//     else if(response.status === 500){
+//       throw 'Server Error';
+//     }
+//     else{
+//         throw 'Something went wrong';
+//     }
+// })
+// .then(async (responseJson) => {
+//     console.log(responseJson);
+
+// })
+// .catch((error) => {
+//     console.log(error);
+//     ToastAndroid.show(error, ToastAndroid.SHORT);
+// })
+// }
 
     render(){
         
@@ -119,6 +162,13 @@ addReview = async () => {
                 title="Add a review"
                 onPress={() => this.addReview()}
                 ></Button>
+
+              {/* <Button 
+                title="Delete Review"
+                onPress={() => this.deleteReview(location_id, userId)}
+                ></Button> */}
+
+
             </View>
         )
     }
