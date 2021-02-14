@@ -148,7 +148,7 @@ updateUserInfo = async() =>{
                 ></Button> 
 
                 <Button title="Log out"
-                onPress={() => navigation.navigate('Login')} /> 
+                onPress={() => navigation.navigate('LogOut')} /> 
 
                 {/* AsyncStorage.clear(),  */}
       </View>

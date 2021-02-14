@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, Image, StyleSheet, ActivityIndicator, ToastAndroid, Alert, ScrollView, Button } from 'react-native';
+import { Text, View, FlatList, Image, StyleSheet, ActivityIndicator, ToastAndroid, Alert, ScrollView, Button, SectionList } from 'react-native';
 import LocationReview from './locationReview';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -103,7 +103,7 @@ class Location extends Component{
         console.log("This is the data i'm trying to send: "+AddFavouriteData)
 
         const token = await AsyncStorage.getItem('session_token');
-        
+        const userId = await AsyncStorage.getItem('user_id');
         return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+item.location_id+"favourite", {
             method: 'post',
             headers: {
@@ -128,7 +128,7 @@ class Location extends Component{
           }
           else if(response.status === 404){
             console.log("This is the data i'm trying to send 2: "+AddFavouriteData)
-            Alert.alert("Id: " + item.location_id +" Token: " + token);
+            Alert.alert("Id: " + item.location_id +" Token: " + token + "UserID:" +userId);
             throw 'Not Found';
             }
             else if(response.status === 500){
@@ -196,36 +196,32 @@ class Location extends Component{
                         <Text> Quality Rating: {item.avg_quality_rating}</Text>
                         <Text> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
                         <Text>  </Text>
-                         
-                        <Button
+                        <Text>Location Reviews:</Text>
+
+                         {item.location_reviews.map((review, key)=> (
+                              
+                            <Text>
+                              <Text key = {review.review_id}>
+                                Review ID: {review.review_id}
+                                Overall rating: {review.overall_rating}
+                                Price Rating: {review.price_rating}
+                                Quality Rating: {review.quality_rating}
+                                Cleanliness Rating: {review.clenliness_rating}
+                                Review body: {review.review_body}
+                                Likes: {review.likes}
+                            </Text>
+                            
+                           </Text>
+                        ))}  
+                        
+                      <Button
                         title="Click here to favourite"
                         onPress={() => this.favouriteLocation(item)}
                         />
-
-
-
-
-                        
-                        {/* KEEP THIS FOR REVIEW STUFF */}
-                        {item.location_reviews.map((review)=> (
-                            <Text>
-                              <Text>Location Reviews:</Text>
-                              <Text>  </Text> 
-                               {/* <Text>Key = {key={item.review_id}}</Text>  */}
-                             <Text>Review ID: {review.review_id}</Text>
-                            <Text> </Text>
-                            <Text> Overall rating: {review.overall_rating} </Text>
-                            <Text> Price Rating: {review.price_rating} </Text>
-                            <Text> Quality Rating: {review.quality_rating}</Text>
-                            <Text> Cleanliness Rating: {review.clenliness_rating} </Text>
-                            <Text> Review body: {review.review_body}  </Text>
-                            <Text> Likes: {review.likes}  </Text>
-                           
-                           </Text>
-                        ))} 
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
+               
                 />
                
             </View>

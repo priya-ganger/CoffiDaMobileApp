@@ -17,15 +17,15 @@ class Home extends Component {
 }
 
   componentDidMount() {
-    // this.unsubscribe = this.props.navigation.addListener('focus', () => {
+     this._unsubscribe = this.props.navigation.addListener('focus', () => {
 
-    this.props.navigation.addListener('focus', () => {
+    //this.props.navigation.addListener('focus', () => {
     });
   }
   
-  // componentWillMount() {
-  //   this.unsubscribe();
-  // }
+  UNSAFE_componentWillMount() {
+    this._unsubscribe
+   }
 
 render(){
   const navigation = this.props.navigation;
