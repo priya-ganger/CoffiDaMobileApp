@@ -71,7 +71,7 @@ class Location extends Component{
           throw 'something went wrong';
         }
       })
-        .then( (responseJson) => {
+        .then((responseJson) => {
          console.log(responseJson);
           this.setState({
             isLoading: false,
