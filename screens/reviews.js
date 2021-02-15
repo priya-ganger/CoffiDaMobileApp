@@ -14,7 +14,8 @@ class Reviews extends Component{
       quality_rating: '',
       clenliness_rating: '',
       review_body: "",
-      location_id: '5'
+      location_id: '5',
+      review_id: '13'
     }
 }
 
@@ -71,51 +72,76 @@ addReview = async () => {
   })
 }
 
-// deleteReview = async (location_id, review_id) => {
-//   const value = await AsyncStorage.getItem('session_token');
-//   return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id, {
-//     method: 'delete',
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'X-Authorization': value
-//     },
-//     body: JSON.stringify(this.state)
-    
-// })
+updateReview = async (location_id, review_id) => {
 
-// .then((response) => {
-//     if(response.status === 200){
-      
-//         return response.json();
-//     }
-//     else if(response.status === 400){
-//         throw 'Bad Request';
-//     }
-//     else if(response.status === 401){
-//       throw 'Unauthorised';
-//     }
-//     else if(response.status === 403){
-//       throw 'Forbidden';
-//     }
-//     else if(response.status === 404){
-//       throw 'Not Found';
-//     }
-//     else if(response.status === 500){
-//       throw 'Server Error';
-//     }
-//     else{
-//         throw 'Something went wrong';
-//     }
-// })
-// .then(async (responseJson) => {
-//     console.log(responseJson);
+  let sendReviewData = {};
 
-// })
-// .catch((error) => {
-//     console.log(error);
-//     ToastAndroid.show(error, ToastAndroid.SHORT);
-// })
-// }
+  if(this.state.overall_rating != ''){
+    sendReviewData['overall_rating'] = this.state.overall_rating;
+  }
+
+  if(this.state.price_rating != ''){
+    sendReviewData['price_rating'] = this.state.price_rating;
+  }
+
+  if(this.state.quality_rating != ''){
+    sendReviewData['quality_rating'] = this.state.quality_rating;
+  }
+
+  if(this.state.clenliness_rating != ''){
+    sendReviewData['clenliness_rating'] = this.state.clenliness_rating;
+  }
+
+  if(this.state.review_body != ''){
+    sendReviewData['review_body'] = this.state.review_body;
+  }
+
+  console.log(sendReviewData);
+
+  const value = await AsyncStorage.getItem('session_token');
+  return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.location_id+"/review/"+this.state.review_id, {
+    method: 'patch',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Authorization': value
+    },
+    body: JSON.stringify(sendReviewData)
+})
+
+.then((response) => {
+    if(response.status === 200){
+       Alert.alert("Review info updated" + "locationID: " + this.state.location_id +"reviewID: "+ this.state.review_id);
+        return response.json();
+    }
+    else if(response.status === 400){
+      Alert.alert("Testing" + "locationID: " + this.state.location_id +"reviewID: "+ this.state.review_id);
+        throw 'Bad Request';
+    }
+    else if(response.status === 401){
+      throw 'Unauthorised';
+    }
+    else if(response.status === 403){
+      throw 'Forbidden';
+    }
+    else if(response.status === 404){
+      throw 'Not Found';
+    }
+    else if(response.status === 500){
+      throw 'Server Error';
+    }
+    else{
+        throw 'Something went wrong';
+    }
+})
+.then(async (responseJson) => {
+    console.log(responseJson);
+
+})
+.catch((error) => {
+    console.log(error);
+    ToastAndroid.show(error, ToastAndroid.SHORT);
+})
+}
 
     render(){
         
@@ -123,7 +149,7 @@ addReview = async () => {
 
         return(
             <View>
-              <Text>This is the Reviews screen</Text>
+              {/* <Text>This is the Reviews screen</Text>
               <Button title="Go back"
                 onPress={() => navigation.goBack()} />  
                   
@@ -161,12 +187,50 @@ addReview = async () => {
                 <Button 
                 title="Add a review"
                 onPress={() => this.addReview()}
+                ></Button> */}
+
+
+              <Text>Update a review</Text>
+              <Button title="Go back"
+                onPress={() => navigation.goBack()} />  
+                  
+                  <TextInput
+                placeholder="Enter your overall_rating"
+                onChangeText={(overall_rating)=>this.setState({overall_rating})}
+                value={this.state.overall_rating}
+             />
+
+             <TextInput
+                placeholder="Enter your price_rating"
+                onChangeText={(price_rating)=>this.setState({price_rating})}
+                value={this.state.price_rating}
+               
+              />
+            
+            <TextInput 
+                placeholder="Enter your quality_rating"
+                onChangeText={(quality_rating)=>this.setState({quality_rating})}
+                value={this.state.quality_rating}
+             />
+
+             <TextInput 
+                placeholder="Enter your clenliness_rating"
+                onChangeText={(clenliness_rating) => this.setState({clenliness_rating})}
+                value={this.state.clenliness_rating}
+             />
+
+              <TextInput 
+                placeholder="Enter your review_body"
+                onChangeText={(review_body) => this.setState({review_body})}
+                value={this.state.review_body}
+             />
+
+                <Button 
+                title="Update review"
+                onPress={() => this.updateReview()}
                 ></Button>
 
-              {/* <Button 
-                title="Delete Review"
-                onPress={() => this.deleteReview(location_id, userId)}
-                ></Button> */}
+             
 
 
             </View>
