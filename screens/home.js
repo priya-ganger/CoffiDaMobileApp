@@ -167,6 +167,45 @@ class Home extends Component {
     })
 }
 
+unfavouriteLocation = async (location_id) => {
+
+  const token = await AsyncStorage.getItem('session_token');
+  return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/favourite", {
+      method: 'delete',
+      headers: {
+          'Content-Type': 'application/json',
+          'X-Authorization': token
+      }
+  })
+  .then((response) => {
+      if(response.status === 200){
+        Alert.alert("Deleted from favourites");
+        // return response.json()
+      }
+      else if(response.status === 401){
+        throw 'Unauthorised';
+    }
+    else if(response.status === 404){
+      Alert.alert("Id: " + location_id +" Token: " + token);
+      throw 'Not Found';
+      }
+      else if(response.status === 500){
+        throw 'Server Error';
+    }
+      else{
+        Alert.alert("Id: " + location_id +" Token: " + token);
+          throw 'Something went wrong';
+      }
+  })
+  .then((responseJson) => {
+      ToastAndroid.show("Successfully removed from favourites", ToastAndroid.SHORT);
+  })
+  .catch((error) => {
+      console.log(error);
+      ToastAndroid.show(error, ToastAndroid.SHORT);
+  })
+}
+
 render(){
   const navigation = this.props.navigation;
   const item = this.state.locationData;
@@ -246,6 +285,11 @@ render(){
                       <Button
                         title="Click here to favourite this location"
                         onPress={() => this.favouriteLocation(item.location_id)}
+                        />
+
+                    <Button
+                        title="Click here to unfavourite this location"
+                        onPress={() => this.unfavouriteLocation(item.location_id)}
                         />
                     </View>
                 )}
