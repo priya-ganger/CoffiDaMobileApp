@@ -250,6 +250,50 @@ likeReview = async (location_id, review_id) => {
 })
 }
 
+unlikeReview = async (location_id, review_id) => {
+  const token = await AsyncStorage.getItem('session_token');
+  return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id+"/like", {
+    method: 'delete',
+    headers: {
+        'Content-Type': 'application/json',
+        'X-Authorization': token
+    },
+})
+
+.then((response) => {
+    if(response.status === 200){
+      Alert.alert("Review unliked! Id: " + location_id + "Review ID" + review_id+ " Token: " + token );
+       this.getLocationData();
+    }
+    else if(response.status === 400){
+        throw 'Bad Request';
+    }
+    else if(response.status === 401){
+      throw 'Unauthorised';
+    }
+    else if(response.status === 403){
+      throw 'Forbidden';
+    }
+    else if(response.status === 404){
+      throw 'Not Found';
+    }
+    else if(response.status === 500){
+      throw 'Server Error';
+    }
+    else{
+        throw 'Something went wrong';
+    }
+})
+.then(async (responseJson) => {
+    console.log(responseJson);
+
+})
+.catch((error) => {
+    console.log(error);
+    ToastAndroid.show(error, ToastAndroid.SHORT);
+})
+}
+
 render(){
   const navigation = this.props.navigation;
   const item = this.state.locationData;
@@ -328,10 +372,10 @@ render(){
                                   onPress={() => this.likeReview(item.location_id, review.review_id)}
                                  ></Button>
 
-                                {/* <Button 
+                                <Button 
                                   title="Unlike Review"
-                                  onPress={() => this.likeReview(item.location_id, review.review_id)}
-                                 ></Button> */}
+                                  onPress={() => this.unlikeReview(item.location_id, review.review_id)}
+                                 ></Button>
 
                             </Text>
                            </Text>
