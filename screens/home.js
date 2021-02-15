@@ -39,7 +39,7 @@ render(){
             onPress={() => navigation.navigate("Profile")}
           />  */}
           
-          <Location/>  
+          <Location />  
           </View>
        
         )

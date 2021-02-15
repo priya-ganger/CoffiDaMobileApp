@@ -108,7 +108,7 @@ updateUserInfo = async() =>{
     <View>
       <Text>Your Details</Text>
       <Text> </Text>
-      <User/>
+      <User />
       <Text> </Text>
 
 

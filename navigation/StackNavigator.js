@@ -8,6 +8,7 @@ import Profile  from "../screens/profile";
 import Settings  from "../screens/settings";
 import Login  from "../screens/login";
 import SignUp  from "../screens/signup";
+import LogOut from "../screens/logout";
 
 const Stack = createStackNavigator();
 
@@ -76,4 +77,12 @@ const SignUpStackNavigator = () => {
   );
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, SignUpStackNavigator };
+const LogOutStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="LogOut" component={LogOut} />
+    </Stack.Navigator>
+  );
+}
+
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, SignUpStackNavigator, LogOutStackNavigator };
