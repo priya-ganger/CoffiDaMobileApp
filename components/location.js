@@ -65,7 +65,7 @@ class Location extends Component{
             return response.json()
         }
         else if(response.status === 401){
-          throw 'testing';
+          throw 'Unauthorised';
         }
         else{
           throw 'something went wrong';

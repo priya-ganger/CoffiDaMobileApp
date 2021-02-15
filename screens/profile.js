@@ -66,6 +66,7 @@ updateUserInfo = async() =>{
   else if(response.status === 401){
     console.log("Checking token " + token);
     Alert.alert("Id: " + userId + " Token: " + token);
+    this.props.navigation.navigate("Login");
     throw 'Unauthorised'
   }
   else if(response.status === 400){
