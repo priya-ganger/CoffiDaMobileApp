@@ -23,6 +23,46 @@ class Profile extends Component {
   };
 }
 
+componentDidMount() {
+  this.getUserData();
+}
+
+getUserData = async () => {
+  const token = await AsyncStorage.getItem('session_token');
+  const userId = await AsyncStorage.getItem('user_id');
+  console.log("Trying to get user data")
+  return fetch('http://10.0.2.2:3333/api/1.0.0/user/'+userId,{
+    'headers': {
+      'X-Authorization': token
+    }
+  })
+  .then((response) => {
+  if(response.status === 200){
+    return response.json()
+  }
+  else if(response.status === 401){
+    throw 'Unauthorised';
+  }
+  else{
+    Alert.alert("Id: " + userId + " Token: " + token);
+    console.log(response.json());
+    throw 'something went wrong';
+  }
+})
+  .then( (responseJson) => {
+   console.log(responseJson);
+    this.setState({
+      isLoading: false,
+      userData: responseJson
+    })
+  })
+  .catch((error) => {
+    console.log(error);
+    ToastAndroid.show(error, ToastAndroid.SHORT);
+  });
+}
+
+
 updateUserInfo = async() =>{
 
   let sendData = {};
@@ -60,6 +100,8 @@ updateUserInfo = async() =>{
 .then((response) => {
   if(response.status === 200){
    // Alert.alert("User info updated" + token + userId);
+    this.getUserData();
+    Alert.alert("Details updated");
     return response.JSON
     
   }
@@ -104,15 +146,34 @@ updateUserInfo = async() =>{
 
   render(){
     const navigation = this.props.navigation;
+    const item = this.state.userData;
+    if(this.state.isLoading){
+      return(
+      <View>
+      <ActivityIndicator/>
+      </View>
+  );
+  }else{
+  return (
+      <View>
+        <Text>Your Details</Text>
+       {/* <Text>User ID: {item.user_id}</Text> */}
+       <Text> First Name:  {item.first_name}</Text>
+        <Text> Last Name: {item.last_name}</Text>
+        <Text> Email Address: {item.email}</Text>
+        {/* <Text> Password: </Text> */}
+ 
 
-    return(
-    <View>
-      <Text>Your Details</Text>
-      <Text> </Text>
-      <User />
-      <Text> </Text>
+    {/* // return(
+    // <View>
+    //   
+    //   
+    //   {/* <User /> */}
 
 
+      <Text></Text>
+
+<Text> Update your details here </Text>
       <Text>First Name:</Text>
             <TextInput
                 placeholder={'Enter your first name'}
@@ -151,10 +212,10 @@ updateUserInfo = async() =>{
                 <Button title="Log out"
                 onPress={() => navigation.navigate('LogOut')} /> 
 
-                {/* AsyncStorage.clear(),  */}
       </View>
      )
   }
+}
 }
 
 const styles = StyleSheet.create({
