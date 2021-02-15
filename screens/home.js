@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Button, Text, StyleSheet, navigation, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
+import { View, Button, Alert, Text, StyleSheet, navigation, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Location from '../components/location';
 
@@ -21,7 +21,6 @@ class Home extends Component {
      this._unsubscribe = this.props.navigation.addListener('focus', () => {
        this.checkUserIsLoggedIn();
       this.getLocationData();
-    //this.props.navigation.addListener('focus', () => {
     });
   }
   
@@ -72,6 +71,101 @@ class Home extends Component {
       ToastAndroid.show(error, ToastAndroid.SHORT);
     });
   }
+
+  deleteReview = async (location_id, review_id) => {
+    const token = await AsyncStorage.getItem('session_token');
+    return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id, {
+      method: 'delete',
+      headers: {
+          'Content-Type': 'application/json',
+          'X-Authorization': token
+      },
+      body: JSON.stringify(this.state)
+      
+  })
+  
+  .then((response) => {
+      if(response.status === 200){
+        Alert.alert("Review Deleted! Id: " + location_id + " Token: " + token + "Review ID" + review_id);
+         
+         //need to refresh data
+         this.getLocationData();
+      }
+      else if(response.status === 400){
+          throw 'Bad Request';
+      }
+      else if(response.status === 401){
+        throw 'Unauthorised';
+      }
+      else if(response.status === 403){
+        throw 'Forbidden';
+      }
+      else if(response.status === 404){
+        Alert.alert("TEST: " + location_id + " Token: " + token + "Review ID" + review_id);
+        throw 'Not Found';
+      }
+      else if(response.status === 500){
+        throw 'Server Error';
+      }
+      else{
+          throw 'Something went wrong';
+      }
+  })
+  .then(async (responseJson) => {
+      console.log(responseJson);
+  
+  })
+  .catch((error) => {
+      console.log(error);
+      ToastAndroid.show(error, ToastAndroid.SHORT);
+  })
+  }
+
+  favouriteLocation = async (location_id) => {
+
+    const token = await AsyncStorage.getItem('session_token');
+    return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/favourite", {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token
+        }
+    })
+    .then((response) => {
+        if(response.status === 200){
+          Alert.alert("Added to favourites");
+          // return response.json()
+        }
+        else if(response.status === 400){
+            throw 'Bad request';
+        }
+        else if(response.status === 401){
+          throw 'Unauthorised';
+      }
+      else if(response.status === 404){
+        console.log("This is the data i'm trying to send 2: "+AddFavouriteData)
+        Alert.alert("Id: " + location_id +" Token: " + token);
+        throw 'Not Found';
+        }
+        else if(response.status === 500){
+          throw 'Server Error';
+      }
+        else{
+          Alert.alert("Id: " + location_id +" Token: " + token);
+            throw 'Something went wrong';
+        }
+    })
+    .then((responseJson) => {
+        console.log("User created", responseJson);
+        ToastAndroid.show("Account created", ToastAndroid.SHORT);
+        this.props.navigation.navigate("Login");
+
+    })
+    .catch((error) => {
+        console.log(error);
+        ToastAndroid.show(error, ToastAndroid.SHORT);
+    })
+}
 
 render(){
   const navigation = this.props.navigation;
@@ -130,8 +224,7 @@ render(){
                          {item.location_reviews.map((review, key)=> (
                              
                             <Text>
-                              
-                              <Text key = {review.review_id}>
+                              <Text>
                                 Review ID: {review.review_id}
                                 Overall rating: {review.overall_rating}
                                 Price Rating: {review.price_rating}
@@ -140,33 +233,25 @@ render(){
                                 Review body: {review.review_body}
                                 Likes: {review.likes}
 
-                               Testing: {item.location_id} {review.review_id}
+                               {/* Testing: {item.location_id} {review.review_id} */}
 
                                 <Button 
                                   title="Delete Review"
                                   onPress={() => this.deleteReview(item.location_id, review.review_id)}
-                                  
                                  ></Button>
-
-
                             </Text>
-                            
                            </Text>
                         ))}  
                         
                       <Button
-                        title="Click here to favourite"
-                        onPress={() => this.favouriteLocation(item)}
+                        title="Click here to favourite this location"
+                        onPress={() => this.favouriteLocation(item.location_id)}
                         />
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
-               
                 />
-
-
           </View>
-       
         )
      }
  }
