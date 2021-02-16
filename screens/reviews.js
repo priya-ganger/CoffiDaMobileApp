@@ -1,7 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { Component } from 'react';
-import { Alert, Text, View, Button, ToastAndroid, TextInput } from 'react-native';
+import { Alert, Text, View, Button, ToastAndroid, TextInput, StyleSheet } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RNCamera } from 'react-native-camera';
 
 class Reviews extends Component{
 
@@ -143,6 +144,15 @@ updateReview = async (location_id, review_id) => {
 })
 }
 
+takeAPhoto = async() => {
+  if(this.camera){
+    const options = {quality: 0.5, base64:true}
+    const data = await this.camera.takePictureAsync(options);
+
+    console.log(data.uri);
+  }
+}
+
     render(){
         
         const navigation = this.props.navigation;
@@ -190,7 +200,7 @@ updateReview = async (location_id, review_id) => {
                 ></Button> */}
 
 
-              <Text>Update a review</Text>
+              {/* <Text>Update a review</Text>
               <Button title="Go back"
                 onPress={() => navigation.goBack()} />  
                   
@@ -223,18 +233,40 @@ updateReview = async (location_id, review_id) => {
                 placeholder="Enter your review_body"
                 onChangeText={(review_body) => this.setState({review_body})}
                 value={this.state.review_body}
-             />
+             /> */}
 
-                <Button 
+                {/* <Button 
                 title="Update review"
                 onPress={() => this.updateReview()}
-                ></Button>
+                ></Button> */}
 
-             
+                      <RNCamera ref={ref =>{this.camera = ref;}} style={styles.cameraPreview}/>
+                     
+                      <Button
+                        title="Take a photo"
+                        onPress={() => this.takeAPhoto()}
+                        />      
 
 
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+  },
+
+  cameraPreview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: "center",
+  },
+
+});
+
 export default Reviews;
