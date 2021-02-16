@@ -169,6 +169,31 @@ takeAPhoto = async() => {
   }
 }
 
+deleteAPhoto = async() => {
+  if(this.camera){
+    const options = {quality: 0.5, base64:true};
+    const data = await this.camera.takePictureAsync(options);
+
+    console.log(data.uri);
+    const value = await AsyncStorage.getItem('session_token');
+    return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.location_id+"/review/"+this.state.review_id+"/photo",
+    {
+      method: 'delete',
+      headers: {
+        "Content-Type": "image/jpeg",
+        "X-Authorization": value
+      },
+      body: data
+    })
+    .then((response) =>{
+      Alert.alert("Picture deleted");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+}
+
     render(){
         
         const navigation = this.props.navigation;
@@ -270,6 +295,10 @@ takeAPhoto = async() => {
                         onPress={() => {this.takeAPhoto()}}
                         />      
 
+                        <Button
+                        title="Delete a photo"
+                        onPress={() => {this.deleteAPhoto()}}
+                        />  
 
             </View>
         )
