@@ -18,14 +18,14 @@ class Home extends Component {
 }
 
   componentDidMount() {
-     this._unsubscribe = this.props.navigation.addListener('focus', () => {
+     //this._unsubscribe = this.props.navigation.addListener('focus', () => {
        this.checkUserIsLoggedIn();
       this.getLocationData();
-    });
+    //});
   }
   
   UNSAFE_componentWillMount() {
-    this._unsubscribe
+   // this._unsubscribe
    }
 
    checkUserIsLoggedIn = async () => {
@@ -307,8 +307,6 @@ render(){
           />  */}
           
           {/* <Location />   */}
-
-
             if(this.state.isLoading){
                 return(
                 <View>
@@ -318,7 +316,8 @@ render(){
             }else{
             return (
                 <View>
-                
+
+                  
                 <FlatList
                 data={this.state.locationData}
                 renderItem={({item}) => (
@@ -347,20 +346,22 @@ render(){
                         <Text> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
                         <Text>  </Text>
                         <Text>Location Reviews:</Text>
+                        <Button
+                         title="Get Reviews"
+                        onPress={() => navigation.navigate("GetReviews"), item.location_id}
+                        /> 
 
-                         {item.location_reviews.map((review, key)=> (
+                         {/* {item.location_reviews.map((review, key)=> (
                              
                             <Text>
                               <Text>
                                 Review ID: {review.review_id}
-                                Overall rating: {review.overall_rating}
-                                Price Rating: {review.price_rating}
-                                Quality Rating: {review.quality_rating}
-                                Cleanliness Rating: {review.clenliness_rating}
+                                Overall rating: {review.review_overallrating}
+                                Price Rating: {review.review_pricerating}
+                                Quality Rating: {review.review_qualityrating}
+                                Cleanliness Rating: {review.review_clenlinessrating}
                                 Review body: {review.review_body}
-                                Likes: {review.likes}
-
-                               {/* Testing: {item.location_id} {review.review_id} */}
+                                Likes: {review.likes} */}
 
                                 <Button 
                                   title="Delete Review"
@@ -377,9 +378,9 @@ render(){
                                   onPress={() => this.unlikeReview(item.location_id, review.review_id)}
                                  ></Button>
 
-                            </Text>
+                            {/* </Text>
                            </Text>
-                        ))}  
+                        ))}   */}
                         
                       <Button
                         title="Click here to favourite this location"

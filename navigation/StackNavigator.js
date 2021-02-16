@@ -9,6 +9,7 @@ import Settings  from "../screens/settings";
 import Login  from "../screens/login";
 import SignUp  from "../screens/signup";
 import LogOut from "../screens/logout";
+import GetReviews from "../screens/getReviews";
 
 const Stack = createStackNavigator();
 
@@ -61,6 +62,14 @@ const ProfileStackNavigator = () => {
   );
 }
 
+const GetReviewsStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="GetReviews" component={GetReviews} />
+    </Stack.Navigator>
+  );
+}
+
 const LoginStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
@@ -85,4 +94,4 @@ const LogOutStackNavigator = () => {
   );
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, SignUpStackNavigator, LogOutStackNavigator };
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, SignUpStackNavigator, LogOutStackNavigator };
