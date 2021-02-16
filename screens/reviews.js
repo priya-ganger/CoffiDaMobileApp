@@ -16,7 +16,7 @@ class Reviews extends Component{
       clenliness_rating: '',
       review_body: "",
       location_id: '5',
-      review_id: '13'
+      review_id: '10'
     }
 }
 
@@ -146,10 +146,26 @@ updateReview = async (location_id, review_id) => {
 
 takeAPhoto = async() => {
   if(this.camera){
-    const options = {quality: 0.5, base64:true}
+    const options = {quality: 0.5, base64:true};
     const data = await this.camera.takePictureAsync(options);
 
     console.log(data.uri);
+    const value = await AsyncStorage.getItem('session_token');
+    return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.location_id+"/review/"+this.state.review_id+"/photo",
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "image/jpeg",
+        "X-Authorization": value
+      },
+      body: data
+    })
+    .then((response) =>{
+      Alert.alert("Picture added");
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 }
 
@@ -158,7 +174,7 @@ takeAPhoto = async() => {
         const navigation = this.props.navigation;
 
         return(
-            <View>
+            <View style={{flex:1}}>
               {/* <Text>This is the Reviews screen</Text>
               <Button title="Go back"
                 onPress={() => navigation.goBack()} />  
@@ -240,11 +256,18 @@ takeAPhoto = async() => {
                 onPress={() => this.updateReview()}
                 ></Button> */}
 
-                      <RNCamera ref={ref =>{this.camera = ref;}} style={styles.cameraPreview}/>
+                      <RNCamera 
+                      ref={ref =>
+                      {this.camera = ref;
+                      }} 
+                      style={{
+                        flex:1,
+                        width: '100%'
+                      }}/>
                      
                       <Button
                         title="Take a photo"
-                        onPress={() => this.takeAPhoto()}
+                        onPress={() => {this.takeAPhoto()}}
                         />      
 
 
