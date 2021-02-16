@@ -13,6 +13,7 @@ class Home extends Component {
       this.state = {
           isLoading: true,
           locationData: [],
+          location_id:''
          // token: ''
   };
 }
@@ -49,6 +50,7 @@ class Home extends Component {
     })
     .then((response) => {
     if(response.status === 200){
+       //AsyncStorage.setItem('location_id', JSON.stringify(response.id));
         return response.json()
     }
     else if(response.status === 401){
@@ -65,6 +67,7 @@ class Home extends Component {
         isLoading: false,
         locationData: responseJson
       })
+      
     })
     .catch((error) => {
       console.log(error);
@@ -296,17 +299,6 @@ unlikeReview = async (location_id, review_id) => {
 
 render(){
   const navigation = this.props.navigation;
-  const item = this.state.locationData;
-
-        // return(
-        //     <View><Text>All Locations</Text>
-          
-          {/* <Button
-            title="Go to Profile Screen"
-            onPress={() => navigation.navigate("Profile")}
-          />  */}
-          
-          {/* <Location />   */}
             if(this.state.isLoading){
                 return(
                 <View>
@@ -316,13 +308,28 @@ render(){
             }else{
             return (
                 <View>
-
-                  
                 <FlatList
                 data={this.state.locationData}
                 renderItem={({item}) => (
+                  
                     <View>
-                        {/* <Text>Location ID:{item.location_id}</Text> */}
+
+                      {/* <Button
+                         title="Get Reviews"
+                        onPress={() => this.props.navigation.navigate('GetReviews', { "cafeData": item})}
+                        />  */}
+
+                        <Button
+                         title="Get Reviews"
+                        onPress={() => this.props.navigation.navigate('GetReviews')}
+                        />
+
+                      <Button
+                         title="Search"
+                        onPress={() => navigation.navigate('Search')}
+                        />
+
+                         <Text>Location ID:{item.location_id.setState}</Text> 
                         <Text> Name:  {item.location_name}</Text>
                         <Text> Town: {item.location_town}</Text>
                         {/* <Text>Location Latitude: {item.latitude}</Text>
@@ -336,7 +343,6 @@ render(){
                           style={{width: 400, height: 400}}
                           onError={this.errorLoadingImg}
                           />
-              
                         {/* //   ) : (
                         //    <View></View>
                         //  )} */}
@@ -346,23 +352,7 @@ render(){
                         <Text> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
                         <Text>  </Text>
                         <Text>Location Reviews:</Text>
-                        <Button
-                         title="Get Reviews"
-                        onPress={() => navigation.navigate("GetReviews"), item.location_id}
-                        /> 
-
-                         {/* {item.location_reviews.map((review, key)=> (
-                             
-                            <Text>
-                              <Text>
-                                Review ID: {review.review_id}
-                                Overall rating: {review.review_overallrating}
-                                Price Rating: {review.review_pricerating}
-                                Quality Rating: {review.review_qualityrating}
-                                Cleanliness Rating: {review.review_clenlinessrating}
-                                Review body: {review.review_body}
-                                Likes: {review.likes} */}
-
+                      
                                 <Button 
                                   title="Delete Review"
                                   onPress={() => this.deleteReview(item.location_id, review.review_id)}
@@ -377,10 +367,6 @@ render(){
                                   title="Unlike Review"
                                   onPress={() => this.unlikeReview(item.location_id, review.review_id)}
                                  ></Button>
-
-                            {/* </Text>
-                           </Text>
-                        ))}   */}
                         
                       <Button
                         title="Click here to favourite this location"
@@ -398,7 +384,7 @@ render(){
           </View>
         )
      }
- }
+  }
 }
 
 const styles = StyleSheet.create({

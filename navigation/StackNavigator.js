@@ -46,6 +46,14 @@ const FavouritesStackNavigator = () => {
   );
 }
 
+const SearchStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Search" component={Search} />
+    </Stack.Navigator>
+  );
+}
+
 const ReviewsStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
@@ -94,4 +102,4 @@ const LogOutStackNavigator = () => {
   );
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, SignUpStackNavigator, LogOutStackNavigator };
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, SearchStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, SignUpStackNavigator, LogOutStackNavigator };

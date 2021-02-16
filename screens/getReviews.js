@@ -11,23 +11,29 @@ class GetReviews extends Component {
       this.state = {
           isLoading: true,
           locationData: [],
-          location_id: '5',
-         // token: ''
+         // location_id: AsyncStorage.getItem('location_id')
+         location_id: '4'
   };
 }
 
   componentDidMount() {
     // this._unsubscribe = this.props.navigation.addListener('focus', () => {
      
-      this.getLocationData();
-   // });
+        // const { cafeData } = route.params;
+        // console.log(cafeData);
+
+
+        //   const { cafeData } = this.props.navigation;
+        //   console.log(cafeData.location_id);
+         // Alert.alert(cafeData.location_id);
+
+          this.getLocationData();
+  //  });
   }
   
   UNSAFE_componentWillMount() {
     //this._unsubscribe
    }
-
-   
 
   getLocationData = async () => {
     const value = await AsyncStorage.getItem('session_token');
@@ -41,12 +47,15 @@ class GetReviews extends Component {
     if(response.status === 200){
         return response.json()
     }
-    else if(response.status === 401){
-      this.props.navigation.navigate("Login");
-      throw 'Unauthorised';
+    else if(response.status === 404){
+        Alert.alert("locationid: " + this.state.location_id)
+      throw 'Not Found';
     }
+    else if(response.status === 401){
+        throw 'Unauthorised';
+      }
     else{
-      throw 'something went wrong';
+      throw 'Server Error';
     }
   })
     .then((responseJson) => {
@@ -64,10 +73,20 @@ class GetReviews extends Component {
 
 render(){
     const navigation = this.props.navigation;
-    const item = this.state.locationData;
+    // const item = this.state.locationData;
+    // const { test } = this.props.route.params;
+    // return( <View>
+        
+    //     <Text>Hello</Text>
+    //     {/* <Text>{this.props.route.params.cafeData}</Text> */}
+    
+    
+    // </View>)
+   
     if(this.state.isLoading){
         return(
         <View>
+            <Text>Hello</Text>
         <ActivityIndicator/>
         </View>
     );
