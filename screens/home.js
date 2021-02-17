@@ -206,8 +206,6 @@ render(){
                          title="Get Reviews"
                         onPress={() => this.props.navigation.navigate('GetReviews', { locData: item})}
                         />
-                      
-                      
                 
                       <Button
                         title="Click here to favourite this location"
@@ -218,6 +216,8 @@ render(){
                         title="Click here to unfavourite this location"
                         onPress={() => this.unfavouriteLocation(item.location_id)}
                         />
+
+                   
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}

@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MainStackNavigator, FavouritesStackNavigator, ReviewsStackNavigator, SearchStackNavigator, SettingsStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator  } from "./StackNavigator";
+import { MainStackNavigator, FavouritesStackNavigator, CameraStackNavigator, SearchStackNavigator, SettingsStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator  } from "./StackNavigator";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Tab = createBottomTabNavigator();
@@ -46,7 +46,7 @@ const BottomTabNavigator = () => {
     >
       <Tab.Screen name="Home" component={MainStackNavigator} />
       <Tab.Screen name="Favourites" component={FavouritesStackNavigator} />
-      <Tab.Screen name="Reviews" component={ReviewsStackNavigator} />
+      {/* <Tab.Screen name="Camera" component={CameraStackNavigator} /> */}
       <Tab.Screen name="Settings" component={SettingsStackNavigator} /> 
       <Tab.Screen name="Profile" component={ProfileStackNavigator} /> 
       {/* <Tab.Screen name="GetReviews" component={GetReviewsStackNavigator} />  */}

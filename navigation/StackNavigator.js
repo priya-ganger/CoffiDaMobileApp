@@ -3,13 +3,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/home";
 import Search from "../screens/search";
 import Favourites from "../screens/favourites";
-import Reviews  from "../screens/reviews";
+import Camera  from "../screens/camera";
 import Profile  from "../screens/profile";
 import Settings  from "../screens/settings";
 import Login  from "../screens/login";
 import SignUp  from "../screens/signup";
 import LogOut from "../screens/logout";
 import GetReviews from "../screens/getReviews";
+import AddReview from "../screens/addReview";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,9 @@ const MainStackNavigator = () => {
       <Stack.Screen name="Home" component={Home} />
        <Stack.Screen name="Profile" component={Profile} /> 
        <Stack.Screen name="GetReviews" component={GetReviews} />
+       <Stack.Screen name="AddReview" component={AddReview} />
+       <Stack.Screen name="Camera" component={Camera} />
+      
     </Stack.Navigator>
   );
 }
@@ -55,10 +59,10 @@ const SearchStackNavigator = () => {
   );
 }
 
-const ReviewsStackNavigator = () => {
+const CameraStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Reviews" component={Reviews} />
+      <Stack.Screen name="Camera" component={Camera} />
     </Stack.Navigator>
   );
 }
@@ -75,6 +79,15 @@ const GetReviewsStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="GetReviews" component={GetReviews} />
+    </Stack.Navigator>
+  );
+}
+
+const AddReviewStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="AddReview" component={AddReview} />
+      
     </Stack.Navigator>
   );
 }
@@ -103,4 +116,4 @@ const LogOutStackNavigator = () => {
   );
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, SearchStackNavigator, ReviewsStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, SignUpStackNavigator, LogOutStackNavigator };
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, SearchStackNavigator, CameraStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator };

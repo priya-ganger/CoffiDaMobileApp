@@ -243,6 +243,11 @@ class GetReviews extends Component {
                                   onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
                                   ></Button>
 
+            <Button
+                title="Add a review"
+                onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id})}
+                />    
+
                       </View>
                   )}
                   keyExtractor={(item) => item.review_id.toString()}
