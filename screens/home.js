@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { View, Button, Alert, Text, StyleSheet, navigation, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Location from '../components/location';
-
 
 class Home extends Component {
 
@@ -307,29 +305,20 @@ render(){
             );
             }else{
             return (
-                <View>
+                
+                
                 <FlatList
                 data={this.state.locationData}
                 renderItem={({item}) => (
                   
                     <View>
 
-                      {/* <Button
-                         title="Get Reviews"
-                        onPress={() => this.props.navigation.navigate('GetReviews', { "cafeData": item})}
-                        />  */}
-
-                        <Button
-                         title="Get Reviews"
-                        onPress={() => this.props.navigation.navigate('GetReviews')}
-                        />
-
                       <Button
                          title="Search"
                         onPress={() => navigation.navigate('Search')}
                         />
 
-                         <Text>Location ID:{item.location_id.setState}</Text> 
+                         <Text>Location ID:{item.location_id}</Text> 
                         <Text> Name:  {item.location_name}</Text>
                         <Text> Town: {item.location_town}</Text>
                         {/* <Text>Location Latitude: {item.latitude}</Text>
@@ -352,6 +341,11 @@ render(){
                         <Text> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
                         <Text>  </Text>
                         <Text>Location Reviews:</Text>
+
+                        <Button
+                         title="Get Reviews"
+                        onPress={() => this.props.navigation.navigate('GetReviews', { locData: item})}
+                        />
                       
                                 <Button 
                                   title="Delete Review"
@@ -381,7 +375,6 @@ render(){
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
                 />
-          </View>
         )
      }
   }

@@ -7,28 +7,24 @@ class GetReviews extends Component {
   constructor(props)
   {
       super(props);
-
       this.state = {
-          isLoading: true,
-          locationData: [],
-         // location_id: AsyncStorage.getItem('location_id')
-         location_id: '4'
+        isLoading: true,
+        locationData: [],
+        location_id: ''
   };
 }
 
   componentDidMount() {
     // this._unsubscribe = this.props.navigation.addListener('focus', () => {
      
-        // const { cafeData } = route.params;
-        // console.log(cafeData);
+       const { locData } = this.props.route.params
+       console.log("This is the params data" +locData.location_id);
 
-
-        //   const { cafeData } = this.props.navigation;
-        //   console.log(cafeData.location_id);
-         // Alert.alert(cafeData.location_id);
+       if(this.props.route.params){
+         this.setState({location_id: this.props.route.params.locData.location_id})
+       }
 
           this.getLocationData();
-  //  });
   }
   
   UNSAFE_componentWillMount() {
@@ -73,16 +69,7 @@ class GetReviews extends Component {
 
 render(){
     const navigation = this.props.navigation;
-    // const item = this.state.locationData;
-    // const { test } = this.props.route.params;
-    // return( <View>
-        
-    //     <Text>Hello</Text>
-    //     {/* <Text>{this.props.route.params.cafeData}</Text> */}
-    
-    
-    // </View>)
-   
+   // const {locData} = this.props.route.params
     if(this.state.isLoading){
         return(
         <View>
@@ -94,11 +81,12 @@ render(){
     return (
     <View>
    <Text>Hello</Text>
+   {/* <Text>Dataa is {locData}</Text> */}
                 <FlatList
                   data={this.state.locationData.location_reviews}
                   renderItem={({item}) => (
                       <View>
-                <Text>Hello</Text>
+                <Text>Location Name: {this.state.locationData.location_name}</Text>
                 <Text>  Review ID: {item.review_id}</Text>
                 <Text> Overall rating: {item.overall_rating}  </Text>
                 <Text> Price Rating: {item.price_rating} </Text>

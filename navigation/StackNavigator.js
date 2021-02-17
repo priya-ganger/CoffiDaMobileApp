@@ -26,6 +26,7 @@ const MainStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Home" component={Home} />
        <Stack.Screen name="Profile" component={Profile} /> 
+       <Stack.Screen name="GetReviews" component={GetReviews} />
     </Stack.Navigator>
   );
 }
