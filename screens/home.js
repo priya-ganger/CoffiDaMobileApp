@@ -73,55 +73,7 @@ class Home extends Component {
     });
   }
 
-  deleteReview = async (location_id, review_id) => {
-    const token = await AsyncStorage.getItem('session_token');
-    return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id, {
-      method: 'delete',
-      headers: {
-          'Content-Type': 'application/json',
-          'X-Authorization': token
-      },
-      body: JSON.stringify(this.state)
-      
-  })
   
-  .then((response) => {
-      if(response.status === 200){
-        Alert.alert("Review Deleted! Id: " + location_id + " Token: " + token + "Review ID" + review_id);
-         
-         //need to refresh data
-         this.getLocationData();
-      }
-      else if(response.status === 400){
-          throw 'Bad Request';
-      }
-      else if(response.status === 401){
-        throw 'Unauthorised';
-      }
-      else if(response.status === 403){
-        throw 'Forbidden';
-      }
-      else if(response.status === 404){
-        Alert.alert("TEST: " + location_id + " Token: " + token + "Review ID" + review_id);
-        throw 'Not Found';
-      }
-      else if(response.status === 500){
-        throw 'Server Error';
-      }
-      else{
-          throw 'Something went wrong';
-      }
-  })
-  .then(async (responseJson) => {
-      console.log(responseJson);
-  
-  })
-  .catch((error) => {
-      console.log(error);
-      ToastAndroid.show(error, ToastAndroid.SHORT);
-  })
-  }
-
   favouriteLocation = async (location_id) => {
 
     const token = await AsyncStorage.getItem('session_token');
@@ -168,7 +120,7 @@ class Home extends Component {
     })
 }
 
-unfavouriteLocation = async (location_id) => {
+  unfavouriteLocation = async (location_id) => {
 
   const token = await AsyncStorage.getItem('session_token');
   return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/favourite", {
@@ -207,94 +159,6 @@ unfavouriteLocation = async (location_id) => {
   })
 }
 
-likeReview = async (location_id, review_id) => {
-  const token = await AsyncStorage.getItem('session_token');
-  return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id+"/like", {
-    method: 'post',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-Authorization': token
-    },
-})
-
-.then((response) => {
-    if(response.status === 200){
-      Alert.alert("Review liked! Id: " + location_id + "Review ID" + review_id+ " Token: " + token );
-       this.getLocationData();
-    }
-    else if(response.status === 400){
-        throw 'Bad Request';
-    }
-    else if(response.status === 401){
-      throw 'Unauthorised';
-    }
-    else if(response.status === 403){
-      throw 'Forbidden';
-    }
-    else if(response.status === 404){
-      throw 'Not Found';
-    }
-    else if(response.status === 500){
-      throw 'Server Error';
-    }
-    else{
-        throw 'Something went wrong';
-    }
-})
-.then(async (responseJson) => {
-    console.log(responseJson);
-
-})
-.catch((error) => {
-    console.log(error);
-    ToastAndroid.show(error, ToastAndroid.SHORT);
-})
-}
-
-unlikeReview = async (location_id, review_id) => {
-  const token = await AsyncStorage.getItem('session_token');
-  return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+location_id+"/review/"+review_id+"/like", {
-    method: 'delete',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-Authorization': token
-    },
-})
-
-.then((response) => {
-    if(response.status === 200){
-      Alert.alert("Review unliked! Id: " + location_id + "Review ID" + review_id+ " Token: " + token );
-       this.getLocationData();
-    }
-    else if(response.status === 400){
-        throw 'Bad Request';
-    }
-    else if(response.status === 401){
-      throw 'Unauthorised';
-    }
-    else if(response.status === 403){
-      throw 'Forbidden';
-    }
-    else if(response.status === 404){
-      throw 'Not Found';
-    }
-    else if(response.status === 500){
-      throw 'Server Error';
-    }
-    else{
-        throw 'Something went wrong';
-    }
-})
-.then(async (responseJson) => {
-    console.log(responseJson);
-
-})
-.catch((error) => {
-    console.log(error);
-    ToastAndroid.show(error, ToastAndroid.SHORT);
-})
-}
-
 render(){
   const navigation = this.props.navigation;
             if(this.state.isLoading){
@@ -305,19 +169,17 @@ render(){
             );
             }else{
             return (
-                
-                
+             <View>
+               <Button
+              title="Filter Search"
+              onPress={() => navigation.navigate('Search')}
+               />
+               
                 <FlatList
                 data={this.state.locationData}
                 renderItem={({item}) => (
                   
                     <View>
-
-                      <Button
-                         title="Search"
-                        onPress={() => navigation.navigate('Search')}
-                        />
-
                          <Text>Location ID:{item.location_id}</Text> 
                         <Text> Name:  {item.location_name}</Text>
                         <Text> Town: {item.location_town}</Text>
@@ -329,7 +191,7 @@ render(){
                           <Image 
                            source={{uri: item.photo_path}}
                           //source={{uri: 'https://tr-images.condecdn.net/image/vOkb7Jmdv2L/crop/1020/f/1kaffeine-london-mar19-pr.jpg'}}
-                          style={{width: 400, height: 400}}
+                          style={{width: 200, height: 200}}
                           onError={this.errorLoadingImg}
                           />
                         {/* //   ) : (
@@ -339,29 +201,14 @@ render(){
                         <Text> Price Rating: {item.avg_price_rating}</Text>
                         <Text> Quality Rating: {item.avg_quality_rating}</Text>
                         <Text> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
-                        <Text>  </Text>
-                        <Text>Location Reviews:</Text>
 
                         <Button
                          title="Get Reviews"
                         onPress={() => this.props.navigation.navigate('GetReviews', { locData: item})}
                         />
                       
-                                <Button 
-                                  title="Delete Review"
-                                  onPress={() => this.deleteReview(item.location_id, review.review_id)}
-                                 ></Button>
-
-                                <Button 
-                                  title="Like Review"
-                                  onPress={() => this.likeReview(item.location_id, review.review_id)}
-                                 ></Button>
-
-                                <Button 
-                                  title="Unlike Review"
-                                  onPress={() => this.unlikeReview(item.location_id, review.review_id)}
-                                 ></Button>
-                        
+                      
+                
                       <Button
                         title="Click here to favourite this location"
                         onPress={() => this.favouriteLocation(item.location_id)}
@@ -375,6 +222,7 @@ render(){
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
                 />
+                </View>
         )
      }
   }
