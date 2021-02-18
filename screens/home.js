@@ -108,12 +108,6 @@ class Home extends Component {
             throw 'Something went wrong';
         }
     })
-    .then((responseJson) => {
-        console.log("User created", responseJson);
-        ToastAndroid.show("Account created", ToastAndroid.SHORT);
-        this.props.navigation.navigate("Login");
-
-    })
     .catch((error) => {
         console.log(error);
         ToastAndroid.show(error, ToastAndroid.SHORT);

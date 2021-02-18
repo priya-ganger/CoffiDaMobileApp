@@ -97,21 +97,7 @@ class GetFavourites extends Component{
                         <Text>Location Quality Rating:{item.avg_quality_rating}</Text>
                         <Text>Location Cleanliness Rating:{item.avg_clenliness_rating}</Text>
                         <Text>  </Text>
-                        {item.location_reviews.map((review, key)=> (
-                              
-                              <Text>
-                                <Text key = {review.review_id}>
-                                  Review ID: {review.review_id}
-                                  Overall rating: {review.overall_rating}
-                                  Price Rating: {review.price_rating}
-                                  Quality Rating: {review.quality_rating}
-                                  Cleanliness Rating: {review.clenliness_rating}
-                                  Review body: {review.review_body}
-                                  Likes: {review.likes}
-                              </Text>
-                              
-                             </Text>
-                          ))}  
+                       
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}

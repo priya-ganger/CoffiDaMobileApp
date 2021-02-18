@@ -230,23 +230,28 @@ class GetReviews extends Component {
                 <Text>  Cleanliness Rating: {item.clenliness_rating} </Text>
                 <Text>  Review body: {item.review_body}</Text>
                 <Text>  Likes: {item.likes} </Text>
-                                <Button 
-                                  title="Like Review"
-                                  onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}
-                                ></Button>
-                                 <Button 
-                                  title="Unlike Review"
-                                  onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}
-                                 ></Button>
-                                   <Button 
-                                  title="Delete Review"
-                                  onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
-                                  ></Button>
+                <Button 
+                  title="Like Review"
+                  onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}
+                ></Button>
+                  <Button 
+                  title="Unlike Review"
+                  onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}
+                  ></Button>
+                    <Button 
+                  title="Delete Review"
+                  onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
+                  ></Button>
 
-            <Button
+                <Button
                 title="Add a review"
                 onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id})}
                 />    
+
+                <Button 
+                  title="Update this Review"
+                  onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, location_id: this.state.locationData.location_id})}
+                  ></Button>
 
                       </View>
                   )}

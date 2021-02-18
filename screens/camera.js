@@ -55,7 +55,22 @@ takeAPhoto = async() => {
       body: data
     })
     .then((response) =>{
-      Alert.alert("Picture added");
+      if(response.status === 200){
+        Alert.alert("Picture added");
+     }
+     else if(response.status === 400){
+       throw 'Bad Request';
+     }
+     else if(response.status === 401){
+      throw 'Unauthorised';
+    }
+    else if(response.status === 404){
+      throw 'Not Found';
+    }
+    else if(response.status === 500){
+      throw 'Server Error';
+    }
+     
     })
     .catch((error) => {
       console.error(error);
@@ -80,7 +95,22 @@ deleteAPhoto = async() => {
       body: data
     })
     .then((response) =>{
-      Alert.alert("Picture deleted");
+      if(response.status === 200){
+        Alert.alert("Picture deleted");
+     }
+     else if(response.status === 403){
+       throw 'Forbidden';
+     }
+     else if(response.status === 401){
+      throw 'Unauthorised';
+    }
+    else if(response.status === 404){
+      throw 'Not Found';
+    }
+    else if(response.status === 500){
+      throw 'Server Error';
+    }
+     
     })
     .catch((error) => {
       console.error(error);
@@ -104,7 +134,15 @@ getAPhoto = async() => {
       body: data
     })
     .then((response) =>{
-      Alert.alert("Got photo");
+      if(response.status === 200){
+        Alert.alert("Success");
+     }
+     else if(response.status === 404){
+       throw 'Not found';
+     }
+     else if(response.status === 500){
+      throw 'Server Error';
+    }
     })
     .catch((error) => {
       console.error(error);

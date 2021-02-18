@@ -11,6 +11,7 @@ import SignUp  from "../screens/signup";
 import LogOut from "../screens/logout";
 import GetReviews from "../screens/getReviews";
 import AddReview from "../screens/addReview";
+import UpdateReview from "../screens/updateReview";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const MainStackNavigator = () => {
        <Stack.Screen name="GetReviews" component={GetReviews} />
        <Stack.Screen name="AddReview" component={AddReview} />
        <Stack.Screen name="Camera" component={Camera} />
+       <Stack.Screen name="UpdateReview" component={UpdateReview} />
       
     </Stack.Navigator>
   );
@@ -63,6 +65,14 @@ const CameraStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Camera" component={Camera} />
+    </Stack.Navigator>
+  );
+}
+
+const UpdateReviewStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="UpdateReview" component={UpdateReview} />
     </Stack.Navigator>
   );
 }
@@ -116,4 +126,4 @@ const LogOutStackNavigator = () => {
   );
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, FavouritesStackNavigator, SearchStackNavigator, CameraStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator };
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, UpdateReviewStackNavigator, FavouritesStackNavigator, SearchStackNavigator, CameraStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator };

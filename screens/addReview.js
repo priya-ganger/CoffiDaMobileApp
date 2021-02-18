@@ -94,76 +94,7 @@ addReview = async () => {
   })
 }
 
-updateReview = async (location_id, review_id) => {
 
-  let sendReviewData = {};
-
-  if(this.state.overall_rating != ''){
-    sendReviewData['overall_rating'] = this.state.overall_rating;
-  }
-
-  if(this.state.price_rating != ''){
-    sendReviewData['price_rating'] = this.state.price_rating;
-  }
-
-  if(this.state.quality_rating != ''){
-    sendReviewData['quality_rating'] = this.state.quality_rating;
-  }
-
-  if(this.state.clenliness_rating != ''){
-    sendReviewData['clenliness_rating'] = this.state.clenliness_rating;
-  }
-
-  if(this.state.review_body != ''){
-    sendReviewData['review_body'] = this.state.review_body;
-  }
-
-  console.log(sendReviewData);
-
-  const value = await AsyncStorage.getItem('session_token');
-  return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.location_id+"/review/"+this.state.review_id, {
-    method: 'patch',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-Authorization': value
-    },
-    body: JSON.stringify(sendReviewData)
-})
-
-.then((response) => {
-    if(response.status === 200){
-       Alert.alert("Review info updated" + "locationID: " + this.state.location_id +"reviewID: "+ this.state.review_id);
-        return response.json();
-    }
-    else if(response.status === 400){
-      Alert.alert("Testing" + "locationID: " + this.state.location_id +"reviewID: "+ this.state.review_id);
-        throw 'Bad Request';
-    }
-    else if(response.status === 401){
-      throw 'Unauthorised';
-    }
-    else if(response.status === 403){
-      throw 'Forbidden';
-    }
-    else if(response.status === 404){
-      throw 'Not Found';
-    }
-    else if(response.status === 500){
-      throw 'Server Error';
-    }
-    else{
-        throw 'Something went wrong';
-    }
-})
-.then(async (responseJson) => {
-    console.log(responseJson);
-
-})
-.catch((error) => {
-    console.log(error);
-    ToastAndroid.show(error, ToastAndroid.SHORT);
-})
-}
 
     render(){
         
