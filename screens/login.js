@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { Text, View, Button, TouchableOpacity, StyleSheet, ToastAndroid, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -32,8 +31,12 @@ class Login extends Component{
             }
             else if(response.status === 400){
              
-                throw 'Incorrect email or password';
+                throw 'Incorrect email address or password';
             }
+            else if(response.status === 500){
+             
+              throw 'Server Error. Please try again later.';
+          }
             else{
              
                 throw 'Something went wrong';
@@ -64,13 +67,13 @@ class Login extends Component{
               <Text style={styles.welcome}>Welcome to CoffiDa</Text>
 
                 <TextInput style={styles.input} 
-                placeholder="Email"
+                placeholder="Enter your email address"
                 onChangeText={(email)=>this.setState({email})}
                 value={this.state.email}
                 />
 
                 <TextInput style={styles.input} 
-                placeholder="Password"
+                placeholder="Enter your password"
                 onChangeText={(password)=>this.setState({password})}
                 value={this.state.password}
                 secureTextEntry={true}
@@ -95,9 +98,9 @@ class Login extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightblue',
+        //backgroundColor: 'lightblue',
         justifyContent: 'center',
-       // alignItems: 'center'
+        alignItems: 'center'
       },
       
       welcome: {
@@ -105,7 +108,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20,
         margin: 10,
-        backgroundColor: 'lightblue',
+       // backgroundColor: 'lightblue',
         fontWeight: '700'
       },
       input: {
@@ -116,7 +119,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         borderBottomWidth: 1,
         borderBottomColor: '#D6EADF',
-        backgroundColor: '#eac4d5'
+        backgroundColor: '#eac4d5',
+        borderRadius: 25
       },
   
       enterButton: {
@@ -126,7 +130,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginLeft: 15,
         marginRight: 15,
-        padding: 10
+        padding: 10,
+        borderRadius: 20
   
       },
   
@@ -143,7 +148,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginLeft: 15,
         marginRight: 15,
-        padding: 10
+        padding: 10,
+        borderRadius: 20,
+        margin: 10
   
       },
   

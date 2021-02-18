@@ -9,15 +9,19 @@ class UpdateReview extends Component{
     super(props);
 
     this.state = {
-      overall_rating: '',
-      price_rating: '',
-      quality_rating: '',
-      clenliness_rating: '',
+     // isLoading: true,
+      locData: [],
+     
+      
+      review_overallrating: '',
+      review_pricerating: '',
+      review_qualityrating: '',
+      review_clenlinessrating: '',
       review_body: '',
+
       location_id: '',
       review_id: '',
-      locData: [],
-      //isLoading: true
+     
     }
 }
 
@@ -51,20 +55,20 @@ updateReview = async () => {
 
     let sendReviewData = {};
   
-    if(this.state.overall_rating != ''){
-      sendReviewData['overall_rating'] = this.state.overall_rating;
+    if(this.state.review_overallrating != ''){
+      sendReviewData['review_overallrating'] = this.state.review_overallrating;
     }
   
-    if(this.state.price_rating != ''){
-      sendReviewData['price_rating'] = this.state.price_rating;
+    if(this.state.review_pricerating != ''){
+      sendReviewData['review_pricerating'] = this.state.review_pricerating;
     }
   
-    if(this.state.quality_rating != ''){
-      sendReviewData['quality_rating'] = this.state.quality_rating;
+    if(this.state.review_qualityrating != ''){
+      sendReviewData['review_qualityrating'] = this.state.review_qualityrating;
     }
   
-    if(this.state.clenliness_rating != ''){
-      sendReviewData['clenliness_rating'] = this.state.clenliness_rating;
+    if(this.state.review_clenlinessrating != ''){
+      sendReviewData['review_clenlinessrating'] = this.state.review_clenlinessrating;
     }
   
     if(this.state.review_body != ''){
@@ -86,10 +90,10 @@ updateReview = async () => {
   .then((response) => {
       if(response.status === 200){
          Alert.alert("Review info updated" + "locationID: " + this.state.location_id +"reviewID: "+ this.state.review_id);
-         return response.json();
+         return response.JSON;
       }
       else if(response.status === 400){
-        Alert.alert("Testing" + "locationID: " + this.state.location_id +"reviewID: "+ this.state.review_id);
+        Alert.alert("Testing" + "locationID: " + this.state.location_id +"reviewID: "+ this.state.review_id + "token" + value);
           throw 'Bad Request';
       }
       else if(response.status === 401){
@@ -107,14 +111,6 @@ updateReview = async () => {
       else{
           throw 'Something went wrong';
       }
-  })
-  .then(async (responseJson) => {
-      console.log(responseJson);
-      this.setState({
-        isLoading: false,
-        userData: responseJson
-      })
-  
   })
   .catch((error) => {
       console.log(error);
@@ -141,27 +137,27 @@ updateReview = async () => {
               
               <TextInput
             placeholder="Enter your overall_rating"
-            onChangeText={(overall_rating)=>this.setState({overall_rating})}
-            value={this.state.overall_rating}
+            onChangeText={(review_overallrating)=>this.setState({review_overallrating})}
+            value={this.state.review_overallrating}
          />
 
          <TextInput
             placeholder="Enter your price_rating"
-            onChangeText={(price_rating)=>this.setState({price_rating})}
-            value={this.state.price_rating}
+            onChangeText={(review_pricerating)=>this.setState({review_pricerating})}
+            value={this.state.review_pricerating}
            
           />
         
         <TextInput 
             placeholder="Enter your quality_rating"
-            onChangeText={(quality_rating)=>this.setState({quality_rating})}
-            value={this.state.quality_rating}
+            onChangeText={(review_qualityrating)=>this.setState({review_qualityrating})}
+            value={this.state.review_qualityrating}
          />
 
          <TextInput 
             placeholder="Enter your clenliness_rating"
-            onChangeText={(clenliness_rating) => this.setState({clenliness_rating})}
-            value={this.state.clenliness_rating}
+            onChangeText={(review_clenlinessrating) => this.setState({review_clenlinessrating})}
+            value={this.state.review_clenlinessrating}
          />
 
           <TextInput 
