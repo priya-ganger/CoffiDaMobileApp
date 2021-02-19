@@ -131,7 +131,7 @@ getAPhoto = async() => {
         "Content-Type": "image/jpeg",
         "X-Authorization": value
       },
-      body: data
+     // body: data
     })
     .then((response) =>{
       if(response.status === 200){
