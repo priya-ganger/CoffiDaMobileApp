@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React, { Component } from 'react';
 import { Alert, Text, View, Button, ToastAndroid, TextInput, StyleSheet, ActivityIndicator } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -11,12 +10,10 @@ class UpdateReview extends Component{
     this.state = {
      // isLoading: true,
       locData: [],
-     
-      
-      review_overallrating: '',
-      review_pricerating: '',
-      review_qualityrating: '',
-      review_clenlinessrating: '',
+      overall_rating: '',
+      price_rating: '',
+      quality_rating: '',
+      clenliness_rating: '',
       review_body: '',
 
       location_id: '',
@@ -55,20 +52,20 @@ updateReview = async () => {
 
     let sendReviewData = {};
   
-    if(this.state.review_overallrating != ''){
-      sendReviewData['review_overallrating'] = this.state.review_overallrating;
+    if(this.state.overall_rating != ''){
+      sendReviewData['overall_rating'] = Number(this.state.overall_rating);
     }
   
-    if(this.state.review_pricerating != ''){
-      sendReviewData['review_pricerating'] = this.state.review_pricerating;
+    if(this.state.price_rating != ''){
+      sendReviewData['price_rating'] = Number(this.state.price_rating);
     }
   
-    if(this.state.review_qualityrating != ''){
-      sendReviewData['review_qualityrating'] = this.state.review_qualityrating;
+    if(this.state.quality_rating != ''){
+      sendReviewData['quality_rating'] = Number(this.state.quality_rating);
     }
   
-    if(this.state.review_clenlinessrating != ''){
-      sendReviewData['review_clenlinessrating'] = this.state.review_clenlinessrating;
+    if(this.state.clenliness_rating != ''){
+      sendReviewData['clenliness_rating'] = Number(this.state.clenliness_rating);
     }
   
     if(this.state.review_body != ''){
@@ -137,27 +134,27 @@ updateReview = async () => {
               
               <TextInput
             placeholder="Enter your overall_rating"
-            onChangeText={(review_overallrating)=>this.setState({review_overallrating})}
-            value={this.state.review_overallrating}
+            onChangeText={(overall_rating)=>this.setState({overall_rating})}
+            value={this.state.overall_rating}
          />
 
          <TextInput
             placeholder="Enter your price_rating"
-            onChangeText={(review_pricerating)=>this.setState({review_pricerating})}
-            value={this.state.review_pricerating}
+            onChangeText={(price_rating)=>this.setState({price_rating})}
+            value={this.state.price_rating}
            
           />
         
         <TextInput 
             placeholder="Enter your quality_rating"
-            onChangeText={(review_qualityrating)=>this.setState({review_qualityrating})}
-            value={this.state.review_qualityrating}
+            onChangeText={(quality_rating)=>this.setState({quality_rating})}
+            value={this.state.quality_rating}
          />
 
          <TextInput 
             placeholder="Enter your clenliness_rating"
-            onChangeText={(review_clenlinessrating) => this.setState({review_clenlinessrating})}
-            value={this.state.review_clenlinessrating}
+            onChangeText={(clenliness_rating) => this.setState({clenliness_rating})}
+            value={this.state.clenliness_rating}
          />
 
           <TextInput 
