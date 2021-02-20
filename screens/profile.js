@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from "react-native";
+import { View, StyleSheet, Text, ActivityIndicator, Image, FlatList, ToastAndroid, Alert, TextInput, Button } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import User from "../components/user";
 
@@ -209,8 +209,30 @@ updateUserInfo = async() =>{
                 onPress={() => this.updateUserInfo()}
                 ></Button> 
 
-                <Button title="Log out"
-                onPress={() => navigation.navigate('LogOut')} /> 
+                {/* <Button title="Log out"
+                onPress={() => navigation.navigate('LogOut')} />  */}
+
+<Text>Your Reviews</Text>
+        <FlatList
+            data={this.state.userData.reviews}
+            renderItem={({item}) => (
+                <View>
+                    <Text>Location Name: {item.location.location_name}</Text>
+                    <Text>Review {item.review.review_body}</Text>
+                    <Text>Overall rating: {item.review.overall_rating}  </Text>
+                    <Text>Price Rating: {item.review.price_rating} </Text>
+                    <Text>Quality Rating: {item.review.quality_rating} </Text>
+                    <Text>Cleanliness Rating: {item.review.clenliness_rating} </Text>
+                    <Text> </Text>
+                    <Button 
+                title="Add photo to review"
+                onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id})}
+                ></Button>
+                </View>
+            )}
+            keyExtractor={(item,index) => item.review.review_id.toString()}
+            />
+
 
       </View>
      )

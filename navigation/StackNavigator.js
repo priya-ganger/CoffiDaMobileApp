@@ -32,6 +32,7 @@ const MainStackNavigator = () => {
        <Stack.Screen name="AddReview" component={AddReview} />
        <Stack.Screen name="Camera" component={Camera} />
        <Stack.Screen name="UpdateReview" component={UpdateReview} />
+       <Stack.Screen name="Favourites" component={Favourites} />
       
     </Stack.Navigator>
   );

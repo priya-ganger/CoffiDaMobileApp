@@ -94,7 +94,7 @@ class GetFavourites extends Component{
                 keyExtractor={(item,index) => item.location_id.toString()}
                 /> 
 
- <Text>Your Reviews</Text>
+ {/* <Text>Your Reviews</Text>
         <FlatList
             data={this.state.userData.reviews}
             renderItem={({item}) => (
@@ -106,10 +106,11 @@ class GetFavourites extends Component{
                     <Text>Quality Rating: {item.review.quality_rating} </Text>
                     <Text>Cleanliness Rating: {item.review.clenliness_rating} </Text>
                     <Text> </Text>
+                    
                 </View>
             )}
             keyExtractor={(item,index) => item.review.review_id.toString()}
-            />
+            /> */}
 
 <Text>Your liked Reviews</Text>
         <FlatList
