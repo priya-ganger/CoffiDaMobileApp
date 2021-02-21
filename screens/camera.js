@@ -158,24 +158,29 @@ getAPhoto = async() => {
         return(
             <View style={{flex:1}}>
 
-                      <RNCamera 
-                      ref={ref =>
-                      {this.camera = ref;
-                      }} 
-                      style={{
-                        flex:1,
-                        width: '100%'
-                      }}/>
+            <RNCamera 
+            ref={ref =>
+            {this.camera = ref;
+            }} 
+            style={{
+              flex:1,
+              width: '100%'
+            }}/>
                      
-                      <Button
-                        title="Take a photo"
-                        onPress={() => {this.takeAPhoto()}}
-                        />      
+            <Button
+              title="Take a photo"
+              onPress={() => {this.takeAPhoto()}}
+              />      
 
-                          <Button
-                        title="View photo"
-                        onPress={() => this.props.navigation.navigate('Photo',{ locId: this.state.location_id, revId: this.state.review_id})}
-                        />  
+            <Button
+            title="View photo"
+            onPress={() => this.props.navigation.navigate('Photo',{ locId: this.state.location_id, revId: this.state.review_id})}
+            />  
+
+            <Button
+            title="Delete a photo"
+            onPress={() => {this.deleteAPhoto()}}
+            /> 
 
 
 

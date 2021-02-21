@@ -1,8 +1,6 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React, { Component } from 'react';
-import { Alert, Text, View, Button, ToastAndroid, TextInput, StyleSheet, Image } from 'react-native';
+import { Alert, View, StyleSheet, Image } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RNCamera } from 'react-native-camera';
 
 class Photo extends Component{
 
@@ -10,14 +8,8 @@ class Photo extends Component{
     super(props);
 
     this.state = {
-      overall_rating: '',
-      price_rating: '',
-      quality_rating: '',
-      clenliness_rating: '',
-      review_body: "",
       location_id: '',
       review_id: '',
-      photo: ''
     }
 }
 
@@ -36,49 +28,6 @@ componentDidMount() {
      if(this.props.route.params){
        this.setState({review_id: this.props.route.params.revId})
      }
-
-}
-
-
-
-deleteAPhoto = async() => {
-  if(this.camera){
-    const options = {quality: 0.5, base64:true};
-    const data = await this.camera.takePictureAsync(options);
-
-    console.log(data.uri);
-    const value = await AsyncStorage.getItem('session_token');
-    return fetch("http://10.0.2.2:3333/api/1.0.0/location/"+this.state.location_id+"/review/"+this.state.review_id+"/photo",
-    {
-      method: 'delete',
-      headers: {
-        "Content-Type": "image/jpeg",
-        "X-Authorization": value
-      },
-      body: data
-    })
-    .then((response) =>{
-      if(response.status === 200){
-        Alert.alert("Picture deleted");
-     }
-     else if(response.status === 403){
-       throw 'Forbidden';
-     }
-     else if(response.status === 401){
-      throw 'Unauthorised';
-    }
-    else if(response.status === 404){
-      throw 'Not Found';
-    }
-    else if(response.status === 500){
-      throw 'Server Error';
-    }
-     
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-  }
 }
 
 getAPhoto = async() => {
@@ -94,7 +43,6 @@ getAPhoto = async() => {
         "Content-Type": "image/jpeg",
         "X-Authorization": value
       },
-     // body: data
     })
     .then((response) =>{
       if(response.status === 200){
@@ -156,23 +104,18 @@ deleteAPhoto = async() => {
   }
 
     render(){
-        
-        const navigation = this.props.navigation;
-
+        let photoUri = "http://10.0.2.2:3333/api/1.0.0/location/"+this.state.location_id+"/review/"+this.state.review_id+"/photo?timestamp=" + Date.now()
+        Alert.alert(photoUri);
 
         return(
             <View style={{flex:1}}>
 
-              {/* <Image
-              source={{uri: }}
-              style={{width: 200, height: 200}}
+              <Image
+              source={{uri: photoUri}}
+              style={{width: 400, height: 400}}
               
-              /> */}
+              />
 
-            <Button
-            title="Delete a photo"
-            onPress={() => {this.deleteAPhoto()}}
-            />   
             </View>
         )
     }
