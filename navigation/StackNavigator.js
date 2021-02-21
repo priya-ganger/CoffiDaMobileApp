@@ -27,7 +27,17 @@ const screenOptionStyle = {
 const MainStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Home" component={Home}  
+      options={{
+          title: 'Home',
+          headerStyle: {
+            backgroundColor: '#50808E',
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontWeight: 'bold'},}} />
+
+
        <Stack.Screen name="Profile" component={Profile} /> 
        <Stack.Screen name="GetReviews" component={GetReviews} />
        <Stack.Screen name="AddReview" component={AddReview} />

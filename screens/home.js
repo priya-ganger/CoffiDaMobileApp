@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Button, Alert, Text, StyleSheet, navigation, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
+import { View, Alert, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {commonStyles} from '../styles/common';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 class Home extends Component {
 
   constructor(props)
@@ -12,7 +13,6 @@ class Home extends Component {
           isLoading: true,
           locationData: [],
           location_id:''
-         // token: ''
   };
 }
 
@@ -48,7 +48,6 @@ class Home extends Component {
     })
     .then((response) => {
     if(response.status === 200){
-       //AsyncStorage.setItem('location_id', JSON.stringify(response.id));
         return response.json()
     }
     else if(response.status === 401){
@@ -87,7 +86,6 @@ class Home extends Component {
     .then((response) => {
         if(response.status === 200){
           Alert.alert("Added to favourites");
-          // return response.json()
         }
         else if(response.status === 400){
             throw 'Bad request';
@@ -127,7 +125,6 @@ class Home extends Component {
   .then((response) => {
       if(response.status === 200){
         Alert.alert("Deleted from favourites");
-        // return response.json()
       }
       else if(response.status === 401){
         throw 'Unauthorised';
@@ -157,61 +154,59 @@ render(){
   const navigation = this.props.navigation;
             if(this.state.isLoading){
                 return(
-                <View>
+                <View style={commonStyles.background}>
                 <ActivityIndicator/>
                 </View>
             );
             }else{
             return (
-             <View>
-               <Button
-              title="Filter Search"
-              onPress={() => navigation.navigate('Search')}
-               />
-               
+             <View style={commonStyles.background}>
+               <TouchableOpacity style={commonStyles.button}  onPress={() => navigation.navigate('Search')}>
+              <Text style={commonStyles.buttonText}>Search </Text>
+              <Ionicons name="search" size={25}  color='#042'/>
+              </TouchableOpacity> 
                 <FlatList
                 data={this.state.locationData}
                 renderItem={({item}) => (
                   
                     <View>
-                         <Text>Location ID:{item.location_id}</Text> 
-                        <Text> Name:  {item.location_name}</Text>
-                        <Text> Town: {item.location_town}</Text>
-                        {/* <Text>Location Latitude: {item.latitude}</Text>
-                        <Text>Location Longitude:  {item.longitude}</Text> */}
-                        {/* <Text>Location Photo   {item.photo_path}</Text> */}
+                         {/* <Text>Location ID:{item.location_id}</Text>  */}
+                        <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
+                        <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
                          {/* {this.state.displayImg ? ( 
                           */}
                           <Image 
                            source={{uri: item.photo_path}}
                           //source={{uri: 'https://tr-images.condecdn.net/image/vOkb7Jmdv2L/crop/1020/f/1kaffeine-london-mar19-pr.jpg'}}
-                          style={{width: 200, height: 200}}
+                          style={commonStyles.photo}
                           onError={this.errorLoadingImg}
                           />
                         {/* //   ) : (
                         //    <View></View>
                         //  )} */}
-                        <Text> Average Overall Rating: {item.avg_overall_rating}</Text>
-                        <Text> Price Rating: {item.avg_price_rating}</Text>
-                        <Text> Quality Rating: {item.avg_quality_rating}</Text>
-                        <Text> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
+                        <Text style={commonStyles.subheadingText}> Average Overall Rating: {item.avg_overall_rating}</Text>
+                        <Text style={commonStyles.subheadingText}> Price Rating: {item.avg_price_rating}</Text>
+                        <Text style={commonStyles.subheadingText}> Quality Rating: {item.avg_quality_rating}</Text>
+                        <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
 
-                        <Button
-                         title="Get Reviews"
-                        onPress={() => this.props.navigation.navigate('GetReviews', { locData: item})}
-                        />
+                        <TouchableOpacity
+                        style={commonStyles.button}  onPress={() => this.props.navigation.navigate('GetReviews', { locData: item})}>
+                          <Text style={commonStyles.buttonText}>View Reviews</Text>
+                        </TouchableOpacity>
                 
-                      <Button
-                        title="Click here to favourite this location"
-                        onPress={() => this.favouriteLocation(item.location_id)}
-                        />
+                        
+                        
+                      <TouchableOpacity
+                      style={commonStyles.button}  onPress={() => this.favouriteLocation(item.location_id)}> 
+                      <Text style={commonStyles.buttonText}>Favourite </Text>
+                      <Ionicons name="heart" size={25}  color='tomato'/>
+                      </TouchableOpacity> 
 
-                    <Button
-                        title="Click here to unfavourite this location"
-                        onPress={() => this.unfavouriteLocation(item.location_id)}
-                        />
-
-                   
+                      <TouchableOpacity
+                      style={commonStyles.button}   onPress={() => this.unfavouriteLocation(item.location_id)}>
+                      <Text style={commonStyles.buttonText}>Unfavourite </Text>
+                      <Ionicons name="heart-outline" size={25}  color='tomato'/>
+                      </TouchableOpacity>
                     </View>
                 )}
                 keyExtractor={(item,index) => item.location_id.toString()}
@@ -221,14 +216,5 @@ render(){
      }
   }
 }
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
-});
 
 export default Home;
