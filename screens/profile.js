@@ -162,14 +162,6 @@ updateUserInfo = async() =>{
         <Text> Last Name: {item.last_name}</Text>
         <Text> Email Address: {item.email}</Text>
         {/* <Text> Password: </Text> */}
- 
-
-    {/* // return(
-    // <View>
-    //   
-    //   
-    //   {/* <User /> */}
-
 
       <Text></Text>
 
