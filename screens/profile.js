@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { commonStyles } from '../styles/common'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class Profile extends Component {
   constructor (props) {
@@ -9,10 +11,6 @@ class Profile extends Component {
     this.state = {
       isLoading: true,
       userData: [],
-
-      // userId: AsyncStorage.getItem('user_id'),
-      //  token: AsyncStorage.getItem('session_token'),
-
       first_name: '',
       last_name: '',
       email: '',
@@ -139,19 +137,20 @@ render () {
     )
   } else {
     return (
-      <View>
-        <Text>Your Details</Text>
+      <View style={commonStyles.container}>
+        <Text style={commonStyles.title}>Your Current Details</Text>
         {/* <Text>User ID: {item.user_id}</Text> */}
-        <Text> First Name:  {item.first_name}</Text>
-        <Text> Last Name: {item.last_name}</Text>
-        <Text> Email Address: {item.email}</Text>
+        <Text style={commonStyles.subheadingText}> First Name:  {item.first_name}</Text>
+        <Text style={commonStyles.subheadingText}> Last Name: {item.last_name}</Text>
+        <Text style={commonStyles.subheadingText}>  Email Address: {item.email}</Text>
         {/* <Text> Password: </Text> */}
 
         <Text />
 
-        <Text> Update your details here </Text>
+        <Text style={commonStyles.title}> Update your details here </Text>
         <Text>First Name:</Text>
         <TextInput
+        style={commonStyles.input}
           placeholder='Enter your first name'
           onChangeText={(first_name) => this.setState({ first_name })}
           value={this.state.first_name}
@@ -159,6 +158,7 @@ render () {
 
         <Text>Second Name:</Text>
         <TextInput
+          style={commonStyles.input}
           placeholder='Enter your last name'
           onChangeText={(last_name) => this.setState({ last_name })}
           value={this.state.last_name}
@@ -166,14 +166,16 @@ render () {
 
         <Text>Email:</Text>
         <TextInput
-          placeholder='Email'
+          style={commonStyles.input}
+          placeholder='Enter your email address'
           onChangeText={(email) => this.setState({ email })}
           value={this.state.email}
         />
 
         <Text>Password:</Text>
         <TextInput
-          placeholder='Password'
+          style={commonStyles.input}
+          placeholder='Enter your Password'
           onChangeText={(password) => this.setState({ password })}
           value={this.state.password}
           secureTextEntry
@@ -192,12 +194,12 @@ render () {
           data={this.state.userData.reviews}
           renderItem={({ item }) => (
             <View>
-              <Text>Location Name: {item.location.location_name}</Text>
-              <Text>Review {item.review.review_body}</Text>
-              <Text>Overall rating: {item.review.overall_rating}  </Text>
-              <Text>Price Rating: {item.review.price_rating} </Text>
-              <Text>Quality Rating: {item.review.quality_rating} </Text>
-              <Text>Cleanliness Rating: {item.review.clenliness_rating} </Text>
+              <Text style={commonStyles.subheadingText}>Location Name: {item.location.location_name}</Text>
+              <Text style={commonStyles.subheadingText}>Review {item.review.review_body}</Text>
+              <Text style={commonStyles.subheadingText}>Overall rating: {item.review.overall_rating}  </Text>
+              <Text style={commonStyles.subheadingText}>Price Rating: {item.review.price_rating} </Text>
+              <Text style={commonStyles.subheadingText}>Quality Rating: {item.review.quality_rating} </Text>
+              <Text style={commonStyles.subheadingText}>Cleanliness Rating: {item.review.clenliness_rating} </Text>
               <Text> </Text>
               <Button
                 title='Add photo to review'

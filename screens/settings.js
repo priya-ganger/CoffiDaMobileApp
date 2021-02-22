@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, StyleSheet, Text, Button } from 'react-native'
 
-const Settings = ({ navigation }) => {
+class Settings extends Component {
+
+  render() {
   return (
     <View style={styles.center}>
       <Text>This is the Settings screen</Text>
@@ -11,7 +13,10 @@ const Settings = ({ navigation }) => {
       />
     </View>
   )
+  }
 }
+  
+
 
 const styles = StyleSheet.create({
   center: {

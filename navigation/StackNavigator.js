@@ -18,10 +18,10 @@ const Stack = createStackNavigator()
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: '#9AC4F8'
+    backgroundColor: '#50808E'
   },
   headerTintColor: 'white',
-  headerBackTitle: 'Back'
+  headerTitleStyle: { fontWeight: 'bold' }
 }
 
 const MainStackNavigator = () => {
@@ -31,48 +31,36 @@ const MainStackNavigator = () => {
         name='Home' component={Home}
         options={{
           title: 'Home',
-          headerStyle: {
-            backgroundColor: '#50808E'
-          },
-          headerTintColor: 'white',
-          headerTitleStyle: { fontWeight: 'bold' }
-        }}
+      }}
       />
 
       <Stack.Screen name='Profile' component={Profile} />
       <Stack.Screen
         name='GetReviews' component={GetReviews}
-        options={{
-          title: 'Reviews',
-          headerStyle: {
-            backgroundColor: '#50808E'
-          },
-          headerTintColor: 'white',
-          headerTitleStyle: { fontWeight: 'bold' }
-        }}
+        
       />
 
       <Stack.Screen name='AddReview' component={AddReview}
        options={{
         title: 'Add a Review',
-        headerStyle: {
-          backgroundColor: '#50808E'
-        },
-        headerTintColor: 'white',
-        headerTitleStyle: { fontWeight: 'bold' }
       }} />
+
       <Stack.Screen name='Camera' component={Camera} 
        options={{
         title: 'Camera',
-        headerStyle: {
-          backgroundColor: '#50808E'
-        },
-        headerTintColor: 'white',
-        headerTitleStyle: { fontWeight: 'bold' }
       }}/>
-      <Stack.Screen name='UpdateReview' component={UpdateReview} />
-      <Stack.Screen name='Favourites' component={Favourites} />
-      <Stack.Screen name='Photo' component={Photo} />
+
+      <Stack.Screen name='UpdateReview' component={UpdateReview} 
+       options={{
+        title: 'Update your review',
+      }}/>
+
+      <Stack.Screen name='Favourites' component={Favourites} 
+      />
+
+      <Stack.Screen name='Photo' component={Photo}  options={{
+        title: 'Photo',
+      }}/>
 
     </Stack.Navigator>
   )
@@ -89,7 +77,10 @@ const SettingsStackNavigator = () => {
 const FavouritesStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='Favourites' component={Favourites} />
+      <Stack.Screen name='Favourites' component={Favourites} 
+      options={{
+        title: 'Your favourites',
+      }}/>
     </Stack.Navigator>
   )
 }
@@ -129,7 +120,9 @@ const UpdateReviewStackNavigator = () => {
 const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='Profile' component={Profile} />
+      <Stack.Screen name='Profile' component={Profile} options={{
+      title: 'Your Profile',
+    }}/>
     </Stack.Navigator>
   )
 }
@@ -157,13 +150,7 @@ const LoginStackNavigator = () => {
       <Stack.Screen
         name='Login' component={Login} options={{
           title: '',
-          headerStyle: {
-            backgroundColor: '#50808E'
-          }
-          // headerTintColor: 'white',
-          // headerTitleStyle: {
-          //   fontWeight: 'bold'},
-        }}
+          }}
       />
     </Stack.Navigator>
   )
@@ -172,7 +159,9 @@ const LoginStackNavigator = () => {
 const SignUpStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='SignUp' component={SignUp} />
+      <Stack.Screen name='SignUp' component={SignUp} options={{
+          title: 'Sign up'
+          }}/>
     </Stack.Navigator>
   )
 }
@@ -180,7 +169,9 @@ const SignUpStackNavigator = () => {
 const LogOutStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='LogOut' component={LogOut} />
+      <Stack.Screen name='LogOut' component={LogOut} options={{
+          title: 'Log out'
+          }}/>
     </Stack.Navigator>
   )
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Text, Button, View, ActivityIndicator, ScrollView, ToastAndroid, Alert, FlatList, Image } from 'react-native'
+import { Text, View, ActivityIndicator, TouchableOpacity, ScrollView, ToastAndroid, Alert, FlatList, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { commonStyles } from '../styles/common'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class GetFavourites extends Component {
-  // This component returns a user's favourite locations.
-  // Can refactor this later
   constructor (props) {
     super(props)
 
@@ -67,50 +67,33 @@ class GetFavourites extends Component {
                 renderItem={({ item }) => (
                   <View>
                     {/* <Text>Location ID:{item.location_id}</Text> */}
-                    <Text>Location Name:  {item.location_name}</Text>
-                    <Text>Location Town: {item.location_town}</Text>
-                    {/* {this.state.displayImg ? (
-                          */}
+                    <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
+                    <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
                     <Image
                       source={{ uri: item.photo_path }}
-                          // source={{uri: 'https://tr-images.condecdn.net/image/vOkb7Jmdv2L/crop/1020/f/1kaffeine-london-mar19-pr.jpg'}}
-                      style={{ width: 200, height: 200 }}
+                      style={commonStyles.photo}
                       onError={this.errorLoadingImg}
                     />
-                    <Button
-                      title='More info'
-                      onPress={() => this.props.navigation.navigate('moreInfo', { locationID: item.location_id })}
-                    />
+
+                <TouchableOpacity
+                  style={commonStyles.button}
+                  onPress={() => this.props.navigation.navigate('moreInfo', { locationID: item.location_id })}
+                >
+                  <Text style={commonStyles.buttonText}> More info </Text>
+                  <Ionicons name='information-circle' size={25} color='white' />
+                </TouchableOpacity>
                   </View>
                 )}
                 keyExtractor={(item, index) => item.location_id.toString()}
               />
 
-              {/* <Text>Your Reviews</Text>
-        <FlatList
-            data={this.state.userData.reviews}
-            renderItem={({item}) => (
-                <View>
-                    <Text>Location Name: {item.location.location_name}</Text>
-                    <Text>Review {item.review.review_body}</Text>
-                    <Text>Overall rating: {item.review.overall_rating}  </Text>
-                    <Text>Price Rating: {item.review.price_rating} </Text>
-                    <Text>Quality Rating: {item.review.quality_rating} </Text>
-                    <Text>Cleanliness Rating: {item.review.clenliness_rating} </Text>
-                    <Text> </Text>
-
-                </View>
-            )}
-            keyExtractor={(item,index) => item.review.review_id.toString()}
-            /> */}
-
-              <Text>Your liked Reviews</Text>
+              <Text style={commonStyles.title}>Your liked Reviews</Text>
               <FlatList
                 data={this.state.userData.liked_reviews}
                 renderItem={({ item }) => (
                   <View>
-                    <Text>Location Name: {item.location.location_name}</Text>
-                    <Text>Review {item.review.review_body}</Text>
+                    <Text style={commonStyles.subheadingText}>Location Name: {item.location.location_name}</Text>
+                    <Text style={commonStyles.subheadingText}>Review {item.review.review_body}</Text>
                     {/* <Text>Overall rating: {item.review.overall_rating}  </Text>
                     <Text>Price Rating: {item.review.price_rating} </Text>
                     <Text>Quality Rating: {item.review.quality_rating} </Text>
