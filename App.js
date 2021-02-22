@@ -1,14 +1,14 @@
-import 'react-native-gesture-handler';
+import 'react-native-gesture-handler'
 
-import { NavigationContainer } from '@react-navigation/native';
-import { MainStackNavigator } from "./navigation/StackNavigator";
-import BottomTabNavigator from "./navigation/TabNavigator";
-import DrawerNavigator from "./navigation/DrawerNavigator";
+import { NavigationContainer } from '@react-navigation/native'
+import { MainStackNavigator } from './navigation/StackNavigator'
+import BottomTabNavigator from './navigation/TabNavigator'
+import DrawerNavigator from './navigation/DrawerNavigator'
 
-import React, { Component } from 'react';
-import { FlatList, View, Text, Image, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { FlatList, View, Text, Image, StyleSheet } from 'react-native'
 
-import LocationReview from './components/locationReview';
+import LocationReview from './components/locationReview'
 import Location from './components/location'
 import User from './components/user'
 
@@ -17,16 +17,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    justifyContent: 'center'
+  }
+})
 
 const App = () => {
   return (
     <NavigationContainer>
       <DrawerNavigator />
     </NavigationContainer>
-  );
+  )
 }
 
 // const Stack = createStackNavigator();
@@ -96,7 +96,6 @@ const App = () => {
 //           ],
 //         },
 
-
 //       location: {
 //         "location_id": 75,
 //         "location_name": "Coffee Shop",
@@ -117,7 +116,7 @@ const App = () => {
 //                               "review_body": "Delicious coffee, would recommend!",
 //                               "likes": 50000000000000000
 //                             },
-                          
+
 //                             {
 //                               "review_id": 2,
 //                               "overall_rating": 5,
@@ -127,7 +126,7 @@ const App = () => {
 //                               "review_body": "Just brilliant!",
 //                               "likes": 5000
 //                             },
-                          
+
 //                             {
 //                              "review_id": 3,
 //                              "overall_rating": 2,
@@ -138,8 +137,7 @@ const App = () => {
 //                              "likes": 1
 //                             }]
 //                          ,
-                      
-                          
+
 //   "location_id": 76,
 //   "location_name": "Coffee Shop",
 //   "location_town": "Manchester",
@@ -159,7 +157,7 @@ const App = () => {
 //                       "review_body": "Delicious coffee, would recommend!",
 //                       "likes": 50000000000000000
 //                     },
-                  
+
 //                     {
 //                       "review_id": 2,
 //                       "overall_rating": 5,
@@ -169,7 +167,7 @@ const App = () => {
 //                       "review_body": "Just brilliant!",
 //                       "likes": 5000
 //                     },
-                  
+
 //                     {
 //                       "review_id": 3,
 //                       "overall_rating": 2,
@@ -179,7 +177,7 @@ const App = () => {
 //                       "review_body": "Boring and nasty coffee!",
 //                       "likes": 1
 //                     }],
-//                   }      
+//                   }
 //      }
 //   }
 
@@ -189,11 +187,11 @@ const App = () => {
 //     <NavigationContainer>
 
 //       <MainStackNavigator />
-      
+
 //    </NavigationContainer>
 //    </View>
 //         );
 //     }
 // }
 
-export default App;
+export default App
