@@ -39,7 +39,16 @@ const MainStackNavigator = () => {
 
 
        <Stack.Screen name="Profile" component={Profile} /> 
-       <Stack.Screen name="GetReviews" component={GetReviews} />
+       <Stack.Screen name="GetReviews" component={GetReviews} 
+       options={{
+        title: 'Reviews',
+        headerStyle: {
+          backgroundColor: '#50808E',
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: {
+          fontWeight: 'bold'},}} />
+
        <Stack.Screen name="AddReview" component={AddReview} />
        <Stack.Screen name="Camera" component={Camera} />
        <Stack.Screen name="UpdateReview" component={UpdateReview} />
@@ -126,7 +135,15 @@ const AddReviewStackNavigator = () => {
 const LoginStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Login" component={Login}  options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: '#50808E',
+          },
+          // headerTintColor: 'white',
+          // headerTitleStyle: {
+          //   fontWeight: 'bold'},
+        }} />
     </Stack.Navigator>
   );
 }

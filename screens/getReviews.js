@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { View, Button, Alert, Text, StyleSheet, navigation, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
+import { View, Button, Alert, Text, StyleSheet, TouchableOpacity, navigation, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {commonStyles} from '../styles/common';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 class GetReviews extends Component {
 
@@ -216,42 +218,56 @@ class GetReviews extends Component {
     }else{
     return (
     <View>
-   <Text>Reviews</Text>
+   <Text style={commonStyles.title}>Reviews</Text>
    {/* <Text>Dataa is {locData}</Text> */}
                 <FlatList
                   data={this.state.locationData.location_reviews}
                   renderItem={({item}) => (
                       <View>
-                <Text>Location Name: {this.state.locationData.location_name}</Text>
-                <Text>  Review ID: {item.review_id}</Text>
-                <Text> Overall rating: {item.overall_rating}  </Text>
-                <Text> Price Rating: {item.price_rating} </Text>
-                <Text>  Quality Rating: {item.quality_rating} </Text>
-                <Text>  Cleanliness Rating: {item.clenliness_rating} </Text>
-                <Text>  Review body: {item.review_body}</Text>
-                <Text>  Likes: {item.likes} </Text>
-                <Button 
-                  title="Like Review"
-                  onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}
-                ></Button>
-                  <Button 
-                  title="Unlike Review"
-                  onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}
-                  ></Button>
-                    <Button 
-                  title="Delete Review"
-                  onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
-                  ></Button>
+                <Text style={commonStyles.subheadingText}> Location Name: {this.state.locationData.location_name}</Text>
+                {/* <Text> Review ID: {item.review_id}</Text> */}
+                <Text style={commonStyles.subheadingText}> Overall rating: {item.overall_rating}  </Text>
+                <Text style={commonStyles.subheadingText}> Price Rating: {item.price_rating} </Text>
+                <Text style={commonStyles.subheadingText}> Quality Rating: {item.quality_rating} </Text>
+                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.clenliness_rating} </Text>
+                <Text style={commonStyles.subheadingText}> Review: {item.review_body}</Text>
+                <Text style={commonStyles.subheadingText}> Likes: {item.likes} </Text>
+               
+                <TouchableOpacity 
+                style={commonStyles.button} 
+                onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}>
+                <Text style={commonStyles.buttonText}> Like </Text>
+                <Ionicons name="thumbs-up" size={25}  color='white'/>
+                </TouchableOpacity>
 
-                <Button
-                title="Add a review"
-                onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id})}
-                />    
+                <TouchableOpacity 
+                style={commonStyles.button} 
+                onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}>
+                <Text style={commonStyles.buttonText}> Unlike </Text>
+                <Ionicons name="thumbs-down" size={25}  color='white'/>
+                </TouchableOpacity>
 
-                <Button 
-                  title="Update this Review"
-                  onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, location_id: this.state.locationData.location_id})}
-                  ></Button>
+                <TouchableOpacity 
+                style={commonStyles.button} 
+                onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}>
+                <Text style={commonStyles.buttonText}> Delete </Text>
+                <Ionicons name="trash" size={25}  color='white'/>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                style={commonStyles.button} 
+                onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id})}>
+                <Text style={commonStyles.buttonText}> Add Review </Text>
+                <Ionicons name="add-circle" size={25}  color='white'/>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                style={commonStyles.button} 
+                onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, location_id: this.state.locationData.location_id})}>
+                <Text style={commonStyles.buttonText}> Update Review </Text>
+                <Ionicons name="create" size={25}  color='white'/>
+                </TouchableOpacity>
+
 
                       </View>
                   )}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Alert, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, FlatList, Image } from "react-native";
+import { View, Alert, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, FlatList, Image, ScrollView } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {commonStyles} from '../styles/common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -154,14 +154,14 @@ render(){
   const navigation = this.props.navigation;
             if(this.state.isLoading){
                 return(
-                <View style={commonStyles.background}>
+                <View style={commonStyles.container}>
                 <ActivityIndicator/>
                 </View>
             );
             }else{
             return (
              <View style={commonStyles.background}>
-               <TouchableOpacity style={commonStyles.button}  onPress={() => navigation.navigate('Search')}>
+               <TouchableOpacity style={commonStyles.button} onPress={() => navigation.navigate('Search')}>
               <Text style={commonStyles.buttonText}>Search </Text>
               <Ionicons name="search" size={25}  color='#042'/>
               </TouchableOpacity> 
@@ -193,8 +193,6 @@ render(){
                         style={commonStyles.button}  onPress={() => this.props.navigation.navigate('GetReviews', { locData: item})}>
                           <Text style={commonStyles.buttonText}>View Reviews</Text>
                         </TouchableOpacity>
-                
-                        
                         
                       <TouchableOpacity
                       style={commonStyles.button}  onPress={() => this.favouriteLocation(item.location_id)}> 

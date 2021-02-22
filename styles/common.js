@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 const commonStyles = StyleSheet.create({
-    background:{
-        backgroundColor: '#DDD8C4'
-    },
+    // background: {
+    //     backgroundColor: '#DDD8C4'
+    // },
 
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#DDD8C4'
       },
 
       button: {
@@ -26,7 +27,14 @@ const commonStyles = StyleSheet.create({
       buttonText: {
         fontSize: 20,
         color: 'white',
-        fontWeight: '700'
+        fontWeight: '600'
+      },
+
+      title: {
+        fontSize: 20,
+        color: '#50808E',
+        fontWeight: '500',
+        textAlign: 'center'
       },
 
       subheadingText: {
@@ -53,6 +61,18 @@ const commonStyles = StyleSheet.create({
         padding: 8,
         borderRadius: 20,
         margin: 5
+      },
+
+      input: {
+         // flex: 1,
+        margin: 10,
+        height: 40,
+        padding: 5,
+        fontSize: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#D6EADF',
+        backgroundColor: '#A3C9A8',
+        borderRadius: 25
       }
 
 })
