@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Text, View, Button, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
+import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -103,35 +103,35 @@ render () {
       <Text style={commonStyles.title}>Your review for: {this.state.locationName}</Text>
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your overall rating (Optional)'
+        placeholder='Enter your overall rating (Required)'
         onChangeText={(overall_rating) => this.setState({ overall_rating })}
         value={this.state.overall_rating}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your price rating (Optional)'
+        placeholder='Enter your price rating (Required)'
         onChangeText={(price_rating) => this.setState({ price_rating })}
         value={this.state.price_rating}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your quality rating (Optional)'
+        placeholder='Enter your quality rating (Required)'
         onChangeText={(quality_rating) => this.setState({ quality_rating })}
         value={this.state.quality_rating}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your cleanliness rating (Optional)'
+        placeholder='Enter your cleanliness rating (Required)'
         onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
         value={this.state.clenliness_rating}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your review  (Optional)'
+        placeholder='Enter your review  (Required)'
         onChangeText={(review_body) => this.setState({ review_body })}
         value={this.state.review_body}
       />

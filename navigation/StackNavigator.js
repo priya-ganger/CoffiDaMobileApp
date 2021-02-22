@@ -61,7 +61,15 @@ const MainStackNavigator = () => {
         headerTintColor: 'white',
         headerTitleStyle: { fontWeight: 'bold' }
       }} />
-      <Stack.Screen name='Camera' component={Camera} />
+      <Stack.Screen name='Camera' component={Camera} 
+       options={{
+        title: 'Camera',
+        headerStyle: {
+          backgroundColor: '#50808E'
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: { fontWeight: 'bold' }
+      }}/>
       <Stack.Screen name='UpdateReview' component={UpdateReview} />
       <Stack.Screen name='Favourites' component={Favourites} />
       <Stack.Screen name='Photo' component={Photo} />

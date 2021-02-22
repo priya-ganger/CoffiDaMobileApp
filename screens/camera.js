@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
-import { Alert, View, Button } from 'react-native'
+import { Alert, View, TouchableOpacity, Text } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RNCamera } from 'react-native-camera'
+import { commonStyles } from '../styles/common'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class Camera extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      overall_rating: '',
-      price_rating: '',
-      quality_rating: '',
-      clenliness_rating: '',
-      review_body: '',
       location_id: '',
       review_id: ''
     }
@@ -137,7 +134,7 @@ getAPhoto = async () => {
 
 render () {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={commonStyles.container}>
 
       <RNCamera
         ref={ref => {
@@ -149,20 +146,20 @@ render () {
         }}
       />
 
-      <Button
-        title='Take a photo'
-        onPress={() => { this.takeAPhoto() }}
-      />
+      <TouchableOpacity style={commonStyles.button} onPress={() => this.takeAPhoto()}>
+      <Text style={commonStyles.buttonText}>Capture </Text>
+      <Ionicons name='camera' size={25} color='white' />
+      </TouchableOpacity>
 
-      <Button
-        title='View photo'
-        onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}
-      />
+      <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
+      <Text style={commonStyles.buttonText}>View Photo </Text>
+      <Ionicons name='image' size={25} color='white' />
+      </TouchableOpacity>
 
-      <Button
-        title='Delete a photo'
-        onPress={() => { this.deleteAPhoto() }}
-      />
+      <TouchableOpacity style={commonStyles.button} onPress={() => { this.deleteAPhoto() }}>
+      <Text style={commonStyles.buttonText}>Delete Photo </Text>
+      <Ionicons name='trash' size={25} color='white' />
+      </TouchableOpacity>
 
     </View>
   )
