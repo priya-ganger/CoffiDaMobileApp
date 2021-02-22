@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Text, View, Button, ToastAndroid, TextInput, StyleSheet } from 'react-native'
+import { Alert, Text, View, Button, ToastAndroid, TextInput } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 class AddReview extends Component {
@@ -137,65 +137,9 @@ render () {
         onPress={() => this.props.navigation.navigate('Camera', { locId: this.state.location_id, revId: this.state.review_id })}
       />
 
-      {/* <Text>Update a review</Text>
-              <Button title="Go back"
-                onPress={() => navigation.goBack()} />
-
-                  <TextInput
-                placeholder="Enter your overall_rating"
-                onChangeText={(overall_rating)=>this.setState({overall_rating})}
-                value={this.state.overall_rating}
-             />
-
-             <TextInput
-                placeholder="Enter your price_rating"
-                onChangeText={(price_rating)=>this.setState({price_rating})}
-                value={this.state.price_rating}
-
-              />
-
-            <TextInput
-                placeholder="Enter your quality_rating"
-                onChangeText={(quality_rating)=>this.setState({quality_rating})}
-                value={this.state.quality_rating}
-             />
-
-             <TextInput
-                placeholder="Enter your clenliness_rating"
-                onChangeText={(clenliness_rating) => this.setState({clenliness_rating})}
-                value={this.state.clenliness_rating}
-             />
-
-              <TextInput
-                placeholder="Enter your review_body"
-                onChangeText={(review_body) => this.setState({review_body})}
-                value={this.state.review_body}
-             /> */}
-
-      {/* <Button
-                title="Update review"
-                onPress={() => this.updateReview()}
-                ></Button> */}
-
     </View>
   )
 }
 }
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  },
-
-  cameraPreview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  }
-
-})
 
 export default AddReview

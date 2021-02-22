@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Alert, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, FlatList, Image, ScrollView } from 'react-native'
+import { View, Alert, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, FlatList, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -82,7 +82,6 @@ class Home extends Component {
         } else if (response.status === 401) {
           throw 'Unauthorised'
         } else if (response.status === 404) {
-          console.log("This is the data i'm trying to send 2: " + AddFavouriteData)
           Alert.alert('Id: ' + location_id + ' Token: ' + token)
           throw 'Not Found'
         } else if (response.status === 500) {

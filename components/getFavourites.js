@@ -53,9 +53,6 @@ class GetFavourites extends Component {
       }
 
       render () {
-        const navigation = this.props.navigation
-        const item = this.state.userData
-
         if (this.state.isLoading) {
           return (
             <View>
@@ -66,7 +63,6 @@ class GetFavourites extends Component {
           return (
             <ScrollView>
               <FlatList
-
                 data={this.state.userData.favourite_locations}
                 renderItem={({ item }) => (
                   <View>

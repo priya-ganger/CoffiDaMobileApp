@@ -1,6 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native'
 import React, { Component } from 'react'
-import { Alert, Text, View, Button, ToastAndroid, TextInput, StyleSheet } from 'react-native'
+import { Alert, View, Button } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RNCamera } from 'react-native-camera'
 
@@ -137,8 +136,6 @@ getAPhoto = async () => {
 }
 
 render () {
-  const navigation = this.props.navigation
-
   return (
     <View style={{ flex: 1 }}>
 
@@ -171,21 +168,5 @@ render () {
   )
 }
 }
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  },
-
-  cameraPreview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  }
-
-})
 
 export default Camera

@@ -45,8 +45,6 @@ class SignUp extends Component {
     }
 
     render () {
-      const navigation = this.props.navigation
-
       return (
         <View>
           <Text>This is the SignUp screnn</Text>

@@ -1,6 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native'
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button, ScrollView } from 'react-native'
+import { View, Text, Button } from 'react-native'
 import GetFavourites from '../components/getFavourites'
 
 class Favourites extends Component {

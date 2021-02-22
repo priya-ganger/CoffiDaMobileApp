@@ -181,10 +181,6 @@ class Location extends Component {
     }
 
     render () {
-      const navigation = this.props.navigation
-      const item = this.state.locationData
-      // const heart = <Icon name="rocket" size={30} color="#900" />;
-
       if (this.state.isLoading) {
         return (
           <View>

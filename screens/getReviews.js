@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Button, Alert, Text, StyleSheet, TouchableOpacity, navigation, ActivityIndicator, ToastAndroid, FlatList, Image } from 'react-native'
+import { View, Alert, Text, StyleSheet, TouchableOpacity, ActivityIndicator, ToastAndroid, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
