@@ -52,7 +52,15 @@ const MainStackNavigator = () => {
         }}
       />
 
-      <Stack.Screen name='AddReview' component={AddReview} />
+      <Stack.Screen name='AddReview' component={AddReview}
+       options={{
+        title: 'Add a Review',
+        headerStyle: {
+          backgroundColor: '#50808E'
+        },
+        headerTintColor: 'white',
+        headerTitleStyle: { fontWeight: 'bold' }
+      }} />
       <Stack.Screen name='Camera' component={Camera} />
       <Stack.Screen name='UpdateReview' component={UpdateReview} />
       <Stack.Screen name='Favourites' component={Favourites} />

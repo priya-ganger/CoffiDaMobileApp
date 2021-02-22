@@ -10,22 +10,22 @@ class GetReviews extends Component {
     this.state = {
       isLoading: true,
       locationData: [],
-      location_id: ''
+      location_id: '',
+      location_Name: ''
     }
   }
 
   componentDidMount () {
-    // this._unsubscribe = this.props.navigation.addListener('focus', () => {
-
+    // this._unsubscribe = 
+    this.props.navigation.addListener('focus', () => {
     const { locData } = this.props.route.params
     console.log('This is the params data' + locData.location_id)
-
     if (this.props.route.params) {
       this.setState({ location_id: this.props.route.params.locData.location_id })
     }
-
     this.getLocationData()
-  }
+  })
+}
 
   UNSAFE_componentWillMount () {
     // this._unsubscribe
@@ -181,8 +181,6 @@ class GetReviews extends Component {
   }
 
   render () {
-    const navigation = this.props.navigation
-    // const {locData} = this.props.route.params
     if (this.state.isLoading) {
       return (
         <View>
@@ -233,7 +231,7 @@ class GetReviews extends Component {
 
                 <TouchableOpacity
                   style={commonStyles.button}
-                  onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id })}
+                  onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name})}
                 >
                   <Text style={commonStyles.buttonText}> Add Review </Text>
                   <Ionicons name='add-circle' size={25} color='white' />

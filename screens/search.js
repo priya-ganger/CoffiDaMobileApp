@@ -1,6 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native'
 import React, { Component } from 'react'
-import { Text, View, Image, Button, FlatList, ActivityIndicator, TextInput, StyleSheet } from 'react-native'
+import { Text, View, Image, Button, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -66,7 +65,7 @@ class Search extends Component {
     console.log(this.state.quality_rating)
     console.log(this.state.clenliness_rating)
 
-    if (this.state.q != '') {
+    if (this.state.q !== '') {
       url += 'q=' + this.state.q + '&'
     }
 

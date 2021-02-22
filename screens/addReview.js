@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Alert, Text, View, Button, ToastAndroid, TextInput } from 'react-native'
+import { Alert, Text, View, Button, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { commonStyles } from '../styles/common'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class AddReview extends Component {
   constructor (props) {
@@ -13,26 +15,34 @@ class AddReview extends Component {
       clenliness_rating: '',
       review_body: '',
       location_id: '',
-      review_id: ''
+      review_id: '',
+      locationName: ''
     }
   }
 
   componentDidMount () {
     // this._unsubscribe = this.props.navigation.addListener('focus', () => {
 
-    const { location_id } = this.props.route.params
-    const { locData } = this.props.route.params
-    console.log('This is the params data' + location_id)
+    const { location_id, locData, location_Name } = this.props.route.params
 
     if (this.props.route.params) {
       this.setState({ location_id: this.props.route.params.location_id })
     }
 
-    console.log('This is the params data' + locData.review_id)
+    if (this.props.route.params) {
+      this.setState({ locationName: this.props.route.params.location_Name })
+    }
 
     if (this.props.route.params) {
       this.setState({ review_id: this.props.route.params.locData.review_id })
     }
+
+    console.log('location id' + location_id)
+
+    console.log('location name' + location_Name)
+
+    console.log('review id' + locData.review_id)
+   
   }
 
   UNSAFE_componentWillMount () {
@@ -86,57 +96,55 @@ addReview = async () => {
 }
 
 render () {
-  const navigation = this.props.navigation
-
   return (
-    <View style={{ flex: 1 }}>
-      <Text>Add Review {this.state.review_id}</Text>
-      <Text>location id {this.state.location_id}</Text>
-      <Button
-        title='Go back'
-        onPress={() => navigation.goBack()}
-      />
-
+    <View style={commonStyles.container}>
+      {/* <Text>Add Review {this.state.review_id}</Text>
+      <Text>location id {this.state.location_id}</Text> */}
+      <Text style={commonStyles.title}>Your review for: {this.state.locationName}</Text>
       <TextInput
-        placeholder='Enter your overall_rating'
+        style={commonStyles.input}
+        placeholder='Enter your overall rating (Optional)'
         onChangeText={(overall_rating) => this.setState({ overall_rating })}
         value={this.state.overall_rating}
       />
 
       <TextInput
-        placeholder='Enter your price_rating'
+        style={commonStyles.input}
+        placeholder='Enter your price rating (Optional)'
         onChangeText={(price_rating) => this.setState({ price_rating })}
         value={this.state.price_rating}
       />
 
       <TextInput
-        placeholder='Enter your quality_rating'
+        style={commonStyles.input}
+        placeholder='Enter your quality rating (Optional)'
         onChangeText={(quality_rating) => this.setState({ quality_rating })}
         value={this.state.quality_rating}
       />
 
       <TextInput
-        placeholder='Enter your clenliness_rating'
+        style={commonStyles.input}
+        placeholder='Enter your cleanliness rating (Optional)'
         onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
         value={this.state.clenliness_rating}
       />
 
       <TextInput
-        placeholder='Enter your review_body'
+        style={commonStyles.input}
+        placeholder='Enter your review  (Optional)'
         onChangeText={(review_body) => this.setState({ review_body })}
         value={this.state.review_body}
       />
 
-      <Button
-        title='Add a review'
-        onPress={() => this.addReview()}
-      />
+       <TouchableOpacity style={commonStyles.button} onPress={() => this.addReview()}>
+       <Text style={commonStyles.buttonText}>Add </Text>
+        <Ionicons name='add' size={25} color='white' />
+      </TouchableOpacity>
 
-      <Button
-        title='Add photo to review'
-        onPress={() => this.props.navigation.navigate('Camera', { locId: this.state.location_id, revId: this.state.review_id })}
-      />
-
+      <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: this.state.location_id, revId: this.state.review_id })}>
+      <Text style={commonStyles.buttonText}> Add photo? </Text>
+      <Ionicons name='camera' size={25} color='white' />
+      </TouchableOpacity> 
     </View>
   )
 }
