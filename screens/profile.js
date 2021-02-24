@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -148,7 +148,7 @@ render () {
         <Text />
 
         <Text style={commonStyles.title}> Update your details here </Text>
-        <Text>First Name:</Text>
+        <Text style={commonStyles.subheadingResultText}>First Name:</Text>
         <TextInput
         style={commonStyles.input}
           placeholder='Enter your first name'
@@ -181,10 +181,12 @@ render () {
           secureTextEntry
         />
 
-        <Button
-          title='Update info'
-          onPress={() => this.updateUserInfo()}
-        />
+        <TouchableOpacity
+        style={commonStyles.button} onPress={() => this.updateUserInfo()}
+      >
+        <Text style={commonStyles.buttonText}>Update </Text>
+        <Ionicons name='create' size={25} color='white' />
+      </TouchableOpacity>
 
         {/* <Button title="Log out"
                 onPress={() => navigation.navigate('LogOut')} />  */}

@@ -44,11 +44,11 @@ const commonStyles = StyleSheet.create({
     textAlign: 'center'
   },
 
-  //   subheadingResultText: {
-  //     fontSize: 20,
-  //     color: 'white',
-  //     fontWeight: '700'
-  //   },
+    subheadingResultText: {
+      fontSize: 20,
+      color: '#50808E',
+      fontWeight: '900'
+    },
 
   photo: {
     justifyContent: 'center',

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, Image, Button, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
+import { Text, View, Image, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { commonStyles } from '../styles/common'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class Search extends Component {
   constructor (props) {
@@ -108,26 +110,27 @@ class Search extends Component {
       )
     } else {
       return (
-        <View>
-          <Text>Search a location:</Text>
+        <View style={commonStyles.container}>
+          <Text style={commonStyles.title}>Name of cafe:</Text>
           <TextInput
+          style={commonStyles.input}
             placeholder='Type here'
             onChangeText={(q) => this.setState({ q: q })}
             value={this.state.q}
           />
 
-          <Text>Overall Rating</Text>
+          <Text style={commonStyles.subheadingText}>Overall Rating</Text>
           <AirbnbRating
             size={15}
             defaultRating={0}
-            reviewSize={20}
+            reviewSize={0}
             selectedColor='#f1c40f'
             unSelectedColor='black'
             reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
             onFinishRating={(rating) => this.ratingCompleted(rating, 'overall_rating')}
           />
-
-          {/* <Text>Price Rating</Text>
+{/* 
+          {/* <Text style={commonStyles.subheadingText}>Price Rating</Text>
              <AirbnbRating
              size={15}
              defaultRating={0}
@@ -135,9 +138,9 @@ class Search extends Component {
              unSelectedColor={'black'}
              reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
              onFinishRating={(rating) => this.ratingCompleted(rating, "price_rating")}
-             />
+             /> */}
 
-            <Text>Quality Rating</Text>
+            <Text style={commonStyles.subheadingText}>Quality Rating</Text>
              <AirbnbRating
              size={15}
              defaultRating={0}
@@ -147,7 +150,7 @@ class Search extends Component {
              onFinishRating={(rating) => this.ratingCompleted(rating, "quality_rating")}
              />
 
-            <Text>Cleanliness Rating</Text>
+            <Text style={commonStyles.subheadingText}>Cleanliness Rating</Text>
              <AirbnbRating
              size={15}
              defaultRating={0}
@@ -155,36 +158,39 @@ class Search extends Component {
              unSelectedColor={'black'}
              reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
              onFinishRating={(rating) => this.ratingCompleted(rating, "clenliness_rating")}
-             /> */}
+             /> 
 
-          <Button
-            title='Search'
-            onPress={() => { this.search() }}
-          />
+
+<TouchableOpacity
+style={commonStyles.button} onPress={() => this.search()}
+>
+<Text style={commonStyles.buttonText}>Search </Text>
+<Ionicons name='search' size={25} color='white' />
+</TouchableOpacity>
 
           <FlatList
             data={this.state.locationData}
             renderItem={({ item }) => (
 
               <View>
-                <Text>Location ID:{item.location_id}</Text>
-                <Text> Name:  {item.location_name}</Text>
-                <Text> Town: {item.location_town}</Text>
+                {/* <Text>Location ID:{item.location_id}</Text> */}
+                <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
+                <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
                 {/* <Text>Location Photo   {item.photo_path}</Text> */}
                 {/* {this.state.displayImg ? (
           */}
                 <Image
                   source={{ uri: item.photo_path }}
-                  style={{ width: 400, height: 400 }}
+                  style={commonStyles.photo}
                   onError={this.errorLoadingImg}
                 />
                 {/* //   ) : (
         //    <View></View>
         //  )} */}
-                <Text> Average Overall Rating: {item.avg_overall_rating}</Text>
-                <Text> Price Rating: {item.avg_price_rating}</Text>
-                <Text> Quality Rating: {item.avg_quality_rating}</Text>
-                <Text> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
+                <Text style={commonStyles.subheadingText}> Average Overall Rating: {item.avg_overall_rating}</Text>
+                <Text style={commonStyles.subheadingText}> Price Rating: {item.avg_price_rating}</Text>
+                <Text style={commonStyles.subheadingText}> Quality Rating: {item.avg_quality_rating}</Text>
+                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
                 <Text>  </Text>
               </View>
             )}

@@ -150,20 +150,13 @@ class Home extends Component {
             renderItem={({ item }) => (
 
               <View>
-                {/* <Text>Location ID:{item.location_id}</Text>  */}
                 <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
                 <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
-                {/* {this.state.displayImg ? (
-                          */}
                 <Image
                   source={{ uri: item.photo_path }}
-                          // source={{uri: 'https://tr-images.condecdn.net/image/vOkb7Jmdv2L/crop/1020/f/1kaffeine-london-mar19-pr.jpg'}}
                   style={commonStyles.photo}
                   onError={this.errorLoadingImg}
                 />
-                {/* //   ) : (
-                        //    <View></View>
-                        //  )} */}
                 <Text style={commonStyles.subheadingText}> Average Overall Rating: {item.avg_overall_rating}</Text>
                 <Text style={commonStyles.subheadingText}> Price Rating: {item.avg_price_rating}</Text>
                 <Text style={commonStyles.subheadingText}> Quality Rating: {item.avg_quality_rating}</Text>
