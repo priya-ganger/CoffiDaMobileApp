@@ -75,34 +75,19 @@ class GetFavourites extends Component {
                       onError={this.errorLoadingImg}
                     />
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('moreInfo', { locationID: item.location_id })}
                 >
                   <Text style={commonStyles.buttonText}> More info </Text>
                   <Ionicons name='information-circle' size={25} color='white' />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                   </View>
                 )}
                 keyExtractor={(item, index) => item.location_id.toString()}
               />
 
-              <Text style={commonStyles.title}>Your liked Reviews</Text>
-              <FlatList
-                data={this.state.userData.liked_reviews}
-                renderItem={({ item }) => (
-                  <View>
-                    <Text style={commonStyles.subheadingText}>Location Name: {item.location.location_name}</Text>
-                    <Text style={commonStyles.subheadingText}>Review {item.review.review_body}</Text>
-                    {/* <Text>Overall rating: {item.review.overall_rating}  </Text>
-                    <Text>Price Rating: {item.review.price_rating} </Text>
-                    <Text>Quality Rating: {item.review.quality_rating} </Text>
-                    <Text>Cleanliness Rating: {item.review.clenliness_rating} </Text> */}
-                    <Text> </Text>
-                  </View>
-                )}
-                keyExtractor={(item, index) => item.review.review_id.toString()}
-              />
+             
             </ScrollView>
 
           )

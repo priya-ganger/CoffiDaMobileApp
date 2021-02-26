@@ -9,7 +9,8 @@ const commonStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
    // alignItems: 'center',
-    backgroundColor: '#DDD8C4'
+    backgroundColor: '#DDD8C4',
+    padding: 8
   },
 
   button: {
@@ -42,7 +43,7 @@ const commonStyles = StyleSheet.create({
     color: '#50808E',
     fontWeight: '900',
    // textAlign: 'center'
-   margin: 10,
+   //margin: 10,
    // height: 40,
    // padding: 5,
    // fontSize: 16,
@@ -70,14 +71,26 @@ const commonStyles = StyleSheet.create({
 
   input: {
     // flex: 1,
+
+    // margin: 5,
+    // height: 40,
+    // padding: 5,
+    // fontSize: 16,
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#D6EADF',
+    // backgroundColor: '#A3C9A8',
+
+   // borderRadius: 25
+
+   height: 48,
+    //width: '80%',
+    padding: 8,
     margin: 5,
-    height: 40,
-    padding: 5,
-    fontSize: 16,
-    borderBottomWidth: 1,
+    borderColor: 'gray',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 6,
     borderBottomColor: '#D6EADF',
     backgroundColor: '#A3C9A8',
-   // borderRadius: 25
   }
 
 })

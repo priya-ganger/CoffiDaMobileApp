@@ -151,9 +151,9 @@ render () {
         <Ionicons name='add' size={25} color='white' />
       </TouchableOpacity>
 
-      <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: this.state.location_id, revId: this.state.review_id })}>
-      <Text style={commonStyles.buttonText}> Add photo? </Text>
-      <Ionicons name='camera' size={25} color='white' />
+      <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('YourReviews')}>
+      <Text style={commonStyles.buttonText}> My Reviews </Text>
+      <Ionicons name='clipboard' size={25} color='white' />
       </TouchableOpacity> 
     </View>
   )

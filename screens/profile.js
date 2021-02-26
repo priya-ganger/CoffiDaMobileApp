@@ -3,6 +3,7 @@ import { View, StyleSheet, SafeAreaView, TouchableOpacity, Text, ActivityIndicat
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { ScrollView } from 'react-native-gesture-handler'
 
 class Profile extends Component {
   constructor (props) {
@@ -137,7 +138,7 @@ render () {
     )
   } else {
     return (
-      <SafeAreaView style={commonStyles.container}>
+      <ScrollView >
         <Text style={commonStyles.title}>Your Current Details</Text>
         {/* <Text>User ID: {item.user_id}</Text> */}
         <Text style={commonStyles.subheadingText}> First Name:  {item.first_name}</Text>
@@ -212,7 +213,7 @@ render () {
           keyExtractor={(item, index) => item.review.review_id.toString()}
         />
 
-      </SafeAreaView>
+      </ScrollView>
     )
   }
 }

@@ -151,7 +151,7 @@ class Home extends Component {
             renderItem={({ item }) => (
 
               <View>
-                <Text style={commonStyles.subheadingResultText}>Name: </Text>
+                <Text style={commonStyles.subheadingText}>Name: </Text>
                 <Text style={commonStyles.subheadingText}>  {item.location_name}</Text>
                 <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
                 <Image

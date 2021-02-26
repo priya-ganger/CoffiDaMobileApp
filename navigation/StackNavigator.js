@@ -13,6 +13,7 @@ import GetReviews from '../screens/getReviews'
 import AddReview from '../screens/addReview'
 import UpdateReview from '../screens/updateReview'
 import Photo from '../screens/photo'
+import YourReviews from '../screens/yourReviews'
 
 const Stack = createStackNavigator()
 
@@ -44,6 +45,11 @@ const MainStackNavigator = () => {
        options={{
         title: 'Add a Review',
       }} />
+
+      <Stack.Screen name='YourReviews' component={YourReviews} 
+      options={{
+        title: 'Your Reviews',
+      }}/>
 
       <Stack.Screen name='Camera' component={Camera} 
        options={{
@@ -80,6 +86,17 @@ const FavouritesStackNavigator = () => {
       <Stack.Screen name='Favourites' component={Favourites} 
       options={{
         title: 'Your favourites',
+      }}/>
+    </Stack.Navigator>
+  )
+}
+
+const YourReviewsStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name='YourReviews' component={YourReviews} 
+      options={{
+        title: 'Your Reviews',
       }}/>
     </Stack.Navigator>
   )
@@ -176,4 +193,4 @@ const LogOutStackNavigator = () => {
   )
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, UpdateReviewStackNavigator, FavouritesStackNavigator, SearchStackNavigator, CameraStackNavigator, PhotoStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator }
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, UpdateReviewStackNavigator, FavouritesStackNavigator, YourReviewsStackNavigator, SearchStackNavigator, CameraStackNavigator, PhotoStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator }

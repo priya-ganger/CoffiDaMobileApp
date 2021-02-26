@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Button, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Input from './input'
 
 class SignUp extends Component {
   constructor (props) {
@@ -11,7 +12,8 @@ class SignUp extends Component {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      isValid: null
     }
   }
 
@@ -49,6 +51,7 @@ class SignUp extends Component {
     }
 
     render () {
+      const { isValid } = this.state;
       return (
         <View style={commonStyles.container}>
             <Text style={commonStyles.title}> Enter your details to sign up</Text>
@@ -78,13 +81,30 @@ class SignUp extends Component {
           />
 
           <Text style={commonStyles.subheadingText}>Create your password</Text>
-          <TextInput
+          <Input
           style={commonStyles.input}
             placeholder='Create a password.'
+            pattern={[
+              '^.{8,}$', // min 8 chars
+              '(?=.*\\d)', // number required
+              '(?=.*[A-Z])', // uppercase letter
+            ]}
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
+            onValidation={isValid => this.setState({ isValid })}
             secureTextEntry
           />
+          
+          <Text style={{ color: isValid && isValid[0] ? 'green' : 'red' }}>
+            A minimum of 8 characters
+          </Text>
+          <Text style={{ color: isValid && isValid[1] ? 'green' : 'red' }}>
+            A number is required
+          </Text>
+          <Text style={{ color: isValid && isValid[2] ? 'green' : 'red' }}>
+            An uppercase letter is required
+          </Text>
+      
 
       <TouchableOpacity style={commonStyles.button} onPress={() => this.signUp()}>
       <Text style={commonStyles.buttonText}>Sign Up </Text>
