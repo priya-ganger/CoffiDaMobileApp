@@ -35,10 +35,10 @@ const MainStackNavigator = () => {
       }}
       />
 
-      <Stack.Screen name='Profile' component={Profile} />
-      <Stack.Screen
-        name='GetReviews' component={GetReviews}
-        
+      <Stack.Screen name='GetReviews' component={GetReviews} 
+       options={{
+        title: 'Reviews',
+    }}
       />
 
       <Stack.Screen name='AddReview' component={AddReview}

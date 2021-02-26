@@ -20,7 +20,9 @@ class YourReviews extends Component {
   }
 
   componentDidMount () {
+    this.props.navigation.addListener('focus', () => {
     this.getUserData()
+});
   }
 
 getUserData = async () => {

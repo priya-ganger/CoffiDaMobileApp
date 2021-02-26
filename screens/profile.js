@@ -138,7 +138,7 @@ render () {
     )
   } else {
     return (
-      <ScrollView >
+      <View >
         <Text style={commonStyles.title}>Your Current Details</Text>
         {/* <Text>User ID: {item.user_id}</Text> */}
         <Text style={commonStyles.subheadingText}> First Name:  {item.first_name}</Text>
@@ -149,7 +149,7 @@ render () {
         <Text />
 
         <Text style={commonStyles.title}> Update your details here </Text>
-        <Text style={commonStyles.subheadingResultText}>First Name:</Text>
+        <Text>First Name:</Text>
         <TextInput
         style={commonStyles.input}
           placeholder='Enter your first name'
@@ -189,31 +189,7 @@ render () {
         <Ionicons name='create' size={25} color='white' />
       </TouchableOpacity>
 
-        {/* <Button title="Log out"
-                onPress={() => navigation.navigate('LogOut')} />  */}
-
-        <Text>Your Reviews</Text>
-        <FlatList
-          data={this.state.userData.reviews}
-          renderItem={({ item }) => (
-            <View>
-              <Text style={commonStyles.subheadingText}>Location Name: {item.location.location_name}</Text>
-              <Text style={commonStyles.subheadingText}>Review {item.review.review_body}</Text>
-              <Text style={commonStyles.subheadingText}>Overall rating: {item.review.overall_rating}  </Text>
-              <Text style={commonStyles.subheadingText}>Price Rating: {item.review.price_rating} </Text>
-              <Text style={commonStyles.subheadingText}>Quality Rating: {item.review.quality_rating} </Text>
-              <Text style={commonStyles.subheadingText}>Cleanliness Rating: {item.review.clenliness_rating} </Text>
-              <Text> </Text>
-              <Button
-                title='Add photo to review'
-                onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}
-              />
-            </View>
-          )}
-          keyExtractor={(item, index) => item.review.review_id.toString()}
-        />
-
-      </ScrollView>
+      </View>
     )
   }
 }

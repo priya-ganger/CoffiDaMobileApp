@@ -9,11 +9,11 @@ class SignUp extends Component {
     super(props)
 
     this.state = {
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
-      isValid: null
+    //  isValid: null
     }
   }
 
@@ -60,16 +60,16 @@ class SignUp extends Component {
           <TextInput
           style={commonStyles.input}
             placeholder='Enter your first name.'
-            onChangeText={(firstName) => this.setState({ firstName })}
-            value={this.state.firstName}
+            onChangeText={(first_name) => this.setState({ first_name })}
+            value={this.state.first_name}
           />
 
           <Text style={commonStyles.subheadingText}>What is your last name?</Text>
           <TextInput
           style={commonStyles.input}
             placeholder='Enter your last name.'
-            onChangeText={(lastName) => this.setState({ lastName })}
-            value={this.state.lastName}
+            onChangeText={(last_name) => this.setState({ last_name })}
+            value={this.state.last_name}
           />
 
           <Text style={commonStyles.subheadingText}>What is your email address?</Text>
@@ -81,7 +81,14 @@ class SignUp extends Component {
           />
 
           <Text style={commonStyles.subheadingText}>Create your password</Text>
-          <Input
+          <TextInput
+          style={commonStyles.input}
+            placeholder='Create a password.'
+            onChangeText={(password) => this.setState({ password })}
+            value={this.state.password}
+            secureTextEntry
+          />
+          {/* <Input
           style={commonStyles.input}
             placeholder='Create a password.'
             pattern={[
@@ -91,11 +98,11 @@ class SignUp extends Component {
             ]}
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
-            onValidation={isValid => this.setState({ isValid })}
+           // onValidation={isValid => this.setState({ isValid })}
             secureTextEntry
-          />
+          /> */}
           
-          <Text style={{ color: isValid && isValid[0] ? 'green' : 'red' }}>
+          {/* <Text style={{ color: isValid && isValid[0] ? 'green' : 'red' }}>
             A minimum of 8 characters
           </Text>
           <Text style={{ color: isValid && isValid[1] ? 'green' : 'red' }}>
@@ -104,7 +111,7 @@ class SignUp extends Component {
           <Text style={{ color: isValid && isValid[2] ? 'green' : 'red' }}>
             An uppercase letter is required
           </Text>
-      
+       */}
 
       <TouchableOpacity style={commonStyles.button} onPress={() => this.signUp()}>
       <Text style={commonStyles.buttonText}>Sign Up </Text>
