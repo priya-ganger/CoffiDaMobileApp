@@ -55,16 +55,18 @@ class Login extends Component {
           <View style={commonStyles.container}>
             <Text style={commonStyles.title}>Welcome to CoffiDa</Text>
 
+            <Text style={commonStyles.subheadingText}>Enter your email address: </Text>
             <TextInput
               style={commonStyles.input}
-              placeholder='Enter your email address'
+              placeholder='Email address'
               onChangeText={(email) => this.setState({ email })}
               value={this.state.email}
             />
 
+            <Text style={commonStyles.subheadingText}>Enter your password: </Text>
             <TextInput
               style={commonStyles.input}
-              placeholder='Enter your password'
+              placeholder='Password'
               onChangeText={(password) => this.setState({ password })}
               value={this.state.password}
               secureTextEntry

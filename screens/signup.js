@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, Button, ToastAndroid, TextInput } from 'react-native'
+import { Text, View, Button, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
+import { commonStyles } from '../styles/common'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class SignUp extends Component {
   constructor (props) {
@@ -29,6 +31,8 @@ class SignUp extends Component {
             return response.json()
           } else if (response.status === 400) {
             throw 'Failed validation'
+          } else if (response.status === 500) {
+            throw 'Server Error'
           } else {
             throw 'Something went wrong'
           }
@@ -46,38 +50,48 @@ class SignUp extends Component {
 
     render () {
       return (
-        <View>
-          <Text>This is the SignUp screnn</Text>
-
+        <View style={commonStyles.container}>
+            <Text style={commonStyles.title}> Enter your details to sign up</Text>
+            
+          <Text style={commonStyles.subheadingText}>What is your first name?</Text>
           <TextInput
-            placeholder='Enter your first name'
+          style={commonStyles.input}
+            placeholder='Enter your first name.'
             onChangeText={(firstName) => this.setState({ firstName })}
             value={this.state.firstName}
           />
 
+          <Text style={commonStyles.subheadingText}>What is your last name?</Text>
           <TextInput
-            placeholder='Enter your last name'
+          style={commonStyles.input}
+            placeholder='Enter your last name.'
             onChangeText={(lastName) => this.setState({ lastName })}
             value={this.state.lastName}
           />
 
+          <Text style={commonStyles.subheadingText}>What is your email address?</Text>
           <TextInput
-            placeholder='Email'
+          style={commonStyles.input}
+            placeholder='Enter your email address.'
             onChangeText={(email) => this.setState({ email })}
             value={this.state.email}
           />
 
+          <Text style={commonStyles.subheadingText}>Create your password</Text>
           <TextInput
-            placeholder='Password'
+          style={commonStyles.input}
+            placeholder='Create a password.'
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
             secureTextEntry
           />
 
-          <Button
-            title='Create an account'
-            onPress={() => this.signUp()}
-          />
+      <TouchableOpacity style={commonStyles.button} onPress={() => this.signUp()}>
+      <Text style={commonStyles.buttonText}>Sign Up </Text>
+      <Ionicons name='add' size={25} color='white' />
+      </TouchableOpacity>
+
+
         </View>
       )
     }

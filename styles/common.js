@@ -8,7 +8,7 @@ const commonStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+   // alignItems: 'center',
     backgroundColor: '#DDD8C4'
   },
 
@@ -38,16 +38,21 @@ const commonStyles = StyleSheet.create({
   },
 
   subheadingText: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#50808E',
-    fontWeight: '400',
-    textAlign: 'center'
+    fontWeight: '900',
+   // textAlign: 'center'
+   margin: 10,
+   // height: 40,
+   // padding: 5,
+   // fontSize: 16,
+    
   },
 
     subheadingResultText: {
-      fontSize: 20,
+      fontSize: 15,
       color: '#50808E',
-      fontWeight: '900'
+      fontWeight: '400'
     },
 
   photo: {
@@ -65,14 +70,14 @@ const commonStyles = StyleSheet.create({
 
   input: {
     // flex: 1,
-    margin: 10,
+    margin: 5,
     height: 40,
     padding: 5,
     fontSize: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#D6EADF',
     backgroundColor: '#A3C9A8',
-    borderRadius: 25
+   // borderRadius: 25
   }
 
 })

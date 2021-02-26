@@ -15,10 +15,11 @@ class Home extends Component {
   }
 
   componentDidMount () {
-    // this._unsubscribe = this.props.navigation.addListener('focus', () => {
+    // this._unsubscribe = 
+    this.props.navigation.addListener('focus', () => {
     this.checkUserIsLoggedIn()
     this.getLocationData()
-    // });
+     });
   }
 
   UNSAFE_componentWillMount () {
@@ -150,7 +151,8 @@ class Home extends Component {
             renderItem={({ item }) => (
 
               <View>
-                <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
+                <Text style={commonStyles.subheadingResultText}>Name: </Text>
+                <Text style={commonStyles.subheadingText}>  {item.location_name}</Text>
                 <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
                 <Image
                   source={{ uri: item.photo_path }}

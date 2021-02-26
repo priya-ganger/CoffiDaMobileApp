@@ -3,6 +3,7 @@ import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity } from 're
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Filter from 'bad-words';
 
 class AddReview extends Component {
   constructor (props) {
@@ -49,6 +50,10 @@ class AddReview extends Component {
     // this._unsubscribe
   }
 
+  ProfanityCheck() {
+ 
+  }
+
 addReview = async () => {
   const to_add_review = {
     overall_rating: parseInt(this.state.overall_rating),
@@ -70,6 +75,11 @@ addReview = async () => {
   })
     .then((response) => {
       if (response.status === 201) {
+        const filter = new Filter(); 
+        filter.addWords('cake', 'pastries', 'tea');
+        console.log(filter.clean(this.state.review_body));
+        Alert.alert(filter.clean(this.state.review_body));
+        
         Alert.alert('Review Added! Id: ' + this.state.location_id + ' Token: ' + token)
         // need to refresh data
       } else if (response.status === 400) {

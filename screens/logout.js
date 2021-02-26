@@ -50,7 +50,12 @@ class LogOut extends Component {
           } else if (response.status === 401) {
             Alert.alert('Login First!')
             this.props.navigation.navigate('Login')
-          } else {
+          } 
+          else if (response.status === 500) {
+            throw 'Server Error'
+          } 
+          
+          else {
             Alert.alert('Token:' + token)
             console.log(response.json())
             throw 'something went wrong'

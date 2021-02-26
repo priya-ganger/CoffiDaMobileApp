@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from 'react-native'
+import { View, StyleSheet, SafeAreaView, TouchableOpacity, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -137,7 +137,7 @@ render () {
     )
   } else {
     return (
-      <View style={commonStyles.container}>
+      <SafeAreaView style={commonStyles.container}>
         <Text style={commonStyles.title}>Your Current Details</Text>
         {/* <Text>User ID: {item.user_id}</Text> */}
         <Text style={commonStyles.subheadingText}> First Name:  {item.first_name}</Text>
@@ -212,7 +212,7 @@ render () {
           keyExtractor={(item, index) => item.review.review_id.toString()}
         />
 
-      </View>
+      </SafeAreaView>
     )
   }
 }

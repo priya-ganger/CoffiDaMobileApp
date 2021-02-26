@@ -161,12 +161,12 @@ class Search extends Component {
              /> 
 
 
-<TouchableOpacity
-style={commonStyles.button} onPress={() => this.search()}
->
-<Text style={commonStyles.buttonText}>Search </Text>
-<Ionicons name='search' size={25} color='white' />
-</TouchableOpacity>
+          <TouchableOpacity
+          style={commonStyles.button} onPress={() => this.search()}
+          >
+          <Text style={commonStyles.buttonText}>Search </Text>
+          <Ionicons name='search' size={25} color='white' />
+          </TouchableOpacity>
 
           <FlatList
             data={this.state.locationData}
