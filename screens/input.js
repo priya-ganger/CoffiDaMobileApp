@@ -3,22 +3,22 @@ import { TextInput } from "react-native";
 class Input extends Component {
  
   validation(value) {
-    const { pattern } = this.props;
-    if (!pattern) return true;
+    const { check } = this.props;
+    if (!check) return true;
 
-    // string pattern, one validation rule
-    if (typeof pattern === 'string') {
-      const condition = new RegExp(pattern, 'g');
+    // string check, one validation rule
+    if (typeof check === 'string') {
+      const condition = new RegExp(check, 'g');
       return condition.test(value);
     }
-    // array patterns, multiple validation rules
-    if (typeof pattern === 'object') {
-      const conditions = pattern.map(rule => new RegExp(rule, 'g'));
+    // array check, multiple validation rules
+    if (typeof check === 'object') {
+      const conditions = check.map(rule => new RegExp(rule, 'g'));
       return conditions.map(condition => condition.test(value));
     }
   }
 onChange(value) {
-  
+
     const { onChangeText, onValidation } = this.props;
     const isValid = this.validation(value);
     onValidation && onValidation(isValid);
@@ -26,7 +26,7 @@ onChange(value) {
   }
 render() {
     const {
-      pattern,
+      check,
       onChangeText,
       children,
       style,
