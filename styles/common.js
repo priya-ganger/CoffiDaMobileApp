@@ -91,6 +91,18 @@ const commonStyles = StyleSheet.create({
     borderRadius: 6,
     borderBottomColor: '#D6EADF',
     backgroundColor: '#A3C9A8',
+  },
+
+  starRating: {
+    color: '#FFF933',
+    backgroundColor: 'transparent',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 2,
+  },
+
+  starRatingEmpty: {
+    color: 'white',
   }
 
 })

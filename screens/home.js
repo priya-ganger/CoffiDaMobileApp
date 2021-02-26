@@ -3,6 +3,8 @@ import { View, Alert, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, F
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Stars from 'react-native-stars'
+
 class Home extends Component {
   constructor (props) {
     super(props)
@@ -159,9 +161,57 @@ class Home extends Component {
                   onError={this.errorLoadingImg}
                 />
                 <Text style={commonStyles.subheadingText}> Average Overall Rating: {item.avg_overall_rating}</Text>
+                <Stars
+                display= {item.avg_overall_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+
+
                 <Text style={commonStyles.subheadingText}> Price Rating: {item.avg_price_rating}</Text>
+                <Stars
+                display= {item.avg_price_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+
                 <Text style={commonStyles.subheadingText}> Quality Rating: {item.avg_quality_rating}</Text>
+                <Stars
+                display= {item.avg_quality_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+
                 <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
+                <Stars
+                display= {item.avg_clenliness_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+
+                
+
+
 
                 <TouchableOpacity
                   style={commonStyles.button} onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}

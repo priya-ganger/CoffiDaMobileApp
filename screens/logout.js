@@ -1,7 +1,8 @@
-import { NavigationContainer } from '@react-navigation/native'
 import React, { Component } from 'react'
-import { Text, View, Button, Alert, ToastAndroid } from 'react-native'
+import { Text, View, Alert, ToastAndroid, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { commonStyles } from '../styles/common'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 class LogOut extends Component {
   constructor (props) {
@@ -15,8 +16,6 @@ class LogOut extends Component {
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.checkUserIsLoggedIn()
-
-      // this.props.navigation.addListener('focus', () => {
     })
   }
 
@@ -28,6 +27,7 @@ class LogOut extends Component {
           const value = AsyncStorage.getItem('session_token')
           if (value !== null) {
             this.setState({ token: value })
+            
           } else {
             this.props.navigation.navigate('Login')
           }
@@ -71,13 +71,26 @@ class LogOut extends Component {
       const navigation = this.props.navigation
 
       return (
-        <View>
-          <Text>This is the LogOut screen</Text>
+        <View style={commonStyles.container}>
+          <Text style={commonStyles.title}>Are you sure you want to logout?</Text>
 
-          <Button
-            title='LogOut'
-            onPress={() => this.logUserOut()}
-          />
+
+    <TouchableOpacity
+        style={commonStyles.button} onPress={() => this.logUserOut()}
+      >
+        <Text style={commonStyles.buttonText}>Yes </Text>
+        <Ionicons name='log-out' size={25} color='white' />
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
+      >
+        <Text style={commonStyles.buttonText}>No </Text>
+        <Ionicons name='arrow-back' size={25} color='white' />
+      </TouchableOpacity>
+
+        {/*  */}
+     
 
         </View>
       )

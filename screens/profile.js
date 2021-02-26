@@ -138,18 +138,18 @@ render () {
     )
   } else {
     return (
-      <View >
+      <View style={commonStyles.container}>
         <Text style={commonStyles.title}>Your Current Details</Text>
         {/* <Text>User ID: {item.user_id}</Text> */}
-        <Text style={commonStyles.subheadingText}> First Name:  {item.first_name}</Text>
-        <Text style={commonStyles.subheadingText}> Last Name: {item.last_name}</Text>
+        <Text style={commonStyles.subheadingText}>  First Name:  {item.first_name}</Text>
+        <Text style={commonStyles.subheadingText}>  Last Name: {item.last_name}</Text>
         <Text style={commonStyles.subheadingText}>  Email Address: {item.email}</Text>
         {/* <Text> Password: </Text> */}
 
         <Text />
 
         <Text style={commonStyles.title}> Update your details here </Text>
-        <Text>First Name:</Text>
+        <Text style={commonStyles.subheadingText}>First Name:</Text>
         <TextInput
         style={commonStyles.input}
           placeholder='Enter your first name'
@@ -157,7 +157,7 @@ render () {
           value={this.state.first_name}
         />
 
-        <Text>Second Name:</Text>
+        <Text style={commonStyles.subheadingText}>Second Name:</Text>
         <TextInput
           style={commonStyles.input}
           placeholder='Enter your last name'
@@ -165,7 +165,7 @@ render () {
           value={this.state.last_name}
         />
 
-        <Text>Email:</Text>
+        <Text style={commonStyles.subheadingText}>Email:</Text>
         <TextInput
           style={commonStyles.input}
           placeholder='Enter your email address'
@@ -173,7 +173,7 @@ render () {
           value={this.state.email}
         />
 
-        <Text>Password:</Text>
+        <Text style={commonStyles.subheadingText}>Password:</Text>
         <TextInput
           style={commonStyles.input}
           placeholder='Enter your Password'

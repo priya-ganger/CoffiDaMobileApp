@@ -3,6 +3,7 @@ import { View, Alert, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Toa
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Stars from 'react-native-stars'
 
 class GetReviews extends Component {
   constructor (props) {
@@ -191,17 +192,59 @@ class GetReviews extends Component {
       return (
         <View style={commonStyles.container}>
           <Text style={commonStyles.title}>Reviews</Text>
-          {/* <Text>Dataa is {locData}</Text> */}
           <FlatList
             data={this.state.locationData.location_reviews}
             renderItem={({ item }) => (
               <View>
                 <Text style={commonStyles.subheadingText}> Location Name: {this.state.locationData.location_name}</Text>
-                {/* <Text> Review ID: {item.review_id}</Text> */}
-                <Text style={commonStyles.subheadingText}> Overall rating: {item.overall_rating}  </Text>
-                <Text style={commonStyles.subheadingText}> Price Rating: {item.price_rating} </Text>
-                <Text style={commonStyles.subheadingText}> Quality Rating: {item.quality_rating} </Text>
-                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.clenliness_rating} </Text>
+                <Text style={commonStyles.subheadingText}> Overall rating: {item.overall_rating}</Text>
+                <Stars
+                display= {item.overall_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+
+                <Text style={commonStyles.subheadingText}> Price Rating: {item.price_rating}</Text>
+                <Stars
+                display= {item.price_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+
+                <Text style={commonStyles.subheadingText}> Quality Rating: {item.quality_rating}</Text>
+                <Stars
+                display= {item.quality_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+
+                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.clenliness_rating}</Text>
+                <Stars
+                display= {item.clenliness_rating}
+                half={true}
+                spacing={4}
+                starSize={100}
+                count={5}
+                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
+                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
+                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                />
+                
                 <Text style={commonStyles.subheadingText}> Review: {item.review_body}</Text>
                 <Text style={commonStyles.subheadingText}> Likes: {item.likes} </Text>
 
