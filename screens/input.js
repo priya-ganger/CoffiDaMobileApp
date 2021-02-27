@@ -3,30 +3,45 @@ import { TextInput } from "react-native";
 class Input extends Component {
  
   validation(value) {
-    const { check } = this.props;
-    if (!check) return true;
+    const { pattern } = this.props;
+    if (!pattern) return true;
 
-    // string check, one validation rule
-    if (typeof check === 'string') {
-      const condition = new RegExp(check, 'g');
+    // string pattern, one validation rule
+    if (typeof pattern === 'string') {
+      const condition = new RegExp(pattern, 'g');
       return condition.test(value);
     }
-    // array check, multiple validation rules
-    if (typeof check === 'object') {
-      const conditions = check.map(rule => new RegExp(rule, 'g'));
+    // array patterns, multiple validation rules
+    if (typeof pattern === 'object') {
+      const conditions = pattern.map(rule => new RegExp(rule, 'g'));
       return conditions.map(condition => condition.test(value));
     }
   }
-onChange(value) {
 
-    const { onChangeText, onValidation } = this.props;
+  emailValidation(value) {
+    const { pattern } = this.props;
+    if (!pattern) return true;
+
+    // string pattern, one validation rule
+    if (typeof pattern === 'string') {
+      const condition = new RegExp(pattern, 'g');
+      return condition.test(value);
+    }
+  }
+
+onChange(value) {
+  
+    const { onChangeText, onValidation, emailValidation } = this.props;
     const isValid = this.validation(value);
+    const isValidEmail = this.emailValidation(value);
+    
     onValidation && onValidation(isValid);
+    emailValidation && emailValidation(isValidEmail);
     onChangeText && onChangeText(value);
   }
 render() {
     const {
-      check,
+      pattern,
       onChangeText,
       children,
       style,

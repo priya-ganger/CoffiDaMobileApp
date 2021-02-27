@@ -13,7 +13,8 @@ class SignUp extends Component {
       last_name: '',
       email: '',
       password: '',
-    //  isValid: null
+     isValid: null,
+     isValidEmail: null
     }
   }
 
@@ -52,6 +53,7 @@ class SignUp extends Component {
 
     render () {
       const { isValid } = this.state;
+      const { isValidEmail } = this.state;
       return (
         <View style={commonStyles.container}>
             <Text style={commonStyles.title}> Enter your details to sign up</Text>
@@ -73,22 +75,38 @@ class SignUp extends Component {
           />
 
           <Text style={commonStyles.subheadingText}>What is your email address?</Text>
-          <TextInput
+          {/* <TextInput
           style={commonStyles.input}
             placeholder='Enter your email address.'
             onChangeText={(email) => this.setState({ email })}
             value={this.state.email}
-          />
+          /> */}
+
+          <Input
+          style={commonStyles.input}
+            placeholder='Enter your email address.'
+            pattern={[
+              '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$', // must be in this ordercharacters@characters.domain
+            ]}
+            onChangeText={(email) => this.setState({ email })}
+            value={this.state.email}
+            onValidation={isValidEmail => this.setState({ isValidEmail })}
+          /> 
+          
+           <Text style={{ color: isValidEmail && isValidEmail[0] ? 'green' : 'tomato' }}>
+           For example: ordercharacters@characters.domain
+          </Text>
+         
 
           <Text style={commonStyles.subheadingText}>Create your password</Text>
-          <TextInput
+          {/* <TextInput
           style={commonStyles.input}
             placeholder='Create a password.'
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
             secureTextEntry
-          />
-          {/* <Input
+          /> */}
+          <Input
           style={commonStyles.input}
             placeholder='Create a password.'
             pattern={[
@@ -98,20 +116,20 @@ class SignUp extends Component {
             ]}
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
-           // onValidation={isValid => this.setState({ isValid })}
+            onValidation={isValid => this.setState({ isValid })}
             secureTextEntry
-          /> */}
+          /> 
           
-          {/* <Text style={{ color: isValid && isValid[0] ? 'green' : 'red' }}>
+           <Text style={{ color: isValid && isValid[0] ? 'green' : 'tomato' }}>
             A minimum of 8 characters
           </Text>
-          <Text style={{ color: isValid && isValid[1] ? 'green' : 'red' }}>
+          <Text style={{ color: isValid && isValid[1] ? 'green' : 'tomato' }}>
             A number is required
           </Text>
-          <Text style={{ color: isValid && isValid[2] ? 'green' : 'red' }}>
+          <Text style={{ color: isValid && isValid[2] ? 'green' : 'tomato' }}>
             An uppercase letter is required
           </Text>
-       */}
+      
 
       <TouchableOpacity style={commonStyles.button} onPress={() => this.signUp()}>
       <Text style={commonStyles.buttonText}>Sign Up </Text>
