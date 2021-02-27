@@ -48,7 +48,7 @@ class GetReviews extends Component {
           throw 'Not Found'
         } else if (response.status === 401) {
           throw 'Unauthorised'
-        } else {
+        } else if  (response.status === 501){
           throw 'Server Error'
         }
       })

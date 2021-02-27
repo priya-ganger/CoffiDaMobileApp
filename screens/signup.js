@@ -32,7 +32,7 @@ class SignUp extends Component {
           if (response.status === 201) {
             return response.json()
           } else if (response.status === 400) {
-            throw 'Failed validation'
+            throw 'Bad Request'
           } else if (response.status === 500) {
             throw 'Server Error'
           } else {

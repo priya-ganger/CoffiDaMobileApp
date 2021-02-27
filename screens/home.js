@@ -114,6 +114,8 @@ class Home extends Component {
           Alert.alert('Deleted from favourites')
         } else if (response.status === 401) {
           throw 'Unauthorised'
+        } else if (response.status === 403) {
+          throw 'Forbidden'
         } else if (response.status === 404) {
           Alert.alert('Id: ' + location_id + ' Token: ' + token)
           throw 'Not Found'
@@ -208,10 +210,6 @@ class Home extends Component {
                 emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
                 halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
                 />
-
-                
-
-
 
                 <TouchableOpacity
                   style={commonStyles.button} onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}

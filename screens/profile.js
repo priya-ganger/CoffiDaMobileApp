@@ -37,6 +37,10 @@ getUserData = async () => {
         return response.json()
       } else if (response.status === 401) {
         throw 'Unauthorised'
+      } else if (response.status === 401) {
+        throw 'Not Found'
+      } else if (response.status === 500) {
+        throw 'Server Error'
       } else {
         Alert.alert('Id: ' + userId + ' Token: ' + token)
         console.log(response.json())
@@ -112,7 +116,7 @@ updateUserInfo = async () => {
         console.log('Checking token ' + token)
         Alert.alert('Id: ' + userId + ' Token: ' + token)
         throw 'Not Found'
-      } else if (response.status === 400) {
+      } else if (response.status === 500) {
         console.log('Checking token ' + token)
         Alert.alert('Id: ' + userId + ' Token: ' + token)
         throw 'Server Error'
