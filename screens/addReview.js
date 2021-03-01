@@ -55,12 +55,17 @@ class AddReview extends Component {
   }
 
 addReview = async () => {
+  const filter = new Filter(); 
+  filter.addWords('cake', 'pastries', 'tea');
+  filter.includes
+  console.log(filter.clean(this.state.review_body));
   const to_add_review = {
+    
     overall_rating: parseInt(this.state.overall_rating),
     price_rating: parseInt(this.state.price_rating),
     quality_rating: parseInt(this.state.quality_rating),
     clenliness_rating: parseInt(this.state.clenliness_rating),
-    review_body: this.state.review_body
+    review_body: (filter.clean(this.state.review_body))
   }
 
   const token = await AsyncStorage.getItem('session_token')
@@ -75,8 +80,7 @@ addReview = async () => {
   })
     .then((response) => {
       if (response.status === 201) {
-        const filter = new Filter(); 
-        filter.addWords('cake', 'pastries', 'tea');
+       
         console.log(filter.clean(this.state.review_body));
         Alert.alert(filter.clean(this.state.review_body));
         
