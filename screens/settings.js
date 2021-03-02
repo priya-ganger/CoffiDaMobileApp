@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import {  TextInput, SafeAreaView, View, TouchableOpacity, Text, Alert, Button, PermissionsAndroid } from 'react-native'
-import Geolocation from 'react-native-geolocation-service'
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
+import React, { Component } from 'react';
+import {  TextInput, FlatList, SafeAreaView, View, TouchableOpacity, Text, Alert, Button, PermissionsAndroid } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
 
 async function requestLocationPermission() {
   try{
@@ -36,7 +37,11 @@ class Settings extends Component {
     this.state = {
      location: null,
      locationPermission: false,
-     isLoading: true
+     isLoading: true,
+     locationData: [],
+      location_id: '',
+      longitude: '',
+      latitude: ''
     }
   }
 
@@ -45,35 +50,74 @@ class Settings extends Component {
       this.state.locationPermission = requestLocationPermission();
     }
 
-    Geolocation.getCurrentPosition(
-      (position) => {
-       // const location = JSON.stringify(position);
-
-        const location = position;
-        console.log("Location1", location.coords);
-
-        this.setState({ location: {
-          longitude: location.coords.longitude,
-          latitude: location.coords.latitude
-        }});
-      this.setState({isLoading: false});
-    },
-      (error) => {
-        Alert.alert(error.message)
+    this.setState({
+      location: {
+        longitude: -2.2511616,
+        latitude: 53.510144
       },
-      {
-        enableHighAccuracy: true,
-        timeout: 2000,
-        maximumAge: 1000
+      isLoading: false
+    })
+  }
+
+  getLocationData = async () => {
+    const value = await AsyncStorage.getItem('session_token')
+    console.log('Trying to get data')
+    return fetch('http://10.0.2.2:3333/api/1.0.0/find', {
+      headers: {
+        'X-Authorization': value
       }
-    );
-  };
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json()
+        } else if (response.status === 401) {
+          this.props.navigation.navigate('Login')
+          throw 'Unauthorised'
+        } else {
+          throw 'something went wrong'
+        }
+      })
+      .then((responseJson) => {
+        console.log(responseJson)
+        this.setState({
+          isLoading: false,
+          locationData: responseJson
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+        ToastAndroid.show(error, ToastAndroid.SHORT)
+      })
+  }
+
+  //   Geolocation.getCurrentPosition(
+  //     (position) => {
+  //      // const location = JSON.stringify(position);
+
+  //       const location = position;
+  //       console.log("Location1", location.coords);
+
+  //       this.setState({ location: {
+  //         longitude: location.coords.longitude,
+  //         latitude: location.coords.latitude
+  //       }});
+  //     this.setState({isLoading: false});
+  //   },
+  //     (error) => {
+  //       Alert.alert(error.message)
+  //     },
+  //     {
+  //       enableHighAccuracy: true,
+  //       timeout: 15000,
+  //       maximumAge: 10000 
+  //     }
+  //   );
+  // };
 
   componentDidMount(){
     this.findCoordinates();
+    this.getLocationData();
   }
-
-
 
   render() {
     if(this.state.isLoading){
@@ -94,12 +138,12 @@ class Settings extends Component {
     
         <MapView
         provider={PROVIDER_GOOGLE}
-        style={{flex:1}}
+       style={{flex: 0.5}}
         region={{
           latitude: this.state.location.latitude,
           longitude: this.state.location.longitude,
-          latitudeDelta: 0.002,
-          longitudeDelta: 0.002
+          latitudeDelta: 1.000,
+          longitudeDelta: 1.000
         }}
         >
           <Marker
@@ -108,15 +152,28 @@ class Settings extends Component {
           description="Hi, here I am"
           />
         </MapView>
-        </View>
+        {/* <Text>Hello</Text> */}
+        <View>
+        <FlatList
+            data={this.state.locationData}
+            renderItem={({ item }) => (
+              <View>
+                <Text>Name: {item.location_name}</Text>
+                <Text> latitude:  {item.latitude}</Text>
+                <Text> longitude: {item.longitude}</Text>
+              </View>
+            )}
+            keyExtractor={(item, index) => item.location_id.toString()}
+          /> 
+          </View>
+         </View>
       );
- 
 
-    // {/* <Button
+     /* <Button
     //   title='Get my coordinates'
     //   onPress={() => {this.findCoordinates()}}
     // /> 
-    // <Text>Location: {this.state.location}</Text> */}
+    // <Text>Location: {this.state.location}</Text> */
 
 }
 }
