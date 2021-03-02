@@ -56,8 +56,8 @@ class AddReview extends Component {
 
 addReview = async () => {
   const filter = new Filter(); 
-  filter.addWords('cake', 'pastries', 'tea');
-  filter.includes
+  filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake');
+  
   console.log(filter.clean(this.state.review_body));
   const to_add_review = {
     
@@ -100,7 +100,7 @@ addReview = async () => {
       }
     })
     .then((responseJson) => {
-      console.log('Review created', responseJson)
+      console.log('Review created')
       ToastAndroid.show('Review created', ToastAndroid.SHORT)
     })
     .catch((error) => {
