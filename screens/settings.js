@@ -1,6 +1,33 @@
 import React, { Component } from 'react'
-import {  TextInput, SafeAreaView, View, TouchableOpacity, Text, Alert } from 'react-native'
-import Filter from 'bad-words';
+import {  TextInput, SafeAreaView, View, TouchableOpacity, Text, Alert, Button, PermissionsAndroid } from 'react-native'
+import Geolocation from 'react-native-geolocation-service'
+import { TapGestureHandler } from 'react-native-gesture-handler'
+
+
+async function requestLocationPermission() {
+  try{
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Lab04 Location Permission',
+        message: 'This app requires access to your location',
+        buttonNeutral: 'Ask me later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if(granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can access the location');
+      return true;
+    }
+    else {
+      console.log('Location permission denied');
+      return false;
+    }
+  } catch (err){
+    console.warn(err);
+  }
+}
 
 class Settings extends Component {
 
@@ -8,43 +35,52 @@ class Settings extends Component {
     super(props)
 
     this.state = {
-      inputValue: ''
+     location: null,
+     locationPermission: false
     }
   }
 
-  test(){
-    const filter = new Filter(); 
-    filter.addWords('cake', 'pastries', 'tea');
-
-    console.log(filter.clean(this.state.inputValue));
-    Alert.alert(filter.clean(this.state.inputValue));
+  componentDidMount(){
+    this.findCoordinates();
   }
 
-  render() {
-    // <View style={styles.center}>
-    //   <Text>This is the Settings screen</Text>
-    //   <Button
-    //     title='Go back'
-    //     onPress={() => navigation.goBack()}
-    //   />
-    // </View>
+  findCoordinates = () => {
+    if(!this.state.locationPermission){
+      this.state.locationPermission = requestLocationPermission();
+    }
 
+    Geolocation.getCurrentPosition(
+      (position) => {
+        const location = JSON.stringify(position);
+
+        this.setState({ location })
+      },
+      (error) => {
+        Alert.alert(error.message)
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 2000,
+        maximumAge: 1000
+      }
+    );
+  };
+
+  render() {
   return (
-    <SafeAreaView style={{flex: 1}}>
-    <View >
-      <Text >
-        Profinity Filter Test
-      </Text>
-      <TextInput
-          placeholder='Enter your first name'
-          onChangeText={(inputValue) => this.setState({ inputValue })}
-          value={this.state.inputValue}
-        />
-     <TouchableOpacity onPress={() => this.test()}>
-      <Text> Submit </Text>
-      </TouchableOpacity>
-    </View>
-  </SafeAreaView>
+    <View>
+    {/* <Text>This is the Settings screen</Text>
+    <Button
+      title='Go back'
+      onPress={() => navigation.goBack()}
+    /> */}
+
+    <Button
+      title='Get my coordinates'
+      onPress={() => {this.findCoordinates()}}
+    /> 
+    <Text>Location: {this.state.location}</Text>
+  </View>
   )}
 }
   
