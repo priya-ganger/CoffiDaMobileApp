@@ -36,24 +36,27 @@ class Settings extends Component {
     super(props)
 
     this.state = {
-     location: null,
+     location: {
+       longitude: '',
+       latitude: ''
+     },
      locationPermission: false,
      isLoading: true,
      locationData: [],
       location_id: '',
       longitude: '',
-      latitude: '',
+      latitude: ''
 
-      //test
-      locationsLong: '',
-      locationsLat: ''
     }
   }
 
   componentDidMount(){
+    this.props.navigation.addListener('focus', () => {
+    console.log('focused')
+    this.setState({isLoading: true})
     this.findCoordinates()
     this.getLocationData()
-    this.calculateDistance();
+  });
   }
 
   findCoordinates = () => {
@@ -62,48 +65,29 @@ class Settings extends Component {
     }
     Geolocation.getCurrentPosition(
       (position) => {
-       // const location = JSON.stringify(position);
-
-        const location = position;
-        console.log("Location1 ", location.coords);
+        console.log('getCurrentPosition()')
 
         this.setState({ location: {
-          longitude: location.coords.longitude,
-          latitude: location.coords.latitude
-        },
-      
-      });
-      this.setState({isLoading: false});
-      this.setState({longitude: location.coords.longitude});
-      this.setState({latitude: location.coords.latitude});
-    
-      console.log("longitude ", location.coords.longitude);
-      console.log("latitude ", location.coords.latitude);
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude
+        }});
 
-      console.log("longitude2 ", this.state.longitude);
-      console.log("latitude2 ", this.state.latitude);
+        console.log("Set the location")
+        console.log("location.longitude: " +this.state.location.longitude+ " location.latitude:" +this.state.location.latitude)
+        this.setState({isLoading: false});
+    
     },
       (error) => {
         Alert.alert(error.message)
       },
       {
         enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 10000 
+        timeout: 20000,
+        maximumAge: 1000 
       }
     );
   };
   
-
-  //   this.setState({
-  //     location: {
-  //       longitude: -2.2511616,
-  //       latitude: 53.510144
-  //     },
-  //     isLoading: false
-  //   })
-  // }
-
   getLocationData = async () => {
     const value = await AsyncStorage.getItem('session_token')
     console.log('Trying to get data')
@@ -135,26 +119,6 @@ class Settings extends Component {
       })
   }
 
-   
-      
-    
-
-   calculateDistance = () => {
-
-    
-    console.log("tesing: " + this.state.locationData)
-
-    var dis = getDistance(
-      {latitude: this.state.latitude, longitude: this.state.longitude},
-      {latitude: 51.528308, longitude: -0.3817765},
-    );
-    alert(
-      `Distance\n\n${dis} Meter\nOR\n${dis / 1000} KM + ${this.state.locationData}`
-    );
-  };
-
-
-
   render() {
     if(this.state.isLoading){
       return(
@@ -163,57 +127,32 @@ class Settings extends Component {
         </View>
       )
     }else{
-      console.log("location 2: ", this.state.location);
-      console.log("location 2: ", this.state.latitude);
-      console.log("location 2: ", this.state.longitude);
-      return (
-        <View style={{flex:1}}>
-        {/* <MapView
-          provider={PROVIDER_GOOGLE}
-          style={{flex: 0.5}}
-          region={{
-          latitude: this.state.location.latitude,
-          longitude: this.state.location.longitude,
-          latitudeDelta: 1.000,
-          longitudeDelta: 1.000
-        }}
-        >
-          <Marker
-          coordinate={this.state.location}
-          title="My location"
-          description="Hi, here I am"
-          />
-        </MapView> */}
-        {/* <Text>Hello</Text> */}
-        <View>
-        <FlatList
-            data={this.state.locationData}
-            renderItem={({ item }) => (
-              <View>
-                <Text>Name: {item.location_name}</Text>
-                <Text> latitude:  {item.latitude}</Text>
-                <Text> longitude: {item.longitude} </Text>
-
-                {/* {this.setState ({ locationsLat:
-                  item.longitude})}
-
-                {this.setState ({ locationsLong:
-                  item.longitude})}   */}
-
-
-
-
-                <Text>Distance:  </Text>
-              </View>
-            )}
-            keyExtractor={(item, index) => item.location_id.toString()}
-          /> 
+      console.log("location 2: ", this.state.location.latitude);
+      console.log("location 2: ", this.state.location.longitude);
+      
+       return(<FlatList
+        data={this.state.locationData}
+        renderItem={({ item }) => {
+          let dis = getDistance(
+            {latitude: this.state.location.latitude, longitude: this.state.location.longitude},
+            {latitude: item.latitude, longitude: item.longitude},
+          )
+          return( 
+            
+          <View>
+            <Text>Name: {item.location_name}</Text>
+            <Text> latitude:  {item.latitude}</Text>
+            <Text> longitude: {item.longitude} </Text>
+            <Text>Distance: {dis} M OR {dis / 1000} KM </Text>
           </View>
-         </View>
-      );
-
-}
-}
-}
+        )
+      }}
+        keyExtractor={(item, index) => item.location_id.toString()}
+      />)
+        
+        }
+      }
+    }
+        
   
 export default Settings
