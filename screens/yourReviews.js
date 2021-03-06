@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, SafeAreaView, TouchableOpacity, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from 'react-native'
+import { View, SafeAreaView, TouchableOpacity, Text, ActivityIndicator, FlatList, ToastAndroid, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { ScrollView } from 'react-native-gesture-handler'
 import Stars from 'react-native-stars'
 
 class YourReviews extends Component {
@@ -21,15 +20,15 @@ class YourReviews extends Component {
   }
 
   componentDidMount () {
-    this._unsubscribe = 
+    this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
-    this.getUserData()
-});
+      this.getUserData()
+    })
   }
 
   UNSAFE_componentWillMount () {
     this._unsubscribe
- }
+  }
 
 getUserData = async () => {
   const token = await AsyncStorage.getItem('session_token')
@@ -64,9 +63,7 @@ getUserData = async () => {
     })
 }
 
-
 render () {
-  const item = this.state.userData
   if (this.state.isLoading) {
     return (
       <View>
@@ -85,57 +82,57 @@ render () {
               <Text style={commonStyles.subheadingText}> Review: {item.review.review_body}</Text>
               <Text style={commonStyles.subheadingText}> Price Rating: {item.review.overall_rating}</Text>
               <Stars
-                display= {item.review.overall_rating}
-                half={true}
+                display={item.review.overall_rating}
+                half
                 spacing={4}
                 starSize={100}
                 count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
-                />
+                fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+              />
 
-                <Text style={commonStyles.subheadingText}> Price Rating: {item.review.price_rating}</Text>
-                <Stars
-                display= {item.review.price_rating}
-                half={true}
+              <Text style={commonStyles.subheadingText}> Price Rating: {item.review.price_rating}</Text>
+              <Stars
+                display={item.review.price_rating}
+                half
                 spacing={4}
                 starSize={100}
                 count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
-                />
+                fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+              />
 
-                <Text style={commonStyles.subheadingText}> Quality Rating: {item.review.quality_rating}</Text>
-                <Stars
-                display= {item.review.quality_rating}
-                half={true}
+              <Text style={commonStyles.subheadingText}> Quality Rating: {item.review.quality_rating}</Text>
+              <Stars
+                display={item.review.quality_rating}
+                half
                 spacing={4}
                 starSize={100}
                 count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
-                />
+                fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+              />
 
-                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.review.clenliness_rating}</Text>
-                <Stars
-                display= {item.review.clenliness_rating}
-                half={true}
+              <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.review.clenliness_rating}</Text>
+              <Stars
+                display={item.review.clenliness_rating}
+                half
                 spacing={4}
                 starSize={100}
                 count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
-                />
+                fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+              />
               <Text> </Text>
 
-        <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
-        <Text style={commonStyles.buttonText}> Add photo? </Text>
-        <Ionicons name='camera' size={25} color='white' />
-        </TouchableOpacity> 
+              <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
+                <Text style={commonStyles.buttonText}> Add photo? </Text>
+                <Ionicons name='camera' size={25} color='white' />
+              </TouchableOpacity>
 
             </View>
           )}
@@ -143,21 +140,21 @@ render () {
         />
 
         <Text style={commonStyles.title}>Your liked Reviews</Text>
-              <FlatList
-                data={this.state.userData.liked_reviews}
-                renderItem={({ item }) => (
-                  <View>
-                    <Text style={commonStyles.subheadingText}>Location Name: {item.location.location_name}</Text>
-                    <Text style={commonStyles.subheadingText}>Review {item.review.review_body}</Text>
-                    {/* <Text>Overall rating: {item.review.overall_rating}  </Text>
+        <FlatList
+          data={this.state.userData.liked_reviews}
+          renderItem={({ item }) => (
+            <View>
+              <Text style={commonStyles.subheadingText}>Location Name: {item.location.location_name}</Text>
+              <Text style={commonStyles.subheadingText}>Review {item.review.review_body}</Text>
+              {/* <Text>Overall rating: {item.review.overall_rating}  </Text>
                     <Text>Price Rating: {item.review.price_rating} </Text>
                     <Text>Quality Rating: {item.review.quality_rating} </Text>
                     <Text>Cleanliness Rating: {item.review.clenliness_rating} </Text> */}
-                    <Text> </Text>
-                  </View>
-                )}
-                keyExtractor={(item, index) => item.review.review_id.toString()}
-              />
+              <Text> </Text>
+            </View>
+          )}
+          keyExtractor={(item, index) => item.review.review_id.toString()}
+        />
 
       </SafeAreaView>
     )

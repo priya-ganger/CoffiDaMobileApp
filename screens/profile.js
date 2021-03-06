@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, SafeAreaView, TouchableOpacity, Text, ActivityIndicator, FlatList, ToastAndroid, Alert, TextInput, Button } from 'react-native'
+import { View, SafeAreaView, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, Alert, TextInput } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -155,7 +155,7 @@ render () {
         <Text style={commonStyles.title}> Update your details here </Text>
         <Text style={commonStyles.subheadingText}>First Name:</Text>
         <TextInput
-        style={commonStyles.input}
+          style={commonStyles.input}
           placeholder='Enter your first name'
           onChangeText={(first_name) => this.setState({ first_name })}
           value={this.state.first_name}
@@ -187,25 +187,16 @@ render () {
         />
 
         <TouchableOpacity
-        style={commonStyles.button} onPress={() => this.updateUserInfo()}
-      >
-        <Text style={commonStyles.buttonText}>Update </Text>
-        <Ionicons name='create' size={25} color='white' />
-      </TouchableOpacity>
+          style={commonStyles.button} onPress={() => this.updateUserInfo()}
+        >
+          <Text style={commonStyles.buttonText}>Update </Text>
+          <Ionicons name='create' size={25} color='white' />
+        </TouchableOpacity>
 
       </View>
     )
   }
 }
 }
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  }
-})
 
 export default Profile

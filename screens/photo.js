@@ -113,20 +113,4 @@ render () {
 }
 }
 
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  },
-
-  cameraPreview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
-  }
-
-})
-
 export default Photo

@@ -27,7 +27,6 @@ class LogOut extends Component {
           const value = AsyncStorage.getItem('session_token')
           if (value !== null) {
             this.setState({ token: value })
-            
           } else {
             this.props.navigation.navigate('Login')
           }
@@ -50,12 +49,9 @@ class LogOut extends Component {
           } else if (response.status === 401) {
             Alert.alert('Login First!')
             this.props.navigation.navigate('Login')
-          } 
-          else if (response.status === 500) {
+          } else if (response.status === 500) {
             throw 'Server Error'
-          } 
-          
-          else {
+          } else {
             Alert.alert('Token:' + token)
             console.log(response.json())
             throw 'something went wrong'
@@ -68,29 +64,25 @@ class LogOut extends Component {
     }
 
     render () {
-      const navigation = this.props.navigation
-
       return (
         <View style={commonStyles.container}>
           <Text style={commonStyles.title}>Are you sure you want to logout?</Text>
 
+          <TouchableOpacity
+            style={commonStyles.button} onPress={() => this.logUserOut()}
+          >
+            <Text style={commonStyles.buttonText}>Yes </Text>
+            <Ionicons name='log-out' size={25} color='white' />
+          </TouchableOpacity>
 
-    <TouchableOpacity
-        style={commonStyles.button} onPress={() => this.logUserOut()}
-      >
-        <Text style={commonStyles.buttonText}>Yes </Text>
-        <Ionicons name='log-out' size={25} color='white' />
-      </TouchableOpacity>
+          <TouchableOpacity
+            style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
+          >
+            <Text style={commonStyles.buttonText}>No </Text>
+            <Ionicons name='arrow-back' size={25} color='white' />
+          </TouchableOpacity>
 
-      <TouchableOpacity
-        style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
-      >
-        <Text style={commonStyles.buttonText}>No </Text>
-        <Ionicons name='arrow-back' size={25} color='white' />
-      </TouchableOpacity>
-
-        {/*  */}
-     
+          {/*  */}
 
         </View>
       )

@@ -17,15 +17,15 @@ class Home extends Component {
   }
 
   componentDidMount () {
-     this._unsubscribe = 
+    this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
-    this.checkUserIsLoggedIn()
-    this.getLocationData()
-     });
+      this.checkUserIsLoggedIn()
+      this.getLocationData()
+    })
   }
 
   UNSAFE_componentWillMount () {
-     this._unsubscribe
+    this._unsubscribe
   }
 
    checkUserIsLoggedIn = async () => {
@@ -164,51 +164,50 @@ class Home extends Component {
                 />
                 <Text style={commonStyles.subheadingText}> Average Overall Rating: {item.avg_overall_rating}</Text>
                 <Stars
-                display= {item.avg_overall_rating}
-                half={true}
-                spacing={4}
-                starSize={100}
-                count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                  display={item.avg_overall_rating}
+                  half
+                  spacing={4}
+                  starSize={100}
+                  count={5}
+                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
-
 
                 <Text style={commonStyles.subheadingText}> Price Rating: {item.avg_price_rating}</Text>
                 <Stars
-                display= {item.avg_price_rating}
-                half={true}
-                spacing={4}
-                starSize={100}
-                count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                  display={item.avg_price_rating}
+                  half
+                  spacing={4}
+                  starSize={100}
+                  count={5}
+                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
                 <Text style={commonStyles.subheadingText}> Quality Rating: {item.avg_quality_rating}</Text>
                 <Stars
-                display= {item.avg_quality_rating}
-                half={true}
-                spacing={4}
-                starSize={100}
-                count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                  display={item.avg_quality_rating}
+                  half
+                  spacing={4}
+                  starSize={100}
+                  count={5}
+                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
                 <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
                 <Stars
-                display= {item.avg_clenliness_rating}
-                half={true}
-                spacing={4}
-                starSize={100}
-                count={5}
-                fullStar={<Ionicons name={'star'} size={15} style={[commonStyles.starRating]}/>}
-                emptyStar={<Ionicons name={'star-outline'} size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]}/>}
-                halfStar={<Ionicons name={'star-half'} size={15} style={[commonStyles.starRating]}/>}
+                  display={item.avg_clenliness_rating}
+                  half
+                  spacing={4}
+                  starSize={100}
+                  count={5}
+                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
                 <TouchableOpacity

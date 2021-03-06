@@ -3,7 +3,7 @@ import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity } from 're
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import Filter from 'bad-words';
+import Filter from 'bad-words'
 
 class AddReview extends Component {
   constructor (props) {
@@ -43,24 +43,23 @@ class AddReview extends Component {
     console.log('location name' + location_Name)
 
     console.log('review id' + locData.review_id)
-   
   }
 
   UNSAFE_componentWillMount () {
     // this._unsubscribe
   }
 
-  ProfanityCheck() {
- 
+  ProfanityCheck () {
+
   }
 
 addReview = async () => {
-  const filter = new Filter(); 
-  filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake');
-  
-  console.log(filter.clean(this.state.review_body));
+  const filter = new Filter()
+  filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake')
+
+  console.log(filter.clean(this.state.review_body))
   const to_add_review = {
-    
+
     overall_rating: parseInt(this.state.overall_rating),
     price_rating: parseInt(this.state.price_rating),
     quality_rating: parseInt(this.state.quality_rating),
@@ -80,10 +79,9 @@ addReview = async () => {
   })
     .then((response) => {
       if (response.status === 201) {
-       
-        console.log(filter.clean(this.state.review_body));
-        Alert.alert(filter.clean(this.state.review_body));
-        
+        console.log(filter.clean(this.state.review_body))
+        Alert.alert(filter.clean(this.state.review_body))
+
         Alert.alert('Review Added! Id: ' + this.state.location_id + ' Token: ' + token)
         // need to refresh data
       } else if (response.status === 400) {
@@ -150,15 +148,15 @@ render () {
         value={this.state.review_body}
       />
 
-       <TouchableOpacity style={commonStyles.button} onPress={() => this.addReview()}>
-       <Text style={commonStyles.buttonText}>Add </Text>
+      <TouchableOpacity style={commonStyles.button} onPress={() => this.addReview()}>
+        <Text style={commonStyles.buttonText}>Add </Text>
         <Ionicons name='add' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('YourReviews')}>
-      <Text style={commonStyles.buttonText}> My Reviews </Text>
-      <Ionicons name='clipboard' size={25} color='white' />
-      </TouchableOpacity> 
+        <Text style={commonStyles.buttonText}> My Reviews </Text>
+        <Ionicons name='clipboard' size={25} color='white' />
+      </TouchableOpacity>
     </View>
   )
 }

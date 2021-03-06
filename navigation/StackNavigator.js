@@ -31,42 +31,54 @@ const MainStackNavigator = () => {
       <Stack.Screen
         name='Home' component={Home}
         options={{
-          title: 'Home',
-      }}
+          title: 'Home'
+        }}
       />
 
-      <Stack.Screen name='GetReviews' component={GetReviews} 
-       options={{
-        title: 'Reviews',
-    }}
+      <Stack.Screen
+        name='GetReviews' component={GetReviews}
+        options={{
+          title: 'Reviews'
+        }}
       />
 
-      <Stack.Screen name='AddReview' component={AddReview}
-       options={{
-        title: 'Add a Review',
-      }} />
-
-      <Stack.Screen name='YourReviews' component={YourReviews} 
-      options={{
-        title: 'Your Reviews',
-      }}/>
-
-      <Stack.Screen name='Camera' component={Camera} 
-       options={{
-        title: 'Camera',
-      }}/>
-
-      <Stack.Screen name='UpdateReview' component={UpdateReview} 
-       options={{
-        title: 'Update your review',
-      }}/>
-
-      <Stack.Screen name='Favourites' component={Favourites} 
+      <Stack.Screen
+        name='AddReview' component={AddReview}
+        options={{
+          title: 'Add a Review'
+        }}
       />
 
-      <Stack.Screen name='Photo' component={Photo}  options={{
-        title: 'Photo',
-      }}/>
+      <Stack.Screen
+        name='YourReviews' component={YourReviews}
+        options={{
+          title: 'Your Reviews'
+        }}
+      />
+
+      <Stack.Screen
+        name='Camera' component={Camera}
+        options={{
+          title: 'Camera'
+        }}
+      />
+
+      <Stack.Screen
+        name='UpdateReview' component={UpdateReview}
+        options={{
+          title: 'Update your review'
+        }}
+      />
+
+      <Stack.Screen
+        name='Favourites' component={Favourites}
+      />
+
+      <Stack.Screen
+        name='Photo' component={Photo} options={{
+          title: 'Photo'
+        }}
+      />
 
     </Stack.Navigator>
   )
@@ -83,10 +95,12 @@ const SettingsStackNavigator = () => {
 const FavouritesStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='Favourites' component={Favourites} 
-      options={{
-        title: 'Your favourites',
-      }}/>
+      <Stack.Screen
+        name='Favourites' component={Favourites}
+        options={{
+          title: 'Your favourites'
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -94,10 +108,12 @@ const FavouritesStackNavigator = () => {
 const YourReviewsStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='YourReviews' component={YourReviews} 
-      options={{
-        title: 'Your Reviews',
-      }}/>
+      <Stack.Screen
+        name='YourReviews' component={YourReviews}
+        options={{
+          title: 'Your Reviews'
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -137,9 +153,11 @@ const UpdateReviewStackNavigator = () => {
 const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='Profile' component={Profile} options={{
-      title: 'Your Profile',
-    }}/>
+      <Stack.Screen
+        name='Profile' component={Profile} options={{
+          title: 'Your Profile'
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -166,8 +184,8 @@ const LoginStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
         name='Login' component={Login} options={{
-          title: '',
-          }}
+          title: ''
+        }}
       />
     </Stack.Navigator>
   )
@@ -176,9 +194,11 @@ const LoginStackNavigator = () => {
 const SignUpStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='SignUp' component={SignUp} options={{
+      <Stack.Screen
+        name='SignUp' component={SignUp} options={{
           title: 'Sign up'
-          }}/>
+        }}
+      />
     </Stack.Navigator>
   )
 }
@@ -186,9 +206,11 @@ const SignUpStackNavigator = () => {
 const LogOutStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='LogOut' component={LogOut} options={{
+      <Stack.Screen
+        name='LogOut' component={LogOut} options={{
           title: 'Log out'
-          }}/>
+        }}
+      />
     </Stack.Navigator>
   )
 }

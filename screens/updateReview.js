@@ -24,35 +24,33 @@ class UpdateReview extends Component {
   }
 
   componentDidMount () {
-    // this._unsubscribe = 
+    // this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
+      const { location_id, locData, location_Name } = this.props.route.params
 
-    const { location_id, locData, location_Name } = this.props.route.params
-   
+      if (this.props.route.params) {
+        this.setState({ location_id: this.props.route.params.location_id })
+      }
 
-    if (this.props.route.params) {
-      this.setState({ location_id: this.props.route.params.location_id })
-    }
+      if (this.props.route.params) {
+        this.setState({ locData: this.props.route.params.locData })
+      }
 
-    if (this.props.route.params) {
-      this.setState({ locData: this.props.route.params.locData })
-    }
+      if (this.props.route.params) {
+        this.setState({ review_id: this.props.route.params.locData.review_id })
 
-    if (this.props.route.params) {
-      this.setState({ review_id: this.props.route.params.locData.review_id })
+        if (this.props.route.params) {
+          this.setState({ locationName: this.props.route.params.location_Name })
+        }
 
-    if (this.props.route.params) {
-      this.setState({ locationName: this.props.route.params.location_Name })
-    }
+        console.log('location id' + location_id)
 
-    console.log('location id' + location_id)
+        console.log('location name' + location_Name)
 
-    console.log('location name' + location_Name)
-
-    console.log('review id' + locData.review_id)
-    }
-  })
-}
+        console.log('review id' + locData.review_id)
+      }
+    })
+  }
 
   UNSAFE_componentWillMount () {
     // this._unsubscribe
@@ -167,14 +165,13 @@ render () {
           value={this.state.review_body}
         />
 
-              <TouchableOpacity
-                  style={commonStyles.button}
-                  onPress={() => this.updateReview()}
-                >
-                  <Text style={commonStyles.buttonText}> Update </Text>
-                  <Ionicons name='create' size={25} color='white' />
-                </TouchableOpacity>
-
+        <TouchableOpacity
+          style={commonStyles.button}
+          onPress={() => this.updateReview()}
+        >
+          <Text style={commonStyles.buttonText}> Update </Text>
+          <Ionicons name='create' size={25} color='white' />
+        </TouchableOpacity>
 
       </View>
     )

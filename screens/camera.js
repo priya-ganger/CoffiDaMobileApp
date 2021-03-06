@@ -31,9 +31,11 @@ class Camera extends Component {
       }
     })
   }
+
   UNSAFE_componentWillMount () {
     this._unsubscribe
- }
+  }
+
 takeAPhoto = async () => {
   if (this.camera) {
     const options = { quality: 0.5, base64: true }
@@ -145,24 +147,24 @@ render () {
         style={{
           flex: 1,
           width: '100%'
-          
+
         }}
         captureAudio={false}
       />
 
       <TouchableOpacity style={commonStyles.button} onPress={() => this.takeAPhoto()}>
-      <Text style={commonStyles.buttonText}>Capture </Text>
-      <Ionicons name='camera' size={25} color='white' />
+        <Text style={commonStyles.buttonText}>Capture </Text>
+        <Ionicons name='camera' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
-      <Text style={commonStyles.buttonText}>View Photo </Text>
-      <Ionicons name='image' size={25} color='white' />
+        <Text style={commonStyles.buttonText}>View Photo </Text>
+        <Ionicons name='image' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity style={commonStyles.button} onPress={() => { this.deleteAPhoto() }}>
-      <Text style={commonStyles.buttonText}>Delete Photo </Text>
-      <Ionicons name='trash' size={25} color='white' />
+        <Text style={commonStyles.buttonText}>Delete Photo </Text>
+        <Ionicons name='trash' size={25} color='white' />
       </TouchableOpacity>
 
     </View>

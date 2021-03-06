@@ -8,7 +8,7 @@ const commonStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-   // alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: '#DDD8C4',
     padding: 8
   },
@@ -41,20 +41,20 @@ const commonStyles = StyleSheet.create({
   subheadingText: {
     fontSize: 16,
     color: '#50808E',
-    fontWeight: '900',
-   // textAlign: 'center'
-   //margin: 10,
-   // height: 40,
-   // padding: 5,
-   // fontSize: 16,
-    
+    fontWeight: '900'
+    // textAlign: 'center'
+    // margin: 10,
+    // height: 40,
+    // padding: 5,
+    // fontSize: 16,
+
   },
 
-    subheadingResultText: {
-      fontSize: 15,
-      color: '#50808E',
-      fontWeight: '400'
-    },
+  subheadingResultText: {
+    fontSize: 15,
+    color: '#50808E',
+    fontWeight: '400'
+  },
 
   photo: {
     justifyContent: 'center',
@@ -80,29 +80,29 @@ const commonStyles = StyleSheet.create({
     // borderBottomColor: '#D6EADF',
     // backgroundColor: '#A3C9A8',
 
-   // borderRadius: 25
+    // borderRadius: 25
 
-   height: 48,
-    //width: '80%',
+    height: 48,
+    // width: '80%',
     padding: 8,
     margin: 5,
     borderColor: 'gray',
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 6,
     borderBottomColor: '#D6EADF',
-    backgroundColor: '#A3C9A8',
+    backgroundColor: '#A3C9A8'
   },
 
   starRating: {
     color: '#FFF933',
     backgroundColor: 'transparent',
     textShadowColor: 'black',
-    textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 2,
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2
   },
 
   starRatingEmpty: {
-    color: 'white',
+    color: 'white'
   }
 
 })

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import {  TextInput, FlatList, SafeAreaView, View, TouchableOpacity, Text, Alert, Button, PermissionsAndroid } from 'react-native';
+import React, { Component } from 'react'
+import { TextInput, FlatList, SafeAreaView, View, TouchableOpacity, Text, Alert, Button, PermissionsAndroid, ToastAndroid } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
-import { getDistance } from 'geolib';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
+import Geolocation from 'react-native-geolocation-service'
+import { getDistance } from 'geolib'
 
-async function requestLocationPermission() {
-  try{
+async function requestLocationPermission () {
+  try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
       {
@@ -14,35 +14,33 @@ async function requestLocationPermission() {
         message: 'This app requires access to your location',
         buttonNeutral: 'Ask me later',
         buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      },
-    );
-    if(granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('You can access the location');
-      return true;
+        buttonPositive: 'OK'
+      }
+    )
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can access the location')
+      return true
+    } else {
+      console.log('Location permission denied')
+      return false
     }
-    else {
-      console.log('Location permission denied');
-      return false;
-    }
-  } catch (err){
-    console.warn(err);
+  } catch (err) {
+    console.warn(err)
   }
 }
 
 class Settings extends Component {
-
   constructor (props) {
     super(props)
 
     this.state = {
-     location: {
-       longitude: '',
-       latitude: ''
-     },
-     locationPermission: false,
-     isLoading: true,
-     locationData: [],
+      location: {
+        longitude: '',
+        latitude: ''
+      },
+      locationPermission: false,
+      isLoading: true,
+      locationData: [],
       location_id: '',
       longitude: '',
       latitude: ''
@@ -50,44 +48,45 @@ class Settings extends Component {
     }
   }
 
-  componentDidMount(){
+  componentDidMount () {
     this.props.navigation.addListener('focus', () => {
-    console.log('focused')
-    this.setState({isLoading: true})
-    this.findCoordinates()
-    this.getLocationData()
-  });
+      console.log('focused')
+      this.setState({ isLoading: true })
+      this.findCoordinates()
+      this.getLocationData()
+    })
   }
 
   findCoordinates = () => {
-    if(!this.state.locationPermission){
-      this.state.locationPermission = requestLocationPermission();
+    if (!this.state.locationPermission) {
+      this.state.locationPermission = requestLocationPermission()
     }
     Geolocation.getCurrentPosition(
       (position) => {
         console.log('getCurrentPosition()')
 
-        this.setState({ location: {
-          longitude: position.coords.longitude,
-          latitude: position.coords.latitude
-        }});
+        this.setState({
+          location: {
+            longitude: position.coords.longitude,
+            latitude: position.coords.latitude
+          }
+        })
 
-        console.log("Set the location")
-        console.log("location.longitude: " +this.state.location.longitude+ " location.latitude:" +this.state.location.latitude)
-        this.setState({isLoading: false});
-    
-    },
+        console.log('Set the location')
+        console.log('location.longitude: ' + this.state.location.longitude + ' location.latitude:' + this.state.location.latitude)
+        this.setState({ isLoading: false })
+      },
       (error) => {
         Alert.alert(error.message)
       },
       {
         enableHighAccuracy: true,
         timeout: 20000,
-        maximumAge: 1000 
+        maximumAge: 1000
       }
-    );
+    )
   };
-  
+
   getLocationData = async () => {
     const value = await AsyncStorage.getItem('session_token')
     console.log('Trying to get data')
@@ -119,40 +118,40 @@ class Settings extends Component {
       })
   }
 
-  render() {
-    if(this.state.isLoading){
-      return(
+  render () {
+    if (this.state.isLoading) {
+      return (
         <View>
           <Text>Loading...</Text>
         </View>
       )
-    }else{
-      console.log("location 2: ", this.state.location.latitude);
-      console.log("location 2: ", this.state.location.longitude);
-      
-       return(<FlatList
-        data={this.state.locationData}
-        renderItem={({ item }) => {
-          let dis = getDistance(
-            {latitude: this.state.location.latitude, longitude: this.state.location.longitude},
-            {latitude: item.latitude, longitude: item.longitude},
-          )
-          return( 
-            
-          <View>
-            <Text>Name: {item.location_name}</Text>
-            <Text> latitude:  {item.latitude}</Text>
-            <Text> longitude: {item.longitude} </Text>
-            <Text>Distance: {dis} M OR {dis / 1000} KM </Text>
-          </View>
-        )
-      }}
-        keyExtractor={(item, index) => item.location_id.toString()}
-      />)
-        
-        }
-      }
+    } else {
+      console.log('location 2: ', this.state.location.latitude)
+      console.log('location 2: ', this.state.location.longitude)
+
+      return (
+        <FlatList
+          data={this.state.locationData}
+          renderItem={({ item }) => {
+            const dis = getDistance(
+              { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
+              { latitude: item.latitude, longitude: item.longitude }
+            )
+            return (
+
+              <View>
+                <Text>Name: {item.location_name}</Text>
+                <Text> latitude:  {item.latitude}</Text>
+                <Text> longitude: {item.longitude} </Text>
+                <Text>Distance: {dis} M OR {dis / 1000} KM </Text>
+              </View>
+            )
+          }}
+          keyExtractor={(item, index) => item.location_id.toString()}
+        />
+      )
     }
-        
-  
+  }
+}
+
 export default Settings
