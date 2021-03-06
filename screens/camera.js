@@ -31,7 +31,9 @@ class Camera extends Component {
       }
     })
   }
-
+  UNSAFE_componentWillMount () {
+    this._unsubscribe
+ }
 takeAPhoto = async () => {
   if (this.camera) {
     const options = { quality: 0.5, base64: true }
@@ -143,7 +145,9 @@ render () {
         style={{
           flex: 1,
           width: '100%'
+          
         }}
+        captureAudio={false}
       />
 
       <TouchableOpacity style={commonStyles.button} onPress={() => this.takeAPhoto()}>

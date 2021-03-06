@@ -21,10 +21,15 @@ class YourReviews extends Component {
   }
 
   componentDidMount () {
+    this._unsubscribe = 
     this.props.navigation.addListener('focus', () => {
     this.getUserData()
 });
   }
+
+  UNSAFE_componentWillMount () {
+    this._unsubscribe
+ }
 
 getUserData = async () => {
   const token = await AsyncStorage.getItem('session_token')
@@ -70,7 +75,7 @@ render () {
     )
   } else {
     return (
-      <ScrollView>
+      <SafeAreaView style={commonStyles.container}>
         <Text style={commonStyles.title}>Your Reviews</Text>
         <FlatList
           data={this.state.userData.reviews}
@@ -137,7 +142,7 @@ render () {
           keyExtractor={(item, index) => item.review.review_id.toString()}
         />
 
-<Text style={commonStyles.title}>Your liked Reviews</Text>
+        <Text style={commonStyles.title}>Your liked Reviews</Text>
               <FlatList
                 data={this.state.userData.liked_reviews}
                 renderItem={({ item }) => (
@@ -154,19 +159,10 @@ render () {
                 keyExtractor={(item, index) => item.review.review_id.toString()}
               />
 
-      </ScrollView>
+      </SafeAreaView>
     )
   }
 }
 }
-
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center'
-  }
-})
 
 export default YourReviews

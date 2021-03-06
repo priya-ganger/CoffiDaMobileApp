@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Alert, View, StyleSheet, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { commonStyles } from '../styles/common'
 
 class Photo extends Component {
   constructor (props) {
@@ -100,11 +101,11 @@ render () {
   Alert.alert(photoUri)
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={commonStyles.container}>
 
       <Image
         source={{ uri: photoUri }}
-        style={{ width: 400, height: 400 }}
+        style={{ width: 500, height: 700 }}
       />
 
     </View>

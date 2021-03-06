@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ActivityIndicator, TouchableOpacity, ScrollView, ToastAndroid, Alert, FlatList, Image } from 'react-native'
+import { Text, View, ActivityIndicator, TouchableOpacity, ScrollView, ToastAndroid, Alert, FlatList, Image, SafeAreaView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -16,10 +16,14 @@ class Favourites extends Component {
   }
 
   componentDidMount () {
-    this.props.navigation.addListener('focus', () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
     this.getUserData()
   });
   }
+
+  UNSAFE_componentWillMount () {
+    this._unsubscribe
+ }
 
       getUserData = async () => {
         const token = await AsyncStorage.getItem('session_token')
@@ -63,7 +67,7 @@ class Favourites extends Component {
           )
         } else {
           return (
-            <ScrollView>
+            <SafeAreaView style={commonStyles.container}>
               <FlatList
                 data={this.state.userData.favourite_locations}
                 renderItem={({ item }) => (
@@ -90,7 +94,7 @@ class Favourites extends Component {
               />
 
              
-            </ScrollView>
+            </SafeAreaView>
 
           )
         }
