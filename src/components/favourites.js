@@ -72,7 +72,6 @@ class Favourites extends Component {
                 data={this.state.userData.favourite_locations}
                 renderItem={({ item }) => (
                   <View>
-                    {/* <Text>Location ID:{item.location_id}</Text> */}
                     <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
                     <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
                     <Image
@@ -82,6 +81,7 @@ class Favourites extends Component {
                     />
 
                     {/* <TouchableOpacity
+                    ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('moreInfo', { locationID: item.location_id })}
                 >

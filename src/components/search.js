@@ -118,6 +118,7 @@ class Search extends Component {
             placeholder='Type here'
             onChangeText={(q) => this.setState({ q: q })}
             value={this.state.q}
+            ariaLabel='Type here to seach for cafe'
           />
 
           <Text style={commonStyles.subheadingText}>Overall Rating</Text>
@@ -162,7 +163,7 @@ class Search extends Component {
              />  */}
 
           <TouchableOpacity
-            style={commonStyles.button} onPress={() => this.search()}
+           ariaRole='button' style={commonStyles.button} onPress={() => this.search()}
           >
             <Text style={commonStyles.buttonText}>Search </Text>
             <Ionicons name='search' size={25} color='white' />

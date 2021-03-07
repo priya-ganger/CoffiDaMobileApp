@@ -69,14 +69,14 @@ class LogOut extends Component {
           <Text style={commonStyles.title}>Are you sure you want to logout?</Text>
 
           <TouchableOpacity
-            style={commonStyles.button} onPress={() => this.logUserOut()}
+            ariaRole='button' style={commonStyles.button} onPress={() => this.logUserOut()}
           >
             <Text style={commonStyles.buttonText}>Yes </Text>
             <Ionicons name='log-out' size={25} color='white' />
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
+            ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
           >
             <Text style={commonStyles.buttonText}>No </Text>
             <Ionicons name='arrow-back' size={25} color='white' />

@@ -63,6 +63,7 @@ class SignUp extends Component {
             placeholder='Enter your first name.'
             onChangeText={(first_name) => this.setState({ first_name })}
             value={this.state.first_name}
+            ariaLabel='Enter your first name'
           />
 
           <Text style={commonStyles.subheadingText}>What is your last name?</Text>
@@ -71,6 +72,7 @@ class SignUp extends Component {
             placeholder='Enter your last name.'
             onChangeText={(last_name) => this.setState({ last_name })}
             value={this.state.last_name}
+            ariaLabel='Enter your last name'
           />
 
           <Text style={commonStyles.subheadingText}>What is your email address?</Text>
@@ -89,6 +91,7 @@ class SignUp extends Component {
             ]}
             onChangeText={(email) => this.setState({ email })}
             value={this.state.email}
+            ariaLabel='Enter your email address'
             onValidation={isValidEmail => this.setState({ isValidEmail })}
           />
 
@@ -114,6 +117,7 @@ class SignUp extends Component {
             ]}
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
+            ariaLabel='Enter your password'
             onValidation={isValid => this.setState({ isValid })}
             secureTextEntry
           />
@@ -128,7 +132,7 @@ class SignUp extends Component {
             An uppercase letter is required
           </Text>
 
-          <TouchableOpacity style={commonStyles.button} onPress={() => this.signUp()}>
+          <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.signUp()}>
             <Text style={commonStyles.buttonText}>Sign Up </Text>
             <Ionicons name='add' size={25} color='white' />
           </TouchableOpacity>

@@ -104,6 +104,7 @@ render () {
     <View style={commonStyles.container}>
 
       <Image
+        accessibilityLabel={'Image taken by user for cafe review'}
         source={{ uri: photoUri }}
         style={{ width: 500, height: 700 }}
       />

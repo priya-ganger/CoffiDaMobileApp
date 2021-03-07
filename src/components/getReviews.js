@@ -249,6 +249,7 @@ class GetReviews extends Component {
                 <Text style={commonStyles.subheadingText}> Likes: {item.likes} </Text>
 
                 <TouchableOpacity
+                ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}
                 >
@@ -257,6 +258,7 @@ class GetReviews extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}
                 >
@@ -265,6 +267,7 @@ class GetReviews extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
                 >
@@ -273,6 +276,7 @@ class GetReviews extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity
+                ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
                 >
@@ -283,6 +287,7 @@ class GetReviews extends Component {
                 {/* TODO: Add button needs to be outside the flatlist */}
 
                 <TouchableOpacity
+                ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
                 >

@@ -159,6 +159,7 @@ render () {
           placeholder='Enter your first name'
           onChangeText={(first_name) => this.setState({ first_name })}
           value={this.state.first_name}
+          ariaLabel='Enter your first name'
         />
 
         <Text style={commonStyles.subheadingText}>Second Name:</Text>
@@ -167,6 +168,7 @@ render () {
           placeholder='Enter your last name'
           onChangeText={(last_name) => this.setState({ last_name })}
           value={this.state.last_name}
+          ariaLabel='Enter your last name'
         />
 
         <Text style={commonStyles.subheadingText}>Email:</Text>
@@ -175,6 +177,7 @@ render () {
           placeholder='Enter your email address'
           onChangeText={(email) => this.setState({ email })}
           value={this.state.email}
+          ariaLabel='Enter your email address'
         />
 
         <Text style={commonStyles.subheadingText}>Password:</Text>
@@ -184,10 +187,11 @@ render () {
           onChangeText={(password) => this.setState({ password })}
           value={this.state.password}
           secureTextEntry
+          ariaLabel='Enter your Password'
         />
 
         <TouchableOpacity
-          style={commonStyles.button} onPress={() => this.updateUserInfo()}
+         ariaRole='button' style={commonStyles.button} onPress={() => this.updateUserInfo()}
         >
           <Text style={commonStyles.buttonText}>Update </Text>
           <Ionicons name='create' size={25} color='white' />

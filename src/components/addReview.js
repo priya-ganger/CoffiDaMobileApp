@@ -49,10 +49,6 @@ class AddReview extends Component {
     // this._unsubscribe
   }
 
-  ProfanityCheck () {
-
-  }
-
 addReview = async () => {
   const filter = new Filter()
   filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake')
@@ -80,8 +76,6 @@ addReview = async () => {
     .then((response) => {
       if (response.status === 201) {
         console.log(filter.clean(this.state.review_body))
-        Alert.alert(filter.clean(this.state.review_body))
-
         Alert.alert('Review Added! Id: ' + this.state.location_id + ' Token: ' + token)
         // need to refresh data
       } else if (response.status === 400) {
@@ -118,6 +112,7 @@ render () {
         placeholder='Enter your overall rating (Required)'
         onChangeText={(overall_rating) => this.setState({ overall_rating })}
         value={this.state.overall_rating}
+        ariaLabel='Enter your overall rating (Required)'
       />
 
       <TextInput
@@ -125,6 +120,7 @@ render () {
         placeholder='Enter your price rating (Required)'
         onChangeText={(price_rating) => this.setState({ price_rating })}
         value={this.state.price_rating}
+        ariaLabel='Enter your price rating (Required)'
       />
 
       <TextInput
@@ -132,6 +128,7 @@ render () {
         placeholder='Enter your quality rating (Required)'
         onChangeText={(quality_rating) => this.setState({ quality_rating })}
         value={this.state.quality_rating}
+        ariaLabel='Enter your quality rating (Required)'
       />
 
       <TextInput
@@ -139,21 +136,23 @@ render () {
         placeholder='Enter your cleanliness rating (Required)'
         onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
         value={this.state.clenliness_rating}
+        ariaLabel='Enter your cleanliness rating (Required)'
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your review  (Required)'
+        placeholder='Enter your review (Required)'
         onChangeText={(review_body) => this.setState({ review_body })}
         value={this.state.review_body}
+        ariaLabel='Enter your review (Required)'
       />
 
-      <TouchableOpacity style={commonStyles.button} onPress={() => this.addReview()}>
+      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.addReview()}>
         <Text style={commonStyles.buttonText}>Add </Text>
         <Ionicons name='add' size={25} color='white' />
       </TouchableOpacity>
 
-      <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('YourReviews')}>
+      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('YourReviews')}>
         <Text style={commonStyles.buttonText}> My Reviews </Text>
         <Ionicons name='clipboard' size={25} color='white' />
       </TouchableOpacity>

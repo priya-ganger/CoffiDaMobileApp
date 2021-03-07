@@ -129,7 +129,7 @@ render () {
               />
               <Text> </Text>
 
-              <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
+              <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
                 <Text style={commonStyles.buttonText}> Add photo? </Text>
                 <Ionicons name='camera' size={25} color='white' />
               </TouchableOpacity>

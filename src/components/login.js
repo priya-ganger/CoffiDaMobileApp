@@ -61,6 +61,7 @@ class Login extends Component {
               placeholder='Email address'
               onChangeText={(email) => this.setState({ email })}
               value={this.state.email}
+              ariaLabel='Email address'
             />
 
             <Text style={commonStyles.subheadingText}>Enter your password: </Text>
@@ -70,15 +71,16 @@ class Login extends Component {
               onChangeText={(password) => this.setState({ password })}
               value={this.state.password}
               secureTextEntry
+              ariaLabel='Password'
             />
 
-            <TouchableOpacity style={commonStyles.button} onPress={() => this.login()}>
+            <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.login()}>
               <Text style={commonStyles.buttonText}>Login
               </Text>
               <Ionicons name='log-in' size={25} color='white' />
             </TouchableOpacity>
 
-            <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
+            <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
               <Text style={commonStyles.buttonText}>Register
               </Text>
               <Ionicons name='person-add' size={25} color='white' />

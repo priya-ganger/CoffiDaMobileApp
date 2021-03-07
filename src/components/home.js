@@ -146,7 +146,7 @@ class Home extends Component {
     } else {
       return (
         <View style={commonStyles.container}>
-          <TouchableOpacity style={commonStyles.button} onPress={() => navigation.navigate('Search')}>
+          <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => navigation.navigate('Search')}>
             <Text style={commonStyles.buttonText}>Search </Text>
             <Ionicons name='search' size={25} color='#042' />
           </TouchableOpacity>
@@ -211,20 +211,20 @@ class Home extends Component {
                 />
 
                 <TouchableOpacity
-                  style={commonStyles.button} onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}
+                  ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}
                 >
                   <Text style={commonStyles.buttonText}>View Reviews</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={commonStyles.button} onPress={() => this.favouriteLocation(item.location_id)}
+                  ariaRole='button' style={commonStyles.button} onPress={() => this.favouriteLocation(item.location_id)}
                 >
                   <Text style={commonStyles.buttonText}>Favourite </Text>
                   <Ionicons name='heart' size={25} color='tomato' />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={commonStyles.button} onPress={() => this.unfavouriteLocation(item.location_id)}
+                  ariaRole='button' style={commonStyles.button} onPress={() => this.unfavouriteLocation(item.location_id)}
                 >
                   <Text style={commonStyles.buttonText}>Unfavourite </Text>
                   <Ionicons name='heart-outline' size={25} color='tomato' />

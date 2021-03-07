@@ -135,6 +135,7 @@ render () {
           placeholder='Enter your overall rating (Optional)'
           onChangeText={(overall_rating) => this.setState({ overall_rating })}
           value={this.state.overall_rating}
+          ariaLabel='Enter your overall rating (Optional)'
         />
 
         <TextInput
@@ -142,6 +143,7 @@ render () {
           placeholder='Enter your price rating (Optional)'
           onChangeText={(price_rating) => this.setState({ price_rating })}
           value={this.state.price_rating}
+          ariaLabel='Enter your price rating (Optional)'
         />
 
         <TextInput
@@ -149,6 +151,7 @@ render () {
           placeholder='Enter your quality rating (Optional)'
           onChangeText={(quality_rating) => this.setState({ quality_rating })}
           value={this.state.quality_rating}
+          ariaLabel='Enter your quality rating (Optional)'
         />
 
         <TextInput
@@ -156,6 +159,7 @@ render () {
           placeholder='Enter your cleanliness rating (Optional)'
           onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
           value={this.state.clenliness_rating}
+          ariaLabel='Enter your cleanliness rating (Optional)'
         />
 
         <TextInput
@@ -163,10 +167,11 @@ render () {
           placeholder='Enter your review (Optional)'
           onChangeText={(review_body) => this.setState({ review_body })}
           value={this.state.review_body}
+          ariaLabel='Enter your review (Optional)'
         />
 
         <TouchableOpacity
-          style={commonStyles.button}
+          ariaRole='button' style={commonStyles.button}
           onPress={() => this.updateReview()}
         >
           <Text style={commonStyles.buttonText}> Update </Text>

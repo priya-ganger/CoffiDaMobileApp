@@ -152,17 +152,17 @@ render () {
         captureAudio={false}
       />
 
-      <TouchableOpacity style={commonStyles.button} onPress={() => this.takeAPhoto()}>
+      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.takeAPhoto()}>
         <Text style={commonStyles.buttonText}>Capture </Text>
         <Ionicons name='camera' size={25} color='white' />
       </TouchableOpacity>
 
-      <TouchableOpacity style={commonStyles.button} onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
+      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
         <Text style={commonStyles.buttonText}>View Photo </Text>
         <Ionicons name='image' size={25} color='white' />
       </TouchableOpacity>
 
-      <TouchableOpacity style={commonStyles.button} onPress={() => { this.deleteAPhoto() }}>
+      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => { this.deleteAPhoto() }}>
         <Text style={commonStyles.buttonText}>Delete Photo </Text>
         <Ionicons name='trash' size={25} color='white' />
       </TouchableOpacity>
