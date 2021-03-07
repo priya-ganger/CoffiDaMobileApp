@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, ToastAndroid, TextInput, Aler
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { t, getLanguage } from '../locales'
 
 class Login extends Component {
   constructor (props) {
@@ -50,10 +51,14 @@ class Login extends Component {
           })
       }
 
+      componentDidMount() {
+        getLanguage();
+      }
+
       render () {
         return (
           <View style={commonStyles.container}>
-            <Text style={commonStyles.title}>Welcome to CoffiDa</Text>
+            <Text style={commonStyles.title}>{t("welcome_text")}</Text>
 
             <Text style={commonStyles.subheadingText}>Enter your email address: </Text>
             <TextInput
