@@ -3,13 +3,13 @@ import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity, ActivityI
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { t, getLanguage } from '../locales'
 
 class UpdateReview extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      // isLoading: true,
       locData: [],
       overall_rating: '',
       price_rating: '',
@@ -26,6 +26,7 @@ class UpdateReview extends Component {
   componentDidMount () {
     // this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
+      getLanguage()
       const { location_id, locData, location_Name } = this.props.route.params
 
       if (this.props.route.params) {
@@ -128,53 +129,53 @@ render () {
     return (
       <View style={commonStyles.container}>
 
-        <Text style={commonStyles.title}>Update your review for: {this.state.locationName}</Text>
+        <Text style={commonStyles.title}>{t("update_your_review_for")} {this.state.locationName}</Text>
 
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your overall rating (Optional)'
+          placeholder={t("update_review_overall_rating")}
           onChangeText={(overall_rating) => this.setState({ overall_rating })}
           value={this.state.overall_rating}
-          ariaLabel='Enter your overall rating (Optional)'
+          ariaLabel={t("update_review_overall_rating")}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your price rating (Optional)'
+          placeholder={t("update_review_price_rating")}
           onChangeText={(price_rating) => this.setState({ price_rating })}
           value={this.state.price_rating}
-          ariaLabel='Enter your price rating (Optional)'
+          ariaLabel={t("update_review_price_rating")}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your quality rating (Optional)'
+          placeholder={t("update_review_quality_rating")}
           onChangeText={(quality_rating) => this.setState({ quality_rating })}
           value={this.state.quality_rating}
-          ariaLabel='Enter your quality rating (Optional)'
+          ariaLabel={t("update_review_quality_rating")}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your cleanliness rating (Optional)'
+          placeholder={t("update_review_cleanliness_rating")}
           onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
           value={this.state.clenliness_rating}
-          ariaLabel='Enter your cleanliness rating (Optional)'
+          ariaLabel={t("update_review_cleanliness_rating")}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your review (Optional)'
+          placeholder={t("update_review")}
           onChangeText={(review_body) => this.setState({ review_body })}
           value={this.state.review_body}
-          ariaLabel='Enter your review (Optional)'
+          ariaLabel={t("update_review")}
         />
 
         <TouchableOpacity
           ariaRole='button' style={commonStyles.button}
           onPress={() => this.updateReview()}
         >
-          <Text style={commonStyles.buttonText}> Update </Text>
+          <Text style={commonStyles.buttonText}> {t("update_btn")} </Text>
           <Ionicons name='create' size={25} color='white' />
         </TouchableOpacity>
 

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
+import { t, getLanguage } from '../locales'
 
 class YourReviews extends Component {
   constructor (props) {
@@ -23,6 +24,7 @@ class YourReviews extends Component {
     this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
       this.getUserData()
+      getLanguage()
     })
   }
 
@@ -73,14 +75,14 @@ render () {
   } else {
     return (
       <SafeAreaView style={commonStyles.container}>
-        <Text style={commonStyles.title}>Your Reviews</Text>
+        <Text style={commonStyles.title}>{t("your_reviews")}</Text>
         <FlatList
           data={this.state.userData.reviews}
           renderItem={({ item }) => (
             <View>
-              <Text style={commonStyles.subheadingText}> Cafe Name: {item.location.location_name}</Text>
-              <Text style={commonStyles.subheadingText}> Review: {item.review.review_body}</Text>
-              <Text style={commonStyles.subheadingText}> Price Rating: {item.review.overall_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t("name_of_cafe")} {item.location.location_name}</Text>
+              <Text style={commonStyles.subheadingText}> {t("review_body")} {item.review.review_body}</Text>
+              <Text style={commonStyles.subheadingText}> {t("review_overall_rating")} {item.review.overall_rating}</Text>
               <Stars
                 display={item.review.overall_rating}
                 half
@@ -92,7 +94,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> Price Rating: {item.review.price_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t("review_price_rating")} {item.review.price_rating}</Text>
               <Stars
                 display={item.review.price_rating}
                 half
@@ -104,7 +106,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> Quality Rating: {item.review.quality_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t("review_quality_rating")} {item.review.quality_rating}</Text>
               <Stars
                 display={item.review.quality_rating}
                 half
@@ -116,7 +118,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.review.clenliness_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t("review_cleanliness_rating")} {item.review.clenliness_rating}</Text>
               <Stars
                 display={item.review.clenliness_rating}
                 half
@@ -130,7 +132,7 @@ render () {
               <Text> </Text>
 
               <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
-                <Text style={commonStyles.buttonText}> Add photo? </Text>
+                <Text style={commonStyles.buttonText}> {t("add_photo")} </Text>
                 <Ionicons name='camera' size={25} color='white' />
               </TouchableOpacity>
 
@@ -139,17 +141,13 @@ render () {
           keyExtractor={(item, index) => item.review.review_id.toString()}
         />
 
-        <Text style={commonStyles.title}>Your liked Reviews</Text>
+        <Text style={commonStyles.title}>{t("your_liked_reviews")}</Text>
         <FlatList
           data={this.state.userData.liked_reviews}
           renderItem={({ item }) => (
             <View>
-              <Text style={commonStyles.subheadingText}>Location Name: {item.location.location_name}</Text>
-              <Text style={commonStyles.subheadingText}>Review {item.review.review_body}</Text>
-              {/* <Text>Overall rating: {item.review.overall_rating}  </Text>
-                    <Text>Price Rating: {item.review.price_rating} </Text>
-                    <Text>Quality Rating: {item.review.quality_rating} </Text>
-                    <Text>Cleanliness Rating: {item.review.clenliness_rating} </Text> */}
+              <Text style={commonStyles.subheadingText}>{t("name_of_cafe")} {item.location.location_name}</Text>
+              <Text style={commonStyles.subheadingText}>{t("review")} {item.review.review_body}</Text>
               <Text> </Text>
             </View>
           )}

@@ -23,7 +23,7 @@
     "yes": "Yes",
     "no": "No",
 
-    "search": "Search",
+    "search": "Search ",
     "name_of_cafe": "Name: ",
     "cafe_town": "Town: ",
     "cafe_avg_overall_rating": "Average Overall Rating: ",
@@ -37,6 +37,7 @@
     "capture": "Capture",
     "view_photo": "View Photo",
     "delete_photo": "Delete Photo",
+    "add_photo": "Add Photo",
 
     "current_details": "Your Current Details",
     "first_name": "First Name",
@@ -57,11 +58,18 @@
     "distance": "Distance",
 
     "your_review_for": "Your review for: ",
-    "review_overall_rating": "Enter your overall rating (Required)",
-    "review_price_rating": "Enter your price rating (Required)",
-    "review_quality_rating": "Enter your quality rating (Required)",
-    "review_cleanliness_rating": "Enter your cleanliness rating (Required)",
-    "review": "Enter your review (Required)",
+    "review_overall_rating_req": "Overall rating (Required)",
+    "review_price_rating_req": "Price rating (Required)",
+    "review_quality_rating_req": "Quality rating (Required)",
+    "review_cleanliness_rating_req": "Cleanliness rating (Required)",
+    "review_req": "Your review (Required)",
+    "review_body": "Your review:",
+    "review_overall_rating": "Overall rating:",
+    "review_price_rating": "Price rating:",
+    "review_quality_rating": "Quality rating:",
+    "review_cleanliness_rating": "Cleanliness rating:",
+    "review": "Review",
+
     "review_add": "Add",
     "my_reviews": "My Reviews",
 
@@ -74,14 +82,16 @@
     "update_review_btn": "Update Review",
 
     "update_your_review_for": "Update your review for: ",
-    "update_review_overall_rating": "Enter your overall rating (Optional)",
-    "update_review_price_rating": "Enter your price rating (Optional)",
-    "update_review_quality_rating": "Enter your quality rating (Optional)",
-    "update_review_cleanliness_rating": "Enter your cleanliness rating (Optional)",
-    "update_review": "Enter your review (Optional)",
+    "update_review_overall_rating": "Overall rating (Optional)",
+    "update_review_price_rating": "Price rating (Optional)",
+    "update_review_quality_rating": "Quality rating (Optional)",
+    "update_review_cleanliness_rating": "Cleanliness rating (Optional)",
+    "update_review": "Review (Optional)",
+
     "update_btn": "Update",
 
     "your_reviews": "Your Reviews",
-    "your_liked_reviews": "Your liked reviews"
+    "your_liked_reviews": "Your liked reviews",
+    "type_here": "Type here"
 
 }

@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
+import { t, getLanguage } from '../locales'
 
 class Search extends Component {
   constructor (props) {
@@ -22,7 +23,10 @@ class Search extends Component {
   }
 
   componentDidMount () {
+    this.props.navigation.addListener('focus', () => {
     this.getLocationData('http://10.0.2.2:3333/api/1.0.0/find')
+    getLanguage()
+      })
   }
 
   getLocationData = async (url) => {
@@ -112,23 +116,23 @@ class Search extends Component {
     } else {
       return (
         <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>Name of cafe:</Text>
+          <Text style={commonStyles.title}>{t("name_of_cafe")}</Text>
           <TextInput
             style={commonStyles.input}
-            placeholder='Type here'
+            placeholder={t("type_here")}
             onChangeText={(q) => this.setState({ q: q })}
             value={this.state.q}
-            ariaLabel='Type here to search for cafe'
+            ariaLabel={t("type_here")}
           />
 
-          <Text style={commonStyles.subheadingText}>Overall Rating</Text>
+          <Text style={commonStyles.subheadingText}>{t("cafe_avg_overall_rating")}</Text>
           <AirbnbRating
             size={15}
             defaultRating={0}
             reviewSize={0}
             selectedColor='#f1c40f'
             unSelectedColor='black'
-            reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
+            reviews={[t("review_terrible"), t("review_bad"), t("review_avg"), t("review_good"), t("review_great")]}
             onFinishRating={(rating) => this.ratingCompleted(rating, 'overall_rating')}
           />
           {/*
@@ -165,7 +169,7 @@ class Search extends Component {
           <TouchableOpacity
            ariaRole='button' style={commonStyles.button} onPress={() => this.search()}
           >
-            <Text style={commonStyles.buttonText}>Search </Text>
+            <Text style={commonStyles.buttonText}>{t("search")} </Text>
             <Ionicons name='search' size={25} color='white' />
           </TouchableOpacity>
 
@@ -174,14 +178,14 @@ class Search extends Component {
             renderItem={({ item }) => (
 
               <View>
-                <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
+                <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
                 <Image
                   source={{ uri: item.photo_path }}
                   style={commonStyles.photo}
                   onError={this.errorLoadingImg}
                 />
-                <Text style={commonStyles.subheadingText}> Average Overall Rating: {item.avg_overall_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_avg_overall_rating")} {item.avg_overall_rating}</Text>
                 <Stars
                   display={item.avg_overall_rating}
                   half
@@ -193,7 +197,7 @@ class Search extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Price Rating: {item.avg_price_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_price_rating")} {item.avg_price_rating}</Text>
                 <Stars
                   display={item.avg_price_rating}
                   half
@@ -205,7 +209,7 @@ class Search extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Quality Rating: {item.avg_quality_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_quality_rating")} {item.avg_quality_rating}</Text>
                 <Stars
                   display={item.avg_quality_rating}
                   half
@@ -217,7 +221,7 @@ class Search extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_cleanliness_rating")} {item.avg_clenliness_rating}</Text>
                 <Stars
                   display={item.avg_clenliness_rating}
                   half

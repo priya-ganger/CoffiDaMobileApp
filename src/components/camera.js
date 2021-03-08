@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RNCamera } from 'react-native-camera'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { t, getLanguage } from '../locales'
 
 class Camera extends Component {
   constructor (props) {
@@ -17,6 +18,7 @@ class Camera extends Component {
 
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      getLanguage()
       const { locId } = this.props.route.params
       console.log('This is the params data' + locId)
 
@@ -153,17 +155,17 @@ render () {
       />
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.takeAPhoto()}>
-        <Text style={commonStyles.buttonText}>Capture </Text>
+        <Text style={commonStyles.buttonText}>{t("capture")} </Text>
         <Ionicons name='camera' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
-        <Text style={commonStyles.buttonText}>View Photo </Text>
+        <Text style={commonStyles.buttonText}>{t("view_photo")} </Text>
         <Ionicons name='image' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => { this.deleteAPhoto() }}>
-        <Text style={commonStyles.buttonText}>Delete Photo </Text>
+        <Text style={commonStyles.buttonText}>{t("delete_photo")} </Text>
         <Ionicons name='trash' size={25} color='white' />
       </TouchableOpacity>
 

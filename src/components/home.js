@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
+import { t, getLanguage } from '../locales'
 
 class Home extends Component {
   constructor (props) {
@@ -19,8 +20,9 @@ class Home extends Component {
   componentDidMount () {
     this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
-      this.checkUserIsLoggedIn()
-      this.getLocationData()
+      this.checkUserIsLoggedIn();
+      getLanguage();
+      this.getLocationData();
     })
   }
 
@@ -147,7 +149,7 @@ class Home extends Component {
       return (
         <View style={commonStyles.container}>
           <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => navigation.navigate('Search')}>
-            <Text style={commonStyles.buttonText}>Search </Text>
+            <Text style={commonStyles.buttonText}>{t("search")}</Text>
             <Ionicons name='search' size={25} color='#042' />
           </TouchableOpacity>
           <FlatList
@@ -155,14 +157,14 @@ class Home extends Component {
             renderItem={({ item }) => (
 
               <View>
-                <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
+                <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
                 <Image
                   source={{ uri: item.photo_path }}
                   style={commonStyles.photo}
                   onError={this.errorLoadingImg}
                 />
-                <Text style={commonStyles.subheadingText}> Average Overall Rating: {item.avg_overall_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_avg_overall_rating")} {item.avg_overall_rating}</Text>
                 <Stars
                   display={item.avg_overall_rating}
                   half
@@ -174,7 +176,7 @@ class Home extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Price Rating: {item.avg_price_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_price_rating")} {item.avg_price_rating}</Text>
                 <Stars
                   display={item.avg_price_rating}
                   half
@@ -186,7 +188,7 @@ class Home extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Quality Rating: {item.avg_quality_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_quality_rating")} {item.avg_quality_rating}</Text>
                 <Stars
                   display={item.avg_quality_rating}
                   half
@@ -198,7 +200,7 @@ class Home extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.avg_clenliness_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("cafe_cleanliness_rating")} {item.avg_clenliness_rating}</Text>
                 <Stars
                   display={item.avg_clenliness_rating}
                   half
@@ -213,20 +215,20 @@ class Home extends Component {
                 <TouchableOpacity
                   ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}
                 >
-                  <Text style={commonStyles.buttonText}>View Reviews</Text>
+                  <Text style={commonStyles.buttonText}>{t("view_reviews_button")}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   ariaRole='button' style={commonStyles.button} onPress={() => this.favouriteLocation(item.location_id)}
                 >
-                  <Text style={commonStyles.buttonText}>Favourite </Text>
+                  <Text style={commonStyles.buttonText}>{t("favourite")} </Text>
                   <Ionicons name='heart' size={25} color='tomato' />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   ariaRole='button' style={commonStyles.button} onPress={() => this.unfavouriteLocation(item.location_id)}
                 >
-                  <Text style={commonStyles.buttonText}>Unfavourite </Text>
+                  <Text style={commonStyles.buttonText}>{t("unfavourite")} </Text>
                   <Ionicons name='heart-outline' size={25} color='tomato' />
                 </TouchableOpacity>
               </View>

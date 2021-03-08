@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { ScrollView } from 'react-native-gesture-handler'
+import { t, getLanguage } from '../locales'
 
 class Profile extends Component {
   constructor (props) {
@@ -21,6 +22,7 @@ class Profile extends Component {
 
   componentDidMount () {
     this.getUserData()
+    getLanguage()
   }
 
 getUserData = async () => {
@@ -143,57 +145,57 @@ render () {
   } else {
     return (
       <View style={commonStyles.container}>
-        <Text style={commonStyles.title}>Your Current Details</Text>
+        <Text style={commonStyles.title}>{t("current_details")}</Text>
         {/* <Text>User ID: {item.user_id}</Text> */}
-        <Text style={commonStyles.subheadingText}>  First Name:  {item.first_name}</Text>
-        <Text style={commonStyles.subheadingText}>  Last Name: {item.last_name}</Text>
-        <Text style={commonStyles.subheadingText}>  Email Address: {item.email}</Text>
+        <Text style={commonStyles.subheadingText}>  {t("first_name")}  {item.first_name}</Text>
+        <Text style={commonStyles.subheadingText}>  {t("second_name")} {item.last_name}</Text>
+        <Text style={commonStyles.subheadingText}>  {t("email_address")} {item.email}</Text>
         {/* <Text> Password: </Text> */}
 
         <Text />
 
-        <Text style={commonStyles.title}> Update your details here </Text>
-        <Text style={commonStyles.subheadingText}>First Name:</Text>
+        <Text style={commonStyles.title}> {t("update_details")}</Text>
+        <Text style={commonStyles.subheadingText}>{t("first_name")}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your first name'
+          placeholder={t("first_name")}
           onChangeText={(first_name) => this.setState({ first_name })}
           value={this.state.first_name}
-          ariaLabel='Enter your first name'
+          ariaLabel={t("first_name")}
         />
 
-        <Text style={commonStyles.subheadingText}>Second Name:</Text>
+        <Text style={commonStyles.subheadingText}>{t("second_name")}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your last name'
+          placeholder={t("second_name")}
           onChangeText={(last_name) => this.setState({ last_name })}
           value={this.state.last_name}
-          ariaLabel='Enter your last name'
+          ariaLabel={t("second_name")}
         />
 
-        <Text style={commonStyles.subheadingText}>Email:</Text>
+        <Text style={commonStyles.subheadingText}>{t("email_address")}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your email address'
+          placeholder={t("email_address")}
           onChangeText={(email) => this.setState({ email })}
           value={this.state.email}
-          ariaLabel='Enter your email address'
+          ariaLabel={t("email_address")}
         />
 
-        <Text style={commonStyles.subheadingText}>Password:</Text>
+        <Text style={commonStyles.subheadingText}>{t("password")}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder='Enter your Password'
+          placeholder={t("password")}
           onChangeText={(password) => this.setState({ password })}
           value={this.state.password}
           secureTextEntry
-          ariaLabel='Enter your Password'
+          ariaLabel={t("password")}
         />
 
         <TouchableOpacity
          ariaRole='button' style={commonStyles.button} onPress={() => this.updateUserInfo()}
         >
-          <Text style={commonStyles.buttonText}>Update </Text>
+          <Text style={commonStyles.buttonText}>{t("update")} </Text>
           <Ionicons name='create' size={25} color='white' />
         </TouchableOpacity>
 

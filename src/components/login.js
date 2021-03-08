@@ -53,7 +53,7 @@ class Login extends Component {
 
       componentDidMount() {
         this.props.navigation.addListener('focus', () => {
-        getLanguage();
+        getLanguage()
       })
       }
 

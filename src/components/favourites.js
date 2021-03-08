@@ -3,6 +3,8 @@ import { Text, View, ActivityIndicator, TouchableOpacity, ToastAndroid, Alert, F
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { t, getLanguage } from '../locales'
+
 
 class Favourites extends Component {
   constructor (props) {
@@ -18,6 +20,7 @@ class Favourites extends Component {
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.getUserData()
+      getLanguage()
     })
   }
 
@@ -72,8 +75,8 @@ class Favourites extends Component {
                 data={this.state.userData.favourite_locations}
                 renderItem={({ item }) => (
                   <View>
-                    <Text style={commonStyles.subheadingText}> Name:  {item.location_name}</Text>
-                    <Text style={commonStyles.subheadingText}> Town: {item.location_town}</Text>
+                    <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
+                    <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
                     <Image
                       source={{ uri: item.photo_path }}
                       style={commonStyles.photo}

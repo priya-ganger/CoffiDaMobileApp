@@ -34,18 +34,19 @@
     "favorite": "Favorite",
     "unfavourite": "défavorable",
 
-    "capture": "Capture",
+    "capture": "Capturer",
     "view_photo": "Afficher la photo",
     "delete_photo": "Supprimer la photo",
+    "add_photo": "Ajouter une photo",
 
     "current_details": "Vos détails actuels",
-    "first_name": "Prénom",
-    "second_name": "Nom de famille",
-    "email_address": "Adresse e-mail",
+    "first_name": "Prénom:",
+    "second_name": "Nom de famille:",
+    "email_address": "Adresse e-mail:",
     "update_details": "Mettez à jour vos coordonnées ici",
     "first_name_placeholder": "Entrez votre prénom",
     "last_name_placeholder": "Entrez votre nom",
-    "update": "Update",
+    "update": "mettre à jour",
 
     "name_of_cafe_placeholder": "Tapez ici pour rechercher un café",
     "review_terrible": "Terrible",
@@ -57,11 +58,20 @@
     "distance": "Distance",
 
     "your_review_for": "Votre avis pour:",
-    "review_overall_rating": "Saisissez votre note globale (obligatoire)",
-    "review_price_rating": "Entrez votre note de prix (obligatoire)",
-    "review_quality_rating": "Saisissez votre note de qualité (obligatoire)",
-    "review_cleanhness_rating": "Entrez votre note de propreté (obligatoire)",
-    "review": "Donnez votre avis (obligatoire)",
+    "review_overall_rating_req": "Saisissez votre note globale (obligatoire)",
+    "review_price_rating_req": "Entrez votre note de prix (obligatoire)",
+    "review_quality_rating_req": "Saisissez votre note de qualité (obligatoire)",
+    "review_cleanliness_rating_req": "Entrez votre note de propreté (obligatoire)",
+    "review_req": "Donnez votre avis (obligatoire)",
+    "review_body": "Donnez votre avis:",
+    "review_overall_rating": "Saisissez votre note globale:",
+    "review_price_rating": "Entrez votre note de prix:",
+    "review_quality_rating": "Saisissez votre note de qualité:",
+    "review_cleanliness_rating": "Entrez votre note de propreté:",
+    
+    "review": "la revue:",
+    
+    
     "review_add": "Ajouter",
     "my_reviews": "Mes avis",
 
@@ -77,11 +87,12 @@
     "update_review_overall_rating": "Saisissez votre note globale (facultatif)",
     "update_review_price_rating": "Entrez votre note de prix (facultatif)",
     "update_review_quality_rating": "Saisissez votre note de qualité (facultatif)",
-    "update_review_cleaneness_rating": "Entrez votre note de propreté (facultatif)",
+    "update_review_cleanliness_rating": "Entrez votre note de propreté (facultatif)",
     "update_review": "Donnez votre avis (facultatif)",
     "update_btn": "Mettre à jour",
 
     "your_reviews": "Vos avis",
-    "your_liked_reviews": "Vos avis préférés"
+    "your_liked_reviews": "Vos avis préférés",
+    "type_here": "écrivez ici"
 
 }

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
+import { t, getLanguage } from '../locales'
 
 class GetReviews extends Component {
   constructor (props) {
@@ -19,6 +20,7 @@ class GetReviews extends Component {
   componentDidMount () {
     // this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
+      getLanguage()
       const { locData } = this.props.route.params
       console.log('This is the params data' + locData.location_id)
       if (this.props.route.params) {
@@ -191,13 +193,13 @@ class GetReviews extends Component {
     } else {
       return (
         <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>Reviews</Text>
+          <Text style={commonStyles.title}>{t("reviews_table")}</Text>
           <FlatList
             data={this.state.locationData.location_reviews}
             renderItem={({ item }) => (
               <View>
-                <Text style={commonStyles.subheadingText}> Location Name: {this.state.locationData.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> Overall rating: {item.overall_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("name_of_cafe")} {this.state.locationData.location_name}</Text>
+                <Text style={commonStyles.subheadingText}> {t("review_overall_rating")} {item.overall_rating}</Text>
                 <Stars
                   display={item.overall_rating}
                   half
@@ -209,7 +211,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Price Rating: {item.price_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("review_price_rating")} {item.price_rating}</Text>
                 <Stars
                   display={item.price_rating}
                   half
@@ -221,7 +223,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Quality Rating: {item.quality_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("review_quality_rating")} {item.quality_rating}</Text>
                 <Stars
                   display={item.quality_rating}
                   half
@@ -233,7 +235,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Cleanliness Rating: {item.clenliness_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t("review_cleanliness_rating")} {item.clenliness_rating}</Text>
                 <Stars
                   display={item.clenliness_rating}
                   half
@@ -245,15 +247,15 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> Review: {item.review_body}</Text>
-                <Text style={commonStyles.subheadingText}> Likes: {item.likes} </Text>
+                <Text style={commonStyles.subheadingText}> {t("review")} {item.review_body}</Text>
+                <Text style={commonStyles.subheadingText}> {t("likes")} {item.likes} </Text>
 
                 <TouchableOpacity
                 ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}
                 >
-                  <Text style={commonStyles.buttonText}> Like </Text>
+                  <Text style={commonStyles.buttonText}> {t("like")} </Text>
                   <Ionicons name='thumbs-up' size={25} color='white' />
                 </TouchableOpacity>
 
@@ -262,7 +264,7 @@ class GetReviews extends Component {
                   style={commonStyles.button}
                   onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}
                 >
-                  <Text style={commonStyles.buttonText}> Unlike </Text>
+                  <Text style={commonStyles.buttonText}> {t("unlike")} </Text>
                   <Ionicons name='thumbs-down' size={25} color='white' />
                 </TouchableOpacity>
 
@@ -271,7 +273,7 @@ class GetReviews extends Component {
                   style={commonStyles.button}
                   onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
                 >
-                  <Text style={commonStyles.buttonText}> Delete </Text>
+                  <Text style={commonStyles.buttonText}> {t("delete")} </Text>
                   <Ionicons name='trash' size={25} color='white' />
                 </TouchableOpacity>
 
@@ -280,7 +282,7 @@ class GetReviews extends Component {
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
                 >
-                  <Text style={commonStyles.buttonText}> Add Review </Text>
+                  <Text style={commonStyles.buttonText}> {t("add_review")} </Text>
                   <Ionicons name='add-circle' size={25} color='white' />
                 </TouchableOpacity>
 
@@ -291,7 +293,7 @@ class GetReviews extends Component {
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
                 >
-                  <Text style={commonStyles.buttonText}> Update Review </Text>
+                  <Text style={commonStyles.buttonText}> {t("update_review_btn")} </Text>
                   <Ionicons name='create' size={25} color='white' />
                 </TouchableOpacity>
 

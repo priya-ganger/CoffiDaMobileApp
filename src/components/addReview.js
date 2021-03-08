@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Filter from 'bad-words'
+import { t, getLanguage } from '../locales'
 
 class AddReview extends Component {
   constructor (props) {
@@ -22,8 +23,8 @@ class AddReview extends Component {
   }
 
   componentDidMount () {
-    // this._unsubscribe = this.props.navigation.addListener('focus', () => {
-
+     this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      getLanguage()
     const { location_id, locData, location_Name } = this.props.route.params
 
     if (this.props.route.params) {
@@ -43,10 +44,11 @@ class AddReview extends Component {
     console.log('location name' + location_Name)
 
     console.log('review id' + locData.review_id)
+  })
   }
 
   UNSAFE_componentWillMount () {
-    // this._unsubscribe
+     this._unsubscribe
   }
 
 addReview = async () => {
@@ -104,56 +106,54 @@ addReview = async () => {
 render () {
   return (
     <View style={commonStyles.container}>
-      {/* <Text>Add Review {this.state.review_id}</Text>
-      <Text>location id {this.state.location_id}</Text> */}
-      <Text style={commonStyles.title}>Your review for: {this.state.locationName}</Text>
+      <Text style={commonStyles.title}>{t("your_review_for")} {this.state.locationName}</Text>
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your overall rating (Required)'
+        placeholder={t("review_overall_rating_req")}
         onChangeText={(overall_rating) => this.setState({ overall_rating })}
         value={this.state.overall_rating}
-        ariaLabel='Enter your overall rating (Required)'
+        ariaLabel={t("review_overall_rating_req")}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your price rating (Required)'
+        placeholder={t("review_price_rating_req")}
         onChangeText={(price_rating) => this.setState({ price_rating })}
         value={this.state.price_rating}
-        ariaLabel='Enter your price rating (Required)'
+        ariaLabel={t("review_price_rating_req")}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your quality rating (Required)'
+        placeholder={t("review_quality_rating_req")}
         onChangeText={(quality_rating) => this.setState({ quality_rating })}
         value={this.state.quality_rating}
-        ariaLabel='Enter your quality rating (Required)'
+        ariaLabel={t("review_quality_rating_req")}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your cleanliness rating (Required)'
+        placeholder={t("review_cleanliness_rating_req")}
         onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
         value={this.state.clenliness_rating}
-        ariaLabel='Enter your cleanliness rating (Required)'
+        ariaLabel={t("review_cleanliness_rating_req")}
       />
 
       <TextInput
         style={commonStyles.input}
-        placeholder='Enter your review (Required)'
+        placeholder={t("review_req")}
         onChangeText={(review_body) => this.setState({ review_body })}
         value={this.state.review_body}
-        ariaLabel='Enter your review (Required)'
+        ariaLabel={t("review_req")}
       />
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.addReview()}>
-        <Text style={commonStyles.buttonText}>Add </Text>
+        <Text style={commonStyles.buttonText}>{t("review_add")} </Text>
         <Ionicons name='add' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('YourReviews')}>
-        <Text style={commonStyles.buttonText}> My Reviews </Text>
+        <Text style={commonStyles.buttonText}> {t("my_reviews")} </Text>
         <Ionicons name='clipboard' size={25} color='white' />
       </TouchableOpacity>
     </View>
