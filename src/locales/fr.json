@@ -1,3 +1,87 @@
 {
-    "welcome_text": "Bienvenue à Coffida!"
+
+    "welcome_text": "Bienvenue à Coffida!",
+    "enter_email_address": "Entrez votre adresse e-mail:",
+    "enter_password": "Entrez votre mot de passe:",
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "password" : "le mot de passe",
+
+    "enter_your_details": "Entrez vos coordonnées pour vous inscrire",
+    "enter_first_name": "Quel est votre prénom",
+    "enter_last_name": "Quel est votre nom de famille",
+    "your_email_address": "Quelle est votre adresse e-mail",
+    "create_password": "Créez votre mot de passe",
+    "sign_up": "S'inscrire",
+
+    "email_example": "Par exemple: ordercharacters@characters.domain",
+    "password_char_hint": "Un minimum de 8 caractères",
+    "password_num_hint": "Un numéro est requis",
+    "password_case_hint": "Une lettre majuscule est requise",
+
+    "logout": "Êtes-vous sûr de vouloir vous déconnecter?",
+    "yes": "oui",
+    "no": "non",
+
+    "search": "Chercher",
+    "name_of_cafe": "Nom:",
+    "cafe_town": "Ville:",
+    "cafe_avg_overall_rating": "Note globale moyenne:",
+    "cafe_price_rating": "Note de prix:",
+    "cafe_quality_rating": "Évaluation de la qualité:",
+    "cafe_cleanhness_rating": "Indice de propreté:",
+    "view_reviews_button": "Afficher les avis",
+    "favorite": "Favorite",
+    "unfavourite": "défavorable",
+
+    "capture": "Capture",
+    "view_photo": "Afficher la photo",
+    "delete_photo": "Supprimer la photo",
+
+    "current_details": "Vos détails actuels",
+    "first_name": "Prénom",
+    "second_name": "Nom de famille",
+    "email_address": "Adresse e-mail",
+    "update_details": "Mettez à jour vos coordonnées ici",
+    "first_name_placeholder": "Entrez votre prénom",
+    "last_name_placeholder": "Entrez votre nom",
+    "update": "Update",
+
+    "name_of_cafe_placeholder": "Tapez ici pour rechercher un café",
+    "review_terrible": "Terrible",
+    "review_bad": "Mauvais",
+    "review_avg": "Moyenne",
+    "review_good": "Bien",
+    "review_great": "Excellent",
+
+    "distance": "Distance",
+
+    "your_review_for": "Votre avis pour:",
+    "review_overall_rating": "Saisissez votre note globale (obligatoire)",
+    "review_price_rating": "Entrez votre note de prix (obligatoire)",
+    "review_quality_rating": "Saisissez votre note de qualité (obligatoire)",
+    "review_cleanhness_rating": "Entrez votre note de propreté (obligatoire)",
+    "review": "Donnez votre avis (obligatoire)",
+    "review_add": "Ajouter",
+    "my_reviews": "Mes avis",
+
+    "reviews_table": "Avis",
+    "likes": "aime",
+    "like": "J'aime",
+    "unlike": "Contrairement à",
+    "delete": "Delete",
+    "add_review": "Ajouter un avis",
+    "update_review_btn": "Mettre à jour la révision",
+
+    "update_your_review_for": "Mettez à jour votre avis pour:",
+    "update_review_overall_rating": "Saisissez votre note globale (facultatif)",
+    "update_review_price_rating": "Entrez votre note de prix (facultatif)",
+    "update_review_quality_rating": "Saisissez votre note de qualité (facultatif)",
+    "update_review_cleaneness_rating": "Entrez votre note de propreté (facultatif)",
+    "update_review": "Donnez votre avis (facultatif)",
+    "update_btn": "Mettre à jour",
+
+    "your_reviews": "Vos avis",
+    "your_liked_reviews": "Vos avis préférés"
+
 }

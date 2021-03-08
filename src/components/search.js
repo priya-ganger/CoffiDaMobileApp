@@ -118,7 +118,7 @@ class Search extends Component {
             placeholder='Type here'
             onChangeText={(q) => this.setState({ q: q })}
             value={this.state.q}
-            ariaLabel='Type here to seach for cafe'
+            ariaLabel='Type here to search for cafe'
           />
 
           <Text style={commonStyles.subheadingText}>Overall Rating</Text>

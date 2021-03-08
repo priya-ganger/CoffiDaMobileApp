@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, ToastAndroid, TextInput, Alert } from 'react-native'
+import { Text, View, TouchableOpacity, ToastAndroid, TextInput, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -52,7 +52,9 @@ class Login extends Component {
       }
 
       componentDidMount() {
+        this.props.navigation.addListener('focus', () => {
         getLanguage();
+      })
       }
 
       render () {
@@ -60,33 +62,33 @@ class Login extends Component {
           <View style={commonStyles.container}>
             <Text style={commonStyles.title}>{t("welcome_text")}</Text>
 
-            <Text style={commonStyles.subheadingText}>Enter your email address: </Text>
+            <Text style={commonStyles.subheadingText}>{t("email_address")} </Text>
             <TextInput
               style={commonStyles.input}
-              placeholder='Email address'
+              placeholder={t("email_address")}
               onChangeText={(email) => this.setState({ email })}
               value={this.state.email}
-              ariaLabel='Email address'
+              ariaLabel={t("email_address")}
             />
 
-            <Text style={commonStyles.subheadingText}>Enter your password: </Text>
+            <Text style={commonStyles.subheadingText}>{t("password")} </Text>
             <TextInput
               style={commonStyles.input}
-              placeholder='Password'
+              placeholder={t("password")}
               onChangeText={(password) => this.setState({ password })}
               value={this.state.password}
               secureTextEntry
-              ariaLabel='Password'
+              ariaLabel={t("password")}
             />
 
             <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.login()}>
-              <Text style={commonStyles.buttonText}>Login
+              <Text style={commonStyles.buttonText}>{t("login")}
               </Text>
               <Ionicons name='log-in' size={25} color='white' />
             </TouchableOpacity>
 
             <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
-              <Text style={commonStyles.buttonText}>Register
+              <Text style={commonStyles.buttonText}>{t("register")}
               </Text>
               <Ionicons name='person-add' size={25} color='white' />
             </TouchableOpacity>
@@ -95,71 +97,4 @@ class Login extends Component {
         )
       }
 }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         //backgroundColor: 'lightblue',
-//         justifyContent: 'center',
-//         alignItems: 'center'
-//       },
-
-//       welcome: {
-//         //flex: 2,
-//         textAlign: 'center',
-//         fontSize: 20,
-//         margin: 10,
-//        // backgroundColor: 'lightblue',
-//         fontWeight: '700'
-//       },
-//       input: {
-//        // flex: 1,
-//         margin: 10,
-//         height: 40,
-//         padding: 5,
-//         fontSize: 16,
-//         borderBottomWidth: 1,
-//         borderBottomColor: '#D6EADF',
-//         backgroundColor: '#eac4d5',
-//         borderRadius: 25
-//       },
-
-//       enterButton: {
-//         justifyContent: 'center',
-//         flexDirection: 'row',
-//         backgroundColor: '#809BCE',
-//         alignItems: 'center',
-//         marginLeft: 15,
-//         marginRight: 15,
-//         padding: 10,
-//         borderRadius: 20
-
-//       },
-
-//       enterButtonText: {
-//         fontSize: 20,
-//         color: '#B8E0D2',
-//         fontWeight: '700'
-//       },
-
-//       signUpButton: {
-//         justifyContent: 'center',
-//         flexDirection: 'row',
-//         backgroundColor: 'white',
-//         alignItems: 'center',
-//         marginLeft: 15,
-//         marginRight: 15,
-//         padding: 10,
-//         borderRadius: 20,
-//         margin: 10
-
-//       },
-
-//       signUpButtonText: {
-//         fontSize: 20,
-//         color: 'black',
-//         fontWeight: '700'
-//       }
-
-// });
 export default Login

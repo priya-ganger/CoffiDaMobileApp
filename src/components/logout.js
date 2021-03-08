@@ -3,6 +3,7 @@ import { Text, View, Alert, ToastAndroid, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { t, getLanguage } from '../locales'
 
 class LogOut extends Component {
   constructor (props) {
@@ -15,7 +16,8 @@ class LogOut extends Component {
 
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      this.checkUserIsLoggedIn()
+      this.checkUserIsLoggedIn();
+      getLanguage();
     })
   }
 
@@ -66,24 +68,21 @@ class LogOut extends Component {
     render () {
       return (
         <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>Are you sure you want to logout?</Text>
+          <Text style={commonStyles.title}>{t("logout")}</Text>
 
           <TouchableOpacity
             ariaRole='button' style={commonStyles.button} onPress={() => this.logUserOut()}
           >
-            <Text style={commonStyles.buttonText}>Yes </Text>
+            <Text style={commonStyles.buttonText}>{t("yes")}</Text>
             <Ionicons name='log-out' size={25} color='white' />
           </TouchableOpacity>
 
           <TouchableOpacity
             ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
           >
-            <Text style={commonStyles.buttonText}>No </Text>
+            <Text style={commonStyles.buttonText}>{t("no")} </Text>
             <Ionicons name='arrow-back' size={25} color='white' />
           </TouchableOpacity>
-
-          {/*  */}
-
         </View>
       )
     }

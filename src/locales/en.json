@@ -1,3 +1,87 @@
 {
-    "welcome_text": "Welcome to Coffida!"
+
+    "welcome_text": "Welcome to Coffida!",
+    "enter_email_address": "Enter your email address: ",
+    "enter_password": "Enter your password: ",
+    "login": "Login",
+    "register": "Register",
+    "password": "Password",
+
+    "enter_your_details": "Enter your details",
+    "enter_first_name": "What is your first name",
+    "enter_last_name": "What is your last name",
+    "your_email_address": "What is your email address",
+    "create_password": "Create your password",
+    "sign_up": "Sign Up",
+
+    "email_example": "For example: ordercharacters@characters.domain",
+    "password_char_hint": "A minimum of 8 characters",
+    "password_num_hint": "A number is required",
+    "password_case_hint": "An uppercase letter is required",
+
+    "logout": "Are you sure you want to logout?",
+    "yes": "Yes",
+    "no": "No",
+
+    "search": "Search",
+    "name_of_cafe": "Name: ",
+    "cafe_town": "Town: ",
+    "cafe_avg_overall_rating": "Average Overall Rating: ",
+    "cafe_price_rating": "Price Rating: ",
+    "cafe_quality_rating": "Quality Rating: ",
+    "cafe_cleanliness_rating": "Cleanliness Rating: ",
+    "view_reviews_button": "View Reviews",
+    "favourite": "Favourite",
+    "unfavourite": "Unfavourite",
+
+    "capture": "Capture",
+    "view_photo": "View Photo",
+    "delete_photo": "Delete Photo",
+
+    "current_details": "Your Current Details",
+    "first_name": "First Name",
+    "second_name": "Last Name",
+    "email_address": "Email Address",
+    "update_details": "Update your details here",
+    "first_name_placeholder": "Enter your first name.",
+    "last_name_placeholder": "Enter your last name.",
+    "update": "Update",
+
+    "name_of_cafe_placeholder": "Type here to search for cafe",
+    "review_terrible": "Terrible",
+    "review_bad": "Bad",
+    "review_avg": "Average",
+    "review_good": "Good",
+    "review_great": "Great",
+
+    "distance": "Distance",
+
+    "your_review_for": "Your review for: ",
+    "review_overall_rating": "Enter your overall rating (Required)",
+    "review_price_rating": "Enter your price rating (Required)",
+    "review_quality_rating": "Enter your quality rating (Required)",
+    "review_cleanliness_rating": "Enter your cleanliness rating (Required)",
+    "review": "Enter your review (Required)",
+    "review_add": "Add",
+    "my_reviews": "My Reviews",
+
+    "reviews_table": "Reviews",
+    "likes": "Likes",
+    "like": "Like",
+    "unlike": "Unlike",
+    "delete": "Delete",
+    "add_review": "Add Review",
+    "update_review_btn": "Update Review",
+
+    "update_your_review_for": "Update your review for: ",
+    "update_review_overall_rating": "Enter your overall rating (Optional)",
+    "update_review_price_rating": "Enter your price rating (Optional)",
+    "update_review_quality_rating": "Enter your quality rating (Optional)",
+    "update_review_cleanliness_rating": "Enter your cleanliness rating (Optional)",
+    "update_review": "Enter your review (Optional)",
+    "update_btn": "Update",
+
+    "your_reviews": "Your Reviews",
+    "your_liked_reviews": "Your liked reviews"
+
 }

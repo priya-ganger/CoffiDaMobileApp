@@ -10,9 +10,10 @@ I18n.translations = {
     fr,
     cy
 }
-
+I18n.fallbacks = true;
 I18n.defaultLocale = 'en';
 I18n.locale = 'en';
+
 
 export function getLanguage() {
     try{

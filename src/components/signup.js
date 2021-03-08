@@ -3,6 +3,7 @@ import { Text, View, ToastAndroid, TextInput, TouchableOpacity } from 'react-nat
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Input from './input'
+import { t, getLanguage } from '../locales'
 
 class SignUp extends Component {
   constructor (props) {
@@ -16,6 +17,12 @@ class SignUp extends Component {
       isValid: null,
       isValidEmail: null
     }
+  }
+
+  componentDidMount() {
+    this.props.navigation.addListener('focus', () => {
+    getLanguage();
+  })
   }
 
     signUp = () => {
@@ -55,27 +62,27 @@ class SignUp extends Component {
       const { isValidEmail } = this.state
       return (
         <View style={commonStyles.container}>
-          <Text style={commonStyles.title}> Enter your details to sign up</Text>
+          <Text style={commonStyles.title}>{t("enter_your_details")}</Text>
 
-          <Text style={commonStyles.subheadingText}>What is your first name?</Text>
+          <Text style={commonStyles.subheadingText}>{t("first_name")}</Text>
           <TextInput
             style={commonStyles.input}
-            placeholder='Enter your first name.'
+            placeholder={t("first_name")}
             onChangeText={(first_name) => this.setState({ first_name })}
             value={this.state.first_name}
-            ariaLabel='Enter your first name'
+            ariaLabel={t("first_name")}
           />
 
-          <Text style={commonStyles.subheadingText}>What is your last name?</Text>
+          <Text style={commonStyles.subheadingText}>{t("second_name")}</Text>
           <TextInput
             style={commonStyles.input}
-            placeholder='Enter your last name.'
+            placeholder={t("second_name")}
             onChangeText={(last_name) => this.setState({ last_name })}
             value={this.state.last_name}
-            ariaLabel='Enter your last name'
+            ariaLabel={t("second_name")}
           />
 
-          <Text style={commonStyles.subheadingText}>What is your email address?</Text>
+          <Text style={commonStyles.subheadingText}>{t("email_address")}</Text>
           {/* <TextInput
           style={commonStyles.input}
             placeholder='Enter your email address.'
@@ -85,21 +92,21 @@ class SignUp extends Component {
 
           <Input
             style={commonStyles.input}
-            placeholder='Enter your email address.'
+            placeholder={t("email_address")}
             pattern={[
               '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' // must be in this ordercharacters@characters.domain
             ]}
             onChangeText={(email) => this.setState({ email })}
             value={this.state.email}
-            ariaLabel='Enter your email address'
+            ariaLabel={t("email_address")}
             onValidation={isValidEmail => this.setState({ isValidEmail })}
           />
 
           <Text style={{ color: isValidEmail && isValidEmail[0] ? 'green' : 'tomato' }}>
-            For example: ordercharacters@characters.domain
+          {t("email_example")}
           </Text>
 
-          <Text style={commonStyles.subheadingText}>Create your password</Text>
+          <Text style={commonStyles.subheadingText}>{t("password")}</Text>
           {/* <TextInput
           style={commonStyles.input}
             placeholder='Create a password.'
@@ -109,7 +116,7 @@ class SignUp extends Component {
           /> */}
           <Input
             style={commonStyles.input}
-            placeholder='Create a password.'
+            placeholder={t("password")}
             pattern={[
               '^.{8,}$', // min 8 chars
               '(?=.*\\d)', // number required
@@ -117,23 +124,23 @@ class SignUp extends Component {
             ]}
             onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
-            ariaLabel='Enter your password'
+            ariaLabel={t("password")}
             onValidation={isValid => this.setState({ isValid })}
             secureTextEntry
           />
 
           <Text style={{ color: isValid && isValid[0] ? 'green' : 'tomato' }}>
-            A minimum of 8 characters
+          {t("password_char_hint")}
           </Text>
           <Text style={{ color: isValid && isValid[1] ? 'green' : 'tomato' }}>
-            A number is required
+          {t("password_num_hint")}
           </Text>
           <Text style={{ color: isValid && isValid[2] ? 'green' : 'tomato' }}>
-            An uppercase letter is required
+          {t("password_case_hint")}
           </Text>
 
           <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.signUp()}>
-            <Text style={commonStyles.buttonText}>Sign Up </Text>
+            <Text style={commonStyles.buttonText}>{t("sign_up")} </Text>
             <Ionicons name='add' size={25} color='white' />
           </TouchableOpacity>
 
