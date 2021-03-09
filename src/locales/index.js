@@ -3,12 +3,10 @@ import * as Localization from 'expo-localization';
 
 import en from './en.json';
 import fr from './fr.json';
-import cy from './cy.json';
 
 I18n.translations = {
     en,
     fr,
-    cy
 }
 I18n.fallbacks = true;
 I18n.defaultLocale = 'en';

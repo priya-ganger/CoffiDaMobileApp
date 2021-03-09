@@ -5,6 +5,7 @@ import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { ScrollView } from 'react-native-gesture-handler'
 import { t, getLanguage } from '../locales'
+import { getUserIdAndSessionToken } from '../utils/asyncStorage'
 
 class Profile extends Component {
   constructor (props) {

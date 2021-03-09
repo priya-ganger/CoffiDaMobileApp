@@ -1,19 +1,55 @@
 import React, { Component } from 'react'
-import { Text, View, Image, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
+import { Text, View, Image, PermissionsAndroid, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../locales'
+import Geolocation from 'react-native-geolocation-service'
+import { getDistance } from 'geolib'
+
+async function requestLocationPermission () {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: ' Location Permission',
+        message: 'This app requires access to your location',
+        buttonNeutral: 'Ask me later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK'
+      }
+    )
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can access the location')
+      return true
+    } else {
+      console.log('Location permission denied')
+      return false
+    }
+  } catch (err) {
+    console.warn(err)
+  }
+}
+
 
 class Search extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
+      location: {
+        longitude: '',
+        latitude: ''
+      },
+      locationPermission: false,
+      location_id: '',
+      longitude: '',
+      latitude: '',
+
       isLoading: true,
-      locationData: null,
+      locationData: [],
       q: '',
       overall_rating: 0,
       price_rating: 0,
@@ -23,10 +59,16 @@ class Search extends Component {
   }
 
   componentDidMount () {
-    this.props.navigation.addListener('focus', () => {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
     this.getLocationData('http://10.0.2.2:3333/api/1.0.0/find')
     getLanguage()
+    this.setState({ isLoading: true })
+    this.findCoordinates()
       })
+  }
+
+  UNSAFE_componentWillMount () {
+    this._unsubscribe
   }
 
   getLocationData = async (url) => {
@@ -106,6 +148,36 @@ class Search extends Component {
     // to avoid 'name' being updated
   }
 
+  findCoordinates = () => {
+    if (!this.state.locationPermission) {
+      this.state.locationPermission = requestLocationPermission()
+    }
+    Geolocation.getCurrentPosition(
+      (position) => {
+        console.log('getCurrentPosition()')
+
+        this.setState({
+          location: {
+            longitude: position.coords.longitude,
+            latitude: position.coords.latitude
+          }
+        })
+
+        console.log('Set the location')
+        console.log('location.longitude: ' + this.state.location.longitude + ' location.latitude:' + this.state.location.latitude)
+        this.setState({ isLoading: false })
+      },
+      (error) => {
+        Alert.alert(error.message)
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000
+      }
+    )
+  };
+
   render () {
     if (this.state.isLoading) {
       return (
@@ -132,7 +204,7 @@ class Search extends Component {
             reviewSize={0}
             selectedColor='#f1c40f'
             unSelectedColor='black'
-            reviews={[t("review_terrible"), t("review_bad"), t("review_avg"), t("review_good"), t("review_great")]}
+            reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
             onFinishRating={(rating) => this.ratingCompleted(rating, 'overall_rating')}
           />
           {/*
@@ -175,18 +247,22 @@ class Search extends Component {
 
           <FlatList
             data={this.state.locationData}
-            renderItem={({ item }) => (
-
-              <View>
-                <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
-                <Image
+            renderItem={({ item }) => {
+              const dis = getDistance(
+                { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
+                { latitude: item.latitude, longitude: item.longitude }
+              )
+                return (
+                  <View>
+                 <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
+                 <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
+                 <Image
                   source={{ uri: item.photo_path }}
                   style={commonStyles.photo}
                   onError={this.errorLoadingImg}
                 />
                 <Text style={commonStyles.subheadingText}> {t("cafe_avg_overall_rating")} {item.avg_overall_rating}</Text>
-                <Stars
+                 <Stars
                   display={item.avg_overall_rating}
                   half
                   spacing={4}
@@ -197,43 +273,15 @@ class Search extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("cafe_price_rating")} {item.avg_price_rating}</Text>
-                <Stars
-                  display={item.avg_price_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
-
-                <Text style={commonStyles.subheadingText}> {t("cafe_quality_rating")} {item.avg_quality_rating}</Text>
-                <Stars
-                  display={item.avg_quality_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
-
-                <Text style={commonStyles.subheadingText}> {t("cafe_cleanliness_rating")} {item.avg_clenliness_rating}</Text>
-                <Stars
-                  display={item.avg_clenliness_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
+                {/* <Text> latitude:  {item.latitude}</Text>
+                <Text> longitude: {item.longitude} </Text> */}
+                <Text style={commonStyles.subheadingText}> Distance: {dis} M OR {dis / 1000} KM </Text>
+                <Text> </Text>
               </View>
-            )}
+                )
+                }}
+             
+            
             keyExtractor={(item, index) => item.location_id.toString()}
           />
         </View>
