@@ -118,7 +118,18 @@ class Settings extends Component {
       })
   }
 
+  // mapMarkers = () => {
+  //   return this.state.locationData.map((location) => <Marker
+  //     key={location.location_id}
+  //     coordinate={{ latitude: Number(this.state.latitude), longitude: Number(this.state.longitude) }}
+  //     title={location.location_name}
+  //     description={location.location_name}
+  //   >
+  //   </Marker >)
+  // }
+
   render () {
+  
     if (this.state.isLoading) {
       return (
         <View>
@@ -130,9 +141,13 @@ class Settings extends Component {
       console.log('location 2: ', this.state.location.longitude)
 
       return (
+        
         <FlatList
           data={this.state.locationData}
           renderItem={({ item }) => {
+
+            
+
             const dis = getDistance(
               { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
               { latitude: item.latitude, longitude: item.longitude }
@@ -144,7 +159,44 @@ class Settings extends Component {
                 <Text> latitude:  {item.latitude}</Text>
                 <Text> longitude: {item.longitude} </Text>
                 <Text>Distance: {dis} M OR {dis / 1000} KM </Text>
+
+                
+
+                <MapView
+          provider={PROVIDER_GOOGLE}
+          style={ {flex: 1, 
+          width: 500,
+          height: 500}}
+          region={{
+          latitude: Number(this.state.location.latitude),
+          longitude: Number(this.state.location.longitude),
+          latitudeDelta: 0.009,
+          longitudeDelta: 0.009,
+          
+        }}
+        >
+
+      {this.state.locationData.map(location => <Marker
+      key={location.location_id}
+       coordinate={{ latitude: Number(location.latitude), longitude: Number(location.longitude) }}
+      title={location.location_name}
+       description={"Distance from you: "+dis.toString() + "M"}
+     >
+     </Marker >)
+   }
+          {/* {this.mapMarkers()} */}
+          
+           <Marker
+          coordinate={this.state.location}
+          title="My location"
+          description="Hi, here I am"
+          /> 
+
+        </MapView>
               </View>
+              
+
+
             )
           }}
           keyExtractor={(item, index) => item.location_id.toString()}
