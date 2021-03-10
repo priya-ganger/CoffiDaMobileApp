@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
+import { Text, View, ToastAndroid, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Input from './input'
@@ -93,7 +93,7 @@ class SignUp extends Component {
             style={commonStyles.input}
             placeholder={t('email_address')}
             pattern={[
-              '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$' // must be in this ordercharacters@characters.domain
+              '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$' // must be in this ordercharacters@characters.domain
             ]}
             onChangeText={(email) => this.setState({ email })}
             value={this.state.email}

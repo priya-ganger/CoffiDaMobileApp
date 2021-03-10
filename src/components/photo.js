@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, View, StyleSheet, Image } from 'react-native'
+import { Alert, View, Image } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 

@@ -108,7 +108,7 @@ updateReview = async () => {
         } else if (response.status === 500) {
           Alert.alert('Server Error')
         } else {
-          throw 'Something went wrong'
+          Alert.alert('Something went wrong')
         }
       })
   } catch (error) {
@@ -118,7 +118,6 @@ updateReview = async () => {
 }
 
 render () {
-  const navigation = this.props.navigation
   if (this.state.isLoading) {
     return (
       <View>

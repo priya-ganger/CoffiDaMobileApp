@@ -279,7 +279,6 @@ class Search extends Component {
                 </View>
               )
             }}
-
             keyExtractor={(item, index) => item.location_id.toString()}
           />
         </View>

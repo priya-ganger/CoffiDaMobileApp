@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { TextInput, FlatList, SafeAreaView, View, TouchableOpacity, Text, Alert, Button, PermissionsAndroid, ToastAndroid } from 'react-native'
+import { FlatList, View, Text, Alert, PermissionsAndroid, ToastAndroid } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 import Geolocation from 'react-native-geolocation-service'
 import { getDistance } from 'geolib'
-import { ScrollView } from 'react-native-gesture-handler'
 
 async function requestLocationPermission () {
   try {
@@ -145,7 +144,6 @@ class Settings extends Component {
       return (
 
         <FlatList
-
           data={this.state.locationData}
           renderItem={({ item }) => {
             const distance = getDistance(

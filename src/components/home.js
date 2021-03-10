@@ -13,7 +13,7 @@ class Home extends Component {
     this.state = {
       isLoading: true,
       locationData: [],
-      location_id: ''
+      locationId: ''
     }
   }
 
@@ -60,7 +60,7 @@ class Home extends Component {
         } else if (response.status === 500) {
           Alert.alert('Server Error')
         } else {
-          throw 'something went wrong'
+          Alert.alert( 'something went wrong')
         }
       })
       .then((responseJson) => {
@@ -76,9 +76,9 @@ class Home extends Component {
       })
   }
 
-  favouriteLocation = async (location_id) => {
+  favouriteLocation = async (locationId) => {
     const token = await AsyncStorage.getItem('session_token')
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/favourite', {
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/favourite', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -93,12 +93,12 @@ class Home extends Component {
         } else if (response.status === 401) {
           Alert.alert('Unauthorised')
         } else if (response.status === 404) {
-          Alert.alert('Id: ' + location_id + ' Token: ' + token)
+          Alert.alert('Id: ' + locationId + ' Token: ' + token)
           Alert.alert('Not Found')
         } else if (response.status === 500) {
           Alert.alert('Server Error')
         } else {
-          Alert.alert('Id: ' + location_id + ' Token: ' + token)
+          Alert.alert('Id: ' + locationId + ' Token: ' + token)
           Alert.alert('Something went wrong')
         }
       })
@@ -108,9 +108,9 @@ class Home extends Component {
       })
   }
 
-  unfavouriteLocation = async (location_id) => {
+  unfavouriteLocation = async (locationId) => {
     const token = await AsyncStorage.getItem('session_token')
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/favourite', {
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/favourite', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -125,12 +125,12 @@ class Home extends Component {
         } else if (response.status === 403) {
           Alert.alert('Forbidden')
         } else if (response.status === 404) {
-          Alert.alert('Id: ' + location_id + ' Token: ' + token)
+          Alert.alert('Id: ' + locationId + ' Token: ' + token)
           Alert.alert('Not Found')
         } else if (response.status === 500) {
           Alert.alert('Server Error')
         } else {
-          Alert.alert('Id: ' + location_id + ' Token: ' + token)
+          Alert.alert('Id: ' + locationId + ' Token: ' + token)
           Alert.alert('Something went wrong')
         }
       })

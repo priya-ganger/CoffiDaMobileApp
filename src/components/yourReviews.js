@@ -51,7 +51,7 @@ getUserData = async () => {
       } else if (response.status === 500) {
         Alert.alert('Server Error')
       } else {
-        throw 'something went wrong'
+        Alert.alert('something went wrong')
       }
     })
     .then((responseJson) => {
