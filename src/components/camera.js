@@ -58,13 +58,13 @@ takeAPhoto = async () => {
         if (response.status === 200) {
           Alert.alert('Picture added')
         } else if (response.status === 400) {
-          throw 'Bad Request'
+          Alert.alert('Bad Request')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 404) {
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         }
       })
       .catch((error) => {
@@ -93,13 +93,13 @@ deleteAPhoto = async () => {
         if (response.status === 200) {
           Alert.alert('Picture deleted')
         } else if (response.status === 403) {
-          throw 'Forbidden'
+          Alert.alert('Forbidden')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 404) {
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         }
       })
       .catch((error) => {
@@ -127,9 +127,9 @@ getAPhoto = async () => {
         if (response.status === 200) {
           Alert.alert('Success')
         } else if (response.status === 404) {
-          throw 'Not found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         }
       })
       .catch((error) => {
@@ -155,17 +155,17 @@ render () {
       />
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.takeAPhoto()}>
-        <Text style={commonStyles.buttonText}>{t("capture")} </Text>
+        <Text style={commonStyles.buttonText}>{t('capture')} </Text>
         <Ionicons name='camera' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
-        <Text style={commonStyles.buttonText}>{t("view_photo")} </Text>
+        <Text style={commonStyles.buttonText}>{t('view_photo')} </Text>
         <Ionicons name='image' size={25} color='white' />
       </TouchableOpacity>
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => { this.deleteAPhoto() }}>
-        <Text style={commonStyles.buttonText}>{t("delete_photo")} </Text>
+        <Text style={commonStyles.buttonText}>{t('delete_photo')} </Text>
         <Ionicons name='trash' size={25} color='white' />
       </TouchableOpacity>
 

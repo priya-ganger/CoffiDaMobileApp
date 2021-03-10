@@ -3,8 +3,8 @@ import { getSessionToken } from '../utils/asyncStorage'
 const SERVER_URL = 'http://10.0.2.2:3333/api/1.0.0/'
 
 const getEndpoint = async (route, contentType = 'application/json') => {
-    console.log('Trying to GET data')
-    return await fetch(SERVER_URL + route, {
+  console.log('Trying to GET data')
+  return await fetch(SERVER_URL + route, {
     method: 'get',
     headers: {
       'Content-Type': contentType,
@@ -14,5 +14,5 @@ const getEndpoint = async (route, contentType = 'application/json') => {
 }
 
 module.exports = {
-    getEndpoint: getEndpoint,
+  getEndpoint: getEndpoint
 }

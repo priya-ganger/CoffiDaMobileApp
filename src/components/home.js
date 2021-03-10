@@ -20,9 +20,9 @@ class Home extends Component {
   componentDidMount () {
     this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
-      this.checkUserIsLoggedIn();
-      getLanguage();
-      this.getLocationData();
+      this.checkUserIsLoggedIn()
+      getLanguage()
+      this.getLocationData()
     })
   }
 
@@ -52,7 +52,13 @@ class Home extends Component {
           return response.json()
         } else if (response.status === 401) {
           this.props.navigation.navigate('Login')
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
+        } else if (response.status === 400) {
+          Alert.alert('Bad Request')
+        } else if (response.status === 401) {
+          Alert.alert('Unauthorised')
+        } else if (response.status === 500) {
+          Alert.alert('Server Error')
         } else {
           throw 'something went wrong'
         }
@@ -83,17 +89,17 @@ class Home extends Component {
         if (response.status === 200) {
           Alert.alert('Added to favourites')
         } else if (response.status === 400) {
-          throw 'Bad request'
+          Alert.alert('Bad request')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 404) {
           Alert.alert('Id: ' + location_id + ' Token: ' + token)
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         } else {
           Alert.alert('Id: ' + location_id + ' Token: ' + token)
-          throw 'Something went wrong'
+          Alert.alert('Something went wrong')
         }
       })
       .catch((error) => {
@@ -115,17 +121,17 @@ class Home extends Component {
         if (response.status === 200) {
           Alert.alert('Deleted from favourites')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 403) {
-          throw 'Forbidden'
+          Alert.alert('Forbidden')
         } else if (response.status === 404) {
           Alert.alert('Id: ' + location_id + ' Token: ' + token)
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         } else {
           Alert.alert('Id: ' + location_id + ' Token: ' + token)
-          throw 'Something went wrong'
+          Alert.alert('Something went wrong')
         }
       })
       .then((responseJson) => {
@@ -149,7 +155,7 @@ class Home extends Component {
       return (
         <View style={commonStyles.container}>
           <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => navigation.navigate('Search')}>
-            <Text style={commonStyles.buttonText}>{t("search")}</Text>
+            <Text style={commonStyles.buttonText}>{t('search')}</Text>
             <Ionicons name='search' size={25} color='#042' />
           </TouchableOpacity>
           <FlatList
@@ -157,14 +163,14 @@ class Home extends Component {
             renderItem={({ item }) => (
 
               <View>
-                <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
+                <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
+                <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
                 <Image
                   source={{ uri: item.photo_path }}
                   style={commonStyles.photo}
                   onError={this.errorLoadingImg}
                 />
-                <Text style={commonStyles.subheadingText}> {t("cafe_avg_overall_rating")} {item.avg_overall_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text>
                 <Stars
                   display={item.avg_overall_rating}
                   half
@@ -176,7 +182,7 @@ class Home extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("cafe_price_rating")} {item.avg_price_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('cafe_price_rating')} {item.avg_price_rating}</Text>
                 <Stars
                   display={item.avg_price_rating}
                   half
@@ -188,7 +194,7 @@ class Home extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("cafe_quality_rating")} {item.avg_quality_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('cafe_quality_rating')} {item.avg_quality_rating}</Text>
                 <Stars
                   display={item.avg_quality_rating}
                   half
@@ -200,7 +206,7 @@ class Home extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("cafe_cleanliness_rating")} {item.avg_clenliness_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('cafe_cleanliness_rating')} {item.avg_clenliness_rating}</Text>
                 <Stars
                   display={item.avg_clenliness_rating}
                   half
@@ -215,20 +221,20 @@ class Home extends Component {
                 <TouchableOpacity
                   ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}
                 >
-                  <Text style={commonStyles.buttonText}>{t("view_reviews_button")}</Text>
+                  <Text style={commonStyles.buttonText}>{t('view_reviews_button')}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   ariaRole='button' style={commonStyles.button} onPress={() => this.favouriteLocation(item.location_id)}
                 >
-                  <Text style={commonStyles.buttonText}>{t("favourite")} </Text>
+                  <Text style={commonStyles.buttonText}>{t('favourite')} </Text>
                   <Ionicons name='heart' size={25} color='tomato' />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   ariaRole='button' style={commonStyles.button} onPress={() => this.unfavouriteLocation(item.location_id)}
                 >
-                  <Text style={commonStyles.buttonText}>{t("unfavourite")} </Text>
+                  <Text style={commonStyles.buttonText}>{t('unfavourite')} </Text>
                   <Ionicons name='heart-outline' size={25} color='tomato' />
                 </TouchableOpacity>
               </View>

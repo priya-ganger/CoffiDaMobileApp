@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Text, View, ActivityIndicator, TouchableOpacity, ToastAndroid, Alert, FlatList, Image, SafeAreaView } from 'react-native'
+import { Text, View, ActivityIndicator, ToastAndroid, Alert, FlatList, Image, SafeAreaView } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../locales'
-
 
 class Favourites extends Component {
   constructor (props) {
@@ -41,11 +39,15 @@ class Favourites extends Component {
             if (response.status === 200) {
               return response.json()
             } else if (response.status === 401) {
-              throw 'Unauthorised'
+              Alert.alert('Unauthorised')
+            } else if (response.status === 404) {
+              Alert.alert('Not Found')
+            } else if (response.status === 500) {
+              Alert.alert('Server Error')
             } else {
               Alert.alert('Id: ' + userId + ' Token: ' + token)
               console.log(response.json())
-              throw 'something went wrong'
+              Alert.alert('something went wrong')
             }
           })
           .then((responseJson) => {
@@ -75,8 +77,8 @@ class Favourites extends Component {
                 data={this.state.userData.favourite_locations}
                 renderItem={({ item }) => (
                   <View>
-                    <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
-                    <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
+                    <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
+                    <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
                     <Image
                       source={{ uri: item.photo_path }}
                       style={commonStyles.photo}

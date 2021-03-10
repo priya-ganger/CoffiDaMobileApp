@@ -14,7 +14,7 @@ import AddReview from '../components/addReview'
 import UpdateReview from '../components/updateReview'
 import Photo from '../components/photo'
 import YourReviews from '../components/yourReviews'
-import { t, getLanguage } from '../locales'
+import { t } from '../locales'
 
 const Stack = createStackNavigator()
 
@@ -196,8 +196,8 @@ const SignUpStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
-        name={t("sign_up")} component={SignUp} options={{
-          title: t("sign_up")
+        name={t('sign_up')} component={SignUp} options={{
+          title: t('sign_up')
         }}
       />
     </Stack.Navigator>

@@ -30,11 +30,11 @@ class Login extends Component {
             if (response.status === 200) {
               return response.json()
             } else if (response.status === 400) {
-              throw 'Incorrect email address or password'
+              Alert.alert('Incorrect email address or password')
             } else if (response.status === 500) {
-              throw 'Server Error. Please try again later.'
+              Alert.alert('Server Error. Please try again later.')
             } else {
-              throw 'Something went wrong'
+              Alert.alert('Something went wrong')
             }
           })
           .then(async (responseJson) => {
@@ -51,44 +51,44 @@ class Login extends Component {
           })
       }
 
-      componentDidMount() {
+      componentDidMount () {
         this.props.navigation.addListener('focus', () => {
-        getLanguage()
-      })
+          getLanguage()
+        })
       }
 
       render () {
         return (
           <View style={commonStyles.container}>
-            <Text style={commonStyles.title}>{t("welcome_text")}</Text>
+            <Text style={commonStyles.title}>{t('welcome_text')}</Text>
 
-            <Text style={commonStyles.subheadingText}>{t("email_address")} </Text>
+            <Text style={commonStyles.subheadingText}>{t('email_address')} </Text>
             <TextInput
               style={commonStyles.input}
-              placeholder={t("email_address")}
+              placeholder={t('email_address')}
               onChangeText={(email) => this.setState({ email })}
               value={this.state.email}
-              ariaLabel={t("email_address")}
+              ariaLabel={t('email_address')}
             />
 
-            <Text style={commonStyles.subheadingText}>{t("password")} </Text>
+            <Text style={commonStyles.subheadingText}>{t('password')} </Text>
             <TextInput
               style={commonStyles.input}
-              placeholder={t("password")}
+              placeholder={t('password')}
               onChangeText={(password) => this.setState({ password })}
               value={this.state.password}
               secureTextEntry
-              ariaLabel={t("password")}
+              ariaLabel={t('password')}
             />
 
             <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.login()}>
-              <Text style={commonStyles.buttonText}>{t("login")}
+              <Text style={commonStyles.buttonText}>{t('login')}
               </Text>
               <Ionicons name='log-in' size={25} color='white' />
             </TouchableOpacity>
 
             <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
-              <Text style={commonStyles.buttonText}>{t("register")}
+              <Text style={commonStyles.buttonText}>{t('register')}
               </Text>
               <Ionicons name='person-add' size={25} color='white' />
             </TouchableOpacity>

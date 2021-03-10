@@ -16,8 +16,8 @@ class LogOut extends Component {
 
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      this.checkUserIsLoggedIn();
-      getLanguage();
+      this.checkUserIsLoggedIn()
+      getLanguage()
     })
   }
 
@@ -56,7 +56,7 @@ class LogOut extends Component {
           } else {
             Alert.alert('Token:' + token)
             console.log(response.json())
-            throw 'something went wrong'
+            Alert.alert('something went wrong')
           }
         })
         .catch((error) => {
@@ -68,19 +68,19 @@ class LogOut extends Component {
     render () {
       return (
         <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>{t("logout")}</Text>
+          <Text style={commonStyles.title}>{t('logout')}</Text>
 
           <TouchableOpacity
             ariaRole='button' style={commonStyles.button} onPress={() => this.logUserOut()}
           >
-            <Text style={commonStyles.buttonText}>{t("yes")}</Text>
+            <Text style={commonStyles.buttonText}>{t('yes')}</Text>
             <Ionicons name='log-out' size={25} color='white' />
           </TouchableOpacity>
 
           <TouchableOpacity
             ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
           >
-            <Text style={commonStyles.buttonText}>{t("no")} </Text>
+            <Text style={commonStyles.buttonText}>{t('no')} </Text>
             <Ionicons name='arrow-back' size={25} color='white' />
           </TouchableOpacity>
         </View>

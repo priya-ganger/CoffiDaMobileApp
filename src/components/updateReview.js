@@ -81,40 +81,40 @@ updateReview = async () => {
   }
 
   console.log(sendReviewData)
-
-  const value = await AsyncStorage.getItem('session_token')
-  return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
-    method: 'patch',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Authorization': value
-    },
-    body: JSON.stringify(sendReviewData)
-  })
-
-    .then((response) => {
-      if (response.status === 200) {
-        Alert.alert('Review info updated' + 'locationID: ' + this.state.location_id + 'reviewID: ' + this.state.review_id)
-        return response.JSON
-      } else if (response.status === 400) {
-        Alert.alert('Testing' + 'locationID: ' + this.state.location_id + 'reviewID: ' + this.state.review_id + 'token' + value)
-        throw 'Bad Request'
-      } else if (response.status === 401) {
-        throw 'Unauthorised'
-      } else if (response.status === 403) {
-        throw 'Forbidden'
-      } else if (response.status === 404) {
-        throw 'Not Found'
-      } else if (response.status === 500) {
-        throw 'Server Error'
-      } else {
-        throw 'Something went wrong'
-      }
+  try {
+    const value = await AsyncStorage.getItem('session_token')
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
+      method: 'patch',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Authorization': value
+      },
+      body: JSON.stringify(sendReviewData)
     })
-    .catch((error) => {
-      console.log(error)
-      ToastAndroid.show(error, ToastAndroid.SHORT)
-    })
+
+      .then((response) => {
+        if (response.status === 200) {
+          console.log('Review info updated' + 'locationID: ' + this.state.location_id + 'reviewID: ' + this.state.review_id)
+          return response.JSON
+        } else if (response.status === 400) {
+          console.log('Testing' + 'locationID: ' + this.state.location_id + 'reviewID: ' + this.state.review_id + 'token' + value)
+          Alert.alert('Bad Request')
+        } else if (response.status === 401) {
+          Alert.alert('Unauthorised')
+        } else if (response.status === 403) {
+          Alert.alert('Forbidden')
+        } else if (response.status === 404) {
+          Alert.alert('Not Found')
+        } else if (response.status === 500) {
+          Alert.alert('Server Error')
+        } else {
+          throw 'Something went wrong'
+        }
+      })
+  } catch (error) {
+    console.log(error)
+    ToastAndroid.show(error, ToastAndroid.SHORT)
+  }
 }
 
 render () {
@@ -129,53 +129,53 @@ render () {
     return (
       <View style={commonStyles.container}>
 
-        <Text style={commonStyles.title}>{t("update_your_review_for")} {this.state.locationName}</Text>
+        <Text style={commonStyles.title}>{t('update_your_review_for')} {this.state.locationName}</Text>
 
         <TextInput
           style={commonStyles.input}
-          placeholder={t("update_review_overall_rating")}
+          placeholder={t('update_review_overall_rating')}
           onChangeText={(overall_rating) => this.setState({ overall_rating })}
           value={this.state.overall_rating}
-          ariaLabel={t("update_review_overall_rating")}
+          ariaLabel={t('update_review_overall_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder={t("update_review_price_rating")}
+          placeholder={t('update_review_price_rating')}
           onChangeText={(price_rating) => this.setState({ price_rating })}
           value={this.state.price_rating}
-          ariaLabel={t("update_review_price_rating")}
+          ariaLabel={t('update_review_price_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder={t("update_review_quality_rating")}
+          placeholder={t('update_review_quality_rating')}
           onChangeText={(quality_rating) => this.setState({ quality_rating })}
           value={this.state.quality_rating}
-          ariaLabel={t("update_review_quality_rating")}
+          ariaLabel={t('update_review_quality_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder={t("update_review_cleanliness_rating")}
+          placeholder={t('update_review_cleanliness_rating')}
           onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
           value={this.state.clenliness_rating}
-          ariaLabel={t("update_review_cleanliness_rating")}
+          ariaLabel={t('update_review_cleanliness_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
-          placeholder={t("update_review")}
+          placeholder={t('update_review')}
           onChangeText={(review_body) => this.setState({ review_body })}
           value={this.state.review_body}
-          ariaLabel={t("update_review")}
+          ariaLabel={t('update_review')}
         />
 
         <TouchableOpacity
           ariaRole='button' style={commonStyles.button}
           onPress={() => this.updateReview()}
         >
-          <Text style={commonStyles.buttonText}> {t("update_btn")} </Text>
+          <Text style={commonStyles.buttonText}> {t('update_btn')} </Text>
           <Ionicons name='create' size={25} color='white' />
         </TouchableOpacity>
 

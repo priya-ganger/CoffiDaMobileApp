@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Image, PermissionsAndroid, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
+import { Text, Alert, View, Image, PermissionsAndroid, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
@@ -33,7 +33,6 @@ async function requestLocationPermission () {
   }
 }
 
-
 class Search extends Component {
   constructor (props) {
     super(props)
@@ -60,11 +59,11 @@ class Search extends Component {
 
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-    this.getLocationData('http://10.0.2.2:3333/api/1.0.0/find')
-    getLanguage()
-    this.setState({ isLoading: true })
-    this.findCoordinates()
-      })
+      this.getLocationData('http://10.0.2.2:3333/api/1.0.0/find')
+      getLanguage()
+      this.setState({ isLoading: true })
+      this.findCoordinates()
+    })
   }
 
   UNSAFE_componentWillMount () {
@@ -83,13 +82,13 @@ class Search extends Component {
         if (response.status === 200) {
           return response.json()
         } else if (response.status === 400) {
-          throw 'Bad Request'
+          Alert.alert('Bad Request')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         } else {
-          throw 'something went wrong'
+          Alert.alert('something went wrong')
         }
       })
       .then((responseJson) => {
@@ -188,16 +187,16 @@ class Search extends Component {
     } else {
       return (
         <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>{t("name_of_cafe")}</Text>
+          <Text style={commonStyles.title}>{t('name_of_cafe')}</Text>
           <TextInput
             style={commonStyles.input}
-            placeholder={t("type_here")}
+            placeholder={t('type_here')}
             onChangeText={(q) => this.setState({ q: q })}
             value={this.state.q}
-            ariaLabel={t("type_here")}
+            ariaLabel={t('type_here')}
           />
 
-          <Text style={commonStyles.subheadingText}>{t("cafe_avg_overall_rating")}</Text>
+          <Text style={commonStyles.subheadingText}>{t('cafe_avg_overall_rating')}</Text>
           <AirbnbRating
             size={15}
             defaultRating={0}
@@ -239,9 +238,9 @@ class Search extends Component {
              />  */}
 
           <TouchableOpacity
-           ariaRole='button' style={commonStyles.button} onPress={() => this.search()}
+            ariaRole='button' style={commonStyles.button} onPress={() => this.search()}
           >
-            <Text style={commonStyles.buttonText}>{t("search")} </Text>
+            <Text style={commonStyles.buttonText}>{t('search')} </Text>
             <Ionicons name='search' size={25} color='white' />
           </TouchableOpacity>
 
@@ -252,36 +251,35 @@ class Search extends Component {
                 { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
                 { latitude: item.latitude, longitude: item.longitude }
               )
-                return (
-                  <View>
-                 <Text style={commonStyles.subheadingText}> {t("name_of_cafe")}  {item.location_name}</Text>
-                 <Text style={commonStyles.subheadingText}> {t("cafe_town")} {item.location_town}</Text>
-                 <Image
-                  source={{ uri: item.photo_path }}
-                  style={commonStyles.photo}
-                  onError={this.errorLoadingImg}
-                />
-                <Text style={commonStyles.subheadingText}> {t("cafe_avg_overall_rating")} {item.avg_overall_rating}</Text>
-                 <Stars
-                  display={item.avg_overall_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
+              return (
+                <View>
+                  <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
+                  <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
+                  <Image
+                    source={{ uri: item.photo_path }}
+                    style={commonStyles.photo}
+                    onError={this.errorLoadingImg}
+                  />
+                  <Text style={commonStyles.subheadingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text>
+                  <Stars
+                    display={item.avg_overall_rating}
+                    half
+                    spacing={4}
+                    starSize={100}
+                    count={5}
+                    fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                    emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                    halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+                  />
 
-                {/* <Text> latitude:  {item.latitude}</Text>
+                  {/* <Text> latitude:  {item.latitude}</Text>
                 <Text> longitude: {item.longitude} </Text> */}
-                <Text style={commonStyles.subheadingText}> Distance: {dis} M OR {dis / 1000} KM </Text>
-                <Text> </Text>
-              </View>
-                )
-                }}
-             
-            
+                  <Text style={commonStyles.subheadingText}> Distance: {dis} M OR {dis / 1000} KM </Text>
+                  <Text> </Text>
+                </View>
+              )
+            }}
+
             keyExtractor={(item, index) => item.location_id.toString()}
           />
         </View>

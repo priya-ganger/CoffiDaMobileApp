@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import { View, SafeAreaView, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, Alert, TextInput } from 'react-native'
+import { View, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, Alert, TextInput } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { ScrollView } from 'react-native-gesture-handler'
 import { t, getLanguage } from '../locales'
-import { getUserIdAndSessionToken } from '../utils/asyncStorage'
 
 class Profile extends Component {
   constructor (props) {
@@ -39,15 +37,15 @@ getUserData = async () => {
       if (response.status === 200) {
         return response.json()
       } else if (response.status === 401) {
-        throw 'Unauthorised'
+        Alert.alert('Unauthorised')
       } else if (response.status === 401) {
-        throw 'Not Found'
+        Alert.alert('Not Found')
       } else if (response.status === 500) {
-        throw 'Server Error'
+        Alert.alert('Server Error')
       } else {
         Alert.alert('Id: ' + userId + ' Token: ' + token)
         console.log(response.json())
-        throw 'something went wrong'
+        Alert.alert('something went wrong')
       }
     })
     .then((responseJson) => {
@@ -104,29 +102,23 @@ updateUserInfo = async () => {
         return response.JSON
       } else if (response.status === 401) {
         console.log('Checking token ' + token)
-        Alert.alert('Id: ' + userId + ' Token: ' + token)
         this.props.navigation.navigate('Login')
-        throw 'Unauthorised'
+        Alert.alert('Unauthorised')
       } else if (response.status === 400) {
         console.log('Checking token ' + token)
-        Alert.alert('Id: ' + userId + ' Token: ' + token)
-        throw 'Bad request'
+        Alert.alert('Bad request')
       } else if (response.status === 403) {
         console.log('Checking token ' + token)
-        Alert.alert('Id: ' + userId + ' Token: ' + token)
-        throw 'Forbidden'
+        Alert.alert('Forbidden')
       } else if (response.status === 404) {
         console.log('Checking token ' + token)
-        Alert.alert('Id: ' + userId + ' Token: ' + token)
-        throw 'Not Found'
+        Alert.alert('Not Found')
       } else if (response.status === 500) {
         console.log('Checking token ' + token)
-        Alert.alert('Id: ' + userId + ' Token: ' + token)
-        throw 'Server Error'
+        Alert.alert('Server Error')
       } else {
-        Alert.alert('Id: ' + userId + ' Token: ' + token)
         console.log(response.json())
-        throw 'something went wrong'
+        Alert.alert('something went wrong')
       }
     })
     .catch((error) => {
@@ -146,57 +138,57 @@ render () {
   } else {
     return (
       <View style={commonStyles.container}>
-        <Text style={commonStyles.title}>{t("current_details")}</Text>
+        <Text style={commonStyles.title}>{t('current_details')}</Text>
         {/* <Text>User ID: {item.user_id}</Text> */}
-        <Text style={commonStyles.subheadingText}>  {t("first_name")}  {item.first_name}</Text>
-        <Text style={commonStyles.subheadingText}>  {t("second_name")} {item.last_name}</Text>
-        <Text style={commonStyles.subheadingText}>  {t("email_address")} {item.email}</Text>
+        <Text style={commonStyles.subheadingText}>  {t('first_name')}  {item.first_name}</Text>
+        <Text style={commonStyles.subheadingText}>  {t('second_name')} {item.last_name}</Text>
+        <Text style={commonStyles.subheadingText}>  {t('email_address')} {item.email}</Text>
         {/* <Text> Password: </Text> */}
 
         <Text />
 
-        <Text style={commonStyles.title}> {t("update_details")}</Text>
-        <Text style={commonStyles.subheadingText}>{t("first_name")}</Text>
+        <Text style={commonStyles.title}> {t('update_details')}</Text>
+        <Text style={commonStyles.subheadingText}>{t('first_name')}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder={t("first_name")}
+          placeholder={t('first_name')}
           onChangeText={(first_name) => this.setState({ first_name })}
           value={this.state.first_name}
-          ariaLabel={t("first_name")}
+          ariaLabel={t('first_name')}
         />
 
-        <Text style={commonStyles.subheadingText}>{t("second_name")}</Text>
+        <Text style={commonStyles.subheadingText}>{t('second_name')}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder={t("second_name")}
+          placeholder={t('second_name')}
           onChangeText={(last_name) => this.setState({ last_name })}
           value={this.state.last_name}
-          ariaLabel={t("second_name")}
+          ariaLabel={t('second_name')}
         />
 
-        <Text style={commonStyles.subheadingText}>{t("email_address")}</Text>
+        <Text style={commonStyles.subheadingText}>{t('email_address')}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder={t("email_address")}
+          placeholder={t('email_address')}
           onChangeText={(email) => this.setState({ email })}
           value={this.state.email}
-          ariaLabel={t("email_address")}
+          ariaLabel={t('email_address')}
         />
 
-        <Text style={commonStyles.subheadingText}>{t("password")}</Text>
+        <Text style={commonStyles.subheadingText}>{t('password')}</Text>
         <TextInput
           style={commonStyles.input}
-          placeholder={t("password")}
+          placeholder={t('password')}
           onChangeText={(password) => this.setState({ password })}
           value={this.state.password}
           secureTextEntry
-          ariaLabel={t("password")}
+          ariaLabel={t('password')}
         />
 
         <TouchableOpacity
-         ariaRole='button' style={commonStyles.button} onPress={() => this.updateUserInfo()}
+          ariaRole='button' style={commonStyles.button} onPress={() => this.updateUserInfo()}
         >
-          <Text style={commonStyles.buttonText}>{t("update")} </Text>
+          <Text style={commonStyles.buttonText}>{t('update')} </Text>
           <Ionicons name='create' size={25} color='white' />
         </TouchableOpacity>
 

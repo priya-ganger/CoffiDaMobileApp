@@ -16,7 +16,7 @@ const getSessionToken = async () => {
 }
 
 module.exports = {
-    getUserIdAndSessionToken: getUserIdAndSessionToken,
-    getUserId: getUserId,
-    getSessionToken: getSessionToken
+  getUserIdAndSessionToken: getUserIdAndSessionToken,
+  getUserId: getUserId,
+  getSessionToken: getSessionToken
 }

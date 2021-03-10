@@ -47,11 +47,11 @@ class GetReviews extends Component {
           return response.json()
         } else if (response.status === 404) {
           Alert.alert('locationid: ' + this.state.location_id)
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 501) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         }
       })
       .then((responseJson) => {
@@ -82,17 +82,17 @@ class GetReviews extends Component {
           Alert.alert('Review liked! Id: ' + location_id + 'Review ID' + review_id + ' Token: ' + token)
           this.getLocationData()
         } else if (response.status === 400) {
-          throw 'Bad Request'
+          Alert.alert('Bad Request')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 403) {
-          throw 'Forbidden'
+          Alert.alert('Forbidden')
         } else if (response.status === 404) {
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         } else {
-          throw 'Something went wrong'
+          Alert.alert('Something went wrong')
         }
       })
       .then(async (responseJson) => {
@@ -119,17 +119,17 @@ class GetReviews extends Component {
           Alert.alert('Review unliked! Id: ' + location_id + 'Review ID' + review_id + ' Token: ' + token)
           this.getLocationData()
         } else if (response.status === 400) {
-          throw 'Bad Request'
+          Alert.alert('Bad Request')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 403) {
-          throw 'Forbidden'
+          Alert.alert('Forbidden')
         } else if (response.status === 404) {
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         } else {
-          throw 'Something went wrong'
+          Alert.alert('Something went wrong')
         }
       })
       .then(async (responseJson) => {
@@ -160,18 +160,18 @@ class GetReviews extends Component {
           // need to refresh data
           this.getLocationData()
         } else if (response.status === 400) {
-          throw 'Bad Request'
+          Alert.alert('Bad Request')
         } else if (response.status === 401) {
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else if (response.status === 403) {
-          throw 'Forbidden'
+          Alert.alert('Forbidden')
         } else if (response.status === 404) {
           Alert.alert('TEST: ' + location_id + ' Token: ' + token + 'Review ID' + review_id)
-          throw 'Not Found'
+          Alert.alert('Not Found')
         } else if (response.status === 500) {
-          throw 'Server Error'
+          Alert.alert('Server Error')
         } else {
-          throw 'Something went wrong'
+          Alert.alert('Something went wrong')
         }
       })
       .then(async (responseJson) => {
@@ -193,13 +193,13 @@ class GetReviews extends Component {
     } else {
       return (
         <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>{t("reviews_table")}</Text>
+          <Text style={commonStyles.title}>{t('reviews_table')}</Text>
           <FlatList
             data={this.state.locationData.location_reviews}
             renderItem={({ item }) => (
               <View>
-                <Text style={commonStyles.subheadingText}> {t("name_of_cafe")} {this.state.locationData.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> {t("review_overall_rating")} {item.overall_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('name_of_cafe')} {this.state.locationData.location_name}</Text>
+                <Text style={commonStyles.subheadingText}> {t('review_overall_rating')} {item.overall_rating}</Text>
                 <Stars
                   display={item.overall_rating}
                   half
@@ -211,7 +211,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("review_price_rating")} {item.price_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('review_price_rating')} {item.price_rating}</Text>
                 <Stars
                   display={item.price_rating}
                   half
@@ -223,7 +223,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("review_quality_rating")} {item.quality_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('review_quality_rating')} {item.quality_rating}</Text>
                 <Stars
                   display={item.quality_rating}
                   half
@@ -235,7 +235,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("review_cleanliness_rating")} {item.clenliness_rating}</Text>
+                <Text style={commonStyles.subheadingText}> {t('review_cleanliness_rating')} {item.clenliness_rating}</Text>
                 <Stars
                   display={item.clenliness_rating}
                   half
@@ -247,53 +247,53 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t("review")} {item.review_body}</Text>
-                <Text style={commonStyles.subheadingText}> {t("likes")} {item.likes} </Text>
+                <Text style={commonStyles.subheadingText}> {t('review')} {item.review_body}</Text>
+                <Text style={commonStyles.subheadingText}> {t('likes')} {item.likes} </Text>
 
                 <TouchableOpacity
-                ariaRole='button'
+                  ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}
                 >
-                  <Text style={commonStyles.buttonText}> {t("like")} </Text>
+                  <Text style={commonStyles.buttonText}> {t('like')} </Text>
                   <Ionicons name='thumbs-up' size={25} color='white' />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                ariaRole='button'
+                  ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}
                 >
-                  <Text style={commonStyles.buttonText}> {t("unlike")} </Text>
+                  <Text style={commonStyles.buttonText}> {t('unlike')} </Text>
                   <Ionicons name='thumbs-down' size={25} color='white' />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                ariaRole='button'
+                  ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
                 >
-                  <Text style={commonStyles.buttonText}> {t("delete")} </Text>
+                  <Text style={commonStyles.buttonText}> {t('delete')} </Text>
                   <Ionicons name='trash' size={25} color='white' />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                ariaRole='button'
+                  ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
                 >
-                  <Text style={commonStyles.buttonText}> {t("add_review")} </Text>
+                  <Text style={commonStyles.buttonText}> {t('add_review')} </Text>
                   <Ionicons name='add-circle' size={25} color='white' />
                 </TouchableOpacity>
 
                 {/* TODO: Add button needs to be outside the flatlist */}
 
                 <TouchableOpacity
-                ariaRole='button'
+                  ariaRole='button'
                   style={commonStyles.button}
                   onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
                 >
-                  <Text style={commonStyles.buttonText}> {t("update_review_btn")} </Text>
+                  <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
                   <Ionicons name='create' size={25} color='white' />
                 </TouchableOpacity>
 

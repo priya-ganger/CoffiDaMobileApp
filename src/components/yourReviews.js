@@ -45,10 +45,12 @@ getUserData = async () => {
       if (response.status === 200) {
         return response.json()
       } else if (response.status === 401) {
-        throw 'Unauthorised'
+        Alert.alert('Unauthorised')
+      } else if (response.status === 404) {
+        Alert.alert('Not Found')
+      } else if (response.status === 500) {
+        Alert.alert('Server Error')
       } else {
-        Alert.alert('Id: ' + userId + ' Token: ' + token)
-        console.log(response.json())
         throw 'something went wrong'
       }
     })
@@ -75,14 +77,14 @@ render () {
   } else {
     return (
       <SafeAreaView style={commonStyles.container}>
-        <Text style={commonStyles.title}>{t("your_reviews")}</Text>
+        <Text style={commonStyles.title}>{t('your_reviews')}</Text>
         <FlatList
           data={this.state.userData.reviews}
           renderItem={({ item }) => (
             <View>
-              <Text style={commonStyles.subheadingText}> {t("name_of_cafe")} {item.location.location_name}</Text>
-              <Text style={commonStyles.subheadingText}> {t("review_body")} {item.review.review_body}</Text>
-              <Text style={commonStyles.subheadingText}> {t("review_overall_rating")} {item.review.overall_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t('name_of_cafe')} {item.location.location_name}</Text>
+              <Text style={commonStyles.subheadingText}> {t('review_body')} {item.review.review_body}</Text>
+              <Text style={commonStyles.subheadingText}> {t('review_overall_rating')} {item.review.overall_rating}</Text>
               <Stars
                 display={item.review.overall_rating}
                 half
@@ -94,7 +96,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> {t("review_price_rating")} {item.review.price_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t('review_price_rating')} {item.review.price_rating}</Text>
               <Stars
                 display={item.review.price_rating}
                 half
@@ -106,7 +108,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> {t("review_quality_rating")} {item.review.quality_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t('review_quality_rating')} {item.review.quality_rating}</Text>
               <Stars
                 display={item.review.quality_rating}
                 half
@@ -118,7 +120,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> {t("review_cleanliness_rating")} {item.review.clenliness_rating}</Text>
+              <Text style={commonStyles.subheadingText}> {t('review_cleanliness_rating')} {item.review.clenliness_rating}</Text>
               <Stars
                 display={item.review.clenliness_rating}
                 half
@@ -132,7 +134,7 @@ render () {
               <Text> </Text>
 
               <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
-                <Text style={commonStyles.buttonText}> {t("add_photo")} </Text>
+                <Text style={commonStyles.buttonText}> {t('add_photo')} </Text>
                 <Ionicons name='camera' size={25} color='white' />
               </TouchableOpacity>
 
@@ -141,13 +143,13 @@ render () {
           keyExtractor={(item, index) => item.review.review_id.toString()}
         />
 
-        <Text style={commonStyles.title}>{t("your_liked_reviews")}</Text>
+        <Text style={commonStyles.title}>{t('your_liked_reviews')}</Text>
         <FlatList
           data={this.state.userData.liked_reviews}
           renderItem={({ item }) => (
             <View>
-              <Text style={commonStyles.subheadingText}>{t("name_of_cafe")} {item.location.location_name}</Text>
-              <Text style={commonStyles.subheadingText}>{t("review")} {item.review.review_body}</Text>
+              <Text style={commonStyles.subheadingText}>{t('name_of_cafe')} {item.location.location_name}</Text>
+              <Text style={commonStyles.subheadingText}>{t('review')} {item.review.review_body}</Text>
               <Text> </Text>
             </View>
           )}

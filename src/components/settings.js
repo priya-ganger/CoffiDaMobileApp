@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 import Geolocation from 'react-native-geolocation-service'
 import { getDistance } from 'geolib'
+import { ScrollView } from 'react-native-gesture-handler'
 
 async function requestLocationPermission () {
   try {
@@ -44,6 +45,7 @@ class Settings extends Component {
       location_id: '',
       longitude: '',
       latitude: ''
+      // dis
 
     }
   }
@@ -54,6 +56,7 @@ class Settings extends Component {
       this.setState({ isLoading: true })
       this.findCoordinates()
       this.getLocationData()
+      // this.testDistance()
     })
   }
 
@@ -100,9 +103,9 @@ class Settings extends Component {
           return response.json()
         } else if (response.status === 401) {
           this.props.navigation.navigate('Login')
-          throw 'Unauthorised'
+          Alert.alert('Unauthorised')
         } else {
-          throw 'something went wrong'
+          Alert.alert('something went wrong')
         }
       })
       .then((responseJson) => {
@@ -129,7 +132,6 @@ class Settings extends Component {
   // }
 
   render () {
-  
     if (this.state.isLoading) {
       return (
         <View>
@@ -139,68 +141,46 @@ class Settings extends Component {
     } else {
       console.log('location 2: ', this.state.location.latitude)
       console.log('location 2: ', this.state.location.longitude)
-
+      // console.log("test"+ distance)
       return (
-        
+
         <FlatList
+
           data={this.state.locationData}
           renderItem={({ item }) => {
-
-            
-
-            const dis = getDistance(
+            const distance = getDistance(
               { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
               { latitude: item.latitude, longitude: item.longitude }
             )
             return (
 
-              <View>
-                <Text>Name: {item.location_name}</Text>
-                <Text> latitude:  {item.latitude}</Text>
-                <Text> longitude: {item.longitude} </Text>
-                <Text>Distance: {dis} M OR {dis / 1000} KM </Text>
-
-                
-
-                <MapView
-          provider={PROVIDER_GOOGLE}
-          style={ {flex: 1, 
-          width: 500,
-          height: 500}}
-          region={{
-          latitude: Number(this.state.location.latitude),
-          longitude: Number(this.state.location.longitude),
-          latitudeDelta: 0.009,
-          longitudeDelta: 0.009,
-          
-        }}
-        >
-
-      {this.state.locationData.map(location => <Marker
-      key={location.location_id}
-       coordinate={{ latitude: Number(location.latitude), longitude: Number(location.longitude) }}
-      title={location.location_name}
-       description={"Distance from you: "+dis.toString() + "M"}
-     >
-     </Marker >)
-   }
-          {/* {this.mapMarkers()} */}
-          
-           <Marker
-          coordinate={this.state.location}
-          title="My location"
-          description="Hi, here I am"
-          /> 
-
-        </MapView>
-              </View>
-              
-
-
+              <MapView
+                provider={PROVIDER_GOOGLE}
+                style={{ flex: 1, height: 500, width: 500 }}
+                region={{
+                  latitude: Number(this.state.location.latitude),
+                  longitude: Number(this.state.location.longitude),
+                  latitudeDelta: 0.8,
+                  longitudeDelta: 0.8
+                }}
+              >
+                {this.state.locationData.map(location => <Marker
+                  key={location.location_id}
+                  coordinate={{ latitude: Number(location.latitude), longitude: Number(location.longitude) }}
+                  title={location.location_name}
+                  description={'Distance from you: ' + distance.toString() + 'M'}
+                                                         />)}
+                <Marker
+                  coordinate={this.state.location}
+                  title='My location'
+                  description='Hi, this is your current location'
+                />
+              </MapView>
             )
           }}
           keyExtractor={(item, index) => item.location_id.toString()}
         />
+
       )
     }
   }
