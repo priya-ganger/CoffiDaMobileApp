@@ -14,6 +14,7 @@ import AddReview from '../components/addReview'
 import UpdateReview from '../components/updateReview'
 import Photo from '../components/photo'
 import YourReviews from '../components/yourReviews'
+import Map from '../components/map'
 import { t } from '../locales'
 
 const Stack = createStackNavigator()
@@ -81,6 +82,13 @@ const MainStackNavigator = () => {
         }}
       />
 
+<Stack.Screen
+        name='Map' component={Map}
+        options={{
+          title: 'Your location'
+        }}
+      />
+
     </Stack.Navigator>
   )
 }
@@ -100,6 +108,19 @@ const FavouritesStackNavigator = () => {
         name='Favourites' component={Favourites}
         options={{
           title: 'Your favourites'
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+const MapStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen
+        name='Map' component={Map}
+        options={{
+          title: 'Your location'
         }}
       />
     </Stack.Navigator>
@@ -216,4 +237,4 @@ const LogOutStackNavigator = () => {
   )
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, UpdateReviewStackNavigator, FavouritesStackNavigator, YourReviewsStackNavigator, SearchStackNavigator, CameraStackNavigator, PhotoStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator }
+export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, MapStackNavigator, UpdateReviewStackNavigator, FavouritesStackNavigator, YourReviewsStackNavigator, SearchStackNavigator, CameraStackNavigator, PhotoStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator }

@@ -206,36 +206,6 @@ class Search extends Component {
             reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
             onFinishRating={(rating) => this.ratingCompleted(rating, 'overall_rating')}
           />
-          {/*
-          {/* <Text style={commonStyles.subheadingText}>Price Rating</Text>
-             <AirbnbRating
-             size={15}
-             defaultRating={0}
-             selectedColor={'#f1c40f'}
-             unSelectedColor={'black'}
-             reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
-             onFinishRating={(rating) => this.ratingCompleted(rating, "price_rating")}
-             /> */}
-
-          {/* <Text style={commonStyles.subheadingText}>Quality Rating</Text>
-             <AirbnbRating
-             size={15}
-             defaultRating={0}
-             selectedColor={'#f1c40f'}
-             unSelectedColor={'black'}
-             reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
-             onFinishRating={(rating) => this.ratingCompleted(rating, "quality_rating")}
-             />
-
-            <Text style={commonStyles.subheadingText}>Cleanliness Rating</Text>
-             <AirbnbRating
-             size={15}
-             defaultRating={0}
-             selectedColor={'#f1c40f'}
-             unSelectedColor={'black'}
-             reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
-             onFinishRating={(rating) => this.ratingCompleted(rating, "clenliness_rating")}
-             />  */}
 
           <TouchableOpacity
             ariaRole='button' style={commonStyles.button} onPress={() => this.search()}
@@ -244,6 +214,10 @@ class Search extends Component {
             <Ionicons name='search' size={25} color='white' />
           </TouchableOpacity>
 
+          
+
+        
+
           <FlatList
             data={this.state.locationData}
             renderItem={({ item }) => {
@@ -251,8 +225,18 @@ class Search extends Component {
                 { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
                 { latitude: item.latitude, longitude: item.longitude }
               )
+              
               return (
+                
                 <View>
+                  <TouchableOpacity
+            ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Map', { distance: dis })}
+          >
+            <Text style={commonStyles.buttonText}>{'Map'} </Text>
+            <Ionicons name='map' size={25} color='white' />
+          </TouchableOpacity>
+
+
                   <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
                   <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
                   <Image
