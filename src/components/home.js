@@ -60,7 +60,7 @@ class Home extends Component {
         } else if (response.status === 500) {
           Alert.alert('Server Error')
         } else {
-          Alert.alert( 'something went wrong')
+          Alert.alert('something went wrong')
         }
       })
       .then((responseJson) => {

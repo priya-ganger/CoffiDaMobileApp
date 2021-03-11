@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../locales'
+import Filter from 'bad-words'
 
 class UpdateReview extends Component {
   constructor (props) {
@@ -11,15 +12,15 @@ class UpdateReview extends Component {
 
     this.state = {
       locData: [],
-      overall_rating: '',
-      price_rating: '',
-      quality_rating: '',
-      clenliness_rating: '',
-      review_body: '',
+      overallRating: '',
+      priceRating: '',
+      qualityRating: '',
+      clenlinessRating: '',
+      reviewBody: '',
 
       location_id: '',
       review_id: '',
-      locationName: ''
+      location_name: ''
     }
   }
 
@@ -27,10 +28,10 @@ class UpdateReview extends Component {
     // this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
       getLanguage()
-      const { location_id, locData, location_Name } = this.props.route.params
+      const { locationId, locData, locationName } = this.props.route.params
 
       if (this.props.route.params) {
-        this.setState({ location_id: this.props.route.params.location_id })
+        this.setState({ location_id: this.props.route.params.locationId })
       }
 
       if (this.props.route.params) {
@@ -41,12 +42,12 @@ class UpdateReview extends Component {
         this.setState({ review_id: this.props.route.params.locData.review_id })
 
         if (this.props.route.params) {
-          this.setState({ locationName: this.props.route.params.location_Name })
+          this.setState({ location_name: this.props.route.params.locationName })
         }
 
-        console.log('location id' + location_id)
+        console.log('location id' + locationId)
 
-        console.log('location name' + location_Name)
+        console.log('location name' + locationName)
 
         console.log('review id' + locData.review_id)
       }
@@ -59,25 +60,29 @@ class UpdateReview extends Component {
 
 updateReview = async () => {
   const sendReviewData = {}
+  const filter = new Filter()
+  filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake')
 
-  if (this.state.overall_rating !== '') {
-    sendReviewData.overall_rating = Number(this.state.overall_rating)
+  const filteredReviewBody = filter.clean(this.state.reviewBody)
+
+  if (this.state.overallRating !== '') {
+    sendReviewData.overall_rating = Number(this.state.overallRating)
   }
 
-  if (this.state.price_rating !== '') {
-    sendReviewData.price_rating = Number(this.state.price_rating)
+  if (this.state.priceRating !== '') {
+    sendReviewData.price_rating = Number(this.state.priceRating)
   }
 
-  if (this.state.quality_rating !== '') {
-    sendReviewData.quality_rating = Number(this.state.quality_rating)
+  if (this.state.qualityRating !== '') {
+    sendReviewData.quality_rating = Number(this.state.qualityRating)
   }
 
-  if (this.state.clenliness_rating !== '') {
-    sendReviewData.clenliness_rating = Number(this.state.clenliness_rating)
+  if (this.state.clenlinessRating !== '') {
+    sendReviewData.clenliness_rating = Number(this.state.clenlinessRating)
   }
 
-  if (this.state.review_body !== '') {
-    sendReviewData.review_body = this.state.review_body
+  if (this.state.reviewBody !== '') {
+    sendReviewData.review_body = filteredReviewBody
   }
 
   console.log(sendReviewData)
@@ -94,6 +99,7 @@ updateReview = async () => {
 
       .then((response) => {
         if (response.status === 200) {
+          Alert.alert('Review Updated!')
           console.log('Review info updated' + 'locationID: ' + this.state.location_id + 'reviewID: ' + this.state.review_id)
           return response.JSON
         } else if (response.status === 400) {
@@ -128,45 +134,45 @@ render () {
     return (
       <View style={commonStyles.container}>
 
-        <Text style={commonStyles.title}>{t('update_your_review_for')} {this.state.locationName}</Text>
+        <Text style={commonStyles.title}>{t('update_your_review_for')} {this.state.location_name}</Text>
 
         <TextInput
           style={commonStyles.input}
           placeholder={t('update_review_overall_rating')}
-          onChangeText={(overall_rating) => this.setState({ overall_rating })}
-          value={this.state.overall_rating}
+          onChangeText={(overallRating) => this.setState({ overallRating })}
+          value={this.state.overallRating}
           ariaLabel={t('update_review_overall_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
           placeholder={t('update_review_price_rating')}
-          onChangeText={(price_rating) => this.setState({ price_rating })}
-          value={this.state.price_rating}
+          onChangeText={(priceRating) => this.setState({ priceRating })}
+          value={this.state.priceRating}
           ariaLabel={t('update_review_price_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
           placeholder={t('update_review_quality_rating')}
-          onChangeText={(quality_rating) => this.setState({ quality_rating })}
-          value={this.state.quality_rating}
+          onChangeText={(qualityRating) => this.setState({ qualityRating })}
+          value={this.state.qualityRating}
           ariaLabel={t('update_review_quality_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
           placeholder={t('update_review_cleanliness_rating')}
-          onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
-          value={this.state.clenliness_rating}
+          onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
+          value={this.state.clenlinessRating}
           ariaLabel={t('update_review_cleanliness_rating')}
         />
 
         <TextInput
           style={commonStyles.input}
           placeholder={t('update_review')}
-          onChangeText={(review_body) => this.setState({ review_body })}
-          value={this.state.review_body}
+          onChangeText={(reviewBody) => this.setState({ reviewBody })}
+          value={this.state.reviewBody}
           ariaLabel={t('update_review')}
         />
 

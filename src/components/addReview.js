@@ -11,11 +11,11 @@ class AddReview extends Component {
     super(props)
 
     this.state = {
-      overall_rating: '',
-      price_rating: '',
-      quality_rating: '',
-      clenliness_rating: '',
-      review_body: '',
+      overallRating: '',
+      priceRating: '',
+      qualityRating: '',
+      clenlinessRating: '',
+      reviewBody: '',
       location_id: '',
       review_id: '',
       location_name: ''
@@ -55,14 +55,14 @@ addReview = async () => {
   const filter = new Filter()
   filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake')
 
-  console.log(filter.clean(this.state.review_body))
+  console.log(filter.clean(this.state.reviewBody))
   const toAddReview = {
 
-    overall_rating: parseInt(this.state.overall_rating),
-    price_rating: parseInt(this.state.price_rating),
-    quality_rating: parseInt(this.state.quality_rating),
-    clenliness_rating: parseInt(this.state.clenliness_rating),
-    review_body: (filter.clean(this.state.review_body))
+    overall_rating: parseInt(this.state.overallRating),
+    price_rating: parseInt(this.state.priceRating),
+    quality_rating: parseInt(this.state.qualityRating),
+    clenliness_rating: parseInt(this.state.clenlinessRating),
+    review_body: (filter.clean(this.state.reviewBody))
   }
 
   const token = await AsyncStorage.getItem('session_token')
@@ -77,7 +77,7 @@ addReview = async () => {
   })
     .then((response) => {
       if (response.status === 201) {
-        console.log(filter.clean(this.state.review_body))
+        console.log(filter.clean(this.state.reviewBody))
         Alert.alert('Review Added! Id: ' + this.state.location_id + ' Token: ' + token)
         // need to refresh data
       } else if (response.status === 400) {
@@ -110,40 +110,40 @@ render () {
       <TextInput
         style={commonStyles.input}
         placeholder={t('review_overall_rating_req')}
-        onChangeText={(overall_rating) => this.setState({ overall_rating })}
-        value={this.state.overall_rating}
+        onChangeText={(overallRating) => this.setState({ overallRating })}
+        value={this.state.overallRating}
         ariaLabel={t('review_overall_rating_req')}
       />
 
       <TextInput
         style={commonStyles.input}
         placeholder={t('review_price_rating_req')}
-        onChangeText={(price_rating) => this.setState({ price_rating })}
-        value={this.state.price_rating}
+        onChangeText={(priceRating) => this.setState({ priceRating })}
+        value={this.state.priceRating}
         ariaLabel={t('review_price_rating_req')}
       />
 
       <TextInput
         style={commonStyles.input}
         placeholder={t('review_quality_rating_req')}
-        onChangeText={(quality_rating) => this.setState({ quality_rating })}
-        value={this.state.quality_rating}
+        onChangeText={(qualityRating) => this.setState({ qualityRating })}
+        value={this.state.qualityRating}
         ariaLabel={t('review_quality_rating_req')}
       />
 
       <TextInput
         style={commonStyles.input}
         placeholder={t('review_cleanliness_rating_req')}
-        onChangeText={(clenliness_rating) => this.setState({ clenliness_rating })}
-        value={this.state.clenliness_rating}
+        onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
+        value={this.state.clenlinessRating}
         ariaLabel={t('review_cleanliness_rating_req')}
       />
 
       <TextInput
         style={commonStyles.input}
         placeholder={t('review_req')}
-        onChangeText={(review_body) => this.setState({ review_body })}
-        value={this.state.review_body}
+        onChangeText={(reviewBody) => this.setState({ reviewBody })}
+        value={this.state.reviewBody}
         ariaLabel={t('review_req')}
       />
 

@@ -291,7 +291,7 @@ class GetReviews extends Component {
                 <TouchableOpacity
                   ariaRole='button'
                   style={commonStyles.button}
-                  onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
+                  onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
                 >
                   <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
                   <Ionicons name='create' size={25} color='white' />
