@@ -18,30 +18,30 @@ class AddReview extends Component {
       review_body: '',
       location_id: '',
       review_id: '',
-      locationName: ''
+      location_name: ''
     }
   }
 
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       getLanguage()
-      const { location_id, locData, location_Name } = this.props.route.params
+      const { locationId, locData, locationName } = this.props.route.params
 
       if (this.props.route.params) {
-        this.setState({ location_id: this.props.route.params.location_id })
+        this.setState({ location_id: this.props.route.params.locationId })
       }
 
       if (this.props.route.params) {
-        this.setState({ locationName: this.props.route.params.location_Name })
+        this.setState({ location_name: this.props.route.params.locationName })
       }
 
       if (this.props.route.params) {
         this.setState({ review_id: this.props.route.params.locData.review_id })
       }
 
-      console.log('location id' + location_id)
+      console.log('location id' + locationId)
 
-      console.log('location name' + location_Name)
+      console.log('location name' + locationName)
 
       console.log('review id' + locData.review_id)
     })
@@ -106,7 +106,7 @@ addReview = async () => {
 render () {
   return (
     <View style={commonStyles.container}>
-      <Text style={commonStyles.title}>{t('your_review_for')} {this.state.locationName}</Text>
+      <Text style={commonStyles.title}>{t('your_review_for')} {this.state.location_name}</Text>
       <TextInput
         style={commonStyles.input}
         placeholder={t('review_overall_rating_req')}

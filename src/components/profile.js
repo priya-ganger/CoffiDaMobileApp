@@ -12,8 +12,8 @@ class Profile extends Component {
     this.state = {
       isLoading: true,
       userData: [],
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: ''
     }
@@ -64,12 +64,12 @@ getUserData = async () => {
 updateUserInfo = async () => {
   const sendData = {}
 
-  if (this.state.first_name !== '') {
-    sendData.first_name = this.state.first_name
+  if (this.state.firstName !== '') {
+    sendData.first_name = this.state.firstName
   }
 
-  if (this.state.last_name !== '') {
-    sendData.last_name = this.state.last_name
+  if (this.state.lastName !== '') {
+    sendData.last_name = this.state.lastName
   }
 
   if (this.state.email !== '') {
@@ -152,8 +152,8 @@ render () {
         <TextInput
           style={commonStyles.input}
           placeholder={t('first_name')}
-          onChangeText={(first_name) => this.setState({ first_name })}
-          value={this.state.first_name}
+          onChangeText={(firstName) => this.setState({ firstName })}
+          value={this.state.firstName}
           ariaLabel={t('first_name')}
         />
 
@@ -161,8 +161,8 @@ render () {
         <TextInput
           style={commonStyles.input}
           placeholder={t('second_name')}
-          onChangeText={(last_name) => this.setState({ last_name })}
-          value={this.state.last_name}
+          onChangeText={(lastName) => this.setState({ lastName })}
+          value={this.state.lastName}
           ariaLabel={t('second_name')}
         />
 

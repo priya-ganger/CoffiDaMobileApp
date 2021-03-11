@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Alert, Text, StyleSheet, TouchableOpacity, ActivityIndicator, ToastAndroid, FlatList } from 'react-native'
+import { View, Alert, Text, TouchableOpacity, ActivityIndicator, ToastAndroid, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -67,9 +67,9 @@ class GetReviews extends Component {
       })
   }
 
-  likeReview = async (location_id, review_id) => {
+  likeReview = async (locationId, reviewId) => {
     const token = await AsyncStorage.getItem('session_token')
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id + '/like', {
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/review/' + reviewId + '/like', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ class GetReviews extends Component {
 
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review liked! Id: ' + location_id + 'Review ID' + review_id + ' Token: ' + token)
+          Alert.alert('Review liked! Id: ' + locationId + 'Review ID' + reviewId + ' Token: ' + token)
           this.getLocationData()
         } else if (response.status === 400) {
           Alert.alert('Bad Request')
@@ -104,9 +104,9 @@ class GetReviews extends Component {
       })
   }
 
-  unlikeReview = async (location_id, review_id) => {
+  unlikeReview = async (locationId, reviewId) => {
     const token = await AsyncStorage.getItem('session_token')
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id + '/like', {
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/review/' + reviewId + '/like', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ class GetReviews extends Component {
 
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review unliked! Id: ' + location_id + 'Review ID' + review_id + ' Token: ' + token)
+          Alert.alert('Review unliked! Id: ' + locationId + 'Review ID' + reviewId + ' Token: ' + token)
           this.getLocationData()
         } else if (response.status === 400) {
           Alert.alert('Bad Request')
@@ -141,9 +141,9 @@ class GetReviews extends Component {
       })
   }
 
-  deleteReview = async (location_id, review_id) => {
+  deleteReview = async (locationId, reviewId) => {
     const token = await AsyncStorage.getItem('session_token')
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + location_id + '/review/' + review_id, {
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/review/' + reviewId, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ class GetReviews extends Component {
 
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review Deleted! Id: ' + location_id + ' Token: ' + token + 'Review ID' + review_id)
+          Alert.alert('Review Deleted! Id: ' + locationId + ' Token: ' + token + 'Review ID' + reviewId)
 
           // need to refresh data
           this.getLocationData()
@@ -166,7 +166,7 @@ class GetReviews extends Component {
         } else if (response.status === 403) {
           Alert.alert('Forbidden')
         } else if (response.status === 404) {
-          Alert.alert('TEST: ' + location_id + ' Token: ' + token + 'Review ID' + review_id)
+          Alert.alert('TEST: ' + locationId + ' Token: ' + token + 'Review ID' + reviewId)
           Alert.alert('Not Found')
         } else if (response.status === 500) {
           Alert.alert('Server Error')
@@ -280,7 +280,7 @@ class GetReviews extends Component {
                 <TouchableOpacity
                   ariaRole='button'
                   style={commonStyles.button}
-                  onPress={() => this.props.navigation.navigate('AddReview', { locData: item, location_id: this.state.locationData.location_id, location_Name: this.state.locationData.location_name })}
+                  onPress={() => this.props.navigation.navigate('AddReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
                 >
                   <Text style={commonStyles.buttonText}> {t('add_review')} </Text>
                   <Ionicons name='add-circle' size={25} color='white' />
