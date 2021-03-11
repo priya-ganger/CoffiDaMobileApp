@@ -2,18 +2,19 @@ import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { SettingsStackNavigator, LoginStackNavigator, SignUpStackNavigator, LogOutStackNavigator } from './StackNavigator'
 import TabNavigator from './TabNavigator'
+import { t } from '../locales'
 
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigator = () => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name='Login' component={LoginStackNavigator} />
-      <Drawer.Screen name='SignUp' component={SignUpStackNavigator} />
+      <Drawer.Screen name={t('login')} component={LoginStackNavigator} />
+      <Drawer.Screen name={t('sign_up')} component={SignUpStackNavigator} />
 
-      <Drawer.Screen name='Home' component={TabNavigator} />
-      <Drawer.Screen name='Settings' component={SettingsStackNavigator} />
-      <Drawer.Screen name='LogOut' component={LogOutStackNavigator} />
+      <Drawer.Screen name={t('home')} component={TabNavigator} />
+      <Drawer.Screen name={t('settings')} component={SettingsStackNavigator} />
+      <Drawer.Screen name={t('log_out')} component={LogOutStackNavigator} />
 
     </Drawer.Navigator>
   )
