@@ -21,8 +21,8 @@ class LogOut extends Component {
     })
   }
 
-  UNSAFE_componentWillMount () {
-    this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
         checkUserIsLoggedIn = async () => {

@@ -10,8 +10,8 @@ class SignUp extends Component {
     super(props)
 
     this.state = {
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
       isValid: null,
@@ -26,12 +26,18 @@ class SignUp extends Component {
   }
 
     signUp = () => {
+      const loginData = {
+        first_name: this.state.firstName,
+        last_name: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
+      }
       return fetch('http://10.0.2.2:3333/api/1.0.0/user', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(this.state)
+        body: JSON.stringify(loginData)
 
       })
         .then((response) => {
@@ -67,8 +73,8 @@ class SignUp extends Component {
           <TextInput
             style={commonStyles.input}
             placeholder={t('first_name')}
-            onChangeText={(first_name) => this.setState({ first_name })}
-            value={this.state.first_name}
+            onChangeText={(firstName) => this.setState({ firstName })}
+            value={this.state.firstName}
             ariaLabel={t('first_name')}
           />
 
@@ -76,8 +82,8 @@ class SignUp extends Component {
           <TextInput
             style={commonStyles.input}
             placeholder={t('second_name')}
-            onChangeText={(last_name) => this.setState({ last_name })}
-            value={this.state.last_name}
+            onChangeText={(lastName) => this.setState({ lastName })}
+            value={this.state.lastName}
             ariaLabel={t('second_name')}
           />
 

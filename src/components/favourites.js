@@ -22,8 +22,8 @@ class Favourites extends Component {
     })
   }
 
-  UNSAFE_componentWillMount () {
-    this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
       getUserData = async () => {
@@ -82,7 +82,6 @@ class Favourites extends Component {
                     <Image
                       source={{ uri: item.photo_path }}
                       style={commonStyles.photo}
-                      onError={this.errorLoadingImg}
                     />
 
                     {/* <TouchableOpacity

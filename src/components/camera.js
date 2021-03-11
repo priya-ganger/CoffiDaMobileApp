@@ -34,8 +34,8 @@ class Camera extends Component {
     })
   }
 
-  UNSAFE_componentWillMount () {
-    this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
 takeAPhoto = async () => {

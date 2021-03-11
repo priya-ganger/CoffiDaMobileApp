@@ -61,7 +61,7 @@ class Settings extends Component {
 
   findCoordinates = () => {
     if (!this.state.locationPermission) {
-      this.state.locationPermission = requestLocationPermission()
+      this.setState({ locationPermission: requestLocationPermission() })
     }
     Geolocation.getCurrentPosition(
       (position) => {

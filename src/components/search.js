@@ -66,8 +66,8 @@ class Search extends Component {
     })
   }
 
-  UNSAFE_componentWillMount () {
-    this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
   getLocationData = async (url) => {
@@ -149,7 +149,7 @@ class Search extends Component {
 
   findCoordinates = () => {
     if (!this.state.locationPermission) {
-      this.state.locationPermission = requestLocationPermission()
+      this.setState({ locationPermission: requestLocationPermission() })
     }
     Geolocation.getCurrentPosition(
       (position) => {
@@ -258,7 +258,6 @@ class Search extends Component {
                   <Image
                     source={{ uri: item.photo_path }}
                     style={commonStyles.photo}
-                    onError={this.errorLoadingImg}
                   />
                   <Text style={commonStyles.subheadingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text>
                   <Stars

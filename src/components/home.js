@@ -26,8 +26,8 @@ class Home extends Component {
     })
   }
 
-  UNSAFE_componentWillMount () {
-    this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
    checkUserIsLoggedIn = async () => {
@@ -168,7 +168,6 @@ class Home extends Component {
                 <Image
                   source={{ uri: item.photo_path }}
                   style={commonStyles.photo}
-                  onError={this.errorLoadingImg}
                 />
                 <Text style={commonStyles.subheadingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text>
                 <Stars

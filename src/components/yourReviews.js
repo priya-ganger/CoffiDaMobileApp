@@ -28,8 +28,8 @@ class YourReviews extends Component {
     })
   }
 
-  UNSAFE_componentWillMount () {
-    this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
 getUserData = async () => {
