@@ -32,7 +32,7 @@
     "cafe_cleanhness_rating": "Indice de propreté:",
     "view_reviews_button": "Afficher les avis",
     "favorite": "Favorite",
-    "unfavourite": "défavorable",
+    "unfavourite": "Défavorable",
 
     "capture": "Capturer",
     "view_photo": "Afficher la photo",
@@ -70,8 +70,6 @@
     "review_cleanliness_rating": "Entrez votre note de propreté:",
     
     "review": "la revue:",
-    
-    
     "review_add": "Ajouter",
     "my_reviews": "Mes avis",
 
@@ -81,7 +79,7 @@
     "unlike": "Contrairement à",
     "delete": "Delete",
     "add_review": "Ajouter un avis",
-    "update_review_btn": "Mettre à jour la révision",
+    "update_review_btn": "Mettre à révision",
 
     "update_your_review_for": "Mettez à jour votre avis pour:",
     "update_review_overall_rating": "Saisissez votre note globale (facultatif)",
@@ -93,6 +91,23 @@
 
     "your_reviews": "Vos avis",
     "your_liked_reviews": "Vos avis préférés",
-    "type_here": "écrivez ici"
+    "type_here": "écrivez ici",
+    "map": "Carte",
+    "my_location": "Ma position",
+    "distance_from_you": "Distance de vous: ",
+
+    "log_out": "Déconnexion",
+    "your_profile": "Votre profil",
+    "your_favourites": "Vos favoris",
+    "photo": "Photo",
+    "home": "Maison",
+    "reviews": "Commentaires",
+    "add_a_review": "Ajouter un avis",
+    "camera": "Caméra",
+    "update_your_review": "Mettez à jour votre avis",
+    "settings": "Réglages"
+
+    
+
 
 }

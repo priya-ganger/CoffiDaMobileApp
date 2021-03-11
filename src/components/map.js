@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { FlatList, View, Text, Alert, PermissionsAndroid, ToastAndroid } from 'react-native'
+import { View, Text, Alert, PermissionsAndroid, ToastAndroid } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 import Geolocation from 'react-native-geolocation-service'
-import { getDistance } from 'geolib'
+import { t, getLanguage } from '../locales'
 
 async function requestLocationPermission () {
   try {
@@ -55,6 +55,7 @@ class Map extends Component {
       this.setState({ isLoading: true })
       this.findCoordinates()
       this.getLocationData()
+      getLanguage()
 
       const { distance } = this.props.route.params
 
@@ -136,32 +137,32 @@ class Map extends Component {
     } else {
       console.log('location 2: ', this.state.location.latitude)
       console.log('location 2: ', this.state.location.longitude)
-            return (
+      return (
 
-              <MapView
-                provider={PROVIDER_GOOGLE}
-                style={{ flex: 1, height: 500, width: 500 }}
-                region={{
-                  latitude: Number(this.state.location.latitude),
-                  longitude: Number(this.state.location.longitude),
-                  latitudeDelta: 0.8,
-                  longitudeDelta: 0.8
-                }}
-              >
-                {this.state.locationData.map(location => <Marker
-                  key={location.location_id}
-                  coordinate={{ latitude: Number(location.latitude), longitude: Number(location.longitude) }}
-                  title={location.location_name}
-                  description={'Distance from you: ' + this.state.dis.toString() + 'M'}
-                                                         />)}
-                <Marker
-                  coordinate={this.state.location}
-                  title='My location'
-                  description='Hi, this is your current location'
-                  pinColor={'#474744'}
-                />
-              </MapView>
-            )
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={{ flex: 1, height: 500, width: 500 }}
+          region={{
+            latitude: Number(this.state.location.latitude),
+            longitude: Number(this.state.location.longitude),
+            latitudeDelta: 0.8,
+            longitudeDelta: 0.8
+          }}
+        >
+          {this.state.locationData.map(location => <Marker
+            key={location.location_id}
+            coordinate={{ latitude: Number(location.latitude), longitude: Number(location.longitude) }}
+            title={location.location_name}
+            description={t('distance_from_you') + this.state.dis.toString() + 'M'}
+                                                   />)}
+          <Marker
+            coordinate={this.state.location}
+            title={t('my_location')}
+           // description='Your current location'
+            pinColor='#474744'
+          />
+        </MapView>
+      )
     }
   }
 }

@@ -214,10 +214,6 @@ class Search extends Component {
             <Ionicons name='search' size={25} color='white' />
           </TouchableOpacity>
 
-          
-
-        
-
           <FlatList
             data={this.state.locationData}
             renderItem={({ item }) => {
@@ -225,17 +221,16 @@ class Search extends Component {
                 { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
                 { latitude: item.latitude, longitude: item.longitude }
               )
-              
+
               return (
-                
+
                 <View>
                   <TouchableOpacity
-            ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Map', { distance: dis })}
-          >
-            <Text style={commonStyles.buttonText}>{'Map'} </Text>
-            <Ionicons name='map' size={25} color='white' />
-          </TouchableOpacity>
-
+                    ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Map', { distance: dis })}
+                  >
+                    <Text style={commonStyles.buttonText}>Map </Text>
+                    <Ionicons name='map' size={25} color='white' />
+                  </TouchableOpacity>
 
                   <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
                   <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>

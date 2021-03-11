@@ -31,44 +31,44 @@ const MainStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
-        name='Home' component={Home}
+        name={t('home')} component={Home}
         options={{
-          title: 'Home'
+          title: t('home')
         }}
       />
 
       <Stack.Screen
         name='GetReviews' component={GetReviews}
         options={{
-          title: 'Reviews'
+          title: t('reviews')
         }}
       />
 
       <Stack.Screen
         name='AddReview' component={AddReview}
         options={{
-          title: 'Add a Review'
+          title: t('add_a_review')
         }}
       />
 
       <Stack.Screen
         name='YourReviews' component={YourReviews}
         options={{
-          title: 'Your Reviews'
+          title: t('your_reviews')
         }}
       />
 
       <Stack.Screen
-        name='Camera' component={Camera}
+        name={t('camera')} component={Camera}
         options={{
-          title: 'Camera'
+          title: t('camera')
         }}
       />
 
       <Stack.Screen
         name='UpdateReview' component={UpdateReview}
         options={{
-          title: 'Update your review'
+          title: t('update_your_review')
         }}
       />
 
@@ -82,10 +82,10 @@ const MainStackNavigator = () => {
         }}
       />
 
-<Stack.Screen
+      <Stack.Screen
         name='Map' component={Map}
         options={{
-          title: 'Your location'
+          title: ''
         }}
       />
 
@@ -96,7 +96,7 @@ const MainStackNavigator = () => {
 const SettingsStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='Settings' component={Settings} />
+      <Stack.Screen name={t('settings')} component={Settings} />
     </Stack.Navigator>
   )
 }
@@ -107,7 +107,7 @@ const FavouritesStackNavigator = () => {
       <Stack.Screen
         name='Favourites' component={Favourites}
         options={{
-          title: 'Your favourites'
+          title: t('your_favourites')
         }}
       />
     </Stack.Navigator>
@@ -120,7 +120,7 @@ const MapStackNavigator = () => {
       <Stack.Screen
         name='Map' component={Map}
         options={{
-          title: 'Your location'
+          title: ''
         }}
       />
     </Stack.Navigator>
@@ -131,9 +131,9 @@ const YourReviewsStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
-        name='YourReviews' component={YourReviews}
+        name={t('your_reviews')} component={YourReviews}
         options={{
-          title: 'Your Reviews'
+          title: t('your_reviews')
         }}
       />
     </Stack.Navigator>
@@ -143,7 +143,7 @@ const YourReviewsStackNavigator = () => {
 const SearchStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name='Search' component={Search} />
+      <Stack.Screen name={t('search')} component={Search} />
     </Stack.Navigator>
   )
 }
@@ -177,7 +177,7 @@ const ProfileStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
         name='Profile' component={Profile} options={{
-          title: 'Your Profile'
+          title: t('your_profile')
         }}
       />
     </Stack.Navigator>
@@ -230,7 +230,7 @@ const LogOutStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
         name='LogOut' component={LogOut} options={{
-          title: 'Log out'
+          title: t('log_out')
         }}
       />
     </Stack.Navigator>

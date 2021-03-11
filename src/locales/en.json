@@ -92,6 +92,23 @@
 
     "your_reviews": "Your Reviews",
     "your_liked_reviews": "Your liked reviews",
-    "type_here": "Type here"
+    "type_here": "Type here",
+    "map": "Map",
+    "my_location": "My location",
+    "distance_from_you": "Distance from you: ",
+
+    "log_out": "Log out",
+    "your_profile": "Your Profile",
+    "your_favourites": "Your favourites",
+    "photo": "Photo",
+    "home": "Home",
+    "reviews": "Reviews",
+    "add_a_review": "Add a Review",
+    "camera": "Camera",
+    "update_your_review": "Update your review",
+
+    "settings": "Settings"
+    
+
 
 }
