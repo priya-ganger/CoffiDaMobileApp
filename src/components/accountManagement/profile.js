@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, ActivityIndicator, ToastAndroid, Alert, TextInput } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { commonStyles } from '../styles/common'
+import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { t, getLanguage } from '../locales'
-import { getSessionToken, getUserId } from '../utils/asyncStorage'
+import { t, getLanguage } from '../../locales'
+import { getSessionToken, getUserId } from '../../utils/asyncStorage'
 
 class Profile extends Component {
   constructor (props) {
@@ -84,6 +84,10 @@ updateUserInfo = async () => {
   })
     .then((response) => {
       if (response.status === 200) {
+        this.firstName_textInput.clear()
+        this.lastName_textInput.clear()
+        this.email_textInput.clear()
+        this.password_textInput.clear()
         this.getUserData()
         Alert.alert('Your details have been updated!')
         return response.JSON
@@ -132,6 +136,7 @@ render () {
           onChangeText={(firstName) => this.setState({ firstName })}
           value={this.state.firstName}
           ariaLabel={t('first_name')}
+          ref={input => { this.firstName_textInput = input }}
         />
 
         <Text style={commonStyles.subheadingText}>{t('second_name')}</Text>
@@ -141,6 +146,7 @@ render () {
           onChangeText={(lastName) => this.setState({ lastName })}
           value={this.state.lastName}
           ariaLabel={t('second_name')}
+          ref={input => { this.lastName_textInput = input }}
         />
 
         <Text style={commonStyles.subheadingText}>{t('email_address')}</Text>
@@ -150,6 +156,7 @@ render () {
           onChangeText={(email) => this.setState({ email })}
           value={this.state.email}
           ariaLabel={t('email_address')}
+          ref={input => { this.email_textInput = input }}
         />
 
         <Text style={commonStyles.subheadingText}>{t('password')}</Text>
@@ -160,6 +167,7 @@ render () {
           value={this.state.password}
           secureTextEntry
           ariaLabel={t('password')}
+          ref={input => { this.password_textInput = input }}
         />
 
         <TouchableOpacity

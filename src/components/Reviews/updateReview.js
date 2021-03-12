@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
 import Filter from 'bad-words'
+import { getSessionToken } from '../../utils/asyncStorage'
 
 class UpdateReview extends Component {
   constructor (props) {
@@ -25,7 +25,7 @@ class UpdateReview extends Component {
   }
 
   componentDidMount () {
-    // this._unsubscribe =
+   this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
       getLanguage()
       const { locationId, locData, locationName } = this.props.route.params
@@ -44,18 +44,12 @@ class UpdateReview extends Component {
         if (this.props.route.params) {
           this.setState({ location_name: this.props.route.params.locationName })
         }
-
-        console.log('location id' + locationId)
-
-        console.log('location name' + locationName)
-
-        console.log('review id' + locData.review_id)
       }
     })
   }
 
-  UNSAFE_componentWillMount () {
-    // this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
 updateReview = async () => {
@@ -85,32 +79,32 @@ updateReview = async () => {
     sendReviewData.review_body = filteredReviewBody
   }
 
-  console.log(sendReviewData)
   try {
-    const value = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
       method: 'patch',
       headers: {
         'Content-Type': 'application/json',
-        'X-Authorization': value
+        'X-Authorization': await getSessionToken()
       },
       body: JSON.stringify(sendReviewData)
     })
-
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review Updated!')
-          console.log('Review info updated' + 'locationID: ' + this.state.location_id + 'reviewID: ' + this.state.review_id)
+        this.overallRating_textInput.clear()
+        this.priceRating_textInput.clear()
+        this.qualityRating_textInput.clear()
+        this.clenlinessRating_textInput.clear()
+        this.reviewBody_textInput.clear()
+          Alert.alert('Your review has been updated!')
           return response.JSON
         } else if (response.status === 400) {
-          console.log('Testing' + 'locationID: ' + this.state.location_id + 'reviewID: ' + this.state.review_id + 'token' + value)
-          Alert.alert('Bad Request')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 403) {
-          Alert.alert('Forbidden')
+          Alert.alert('Forbidden. You can only update your own reviews.')
         } else if (response.status === 404) {
-          Alert.alert('Not Found')
+          Alert.alert('Not Found.Try again.')
         } else if (response.status === 500) {
           Alert.alert('Server Error')
         } else {
@@ -118,7 +112,6 @@ updateReview = async () => {
         }
       })
   } catch (error) {
-    console.log(error)
     ToastAndroid.show(error, ToastAndroid.SHORT)
   }
 }
@@ -142,6 +135,7 @@ render () {
           onChangeText={(overallRating) => this.setState({ overallRating })}
           value={this.state.overallRating}
           ariaLabel={t('update_review_overall_rating')}
+          ref={input => { this.overallRating_textInput = input }}
         />
 
         <TextInput
@@ -150,6 +144,7 @@ render () {
           onChangeText={(priceRating) => this.setState({ priceRating })}
           value={this.state.priceRating}
           ariaLabel={t('update_review_price_rating')}
+          ref={input => { this.priceRating_textInput = input }}
         />
 
         <TextInput
@@ -158,6 +153,7 @@ render () {
           onChangeText={(qualityRating) => this.setState({ qualityRating })}
           value={this.state.qualityRating}
           ariaLabel={t('update_review_quality_rating')}
+          ref={input => { this.qualityRating_textInput = input }}
         />
 
         <TextInput
@@ -166,6 +162,7 @@ render () {
           onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
           value={this.state.clenlinessRating}
           ariaLabel={t('update_review_cleanliness_rating')}
+          ref={input2 => { this.clenlinessRating_textInput = input2 }}
         />
 
         <TextInput
@@ -174,6 +171,7 @@ render () {
           onChangeText={(reviewBody) => this.setState({ reviewBody })}
           value={this.state.reviewBody}
           ariaLabel={t('update_review')}
+          ref={input => { this.reviewBody_textInput = input }}
         />
 
         <TouchableOpacity

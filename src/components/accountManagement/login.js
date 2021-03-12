@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, ToastAndroid, TextInput, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { commonStyles } from '../styles/common'
+import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { t, getLanguage } from '../locales'
+import { t, getLanguage } from '../../locales'
 
 class Login extends Component {
   constructor (props) {
@@ -13,40 +13,31 @@ class Login extends Component {
       email: '', password: ''
     }
   }
-
       login = async () => {
-        // need to add some validation. make sure email + pw are valid
-
         return fetch('http://10.0.2.2:3333/api/1.0.0/user/login', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(this.state)
-
         })
-
           .then((response) => {
             if (response.status === 200) {
               return response.json()
             } else if (response.status === 400) {
-              Alert.alert('Incorrect email address or password')
+              Alert.alert('Incorrect email address or password.Try again.')
             } else if (response.status === 500) {
-              Alert.alert('Server Error. Please try again later.')
+              Alert.alert('Server Error. Try again.')
             } else {
               Alert.alert('Something went wrong')
             }
           })
           .then(async (responseJson) => {
-            console.log(responseJson)
             await AsyncStorage.setItem('session_token', responseJson.token)
             await AsyncStorage.setItem('user_id', JSON.stringify(responseJson.id))
             this.props.navigation.navigate('Home')
-
-            Alert.alert('Id: ' + responseJson.id + ' Token: ' + responseJson.token)
           })
           .catch((error) => {
-            console.log(error)
             ToastAndroid.show(error, ToastAndroid.SHORT)
           })
       }
@@ -61,7 +52,6 @@ class Login extends Component {
         return (
           <View style={commonStyles.container}>
             <Text style={commonStyles.title}>{t('welcome_text')}</Text>
-
             <Text style={commonStyles.subheadingText}>{t('email_address')} </Text>
             <TextInput
               style={commonStyles.input}

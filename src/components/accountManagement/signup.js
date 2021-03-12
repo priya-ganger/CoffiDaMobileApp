@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View, ToastAndroid, TextInput, TouchableOpacity, Alert } from 'react-native'
-import { commonStyles } from '../styles/common'
+import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import Input from './input'
-import { t, getLanguage } from '../locales'
+import Input from '../../utils/input'
+import { t, getLanguage } from '../../locales'
 
 class SignUp extends Component {
   constructor (props) {
@@ -42,22 +42,20 @@ class SignUp extends Component {
       })
         .then((response) => {
           if (response.status === 201) {
+            this.firstName_textInput.clear()
+            this.lastName_textInput.clear()
+            Alert.alert('Account created!')
+            this.props.navigation.navigate('Login')
             return response.json()
           } else if (response.status === 400) {
-            Alert.alert('Bad Request')
+            Alert.alert('Bad Request. Try again.')
           } else if (response.status === 500) {
-            Alert.alert('Server Error')
+            Alert.alert('Server Error. Try again.')
           } else {
             Alert.alert('Something went wrong')
           }
         })
-        .then((responseJson) => {
-          console.log('User created', responseJson)
-          ToastAndroid.show('Account created', ToastAndroid.SHORT)
-          this.props.navigation.navigate('Login')
-        })
         .catch((error) => {
-          console.log(error)
           ToastAndroid.show(error, ToastAndroid.SHORT)
         })
     }
@@ -76,6 +74,7 @@ class SignUp extends Component {
             onChangeText={(firstName) => this.setState({ firstName })}
             value={this.state.firstName}
             ariaLabel={t('first_name')}
+            ref={input => { this.firstName_textInput = input }}
           />
 
           <Text style={commonStyles.subheadingText}>{t('second_name')}</Text>
@@ -85,15 +84,10 @@ class SignUp extends Component {
             onChangeText={(lastName) => this.setState({ lastName })}
             value={this.state.lastName}
             ariaLabel={t('second_name')}
+            ref={input => { this.lastName_textInput = input }}
           />
 
           <Text style={commonStyles.subheadingText}>{t('email_address')}</Text>
-          {/* <TextInput
-          style={commonStyles.input}
-            placeholder='Enter your email address.'
-            onChangeText={(email) => this.setState({ email })}
-            value={this.state.email}
-          /> */}
 
           <Input
             style={commonStyles.input}
@@ -112,13 +106,6 @@ class SignUp extends Component {
           </Text>
 
           <Text style={commonStyles.subheadingText}>{t('password')}</Text>
-          {/* <TextInput
-          style={commonStyles.input}
-            placeholder='Create a password.'
-            onChangeText={(password) => this.setState({ password })}
-            value={this.state.password}
-            secureTextEntry
-          /> */}
           <Input
             style={commonStyles.input}
             placeholder={t('password')}

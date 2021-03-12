@@ -5,6 +5,7 @@ import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../../locales'
+import { getSessionToken, getUserId } from '../../utils/asyncStorage'
 
 class YourReviews extends Component {
   constructor (props) {
@@ -33,36 +34,32 @@ class YourReviews extends Component {
   }
 
 getUserData = async () => {
-  const token = await AsyncStorage.getItem('session_token')
-  const userId = await AsyncStorage.getItem('user_id')
   console.log('Trying to get user data')
-  return fetch('http://10.0.2.2:3333/api/1.0.0/user/' + userId, {
+  return fetch('http://10.0.2.2:3333/api/1.0.0/user/' + await getUserId(), {
     headers: {
-      'X-Authorization': token
+      'X-Authorization': await getSessionToken()
     }
   })
     .then((response) => {
       if (response.status === 200) {
         return response.json()
       } else if (response.status === 401) {
-        Alert.alert('Unauthorised')
+        Alert.alert('Unauthorised. Please login.')
       } else if (response.status === 404) {
-        Alert.alert('Not Found')
+        Alert.alert('User not Found. Try again.')
       } else if (response.status === 500) {
-        Alert.alert('Server Error')
+        Alert.alert('Server Error. Try again.')
       } else {
         Alert.alert('something went wrong')
       }
     })
     .then((responseJson) => {
-      console.log(responseJson)
       this.setState({
         isLoading: false,
         userData: responseJson
       })
     })
     .catch((error) => {
-      console.log(error)
       ToastAndroid.show(error, ToastAndroid.SHORT)
     })
 }

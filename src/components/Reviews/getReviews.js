@@ -5,6 +5,8 @@ import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../../locales'
+import { getSessionToken, getUserId } from '../../utils/asyncStorage'
+
 
 class GetReviews extends Component {
   constructor (props) {
@@ -18,7 +20,7 @@ class GetReviews extends Component {
   }
 
   componentDidMount () {
-    // this._unsubscribe =
+     this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
       getLanguage()
       const { locData } = this.props.route.params
@@ -30,8 +32,8 @@ class GetReviews extends Component {
     })
   }
 
-  UNSAFE_componentWillMount () {
-    // this._unsubscribe
+  componentWillUnmount () {
+    this._unsubscribe()
   }
 
   getLocationData = async () => {
@@ -46,12 +48,11 @@ class GetReviews extends Component {
         if (response.status === 200) {
           return response.json()
         } else if (response.status === 404) {
-          Alert.alert('locationid: ' + this.state.location_id)
-          Alert.alert('Not Found')
+          Alert.alert('Not Found.Try again.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 501) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         }
       })
       .then((responseJson) => {
@@ -68,64 +69,56 @@ class GetReviews extends Component {
   }
 
   likeReview = async (locationId, reviewId) => {
-    const token = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/review/' + reviewId + '/like', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
-        'X-Authorization': token
+        'X-Authorization': await getSessionToken()
       }
     })
-
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review liked! Id: ' + locationId + 'Review ID' + reviewId + ' Token: ' + token)
+          Alert.alert('Review liked!' )
           this.getLocationData()
         } else if (response.status === 400) {
-          Alert.alert('Bad Request')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 403) {
-          Alert.alert('Forbidden')
+          Alert.alert('Forbidden. Try again.')
         } else if (response.status === 404) {
-          Alert.alert('Not Found')
+          Alert.alert('Not Found.Try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         } else {
           Alert.alert('Something went wrong')
         }
       })
-      .then(async (responseJson) => {
-        console.log(responseJson)
-      })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 
   unlikeReview = async (locationId, reviewId) => {
-    const token = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/review/' + reviewId + '/like', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
-        'X-Authorization': token
+        'X-Authorization': await getSessionToken()
       }
     })
-
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review unliked! Id: ' + locationId + 'Review ID' + reviewId + ' Token: ' + token)
+          Alert.alert('Review unliked!')
           this.getLocationData()
         } else if (response.status === 400) {
-          Alert.alert('Bad Request')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 403) {
-          Alert.alert('Forbidden')
+          Alert.alert('Forbidden. Try again.')
         } else if (response.status === 404) {
-          Alert.alert('Not Found')
+          Alert.alert('Not Found.Try again.')
         } else if (response.status === 500) {
           Alert.alert('Server Error')
         } else {
@@ -136,49 +129,38 @@ class GetReviews extends Component {
         console.log(responseJson)
       })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 
   deleteReview = async (locationId, reviewId) => {
-    const token = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/review/' + reviewId, {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
-        'X-Authorization': token
+        'X-Authorization': await getSessionToken()
       },
       body: JSON.stringify(this.state)
-
     })
-
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review Deleted! Id: ' + locationId + ' Token: ' + token + 'Review ID' + reviewId)
-
-          // need to refresh data
+          Alert.alert('Your review has been deleted!')
           this.getLocationData()
         } else if (response.status === 400) {
-          Alert.alert('Bad Request')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 403) {
-          Alert.alert('Forbidden')
+          Alert.alert('Forbidden. You can only delete your own reviews.')
         } else if (response.status === 404) {
-          Alert.alert('TEST: ' + locationId + ' Token: ' + token + 'Review ID' + reviewId)
-          Alert.alert('Not Found')
+          Alert.alert('Not Found.Try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         } else {
           Alert.alert('Something went wrong')
         }
       })
-      .then(async (responseJson) => {
-        console.log(responseJson)
-      })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
