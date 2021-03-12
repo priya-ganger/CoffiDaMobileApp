@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, ActivityIndicator, ToastAndroid, Alert, FlatList, Image, SafeAreaView } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../styles/common'
 import { t, getLanguage } from '../locales'
+import { getSessionToken, getUserId } from '../utils/asyncStorage'
 
 class Favourites extends Component {
   constructor (props) {
@@ -25,43 +25,35 @@ class Favourites extends Component {
   componentWillUnmount () {
     this._unsubscribe()
   }
-
-      getUserData = async () => {
-        const token = await AsyncStorage.getItem('session_token')
-        const userId = await AsyncStorage.getItem('user_id')
-        console.log('Trying to get user data')
-        return fetch('http://10.0.2.2:3333/api/1.0.0/user/' + userId, {
-          headers: {
-            'X-Authorization': token
-          }
-        })
-          .then((response) => {
-            if (response.status === 200) {
-              return response.json()
-            } else if (response.status === 401) {
-              Alert.alert('Unauthorised')
-            } else if (response.status === 404) {
-              Alert.alert('Not Found')
-            } else if (response.status === 500) {
-              Alert.alert('Server Error')
-            } else {
-              Alert.alert('Id: ' + userId + ' Token: ' + token)
-              console.log(response.json())
-              Alert.alert('something went wrong')
-            }
-          })
-          .then((responseJson) => {
-            console.log(responseJson)
-            this.setState({
-              isLoading: false,
-              userData: responseJson
-            })
-          })
-          .catch((error) => {
-            console.log(error)
-            ToastAndroid.show(error, ToastAndroid.SHORT)
-          })
+  getUserData = async () => {
+    return fetch('http://10.0.2.2:3333/api/1.0.0/user/' + await getUserId(), {
+      headers: {
+        'X-Authorization': await getSessionToken()
       }
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json()
+        } else if (response.status === 401) {
+          Alert.alert('Unauthorised. Please login.')
+        } else if (response.status === 404) {
+          Alert.alert('User not Found. Try again.')
+        } else if (response.status === 500) {
+          Alert.alert('Server Error. Try again.')
+        } else {
+          Alert.alert('Something went wrong')
+        }
+      })
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          userData: responseJson
+        })
+      })
+      .catch((error) => {
+        ToastAndroid.show(error, ToastAndroid.SHORT)
+      })
+  }
 
       render () {
         if (this.state.isLoading) {
@@ -83,22 +75,11 @@ class Favourites extends Component {
                       source={{ uri: item.photo_path }}
                       style={commonStyles.photo}
                     />
-
-                    {/* <TouchableOpacity
-                    ariaRole='button'
-                  style={commonStyles.button}
-                  onPress={() => this.props.navigation.navigate('moreInfo', { locationID: item.location_id })}
-                >
-                  <Text style={commonStyles.buttonText}> More info </Text>
-                  <Ionicons name='information-circle' size={25} color='white' />
-                </TouchableOpacity> */}
                   </View>
                 )}
                 keyExtractor={(item, index) => item.location_id.toString()}
               />
-
             </SafeAreaView>
-
           )
         }
       }

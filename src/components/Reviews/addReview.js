@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { commonStyles } from '../styles/common'
+import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Filter from 'bad-words'
-import { t, getLanguage } from '../locales'
+import { t, getLanguage } from '../../locales'
+import { getSessionToken } from '../../utils/asyncStorage'
 
 class AddReview extends Component {
   constructor (props) {
@@ -38,12 +39,6 @@ class AddReview extends Component {
       if (this.props.route.params) {
         this.setState({ review_id: this.props.route.params.locData.review_id })
       }
-
-      console.log('location id' + locationId)
-
-      console.log('location name' + locationName)
-
-      console.log('review id' + locData.review_id)
     })
   }
 
@@ -64,41 +59,36 @@ addReview = async () => {
     clenliness_rating: parseInt(this.state.clenlinessRating),
     review_body: (filter.clean(this.state.reviewBody))
   }
-
-  const token = await AsyncStorage.getItem('session_token')
   return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
-      'X-Authorization': token
+      'X-Authorization': await getSessionToken()
     },
     body: JSON.stringify(toAddReview)
 
   })
     .then((response) => {
       if (response.status === 201) {
-        console.log(filter.clean(this.state.reviewBody))
-        Alert.alert('Review Added! Id: ' + this.state.location_id + ' Token: ' + token)
-        // need to refresh data
+        this.overallRating_textInput.clear()
+        this.priceRating_textInput.clear()
+        this.qualityRating_textInput.clear()
+        this.clenlinessRating_textInput.clear()
+        this.reviewBody_textInput.clear()
+        Alert.alert('Your review has been added!')
       } else if (response.status === 400) {
-        Alert.alert('Id: ' + this.state.location_id + ' Token: ' + token)
-        Alert.alert('Bad Request')
+        Alert.alert('Bad Request. Try again.')
       } else if (response.status === 401) {
-        Alert.alert('Unauthorised')
+        Alert.alert('Unauthorised. Please login.')
       } else if (response.status === 404) {
-        Alert.alert('Not Found')
+        Alert.alert('Not Found.Try again.')
       } else if (response.status === 500) {
-        Alert.alert('Server Error')
+        Alert.alert('Server Error. Try again.')
       } else {
-        // throw 'Something went wrong'
+        Alert.alert('Something went wrong')
       }
     })
-    .then((responseJson) => {
-      console.log('Review created')
-      ToastAndroid.show('Review created', ToastAndroid.SHORT)
-    })
     .catch((error) => {
-      console.log(error)
       ToastAndroid.show(error, ToastAndroid.SHORT)
     })
 }
@@ -113,6 +103,7 @@ render () {
         onChangeText={(overallRating) => this.setState({ overallRating })}
         value={this.state.overallRating}
         ariaLabel={t('review_overall_rating_req')}
+        ref={input => { this.overallRating_textInput = input }}
       />
 
       <TextInput
@@ -121,6 +112,7 @@ render () {
         onChangeText={(priceRating) => this.setState({ priceRating })}
         value={this.state.priceRating}
         ariaLabel={t('review_price_rating_req')}
+        ref={input => { this.priceRating_textInput = input }}
       />
 
       <TextInput
@@ -129,6 +121,7 @@ render () {
         onChangeText={(qualityRating) => this.setState({ qualityRating })}
         value={this.state.qualityRating}
         ariaLabel={t('review_quality_rating_req')}
+        ref={input => { this.qualityRating_textInput = input }}
       />
 
       <TextInput
@@ -137,6 +130,7 @@ render () {
         onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
         value={this.state.clenlinessRating}
         ariaLabel={t('review_cleanliness_rating_req')}
+        ref={input2 => { this.clenlinessRating_textInput = input2 }}
       />
 
       <TextInput
@@ -145,6 +139,7 @@ render () {
         onChangeText={(reviewBody) => this.setState({ reviewBody })}
         value={this.state.reviewBody}
         ariaLabel={t('review_req')}
+        ref={input => { this.reviewBody_textInput = input }}
       />
 
       <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.addReview()}>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { View, Alert, Text, TouchableOpacity, ActivityIndicator, ToastAndroid, FlatList } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { commonStyles } from '../styles/common'
+import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
-import { t, getLanguage } from '../locales'
+import { t, getLanguage } from '../../locales'
 
 class GetReviews extends Component {
   constructor (props) {

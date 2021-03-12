@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { commonStyles } from '../styles/common'
+import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { t, getLanguage } from '../locales'
+import { t, getLanguage } from '../../locales'
 import Filter from 'bad-words'
 
 class UpdateReview extends Component {

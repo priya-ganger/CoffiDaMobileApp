@@ -8,6 +8,7 @@ import Stars from 'react-native-stars'
 import { t, getLanguage } from '../locales'
 import Geolocation from 'react-native-geolocation-service'
 import { getDistance } from 'geolib'
+import { getSessionToken } from '../utils/asyncStorage'
 
 async function requestLocationPermission () {
   try {
@@ -71,47 +72,37 @@ class Search extends Component {
   }
 
   getLocationData = async (url) => {
-    const value = await AsyncStorage.getItem('session_token')
-    console.log('Trying to get data for search')
     return fetch(url, {
       headers: {
-        'X-Authorization': value
+        'X-Authorization': await getSessionToken()
       }
     })
       .then((response) => {
         if (response.status === 200) {
           return response.json()
         } else if (response.status === 400) {
-          Alert.alert('Bad Request')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         } else {
-          Alert.alert('something went wrong')
+          Alert.alert('Something went wrong')
         }
       })
       .then((responseJson) => {
-        console.log(responseJson)
         this.setState({
           isLoading: false,
           locationData: responseJson
         })
       })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 
   search =() => {
     let url = 'http://10.0.2.2:3333/api/1.0.0/find?'
-
-    console.log(this.state.q)
-    console.log(this.state.overall_rating)
-    console.log(this.state.price_rating)
-    console.log(this.state.quality_rating)
-    console.log(this.state.clenliness_rating)
 
     if (this.state.q !== '') {
       url += 'q=' + this.state.q + '&'
@@ -143,7 +134,6 @@ class Search extends Component {
       return returnObj
     }
     this.setState(stateObject)
-
     // to avoid 'name' being updated
   }
 
@@ -153,8 +143,6 @@ class Search extends Component {
     }
     Geolocation.getCurrentPosition(
       (position) => {
-        console.log('getCurrentPosition()')
-
         this.setState({
           location: {
             longitude: position.coords.longitude,
@@ -162,8 +150,6 @@ class Search extends Component {
           }
         })
 
-        console.log('Set the location')
-        console.log('location.longitude: ' + this.state.location.longitude + ' location.latitude:' + this.state.location.latitude)
         this.setState({ isLoading: false })
       },
       (error) => {
@@ -250,8 +236,6 @@ class Search extends Component {
                     halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                   />
 
-                  {/* <Text> latitude:  {item.latitude}</Text>
-                <Text> longitude: {item.longitude} </Text> */}
                   <Text style={commonStyles.subheadingText}> Distance: {dis} M OR {dis / 1000} KM </Text>
                   <Text> </Text>
                 </View>

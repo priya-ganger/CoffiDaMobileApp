@@ -5,6 +5,7 @@ import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../locales'
+import { getSessionToken } from '../utils/asyncStorage'
 
 class Home extends Component {
   constructor (props) {
@@ -40,11 +41,9 @@ class Home extends Component {
    }
 
   getLocationData = async () => {
-    const value = await AsyncStorage.getItem('session_token')
-    console.log('Trying to get data')
     return fetch('http://10.0.2.2:3333/api/1.0.0/find', {
       headers: {
-        'X-Authorization': value
+        'X-Authorization': await getSessionToken()
       }
     })
       .then((response) => {
@@ -52,93 +51,78 @@ class Home extends Component {
           return response.json()
         } else if (response.status === 401) {
           this.props.navigation.navigate('Login')
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 400) {
-          Alert.alert('Bad Request')
-        } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         } else {
-          Alert.alert('something went wrong')
+          Alert.alert('Something went wrong')
         }
       })
       .then((responseJson) => {
-        console.log(responseJson)
         this.setState({
           isLoading: false,
           locationData: responseJson
         })
       })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 
   favouriteLocation = async (locationId) => {
-    const token = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/favourite', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
-        'X-Authorization': token
+        'X-Authorization': await getSessionToken()
       }
     })
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Added to favourites')
+          Alert.alert('Added to favourites!')
         } else if (response.status === 400) {
-          Alert.alert('Bad request')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 404) {
-          Alert.alert('Id: ' + locationId + ' Token: ' + token)
-          Alert.alert('Not Found')
+          Alert.alert('Cafe not Found. Try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         } else {
-          Alert.alert('Id: ' + locationId + ' Token: ' + token)
           Alert.alert('Something went wrong')
         }
       })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 
   unfavouriteLocation = async (locationId) => {
-    const token = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/favourite', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
-        'X-Authorization': token
+        'X-Authorization': await getSessionToken()
       }
     })
       .then((response) => {
         if (response.status === 200) {
           Alert.alert('Deleted from favourites')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 403) {
-          Alert.alert('Forbidden')
+          Alert.alert('Forbidden. Try again later.')
         } else if (response.status === 404) {
-          Alert.alert('Id: ' + locationId + ' Token: ' + token)
-          Alert.alert('Not Found')
+          Alert.alert('Cafe not Found, try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         } else {
-          Alert.alert('Id: ' + locationId + ' Token: ' + token)
           Alert.alert('Something went wrong')
         }
       })
-      .then((responseJson) => {
-        ToastAndroid.show('Successfully removed from favourites', ToastAndroid.SHORT)
-      })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
