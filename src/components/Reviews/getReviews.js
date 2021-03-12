@@ -176,6 +176,16 @@ class GetReviews extends Component {
       return (
         <View style={commonStyles.container}>
           <Text style={commonStyles.title}>{t('reviews_table')}</Text>
+
+          <TouchableOpacity
+                  ariaRole='button'
+                  style={commonStyles.button}
+                  onPress={() => this.props.navigation.navigate('AddReview', { locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
+                >
+                  <Text style={commonStyles.buttonText}> {t('add_review')} </Text>
+                  <Ionicons name='add-circle' size={25} color='white' />
+                </TouchableOpacity>
+
           <FlatList
             data={this.state.locationData.location_reviews}
             renderItem={({ item }) => (
@@ -258,17 +268,6 @@ class GetReviews extends Component {
                   <Text style={commonStyles.buttonText}> {t('delete')} </Text>
                   <Ionicons name='trash' size={25} color='white' />
                 </TouchableOpacity>
-
-                <TouchableOpacity
-                  ariaRole='button'
-                  style={commonStyles.button}
-                  onPress={() => this.props.navigation.navigate('AddReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
-                >
-                  <Text style={commonStyles.buttonText}> {t('add_review')} </Text>
-                  <Ionicons name='add-circle' size={25} color='white' />
-                </TouchableOpacity>
-
-                {/* TODO: Add button needs to be outside the flatlist */}
 
                 <TouchableOpacity
                   ariaRole='button'

@@ -26,7 +26,7 @@ class AddReview extends Component {
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       getLanguage()
-      const { locationId, locData, locationName } = this.props.route.params
+      const { locationId, locationName } = this.props.route.params
 
       if (this.props.route.params) {
         this.setState({ location_id: this.props.route.params.locationId })
@@ -36,9 +36,9 @@ class AddReview extends Component {
         this.setState({ location_name: this.props.route.params.locationName })
       }
 
-      if (this.props.route.params) {
-        this.setState({ review_id: this.props.route.params.locData.review_id })
-      }
+      // if (this.props.route.params) {
+      //   this.setState({ review_id: this.props.route.params.locData.review_id })
+      // }
     })
   }
 
