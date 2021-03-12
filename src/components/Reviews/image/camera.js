@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Alert, View, TouchableOpacity, Text } from 'react-native'
+import { Alert, View, TouchableOpacity, Text, ToastAndroid } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RNCamera } from 'react-native-camera'
-import { commonStyles } from '../styles/common'
+import { commonStyles } from '../../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import { t, getLanguage } from '../locales'
+import { t, getLanguage } from '../../../locales'
+import { getSessionToken } from '../../../utils/asyncStorage'
 
 class Camera extends Component {
   constructor (props) {
@@ -20,14 +21,12 @@ class Camera extends Component {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       getLanguage()
       const { locId } = this.props.route.params
-      console.log('This is the params data' + locId)
 
       if (this.props.route.params) {
         this.setState({ location_id: this.props.route.params.locId })
       }
 
       const { revId } = this.props.route.params
-      console.log('This is the params data' + revId)
       if (this.props.route.params) {
         this.setState({ review_id: this.props.route.params.revId })
       }
@@ -43,32 +42,28 @@ takeAPhoto = async () => {
     const options = { quality: 0.5, base64: true }
     const data = await this.camera.takePictureAsync(options)
 
-    console.log(data.uri)
-    const value = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'image/jpeg',
-          'X-Authorization': value
+          'X-Authorization': await getSessionToken()
         },
         body: data
       })
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Picture added')
+          Alert.alert('Image added!')
         } else if (response.status === 400) {
-          Alert.alert('Bad Request')
-        } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Bad Request. Try again.')
         } else if (response.status === 404) {
-          Alert.alert('Not Found')
+          Alert.alert('Not Found. Try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         }
       })
       .catch((error) => {
-        console.error(error)
+        ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 }
@@ -78,32 +73,30 @@ deleteAPhoto = async () => {
     const options = { quality: 0.5, base64: true }
     const data = await this.camera.takePictureAsync(options)
 
-    console.log(data.uri)
-    const value = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
       {
         method: 'delete',
         headers: {
           'Content-Type': 'image/jpeg',
-          'X-Authorization': value
+          'X-Authorization': await getSessionToken()
         },
         body: data
       })
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Picture deleted')
+          Alert.alert('Image has been deleted!')
         } else if (response.status === 403) {
-          Alert.alert('Forbidden')
+          Alert.alert('Forbidden. Try again later.')
         } else if (response.status === 401) {
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 404) {
-          Alert.alert('Not Found')
+          Alert.alert('Not Found, try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         }
       })
       .catch((error) => {
-        console.error(error)
+        ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 }
@@ -113,27 +106,24 @@ getAPhoto = async () => {
     const options = { quality: 0.5, base64: true }
     const data = await this.camera.takePictureAsync(options)
 
-    console.log(data.uri)
-    const value = await AsyncStorage.getItem('session_token')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
       {
         headers: {
           'Content-Type': 'image/jpeg',
-          'X-Authorization': value
+          'X-Authorization': await getSessionToken()
         }
-        // body: data
       })
       .then((response) => {
         if (response.status === 200) {
           Alert.alert('Success')
         } else if (response.status === 404) {
-          Alert.alert('Not Found')
+          Alert.alert('Not Found, try again.')
         } else if (response.status === 500) {
-          Alert.alert('Server Error')
+          Alert.alert('Server Error. Try again.')
         }
       })
       .catch((error) => {
-        console.error(error)
+        ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
 }

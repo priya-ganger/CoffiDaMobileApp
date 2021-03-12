@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 import Geolocation from 'react-native-geolocation-service'
 import { t, getLanguage } from '../locales'
+import { getSessionToken } from '../utils/asyncStorage'
 
 async function requestLocationPermission () {
   try {
@@ -18,10 +19,8 @@ async function requestLocationPermission () {
       }
     )
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('You can access the location')
       return true
     } else {
-      console.log('Location permission denied')
       return false
     }
   } catch (err) {
@@ -62,7 +61,6 @@ class Map extends Component {
       if (this.props.route.params) {
         this.setState({ dis: this.props.route.params.distance })
       }
-      console.log(Number(distance))
     })
   }
 
@@ -80,9 +78,6 @@ class Map extends Component {
             latitude: position.coords.latitude
           }
         })
-
-        console.log('Set the location')
-        console.log('location.longitude: ' + this.state.location.longitude + ' location.latitude:' + this.state.location.latitude)
         this.setState({ isLoading: false })
       },
       (error) => {
@@ -97,32 +92,31 @@ class Map extends Component {
   };
 
   getLocationData = async () => {
-    const value = await AsyncStorage.getItem('session_token')
-    console.log('Trying to get data')
     return fetch('http://10.0.2.2:3333/api/1.0.0/find', {
       headers: {
-        'X-Authorization': value
+        'X-Authorization': await getSessionToken()
       }
     })
       .then((response) => {
         if (response.status === 200) {
           return response.json()
         } else if (response.status === 401) {
-          this.props.navigation.navigate('Login')
-          Alert.alert('Unauthorised')
+          Alert.alert('Unauthorised. Please login.')
+        } else if (response.status === 400) {
+          Alert.alert('Bad Request. Try again.')
+        } else if (response.status === 500) {
+          Alert.alert('Server Error. Try again.')
         } else {
           Alert.alert('something went wrong')
         }
       })
       .then((responseJson) => {
-        console.log(responseJson)
         this.setState({
           isLoading: false,
           locationData: responseJson
         })
       })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
@@ -135,8 +129,6 @@ class Map extends Component {
         </View>
       )
     } else {
-      console.log('location 2: ', this.state.location.latitude)
-      console.log('location 2: ', this.state.location.longitude)
       return (
 
         <MapView
@@ -158,7 +150,6 @@ class Map extends Component {
           <Marker
             coordinate={this.state.location}
             title={t('my_location')}
-           // description='Your current location'
             pinColor='#474744'
           />
         </MapView>
