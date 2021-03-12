@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Alert, View, TouchableOpacity, Text, ToastAndroid } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RNCamera } from 'react-native-camera'
 import { commonStyles } from '../../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -29,6 +28,8 @@ class Camera extends Component {
       const { revId } = this.props.route.params
       if (this.props.route.params) {
         this.setState({ review_id: this.props.route.params.revId })
+
+        console.log('Location id: ' + locId, +'Review id' + revId)
       }
     })
   }
@@ -103,9 +104,6 @@ deleteAPhoto = async () => {
 
 getAPhoto = async () => {
   if (this.camera) {
-    const options = { quality: 0.5, base64: true }
-    const data = await this.camera.takePictureAsync(options)
-
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
       {
         headers: {

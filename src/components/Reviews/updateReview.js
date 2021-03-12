@@ -25,7 +25,7 @@ class UpdateReview extends Component {
   }
 
   componentDidMount () {
-   this._unsubscribe =
+    this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
       getLanguage()
       const { locationId, locData, locationName } = this.props.route.params
@@ -44,6 +44,8 @@ class UpdateReview extends Component {
         if (this.props.route.params) {
           this.setState({ location_name: this.props.route.params.locationName })
         }
+
+        console.log('Location Id: ' + locationId + 'LocData: ' + locData, 'LocationName: ' + locationName)
       }
     })
   }
@@ -90,11 +92,11 @@ updateReview = async () => {
     })
       .then((response) => {
         if (response.status === 200) {
-        this.overallRating_textInput.clear()
-        this.priceRating_textInput.clear()
-        this.qualityRating_textInput.clear()
-        this.clenlinessRating_textInput.clear()
-        this.reviewBody_textInput.clear()
+          this.overallRating_textInput.clear()
+          this.priceRating_textInput.clear()
+          this.qualityRating_textInput.clear()
+          this.clenlinessRating_textInput.clear()
+          this.reviewBody_textInput.clear()
           Alert.alert('Your review has been updated!')
           return response.JSON
         } else if (response.status === 400) {

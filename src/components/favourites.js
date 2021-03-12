@@ -25,6 +25,7 @@ class Favourites extends Component {
   componentWillUnmount () {
     this._unsubscribe()
   }
+
   getUserData = async () => {
     return fetch('http://10.0.2.2:3333/api/1.0.0/user/' + await getUserId(), {
       headers: {
@@ -55,33 +56,33 @@ class Favourites extends Component {
       })
   }
 
-      render () {
-        if (this.state.isLoading) {
-          return (
-            <View>
-              <ActivityIndicator />
-            </View>
-          )
-        } else {
-          return (
-            <SafeAreaView style={commonStyles.container}>
-              <FlatList
-                data={this.state.userData.favourite_locations}
-                renderItem={({ item }) => (
-                  <View>
-                    <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
-                    <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
-                    <Image
-                      source={{ uri: item.photo_path }}
-                      style={commonStyles.photo}
-                    />
-                  </View>
-                )}
-                keyExtractor={(item, index) => item.location_id.toString()}
-              />
-            </SafeAreaView>
-          )
-        }
-      }
+  render () {
+    if (this.state.isLoading) {
+      return (
+        <View>
+          <ActivityIndicator />
+        </View>
+      )
+    } else {
+      return (
+        <SafeAreaView style={commonStyles.container}>
+          <FlatList
+            data={this.state.userData.favourite_locations}
+            renderItem={({ item }) => (
+              <View>
+                <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
+                <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
+                <Image
+                  source={{ uri: item.photo_path }}
+                  style={commonStyles.photo}
+                />
+              </View>
+            )}
+            keyExtractor={(item, index) => item.location_id.toString()}
+          />
+        </SafeAreaView>
+      )
+    }
+  }
 }
 export default Favourites

@@ -5,8 +5,7 @@ import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../../locales'
-import { getSessionToken, getUserId } from '../../utils/asyncStorage'
-
+import { getSessionToken } from '../../utils/asyncStorage'
 
 class GetReviews extends Component {
   constructor (props) {
@@ -20,14 +19,14 @@ class GetReviews extends Component {
   }
 
   componentDidMount () {
-     this._unsubscribe =
+    this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
       getLanguage()
       const { locData } = this.props.route.params
-      console.log('This is the params data' + locData.location_id)
       if (this.props.route.params) {
         this.setState({ location_id: this.props.route.params.locData.location_id })
       }
+      console.log('Location Data ' + locData)
       this.getLocationData()
     })
   }
@@ -38,7 +37,6 @@ class GetReviews extends Component {
 
   getLocationData = async () => {
     const value = await AsyncStorage.getItem('session_token')
-    console.log('Trying to get data')
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id, {
       headers: {
         'X-Authorization': value
@@ -63,7 +61,6 @@ class GetReviews extends Component {
         })
       })
       .catch((error) => {
-        console.log(error)
         ToastAndroid.show(error, ToastAndroid.SHORT)
       })
   }
@@ -78,7 +75,7 @@ class GetReviews extends Component {
     })
       .then((response) => {
         if (response.status === 200) {
-          Alert.alert('Review liked!' )
+          Alert.alert('Review liked!')
           this.getLocationData()
         } else if (response.status === 400) {
           Alert.alert('Bad Request. Try again.')
@@ -124,9 +121,6 @@ class GetReviews extends Component {
         } else {
           Alert.alert('Something went wrong')
         }
-      })
-      .then(async (responseJson) => {
-        console.log(responseJson)
       })
       .catch((error) => {
         ToastAndroid.show(error, ToastAndroid.SHORT)
@@ -178,13 +172,13 @@ class GetReviews extends Component {
           <Text style={commonStyles.title}>{t('reviews_table')}</Text>
 
           <TouchableOpacity
-                  ariaRole='button'
-                  style={commonStyles.button}
-                  onPress={() => this.props.navigation.navigate('AddReview', { locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
-                >
-                  <Text style={commonStyles.buttonText}> {t('add_review')} </Text>
-                  <Ionicons name='add-circle' size={25} color='white' />
-                </TouchableOpacity>
+            ariaRole='button'
+            style={commonStyles.button}
+            onPress={() => this.props.navigation.navigate('AddReview', { locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
+          >
+            <Text style={commonStyles.buttonText}> {t('add_review')} </Text>
+            <Ionicons name='add-circle' size={25} color='white' />
+          </TouchableOpacity>
 
           <FlatList
             data={this.state.locationData.location_reviews}

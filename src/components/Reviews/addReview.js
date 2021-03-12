@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Filter from 'bad-words'
@@ -36,9 +35,7 @@ class AddReview extends Component {
         this.setState({ location_name: this.props.route.params.locationName })
       }
 
-      // if (this.props.route.params) {
-      //   this.setState({ review_id: this.props.route.params.locData.review_id })
-      // }
+      console.log('Location Id: ' + locationId, 'Location Name: ' + locationName)
     })
   }
 

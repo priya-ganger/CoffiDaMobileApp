@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Text, Alert, PermissionsAndroid, ToastAndroid } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 import Geolocation from 'react-native-geolocation-service'
 import { t, getLanguage } from '../locales'
@@ -60,6 +59,8 @@ class Map extends Component {
 
       if (this.props.route.params) {
         this.setState({ dis: this.props.route.params.distance })
+
+        console.log('Distance: ' + distance)
       }
     })
   }

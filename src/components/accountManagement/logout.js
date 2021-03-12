@@ -7,10 +7,6 @@ import { t, getLanguage } from '../../locales'
 import { getSessionToken } from '../../utils/asyncStorage'
 
 class LogOut extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   componentDidMount () {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.checkUserIsLoggedIn()
@@ -59,26 +55,26 @@ class LogOut extends Component {
       })
   }
 
-    render () {
-      return (
-        <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>{t('logout')}</Text>
+  render () {
+    return (
+      <View style={commonStyles.container}>
+        <Text style={commonStyles.title}>{t('logout')}</Text>
 
-          <TouchableOpacity
-            ariaRole='button' style={commonStyles.button} onPress={() => this.logUserOut()}
-          >
-            <Text style={commonStyles.buttonText}>{t('yes')}</Text>
-            <Ionicons name='log-out' size={25} color='white' />
-          </TouchableOpacity>
+        <TouchableOpacity
+          ariaRole='button' style={commonStyles.button} onPress={() => this.logUserOut()}
+        >
+          <Text style={commonStyles.buttonText}>{t('yes')}</Text>
+          <Ionicons name='log-out' size={25} color='white' />
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
-          >
-            <Text style={commonStyles.buttonText}>{t('no')} </Text>
-            <Ionicons name='arrow-back' size={25} color='white' />
-          </TouchableOpacity>
-        </View>
-      )
-    }
+        <TouchableOpacity
+          ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
+        >
+          <Text style={commonStyles.buttonText}>{t('no')} </Text>
+          <Ionicons name='arrow-back' size={25} color='white' />
+        </TouchableOpacity>
+      </View>
+    )
+  }
 }
 export default LogOut
