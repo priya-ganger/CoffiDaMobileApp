@@ -25,7 +25,11 @@ const screenOptionStyle = {
    // backgroundColor: '#23193D'
   },
   headerTintColor: 'white',
-  headerTitleStyle: { fontWeight: 'bold' }
+  headerTitleStyle: { 
+    fontWeight: 'bold',
+    fontFamily: 'sans-serif-thin',
+    fontSize: 27
+ }
  // headerShown: false
 }
 

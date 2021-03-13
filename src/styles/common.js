@@ -60,8 +60,9 @@ const commonStyles = StyleSheet.create({
     // justifyContent: 'center',
     // flexDirection: 'row',
     // alignItems: 'center',
-    height: 200,
+    height: 250,
     width: 200,
+  
     // marginLeft: 100,
     // marginRight: 100,
     // padding: 8,
@@ -103,7 +104,53 @@ const commonStyles = StyleSheet.create({
 
   starRatingEmpty: {
     color: 'white'
+  },
+
+  //new stuff
+
+  headingText: {
+    color: 'white',
+    margin: 5
+  },
+
+  button: {
+    margin: 10
+  },
+
+  grid: {
+    margin: 10
+  },
+
+  h1: {
+    // justifyContent: 'center',
+    // alignItems: 'center'
+    textAlign: 'center',
+    marginTop: 10,
+    textDecorationLine: 'underline'
+  },
+
+  h2: {
+    // justifyContent: 'center',
+    // alignItems: 'center'
+    textAlign: 'center',
+    marginTop: 5
+  },
+
+  h3: {
+    // justifyContent: 'center',
+    // alignItems: 'center'
+    textAlign: 'center',
+    marginTop: 5
+  },
+
+  col: {
+    backgroundColor: '#635DB7', 
+    height: 250
   }
+  
+
+
+  
 
 })
 
