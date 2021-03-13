@@ -57,16 +57,16 @@ const commonStyles = StyleSheet.create({
   },
 
   photo: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // flexDirection: 'row',
+    // alignItems: 'center',
     height: 200,
     width: 200,
-    marginLeft: 100,
-    marginRight: 100,
-    padding: 8,
-    borderRadius: 20,
-    margin: 5
+    // marginLeft: 100,
+    // marginRight: 100,
+    // padding: 8,
+    // borderRadius: 20,
+    // margin: 5
   },
 
   input: {

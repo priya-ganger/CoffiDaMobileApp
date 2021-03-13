@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../locales'
 import { getSessionToken } from '../utils/asyncStorage'
-import { Container, Header, Content, H1, H2, H3, Text, Left, Body, Right, Title, Subtitle, Button, Icon,  List, ListItem } from 'native-base';
+import { Container, Header, Content, H1, H2, H3, Text, Left,Col, Row, Body, Right, Title, Subtitle, Button, Icon,  List, ListItem, Grid } from 'native-base';
 
 class Home extends Component {
   constructor (props) {
@@ -250,10 +250,10 @@ render () {
           </Body>
           <Right />
         </Header> */}
-      <Content>
+      {/* <Content> */}
         <H1>Your Local Cafes</H1>
 
-        <Button  primary ariaRole='button' onPress={() => navigation.navigate('Search')}>
+        <Button block   primary ariaRole='button' onPress={() => navigation.navigate('Search')}>
         <Ionicons name='search' size={25} color='white' />
             <Text>{t('search')}</Text>
           </Button>
@@ -265,18 +265,21 @@ render () {
               <View>
                 <H2 > {t('name_of_cafe')}  {item.location_name}</H2>
                 <H3 > {t('cafe_town')} {item.location_town}</H3>
-                <H3 > {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</H3>
+                <Grid>
+                <Col style={{ backgroundColor: '#635DB7', height: 200 }}>
+                  <Text > {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text> 
                 <Stars
                   display={item.avg_overall_rating}
                   half
                   spacing={4}
                   starSize={100}
                   count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+                  fullStar={<Ionicons name='star' size={20} style={[commonStyles.starRating]} />}
+                  emptyStar={<Ionicons name='star-outline' size={20} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                  halfStar={<Ionicons name='star-half' size={20} style={[commonStyles.starRating]} />}
                 />
-                <H3 > {t('cafe_price_rating')} {item.avg_price_rating}</H3>
+
+              <Text > {t('cafe_price_rating')} {item.avg_price_rating}</Text>
                 <Stars
                   display={item.avg_price_rating}
                   half
@@ -287,7 +290,7 @@ render () {
                   emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
-                <H3 > {t('cafe_quality_rating')} {item.avg_quality_rating}</H3>
+                <Text > {t('cafe_quality_rating')} {item.avg_quality_rating}</Text>
                 <Stars
                   display={item.avg_quality_rating}
                   half
@@ -298,7 +301,7 @@ render () {
                   emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
-                <H3 > {t('cafe_cleanliness_rating')} {item.avg_clenliness_rating}</H3>
+                <Text > {t('cafe_cleanliness_rating')} {item.avg_clenliness_rating}</Text>
                 <Stars
                   display={item.avg_clenliness_rating}
                   half
@@ -309,22 +312,30 @@ render () {
                   emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
+                
+                
+                
+                
+                </Col>
                 <Image
                   source={{ uri: item.photo_path }}
                    style={commonStyles.photo}
                 />
+                </Grid>
+                
+               
 
-          <Button primary ariaRole='button' onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}>
+          <Button block primary ariaRole='button' onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}>
             <Ionicons name='clipboard-outline' size={25} color='white' />
             <Text>{t('view_reviews_button')}</Text>
           </Button>
 
-          <Button primary ariaRole='button' onPress={() => this.favouriteLocation(item.location_id)}>
+          <Button block  primary ariaRole='button' onPress={() => this.favouriteLocation(item.location_id)}>
           <Ionicons name='heart' size={25} color='tomato' />
             <Text >{t('favourite')} </Text>
           </Button>
 
-          <Button primary ariaRole='button' onPress={() => this.unfavouriteLocation(item.location_id)}>
+          <Button block  primary ariaRole='button' onPress={() => this.unfavouriteLocation(item.location_id)}>
           <Ionicons name='heart-outline' size={25} color='tomato' />
             <Text>{t('unfavourite')} </Text>
           </Button>
@@ -336,7 +347,7 @@ render () {
         <H2>Header Two</H2>
         <H3>Header Three</H3>
         <Text>Default</Text>
-      </Content>
+      {/* </Content> */}
       
     </Container>
     )
