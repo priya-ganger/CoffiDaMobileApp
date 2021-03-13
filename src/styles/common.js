@@ -110,7 +110,8 @@ const commonStyles = StyleSheet.create({
 
   headingText: {
     color: 'white',
-    margin: 5
+    margin: 5,
+    fontSize: 18
   },
 
   button: {
@@ -126,7 +127,7 @@ const commonStyles = StyleSheet.create({
     // alignItems: 'center'
     textAlign: 'center',
     marginTop: 10,
-    textDecorationLine: 'underline'
+   // textDecorationLine: 'underline'
   },
 
   h2: {
@@ -146,10 +147,22 @@ const commonStyles = StyleSheet.create({
   col: {
     backgroundColor: '#635DB7', 
     height: 250
-  }
-  
+  },
 
+  inputValidation: {
+    
+     marginTop: 5
+  },
 
+  headingDarkText: {
+    color: 'black',
+    margin: 5,
+    fontSize: 18
+  },
+
+card: {
+  margin: 5
+}
   
 
 })

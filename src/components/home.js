@@ -141,9 +141,9 @@ render () {
       <Container>
         <H1 style={commonStyles.h1}>Your Local Cafes</H1>
 
-        <Button block   primary style={commonStyles.button} ariaRole='button' onPress={() => navigation.navigate('Search')}>
+        <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => navigation.navigate('Search')}>
         <Ionicons name='search' size={25} color='white' />
-            <Text>{t('search')}</Text>
+            <Text style={commonStyles.buttonText}>{t('search')}</Text>
           </Button>
           <FlatList
             data={this.state.locationData}
@@ -153,6 +153,7 @@ render () {
                 <H3 style={commonStyles.h3}> {t('cafe_town')} {item.location_town}</H3>
                 <Grid primary style={commonStyles.grid}>
                 <Col style={commonStyles.col}>
+                  <Text style={commonStyles.headingDarkText}>Ratings:</Text>
                   <Text style={commonStyles.headingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text> 
                 <Stars
                   display={item.avg_overall_rating}
@@ -207,17 +208,17 @@ render () {
 
           <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('GetReviews', { locData: item })}>
             <Ionicons name='clipboard-outline' size={25} color='white' />
-            <Text>{t('view_reviews_button')}</Text>
+            <Text style={commonStyles.buttonText}>{t('view_reviews_button')}</Text>
           </Button>
 
           <Button block  primary style={commonStyles.button} ariaRole='button' onPress={() => this.favouriteLocation(item.location_id)}>
           <Ionicons name='heart' size={25} color='tomato' />
-            <Text >{t('favourite')} </Text>
+            <Text style={commonStyles.buttonText}>{t('favourite')} </Text>
           </Button>
 
           <Button block  primary style={commonStyles.button} ariaRole='button' onPress={() => this.unfavouriteLocation(item.location_id)}>
           <Ionicons name='heart-outline' size={25} color='tomato' />
-            <Text>{t('unfavourite')} </Text>
+            <Text style={commonStyles.buttonText}>{t('unfavourite')} </Text>
           </Button>
               </View>
             )}

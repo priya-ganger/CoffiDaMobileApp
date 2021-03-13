@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { TextInput } from 'react-native'
-class Input extends Component {
+class InputValidation extends Component {
   validation (value) {
     const { pattern } = this.props
     if (!pattern) return true
@@ -57,4 +57,4 @@ class Input extends Component {
     )
   }
 }
-export default Input
+export default InputValidation

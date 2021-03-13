@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, ToastAndroid, TextInput, TouchableOpacity, Alert } from 'react-native'
+import {  View, ToastAndroid, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import Input from '../../utils/input'
+import InputValidation from '../../utils/input'
 import { t, getLanguage } from '../../locales'
+import { Container, H1, Form, Item, Input, Label, H3, Text, Col, Button,Grid, Spinner, Icon } from 'native-base';
 
 class SignUp extends Component {
   constructor (props) {
@@ -26,6 +27,9 @@ class SignUp extends Component {
   }
 
     signUp = () => {
+      if (this.state.firstName === '' || this.state.lastName === '' || this.state.email === '' || this.state.password === '') {
+        Alert.alert('Complete all fields.')
+      }
       const loginData = {
         first_name: this.state.firstName,
         last_name: this.state.lastName,
@@ -42,8 +46,8 @@ class SignUp extends Component {
       })
         .then((response) => {
           if (response.status === 201) {
-            this.firstName_textInput.clear()
-            this.lastName_textInput.clear()
+           // this.firstName_textInput.clear()
+            //this.lastName_textInput.clear()
             Alert.alert('Account created!')
             this.props.navigation.navigate('Login')
             return response.json()
@@ -64,34 +68,54 @@ class SignUp extends Component {
       const { isValid } = this.state
       const { isValidEmail } = this.state
       return (
-        <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>{t('enter_your_details')}</Text>
-
-          <Text style={commonStyles.subheadingText}>{t('first_name')}</Text>
-          <TextInput
-            style={commonStyles.input}
-            placeholder={t('first_name')}
+        <Container>
+          <H1 style={commonStyles.h1}>{t('enter_your_details')}</H1>
+          <Form>
+         
+            <Item>
+            <Icon active name='person' />
+            <Input  placeholder={t('first_name_placeholder')}
             onChangeText={(firstName) => this.setState({ firstName })}
             value={this.state.firstName}
             ariaLabel={t('first_name')}
-            ref={input => { this.firstName_textInput = input }}
-          />
+          //  ref={input => { this.firstName_textInput = input }}
+            />
+          </Item>
 
-          <Text style={commonStyles.subheadingText}>{t('second_name')}</Text>
-          <TextInput
-            style={commonStyles.input}
-            placeholder={t('second_name')}
+          <Item>
+            <Icon active name='person' />
+            <Input  placeholder={t('last_name_placeholder')}
             onChangeText={(lastName) => this.setState({ lastName })}
             value={this.state.lastName}
             ariaLabel={t('second_name')}
-            ref={input => { this.lastName_textInput = input }}
-          />
+          //  ref={input => { this.lastName_textInput = input }}
+            />
+          </Item>
 
-          <Text style={commonStyles.subheadingText}>{t('email_address')}</Text>
+          {/* <Item>
+            <Icon active name='mail' />
+            <Input placeholder='Email'
+            onChangeText={(email) => this.setState({ email })}
+            value={this.state.email}
+            ariaLabel={t('email_address')}
+            />
+          </Item>
 
-          <Input
-            style={commonStyles.input}
-            placeholder={t('email_address')}
+          <Item>
+            <Icon active name='key' />
+            <Input placeholder='Password'
+             onChangeText={(password) => this.setState({ password })}
+             value={this.state.password}
+             ariaLabel={t('password')}
+             secureTextEntry
+            />
+          </Item> */}
+
+
+          <Item>
+            <Icon active name='mail' />
+            <InputValidation
+            placeholder={t('email_address_placeholder')}
             pattern={[
               '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$' // must be in this ordercharacters@characters.domain
             ]}
@@ -100,14 +124,14 @@ class SignUp extends Component {
             ariaLabel={t('email_address')}
             onValidation={isValidEmail => this.setState({ isValidEmail })}
           />
-
-          <Text style={{ color: isValidEmail && isValidEmail[0] ? 'green' : 'tomato' }}>
+          </Item>
+          <Text style={{ color: isValidEmail && isValidEmail[0] ? 'green' : 'tomato', margin: 10 }}>
             {t('email_example')}
           </Text>
 
-          <Text style={commonStyles.subheadingText}>{t('password')}</Text>
-          <Input
-            style={commonStyles.input}
+          <Item>
+            <Icon active name='key' />
+            <InputValidation
             placeholder={t('password')}
             pattern={[
               '^.{8,}$', // min 8 chars
@@ -120,23 +144,24 @@ class SignUp extends Component {
             onValidation={isValid => this.setState({ isValid })}
             secureTextEntry
           />
-
-          <Text style={{ color: isValid && isValid[0] ? 'green' : 'tomato' }}>
+          </Item>
+          <Text style={{ color: isValid && isValid[0] ? 'green' : 'tomato', margin: 10 }} >
             {t('password_char_hint')}
           </Text>
-          <Text style={{ color: isValid && isValid[1] ? 'green' : 'tomato' }}>
+          <Text style={{ color: isValid && isValid[1] ? 'green' : 'tomato', margin: 10 }}>
             {t('password_num_hint')}
           </Text>
-          <Text style={{ color: isValid && isValid[2] ? 'green' : 'tomato' }}>
+          <Text style={{ color: isValid && isValid[2] ? 'green' : 'tomato', margin: 10 }}>
             {t('password_case_hint')}
           </Text>
+          </Form>
 
-          <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.signUp()}>
-            <Text style={commonStyles.buttonText}>{t('sign_up')} </Text>
-            <Ionicons name='add' size={25} color='white' />
-          </TouchableOpacity>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.signUp()}>
+          <Ionicons name='add' size={25} color='white' />
+          <Text style={commonStyles.buttonText}>{t('sign_up')}</Text>
+          </Button>
 
-        </View>
+          </Container>
       )
     }
 }

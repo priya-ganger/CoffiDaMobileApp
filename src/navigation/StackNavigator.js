@@ -45,6 +45,12 @@ const MainStackNavigator = () => {
       <Stack.Screen name='Search' component={Search} />
 
       <Stack.Screen
+        name='Login' component={Login} options={{
+          title: t('login')
+        }}
+        />
+
+      <Stack.Screen
         name='GetReviews' component={GetReviews}
         options={{
           title: t('reviews')
@@ -213,7 +219,12 @@ const LoginStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
         name='Login' component={Login} options={{
-          title: ''
+          title: t('login')
+        }} />
+
+        <Stack.Screen
+        name='SignUp' component={SignUp} options={{
+          title: t('sign_up')
         }}
       />
     </Stack.Navigator>
@@ -224,7 +235,7 @@ const SignUpStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
-        name={t('sign_up')} component={SignUp} options={{
+        name='SignUp' component={SignUp} options={{
           title: t('sign_up')
         }}
       />

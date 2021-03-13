@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, ToastAndroid, TextInput, Alert } from 'react-native'
+import {  View, TouchableOpacity, ToastAndroid, TextInput, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
+import { Container, H1, Form, Item, Input, Text, Button, Icon } from 'native-base';
 
 class Login extends Component {
   constructor (props) {
@@ -15,6 +16,10 @@ class Login extends Component {
   }
 
       login = async () => {
+        if (this.state.email === '' || this.state.password === '') {
+          Alert.alert('Enter an email address and password.')
+        }
+
         return fetch('http://10.0.2.2:3333/api/1.0.0/user/login', {
           method: 'post',
           headers: {
@@ -26,6 +31,8 @@ class Login extends Component {
             if (response.status === 200) {
               return response.json()
             } else if (response.status === 400) {
+              //this.props.navigation.navigate('Login')
+              //ToastAndroid.show('Incorrect email address or password.Try again.')
               Alert.alert('Incorrect email address or password.Try again.')
             } else if (response.status === 500) {
               Alert.alert('Server Error. Try again.')
@@ -51,40 +58,41 @@ class Login extends Component {
 
       render () {
         return (
-          <View style={commonStyles.container}>
-            <Text style={commonStyles.title}>{t('welcome_text')}</Text>
-            <Text style={commonStyles.subheadingText}>{t('email_address')} </Text>
-            <TextInput
-              style={commonStyles.input}
-              placeholder={t('email_address')}
-              onChangeText={(email) => this.setState({ email })}
-              value={this.state.email}
-              ariaLabel={t('email_address')}
+          <Container>
+            
+            <H1 style={commonStyles.h1}>{t('welcome_text')}</H1>
+            <Form>
+            <Item>
+            <Icon active name='mail' />
+            <Input placeholder='Email'
+            onChangeText={(email) => this.setState({ email })}
+            value={this.state.email}
+            ariaLabel={t('email_address')}
             />
+          </Item>
 
-            <Text style={commonStyles.subheadingText}>{t('password')} </Text>
-            <TextInput
-              style={commonStyles.input}
-              placeholder={t('password')}
-              onChangeText={(password) => this.setState({ password })}
-              value={this.state.password}
-              secureTextEntry
-              ariaLabel={t('password')}
+          <Item>
+            <Icon active name='key' />
+            <Input placeholder='Password'
+             onChangeText={(password) => this.setState({ password })}
+             value={this.state.password}
+             ariaLabel={t('password')}
+             secureTextEntry
             />
+          </Item>
+           </Form>
 
-            <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.login()}>
-              <Text style={commonStyles.buttonText}>{t('login')}
-              </Text>
-              <Ionicons name='log-in' size={25} color='white' />
-            </TouchableOpacity>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.login()}>
+          <Ionicons name='log-in' size={25} color='white' />
+          <Text style={commonStyles.buttonText}>{t('login')}</Text>
+          </Button>
 
-            <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('SignUp')}>
-              <Text style={commonStyles.buttonText}>{t('register')}
-              </Text>
-              <Ionicons name='person-add' size={25} color='white' />
-            </TouchableOpacity>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('SignUp')}>
+          <Ionicons name='person-add' size={25} color='white' />
+          <Text style={commonStyles.buttonText}>{t('register')}</Text>
+          </Button>
 
-          </View>
+            </Container>
         )
       }
 }

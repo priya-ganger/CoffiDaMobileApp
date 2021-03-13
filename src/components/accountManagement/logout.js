@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Text, View, Alert, ToastAndroid, TouchableOpacity } from 'react-native'
+import { View, Alert, ToastAndroid, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken } from '../../utils/asyncStorage'
+import { Container, H1, Form, Item, Input, Text, Button, Icon } from 'native-base';
 
 class LogOut extends Component {
   componentDidMount () {
@@ -57,23 +58,23 @@ class LogOut extends Component {
 
   render () {
     return (
-      <View style={commonStyles.container}>
-        <Text style={commonStyles.title}>{t('logout')}</Text>
+      <Container>
+        <H1 style={commonStyles.h1}>{t('logout')}</H1>
 
-        <TouchableOpacity
-          ariaRole='button' style={commonStyles.button} onPress={() => this.logUserOut()}
-        >
-          <Text style={commonStyles.buttonText}>{t('yes')}</Text>
-          <Ionicons name='log-out' size={25} color='white' />
-        </TouchableOpacity>
+        <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.logUserOut()}>
+        <Ionicons name='log-out' size={25} color='white' />
+        <Text style={commonStyles.buttonText}>{t('yes')}</Text>
+        </Button>
 
-        <TouchableOpacity
-          ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Home')}
-        >
-          <Text style={commonStyles.buttonText}>{t('no')} </Text>
-          <Ionicons name='arrow-back' size={25} color='white' />
-        </TouchableOpacity>
-      </View>
+        <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Home')}>
+        <Ionicons name='arrow-back' size={25} color='white' />
+        <Text style={commonStyles.buttonText}>{t('no')} </Text>
+        </Button>
+
+      
+         
+       
+        </Container>
     )
   }
 }

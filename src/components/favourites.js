@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, ActivityIndicator, ToastAndroid, Alert, FlatList, Image, SafeAreaView } from 'react-native'
+import { Text, View, ActivityIndicator, StyleSheet, ToastAndroid, Alert, FlatList, Image, SafeAreaView } from 'react-native'
 import { commonStyles } from '../styles/common'
 import { t, getLanguage } from '../locales'
 import { getSessionToken, getUserId } from '../utils/asyncStorage'
+import { Container, H1, Col,Grid, Spinner } from 'native-base';
 
 class Favourites extends Component {
   constructor (props) {
@@ -60,29 +61,51 @@ class Favourites extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-          <ActivityIndicator />
+           <Spinner color='green' />
         </View>
       )
     } else {
       return (
-        <SafeAreaView style={commonStyles.container}>
+        <Container>
+          <H1 style={commonStyles.h1}>Your Favourite Cafes</H1>
           <FlatList
             data={this.state.userData.favourite_locations}
             renderItem={({ item }) => (
               <View>
-                <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
-                <Image
+                <Grid primary style={commonStyles.grid}>
+                <Col style={specific.col}>
+                <Text style={commonStyles.headingText}> {t('name_of_cafe')}  {item.location_name}</Text>
+                <Text style={commonStyles.headingText}> {t('cafe_town')} {item.location_town}</Text>
+                 
+                  </Col>
+                  <Image
                   source={{ uri: item.photo_path }}
-                  style={commonStyles.photo}
+                  style={specific.photo}
                 />
+                </Grid>
               </View>
+              
             )}
             keyExtractor={(item, index) => item.location_id.toString()}
           />
-        </SafeAreaView>
+          
+       </Container>
       )
     }
   }
 }
+
+const specific = StyleSheet.create({
+  col: {
+    backgroundColor: '#635DB7', 
+    height: 150
+  },
+
+  photo: {
+    height: 150,
+    width: 200
+  }
+  
+})
+
 export default Favourites
