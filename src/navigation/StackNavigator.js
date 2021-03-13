@@ -21,10 +21,12 @@ const Stack = createStackNavigator()
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: '#50808E'
+    backgroundColor: '#635DB7'
+   // backgroundColor: '#23193D'
   },
   headerTintColor: 'white',
   headerTitleStyle: { fontWeight: 'bold' }
+ // headerShown: false
 }
 
 const MainStackNavigator = () => {
@@ -36,6 +38,7 @@ const MainStackNavigator = () => {
           title: t('home')
         }}
       />
+      <Stack.Screen name='Search' component={Search} />
 
       <Stack.Screen
         name='GetReviews' component={GetReviews}
@@ -143,7 +146,7 @@ const YourReviewsStackNavigator = () => {
 const SearchStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name={t('search')} component={Search} />
+      <Stack.Screen name='Search' component={Search} />
     </Stack.Navigator>
   )
 }
