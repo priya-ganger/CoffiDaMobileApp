@@ -154,10 +154,13 @@ const commonStyles = StyleSheet.create({
      marginTop: 5
   },
 
-  headingDarkText: {
-    color: 'black',
+  headingCentreText: {
+    color: 'white',
     margin: 5,
-    fontSize: 18
+    fontSize: 18,
+    textAlign: 'center',
+    textDecorationLine: 'underline'
+
   },
 
 card: {

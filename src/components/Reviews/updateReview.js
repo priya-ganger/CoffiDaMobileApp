@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Alert, View, ToastAndroid, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
 import Filter from 'bad-words'
 import { getSessionToken } from '../../utils/asyncStorage'
+import { Container, H1, Form, Item, Input, Label, H3, Text, Col, Button,Grid, Spinner, Icon, Textarea } from 'native-base';
 
 class UpdateReview extends Component {
   constructor (props) {
@@ -92,11 +93,11 @@ updateReview = async () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          this.overallRating_textInput.clear()
-          this.priceRating_textInput.clear()
-          this.qualityRating_textInput.clear()
-          this.clenlinessRating_textInput.clear()
-          this.reviewBody_textInput.clear()
+          // this.overallRating_textInput.clear()
+          // this.priceRating_textInput.clear()
+          // this.qualityRating_textInput.clear()
+          // this.clenlinessRating_textInput.clear()
+          // this.reviewBody_textInput.clear()
           Alert.alert('Your review has been updated!')
           return response.JSON
         } else if (response.status === 400) {
@@ -122,69 +123,65 @@ render () {
   if (this.state.isLoading) {
     return (
       <View>
-        <ActivityIndicator />
+        <Spinner color='green' />
       </View>
     )
   } else {
     return (
-      <View style={commonStyles.container}>
+     <Container>
 
-        <Text style={commonStyles.title}>{t('update_your_review_for')} {this.state.location_name}</Text>
+        <H1 style={commonStyles.h1}>{t('update_your_review_for')} {this.state.location_name}</H1>
 
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('update_review_overall_rating')}
-          onChangeText={(overallRating) => this.setState({ overallRating })}
-          value={this.state.overallRating}
-          ariaLabel={t('update_review_overall_rating')}
-          ref={input => { this.overallRating_textInput = input }}
-        />
+        <Item>
+      <Icon active name='star-outline' />
+      <Input   placeholder={t('update_review_overall_rating')}
+      onChangeText={(overallRating) => this.setState({ overallRating })}
+      value={this.state.overallRating}
+      ariaLabel={t('update_review_overall_rating')}
+      />
+    </Item>
 
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('update_review_price_rating')}
-          onChangeText={(priceRating) => this.setState({ priceRating })}
-          value={this.state.priceRating}
-          ariaLabel={t('update_review_price_rating')}
-          ref={input => { this.priceRating_textInput = input }}
-        />
+    <Item>
+      <Icon active name='cash-outline' />
+      <Input placeholder={t('update_review_price_rating')}
+     onChangeText={(priceRating) => this.setState({ priceRating })}
+     value={this.state.priceRating}
+     ariaLabel={t('update_review_price_rating')}
+      />
+    </Item>
 
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('update_review_quality_rating')}
-          onChangeText={(qualityRating) => this.setState({ qualityRating })}
-          value={this.state.qualityRating}
-          ariaLabel={t('update_review_quality_rating')}
-          ref={input => { this.qualityRating_textInput = input }}
-        />
+    <Item>
+      <Icon active name='checkbox-outline' />
+      <Input   placeholder={t('update_review_quality_rating')}
+     onChangeText={(qualityRating) => this.setState({ qualityRating })}
+     value={this.state.qualityRating}
+     ariaLabel={t('update_review_quality_rating')}
+      />
+    </Item>
 
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('update_review_cleanliness_rating')}
-          onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
-          value={this.state.clenlinessRating}
-          ariaLabel={t('update_review_cleanliness_rating')}
-          ref={input2 => { this.clenlinessRating_textInput = input2 }}
-        />
+    <Item>
+      <Icon active name='water-outline' />
+      <Input   placeholder={t('update_review_cleanliness_rating')}
+      onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
+      value={this.state.clenlinessRating}
+      ariaLabel={t('update_review_cleanliness_rating')}
+      />
+    </Item>
 
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('update_review')}
-          onChangeText={(reviewBody) => this.setState({ reviewBody })}
-          value={this.state.reviewBody}
-          ariaLabel={t('update_review')}
-          ref={input => { this.reviewBody_textInput = input }}
-        />
+    <Textarea rowSpan={2} bordered 
+    placeholder={t('update_review')}
+    onChangeText={(reviewBody) => this.setState({ reviewBody })}
+    value={this.state.reviewBody}
+    ariaLabel={t('update_review')}
+    
+    />
 
-        <TouchableOpacity
-          ariaRole='button' style={commonStyles.button}
-          onPress={() => this.updateReview()}
-        >
-          <Text style={commonStyles.buttonText}> {t('update_btn')} </Text>
-          <Ionicons name='create' size={25} color='white' />
-        </TouchableOpacity>
+        <Button block primary style={commonStyles.button} ariaRole='button'  onPress={() => this.updateReview()}>
+        <Ionicons name='create' size={25} color='white' />
+        <Text style={commonStyles.buttonText}> {t('update_btn')} </Text>
+        </Button>
 
-      </View>
+        </Container>
     )
   }
 }

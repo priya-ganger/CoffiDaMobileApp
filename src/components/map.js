@@ -144,7 +144,7 @@ class Map extends Component {
         >
           {this.state.locationData.map(location => <Marker
             key={location.location_id}
-            coordinate={{ latitude: Number(location.latitude), longitude: Number(location.longitude) }}
+            coordinate={{ latitude: location.latitude, longitude: location.longitude }}
             title={location.location_name}
             description={t('distance_from_you') + this.state.dis.toString() + 'M'}
                                                    />)}

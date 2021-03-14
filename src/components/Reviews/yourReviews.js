@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, SafeAreaView, TouchableOpacity, Text, ActivityIndicator, FlatList, ToastAndroid, Alert } from 'react-native'
+import { View, SafeAreaView, TouchableOpacity, StyleSheet, FlatList, ToastAndroid, Alert } from 'react-native'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken, getUserId } from '../../utils/asyncStorage'
+import { Container, H1, H2, H3, Text, Col, Button,Grid, Spinner } from 'native-base';
 
 class YourReviews extends Component {
   constructor (props) {
@@ -67,20 +68,22 @@ render () {
   if (this.state.isLoading) {
     return (
       <View>
-        <ActivityIndicator />
+         <Spinner color='green' />
       </View>
     )
   } else {
     return (
-      <SafeAreaView style={commonStyles.container}>
-        <Text style={commonStyles.title}>{t('your_reviews')}</Text>
+      <Container>
+        <H1 style={commonStyles.h1}>{t('your_reviews')}</H1>
         <FlatList
           data={this.state.userData.reviews}
           renderItem={({ item }) => (
             <View>
-              <Text style={commonStyles.subheadingText}> {t('name_of_cafe')} {item.location.location_name}</Text>
-              <Text style={commonStyles.subheadingText}> {t('review_body')} {item.review.review_body}</Text>
-              <Text style={commonStyles.subheadingText}> {t('review_overall_rating')} {item.review.overall_rating}</Text>
+              <H2 style={commonStyles.h2}> {t('name_of_cafe')} {item.location.location_name}</H2>
+              <Grid primary style={commonStyles.grid}>
+                <Col style={specific.ratingCol}>
+            
+              <Text style={commonStyles.headingText}> {t('review_overall_rating')} {item.review.overall_rating}</Text>
               <Stars
                 display={item.review.overall_rating}
                 half
@@ -92,7 +95,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> {t('review_price_rating')} {item.review.price_rating}</Text>
+              <Text style={commonStyles.headingText}> {t('review_price_rating')} {item.review.price_rating}</Text>
               <Stars
                 display={item.review.price_rating}
                 half
@@ -104,7 +107,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> {t('review_quality_rating')} {item.review.quality_rating}</Text>
+              <Text style={commonStyles.headingText}> {t('review_quality_rating')} {item.review.quality_rating}</Text>
               <Stars
                 display={item.review.quality_rating}
                 half
@@ -116,7 +119,7 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
 
-              <Text style={commonStyles.subheadingText}> {t('review_cleanliness_rating')} {item.review.clenliness_rating}</Text>
+              <Text style={commonStyles.headingText}> {t('review_cleanliness_rating')} {item.review.clenliness_rating}</Text>
               <Stars
                 display={item.review.clenliness_rating}
                 half
@@ -128,18 +131,26 @@ render () {
                 halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
               />
               <Text> </Text>
+              </Col>
 
-              <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
-                <Text style={commonStyles.buttonText}> {t('add_photo')} </Text>
-                <Ionicons name='camera' size={25} color='white' />
-              </TouchableOpacity>
+              <Col style={specific.reviewCol}>
+              <Text style={commonStyles.headingText}> {t('review_body')} {item.review.review_body}</Text>
+              </Col>
+
+              </Grid>
+              
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
+          <Ionicons name='camera' size={25} color='white' />
+          <Text style={commonStyles.buttonText}> {t('add_photo')} </Text>
+          </Button>
+
 
             </View>
           )}
           keyExtractor={(item, index) => item.review.review_id.toString()}
         />
 
-        <Text style={commonStyles.title}>{t('your_liked_reviews')}</Text>
+        {/* <Text style={commonStyles.title}>{t('your_liked_reviews')}</Text>
         <FlatList
           data={this.state.userData.liked_reviews}
           renderItem={({ item }) => (
@@ -150,12 +161,25 @@ render () {
             </View>
           )}
           keyExtractor={(item, index) => item.review.review_id.toString()}
-        />
+        /> */}
 
-      </SafeAreaView>
+</Container>
     )
   }
 }
 }
+
+const specific = StyleSheet.create({
+  reviewCol: {
+    backgroundColor: '#00CE9F',
+    height: 270
+  },
+
+  ratingCol: {
+    backgroundColor: '#635DB7',
+    height: 270
+  }
+  
+})
 
 export default YourReviews

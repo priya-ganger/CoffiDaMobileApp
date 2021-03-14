@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { View, Alert, Text, TouchableOpacity, ActivityIndicator, ToastAndroid, FlatList } from 'react-native'
+import { View, Alert, ToastAndroid, FlatList, StyleSheet } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken } from '../../utils/asyncStorage'
+import { Container, H1, H2, Text, Col, Button,Grid, Spinner } from 'native-base';
 
 class GetReviews extends Component {
   constructor (props) {
@@ -163,29 +164,29 @@ class GetReviews extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-          <ActivityIndicator />
+         <Spinner color='green' />
         </View>
       )
     } else {
       return (
-        <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>{t('reviews_table')}</Text>
+        <Container>
+          <H1 style={commonStyles.h1}>{t('reviews_table')}</H1>
 
-          <TouchableOpacity
-            ariaRole='button'
-            style={commonStyles.button}
-            onPress={() => this.props.navigation.navigate('AddReview', { locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
-          >
-            <Text style={commonStyles.buttonText}> {t('add_review')} </Text>
-            <Ionicons name='add-circle' size={25} color='white' />
-          </TouchableOpacity>
+          <Button block  primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('AddReview', { locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}>
+          <Ionicons name='add-circle' size={25} color='white' />
+            <Text style={commonStyles.buttonText}>{t('add_review')}</Text>
+          </Button>
 
           <FlatList
             data={this.state.locationData.location_reviews}
             renderItem={({ item }) => (
               <View>
-                <Text style={commonStyles.subheadingText}> {t('name_of_cafe')} {this.state.locationData.location_name}</Text>
-                <Text style={commonStyles.subheadingText}> {t('review_overall_rating')} {item.overall_rating}</Text>
+                <H2 style={commonStyles.h2}> {t('name_of_cafe')} {this.state.locationData.location_name}</H2>
+                <Grid primary style={commonStyles.grid}>
+                <Col style={specific.ratingCol}>
+                <Text style={commonStyles.headingCentreText}>Ratings:</Text>
+                <Text style={commonStyles.headingText}> {t('review_overall_rating')} {item.overall_rating}</Text>
+                
                 <Stars
                   display={item.overall_rating}
                   half
@@ -197,7 +198,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t('review_price_rating')} {item.price_rating}</Text>
+                <Text style={commonStyles.headingText}> {t('review_price_rating')} {item.price_rating}</Text>
                 <Stars
                   display={item.price_rating}
                   half
@@ -209,7 +210,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t('review_quality_rating')} {item.quality_rating}</Text>
+                <Text style={commonStyles.headingText}> {t('review_quality_rating')} {item.quality_rating}</Text>
                 <Stars
                   display={item.quality_rating}
                   half
@@ -221,7 +222,7 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t('review_cleanliness_rating')} {item.clenliness_rating}</Text>
+                <Text style={commonStyles.headingText}> {t('review_cleanliness_rating')} {item.clenliness_rating}</Text>
                 <Stars
                   display={item.clenliness_rating}
                   half
@@ -233,52 +234,55 @@ class GetReviews extends Component {
                   halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                 />
 
-                <Text style={commonStyles.subheadingText}> {t('review')} {item.review_body}</Text>
-                <Text style={commonStyles.subheadingText}> {t('likes')} {item.likes} </Text>
+            <Text style={commonStyles.headingText}> {t('likes')} {item.likes} </Text>
+                  </Col>
+                  <Col style={specific.reviewCol}>
+                <Text style={commonStyles.headingCentreText}> {t('review')} </Text>
+                <Text style={commonStyles.headingText}> {item.review_body}</Text>
+               
+                </Col>
+                </Grid>
 
-                <TouchableOpacity
-                  ariaRole='button'
-                  style={commonStyles.button}
-                  onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}
-                >
-                  <Text style={commonStyles.buttonText}> {t('like')} </Text>
-                  <Ionicons name='thumbs-up' size={25} color='white' />
-                </TouchableOpacity>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}>
+          <Ionicons name='thumbs-up-outline' size={25} color='white' />
+          <Text style={commonStyles.buttonText}>{t('like')}</Text>
+          </Button>
 
-                <TouchableOpacity
-                  ariaRole='button'
-                  style={commonStyles.button}
-                  onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}
-                >
-                  <Text style={commonStyles.buttonText}> {t('unlike')} </Text>
-                  <Ionicons name='thumbs-down' size={25} color='white' />
-                </TouchableOpacity>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}>
+          <Ionicons name='thumbs-down-outline' size={25} color='white' />
+          <Text style={commonStyles.buttonText}>{t('unlike')}</Text>
+          </Button>
 
-                <TouchableOpacity
-                  ariaRole='button'
-                  style={commonStyles.button}
-                  onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}
-                >
-                  <Text style={commonStyles.buttonText}> {t('delete')} </Text>
-                  <Ionicons name='trash' size={25} color='white' />
-                </TouchableOpacity>
+          <Button block primary style={commonStyles.button} ariaRole='button'  onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}>
+          <Ionicons name='trash' size={25} color='white' />
+          <Text style={commonStyles.buttonText}> {t('delete')} </Text>
+          </Button>
 
-                <TouchableOpacity
-                  ariaRole='button'
-                  style={commonStyles.button}
-                  onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}
-                >
-                  <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
-                  <Ionicons name='create' size={25} color='white' />
-                </TouchableOpacity>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}>
+          <Ionicons name='create' size={25} color='white' />
+          <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
+          </Button>
 
               </View>
             )}
             keyExtractor={(item) => item.review_id.toString()}
           />
-        </View>
+       </Container>
       )
     }
   }
 }
+
+const specific = StyleSheet.create({
+  reviewCol: {
+    backgroundColor: '#00CE9F',
+    height: 270
+  },
+
+  ratingCol: {
+    backgroundColor: '#635DB7',
+    height: 270
+  }
+  
+})
 export default GetReviews

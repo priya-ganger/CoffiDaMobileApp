@@ -153,7 +153,7 @@ render () {
                 <H3 style={commonStyles.h3}> {t('cafe_town')} {item.location_town}</H3>
                 <Grid primary style={commonStyles.grid}>
                 <Col style={commonStyles.col}>
-                  <Text style={commonStyles.headingDarkText}>Ratings:</Text>
+                  <Text style={commonStyles.headingCentreText}>Ratings:</Text>
                   <Text style={commonStyles.headingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text> 
                 <Stars
                   display={item.avg_overall_rating}

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Alert, Text, View, ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
+import { Alert, View,  ToastAndroid, TextInput, TouchableOpacity } from 'react-native'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Filter from 'bad-words'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken } from '../../utils/asyncStorage'
-
+import { Container, H1, Form, Item, Input, Label, H3, Text, Col, Button,Grid, Spinner, Icon, Textarea } from 'native-base';
 class AddReview extends Component {
   constructor (props) {
     super(props)
@@ -67,11 +67,6 @@ addReview = async () => {
   })
     .then((response) => {
       if (response.status === 201) {
-        this.overallRating_textInput.clear()
-        this.priceRating_textInput.clear()
-        this.qualityRating_textInput.clear()
-        this.clenlinessRating_textInput.clear()
-        this.reviewBody_textInput.clear()
         Alert.alert('Your review has been added!')
       } else if (response.status === 400) {
         Alert.alert('Bad Request. Try again.')
@@ -92,63 +87,72 @@ addReview = async () => {
 
 render () {
   return (
-    <View style={commonStyles.container}>
-      <Text style={commonStyles.title}>{t('your_review_for')} {this.state.location_name}</Text>
-      <TextInput
-        style={commonStyles.input}
-        placeholder={t('review_overall_rating_req')}
-        onChangeText={(overallRating) => this.setState({ overallRating })}
-        value={this.state.overallRating}
-        ariaLabel={t('review_overall_rating_req')}
-        ref={input => { this.overallRating_textInput = input }}
+    <Container>
+      <H1 style={commonStyles.h1}>{t('your_review_for')} {this.state.location_name}</H1>
+      <Form>
+
+      <Item>
+      <Icon active name='star-outline' />
+      <Input  placeholder={t('review_overall_rating_req')}
+      onChangeText={(overallRating) => this.setState({ overallRating })}
+      value={this.state.overallRating}
+      ariaLabel={t('review_overall_rating_req')}
       />
+    </Item>
 
-      <TextInput
-        style={commonStyles.input}
-        placeholder={t('review_price_rating_req')}
-        onChangeText={(priceRating) => this.setState({ priceRating })}
-        value={this.state.priceRating}
-        ariaLabel={t('review_price_rating_req')}
-        ref={input => { this.priceRating_textInput = input }}
+    <Item>
+      <Icon active name='cash-outline' />
+      <Input   placeholder={t('review_price_rating_req')}
+     onChangeText={(priceRating) => this.setState({ priceRating })}
+     value={this.state.priceRating}
+     ariaLabel={t('review_price_rating_req')}
       />
+    </Item>
 
-      <TextInput
-        style={commonStyles.input}
-        placeholder={t('review_quality_rating_req')}
-        onChangeText={(qualityRating) => this.setState({ qualityRating })}
-        value={this.state.qualityRating}
-        ariaLabel={t('review_quality_rating_req')}
-        ref={input => { this.qualityRating_textInput = input }}
+    <Item>
+      <Icon active name='checkbox-outline' />
+      <Input  placeholder={t('review_quality_rating_req')}
+     onChangeText={(qualityRating) => this.setState({ qualityRating })}
+     value={this.state.qualityRating}
+     ariaLabel={t('review_quality_rating_req')}
       />
+    </Item>
 
-      <TextInput
-        style={commonStyles.input}
-        placeholder={t('review_cleanliness_rating_req')}
-        onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
-        value={this.state.clenlinessRating}
-        ariaLabel={t('review_cleanliness_rating_req')}
-        ref={input2 => { this.clenlinessRating_textInput = input2 }}
+    <Item>
+      <Icon active name='water-outline' />
+      <Input  placeholder={t('review_cleanliness_rating_req')}
+      onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
+      value={this.state.clenlinessRating}
+      ariaLabel={t('review_cleanliness_rating_req')}
       />
+    </Item>
 
-      <TextInput
-        style={commonStyles.input}
-        placeholder={t('review_req')}
-        onChangeText={(reviewBody) => this.setState({ reviewBody })}
-        value={this.state.reviewBody}
-        ariaLabel={t('review_req')}
-        ref={input => { this.reviewBody_textInput = input }}
-      />
+    
+    <Textarea rowSpan={2} bordered 
+    placeholder={  t('review_req')} 
+    
+    onChangeText={(reviewBody) => this.setState({ reviewBody })}
+    value={this.state.reviewBody}
+    ariaLabel={t('review_req')}
+    
+    />
+  
 
-      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.addReview()}>
-        <Text style={commonStyles.buttonText}>{t('review_add')} </Text>
-        <Ionicons name='add' size={25} color='white' />
-      </TouchableOpacity>
+     
+</Form>
 
-      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('YourReviews')}>
-        <Text style={commonStyles.buttonText}> {t('my_reviews')} </Text>
-        <Ionicons name='clipboard' size={25} color='white' />
-      </TouchableOpacity>
-    </View>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.addReview()}>
+          <Ionicons name='add' size={25} color='white' />
+          <Text style={commonStyles.buttonText}>{t('review_add')} </Text>
+          </Button>
+
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('YourReviews')}>
+          <Ionicons name='clipboard' size={25} color='white' />
+          <Text style={commonStyles.buttonText}> {t('my_reviews')} </Text>
+          </Button>
+
+
+      </Container>
   )
 }
 }

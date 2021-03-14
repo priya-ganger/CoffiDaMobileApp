@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, Alert, View, Image, PermissionsAndroid, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
+import { Alert, View, Image, PermissionsAndroid, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -8,6 +8,7 @@ import { t, getLanguage } from '../locales'
 import Geolocation from 'react-native-geolocation-service'
 import { getDistance } from 'geolib'
 import { getSessionToken } from '../utils/asyncStorage'
+import { Container, H1, H2, H3, Text, Col, Button,Grid, Spinner } from 'native-base';
 
 async function requestLocationPermission () {
   try {
@@ -166,7 +167,7 @@ class Search extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-          <ActivityIndicator />
+         <Spinner color='green' />
         </View>
       )
     } else {
