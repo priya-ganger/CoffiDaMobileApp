@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {  View, TouchableOpacity, ToastAndroid, TextInput, Alert } from 'react-native'
+import { ToastAndroid, Alert } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
-import { Container, H1, Form, Item, Input, Text, Button, Icon } from 'native-base';
+import { Container, H1, Form, Item, Input, Text, Button, Icon } from 'native-base'
 
 class Login extends Component {
   constructor (props) {
@@ -31,8 +31,8 @@ class Login extends Component {
             if (response.status === 200) {
               return response.json()
             } else if (response.status === 400) {
-              //this.props.navigation.navigate('Login')
-              //ToastAndroid.show('Incorrect email address or password.Try again.')
+              // this.props.navigation.navigate('Login')
+              // ToastAndroid.show('Incorrect email address or password.Try again.')
               Alert.alert('Incorrect email address or password.Try again.')
             } else if (response.status === 500) {
               Alert.alert('Server Error. Try again.')
@@ -59,40 +59,42 @@ class Login extends Component {
       render () {
         return (
           <Container>
-            
+
             <H1 style={commonStyles.h1}>{t('welcome_text')}</H1>
             <Form>
-            <Item>
-            <Icon active name='mail' />
-            <Input placeholder='Email'
-            onChangeText={(email) => this.setState({ email })}
-            value={this.state.email}
-            ariaLabel={t('email_address')}
-            />
-          </Item>
+              <Item>
+                <Icon active name='mail' />
+                <Input
+                  placeholder='Email'
+                  onChangeText={(email) => this.setState({ email })}
+                  value={this.state.email}
+                  ariaLabel={t('email_address')}
+                />
+              </Item>
 
-          <Item>
-            <Icon active name='key' />
-            <Input placeholder='Password'
-             onChangeText={(password) => this.setState({ password })}
-             value={this.state.password}
-             ariaLabel={t('password')}
-             secureTextEntry
-            />
-          </Item>
-           </Form>
+              <Item>
+                <Icon active name='key' />
+                <Input
+                  placeholder='Password'
+                  onChangeText={(password) => this.setState({ password })}
+                  value={this.state.password}
+                  ariaLabel={t('password')}
+                  secureTextEntry
+                />
+              </Item>
+            </Form>
 
-          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.login()}>
-          <Ionicons name='log-in' size={25} color='white' />
-          <Text style={commonStyles.buttonText}>{t('login')}</Text>
-          </Button>
+            <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.login()}>
+              <Ionicons name='log-in' size={25} color='white' />
+              <Text style={commonStyles.buttonText}>{t('login')}</Text>
+            </Button>
 
-          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('SignUp')}>
-          <Ionicons name='person-add' size={25} color='white' />
-          <Text style={commonStyles.buttonText}>{t('register')}</Text>
-          </Button>
+            <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('SignUp')}>
+              <Ionicons name='person-add' size={25} color='white' />
+              <Text style={commonStyles.buttonText}>{t('register')}</Text>
+            </Button>
 
-            </Container>
+          </Container>
         )
       }
 }

@@ -13,17 +13,17 @@ const commonStyles = StyleSheet.create({
     padding: 8
   },
 
-  button: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#69A297',
-    alignItems: 'center',
-    marginLeft: 100,
-    marginRight: 100,
-    padding: 8,
-    borderRadius: 20,
-    margin: 5
-  },
+  // button: {
+  //   justifyContent: 'center',
+  //   flexDirection: 'row',
+  //   backgroundColor: '#69A297',
+  //   alignItems: 'center',
+  //   marginLeft: 100,
+  //   marginRight: 100,
+  //   padding: 8,
+  //   borderRadius: 20,
+  //   margin: 5
+  // },
 
   buttonText: {
     fontSize: 20,
@@ -61,8 +61,8 @@ const commonStyles = StyleSheet.create({
     // flexDirection: 'row',
     // alignItems: 'center',
     height: 250,
-    width: 200,
-  
+    width: 200
+
     // marginLeft: 100,
     // marginRight: 100,
     // padding: 8,
@@ -106,7 +106,7 @@ const commonStyles = StyleSheet.create({
     color: 'white'
   },
 
-  //new stuff
+  // new stuff
 
   headingText: {
     color: 'white',
@@ -126,8 +126,8 @@ const commonStyles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center'
     textAlign: 'center',
-    marginTop: 10,
-   // textDecorationLine: 'underline'
+    marginTop: 10
+    // textDecorationLine: 'underline'
   },
 
   h2: {
@@ -145,13 +145,13 @@ const commonStyles = StyleSheet.create({
   },
 
   col: {
-    backgroundColor: '#635DB7', 
+    backgroundColor: '#635DB7',
     height: 250
   },
 
   inputValidation: {
-    
-     marginTop: 5
+
+    marginTop: 5
   },
 
   headingCentreText: {
@@ -163,10 +163,9 @@ const commonStyles = StyleSheet.create({
 
   },
 
-card: {
-  margin: 5
-}
-  
+  card: {
+    margin: 5
+  }
 
 })
 

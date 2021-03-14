@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Alert, View, TouchableOpacity, Text, ToastAndroid } from 'react-native'
+import { Alert, View, ToastAndroid } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import { commonStyles } from '../../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../../locales'
 import { getSessionToken } from '../../../utils/asyncStorage'
+import { Text, Button } from 'native-base'
 
 class Camera extends Component {
   constructor (props) {
@@ -142,20 +143,20 @@ render () {
         captureAudio={false}
       />
 
-      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.takeAPhoto()}>
-        <Text style={commonStyles.buttonText}>{t('capture')} </Text>
+      <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.takeAPhoto()}>
         <Ionicons name='camera' size={25} color='white' />
-      </TouchableOpacity>
+        <Text style={commonStyles.buttonText}>{t('capture')} </Text>
+      </Button>
 
-      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
-        <Text style={commonStyles.buttonText}>{t('view_photo')} </Text>
+      <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
         <Ionicons name='image' size={25} color='white' />
-      </TouchableOpacity>
+        <Text style={commonStyles.buttonText}>{t('view_photo')} </Text>
+      </Button>
 
-      <TouchableOpacity ariaRole='button' style={commonStyles.button} onPress={() => { this.deleteAPhoto() }}>
-        <Text style={commonStyles.buttonText}>{t('delete_photo')} </Text>
+      <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => { this.deleteAPhoto() }}>
         <Ionicons name='trash' size={25} color='white' />
-      </TouchableOpacity>
+        <Text style={commonStyles.buttonText}>{t('delete_photo')} </Text>
+      </Button>
 
     </View>
   )

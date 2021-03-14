@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, ActivityIndicator, StyleSheet, ToastAndroid, Alert, FlatList, Image, SafeAreaView } from 'react-native'
+import { Text, View, StyleSheet, ToastAndroid, Alert, FlatList, Image } from 'react-native'
 import { commonStyles } from '../styles/common'
 import { t, getLanguage } from '../locales'
 import { getSessionToken, getUserId } from '../utils/asyncStorage'
-import { Container, H1, Col,Grid, Spinner } from 'native-base';
+import { Container, H1, Col, Grid, Spinner } from 'native-base'
 
 class Favourites extends Component {
   constructor (props) {
@@ -61,7 +61,7 @@ class Favourites extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-           <Spinner color='green' />
+          <Spinner color='green' />
         </View>
       )
     } else {
@@ -73,23 +73,23 @@ class Favourites extends Component {
             renderItem={({ item }) => (
               <View>
                 <Grid primary style={commonStyles.grid}>
-                <Col style={specific.col}>
-                <Text style={commonStyles.headingText}> {t('name_of_cafe')}  {item.location_name}</Text>
-                <Text style={commonStyles.headingText}> {t('cafe_town')} {item.location_town}</Text>
-                 
+                  <Col style={specific.col}>
+                    <Text style={commonStyles.headingText}> {t('name_of_cafe')}  {item.location_name}</Text>
+                    <Text style={commonStyles.headingText}> {t('cafe_town')} {item.location_town}</Text>
+
                   </Col>
                   <Image
-                  source={{ uri: item.photo_path }}
-                  style={specific.photo}
-                />
+                    source={{ uri: item.photo_path }}
+                    style={specific.photo}
+                  />
                 </Grid>
               </View>
-              
+
             )}
             keyExtractor={(item, index) => item.location_id.toString()}
           />
-          
-       </Container>
+
+        </Container>
       )
     }
   }
@@ -97,7 +97,7 @@ class Favourites extends Component {
 
 const specific = StyleSheet.create({
   col: {
-    backgroundColor: '#635DB7', 
+    backgroundColor: '#635DB7',
     height: 150
   },
 
@@ -105,7 +105,7 @@ const specific = StyleSheet.create({
     height: 150,
     width: 200
   }
-  
+
 })
 
 export default Favourites

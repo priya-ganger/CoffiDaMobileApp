@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, View, Image, PermissionsAndroid, TouchableOpacity, FlatList, ActivityIndicator, TextInput, ToastAndroid } from 'react-native'
+import { Alert, View, Image, PermissionsAndroid, FlatList, ToastAndroid } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -8,7 +8,7 @@ import { t, getLanguage } from '../locales'
 import Geolocation from 'react-native-geolocation-service'
 import { getDistance } from 'geolib'
 import { getSessionToken } from '../utils/asyncStorage'
-import { Container, H1, H2, H3, Text, Col, Button,Grid, Spinner } from 'native-base';
+import { Container, Item, Icon, Input, H2, H3, Text, Col, Button, Grid, Spinner } from 'native-base'
 
 async function requestLocationPermission () {
   try {
@@ -167,22 +167,24 @@ class Search extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-         <Spinner color='green' />
+          <Spinner color='green' />
         </View>
       )
     } else {
       return (
-        <View style={commonStyles.container}>
-          <Text style={commonStyles.title}>{t('name_of_cafe')}</Text>
-          <TextInput
-            style={commonStyles.input}
-            placeholder={t('type_here')}
-            onChangeText={(q) => this.setState({ q: q })}
-            value={this.state.q}
-            ariaLabel={t('type_here')}
-          />
+        <Container>
+          {/* <Text style={commonStyles.title}>{t('name_of_cafe')}</Text> */}
+          <Item>
+            <Icon active name='search-outline' />
+            <Input
+              placeholder={t('type_here')}
+              onChangeText={(q) => this.setState({ q: q })}
+              value={this.state.q}
+              ariaLabel={t('type_here')}
+            />
+          </Item>
 
-          <Text style={commonStyles.subheadingText}>{t('cafe_avg_overall_rating')}</Text>
+          <Text style={commonStyles.h2}>Overall Rating</Text>
           <AirbnbRating
             size={15}
             defaultRating={0}
@@ -192,13 +194,10 @@ class Search extends Component {
             reviews={['Terrible', 'Bad', 'Average', 'Good', 'Great']}
             onFinishRating={(rating) => this.ratingCompleted(rating, 'overall_rating')}
           />
-
-          <TouchableOpacity
-            ariaRole='button' style={commonStyles.button} onPress={() => this.search()}
-          >
-            <Text style={commonStyles.buttonText}>{t('search')} </Text>
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.search()}>
             <Ionicons name='search' size={25} color='white' />
-          </TouchableOpacity>
+            <Text style={commonStyles.buttonText}>{t('search')}</Text>
+          </Button>
 
           <FlatList
             data={this.state.locationData}
@@ -207,43 +206,44 @@ class Search extends Component {
                 { latitude: this.state.location.latitude, longitude: this.state.location.longitude },
                 { latitude: item.latitude, longitude: item.longitude }
               )
-
               return (
-
                 <View>
-                  <TouchableOpacity
-                    ariaRole='button' style={commonStyles.button} onPress={() => this.props.navigation.navigate('Map', { distance: dis })}
-                  >
-                    <Text style={commonStyles.buttonText}>Map </Text>
+                  <H2 style={commonStyles.h2}> {t('name_of_cafe')}  {item.location_name}</H2>
+                  <H3 style={commonStyles.h3}> {t('cafe_town')} {item.location_town}</H3>
+
+                  <Grid primary style={commonStyles.grid}>
+                    <Col style={commonStyles.col}>
+                      <Text style={commonStyles.headingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text>
+                      <Stars
+                        display={item.avg_overall_rating}
+                        half
+                        spacing={4}
+                        starSize={100}
+                        count={5}
+                        fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                        emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                        halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+                      />
+
+                      <Text style={commonStyles.headingText}> Distance: {dis} M  ({dis / 1000} KM) </Text>
+
+                    </Col>
+
+                    <Image
+                      source={{ uri: item.photo_path }}
+                      style={commonStyles.photo}
+                    />
+                  </Grid>
+                  <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Map', { distance: dis })}>
                     <Ionicons name='map' size={25} color='white' />
-                  </TouchableOpacity>
-
-                  <Text style={commonStyles.subheadingText}> {t('name_of_cafe')}  {item.location_name}</Text>
-                  <Text style={commonStyles.subheadingText}> {t('cafe_town')} {item.location_town}</Text>
-                  <Image
-                    source={{ uri: item.photo_path }}
-                    style={commonStyles.photo}
-                  />
-                  <Text style={commonStyles.subheadingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text>
-                  <Stars
-                    display={item.avg_overall_rating}
-                    half
-                    spacing={4}
-                    starSize={100}
-                    count={5}
-                    fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                    emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                    halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                  />
-
-                  <Text style={commonStyles.subheadingText}> Distance: {dis} M OR {dis / 1000} KM </Text>
-                  <Text> </Text>
+                    <Text style={commonStyles.buttonText}>Find on map </Text>
+                  </Button>
                 </View>
               )
             }}
             keyExtractor={(item, index) => item.location_id.toString()}
           />
-        </View>
+        </Container>
       )
     }
   }

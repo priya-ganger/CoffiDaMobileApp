@@ -22,15 +22,15 @@ const Stack = createStackNavigator()
 const screenOptionStyle = {
   headerStyle: {
     backgroundColor: '#635DB7'
-   // backgroundColor: '#23193D'
+    // backgroundColor: '#23193D'
   },
   headerTintColor: 'white',
-  headerTitleStyle: { 
+  headerTitleStyle: {
     fontWeight: 'bold',
     fontFamily: 'sans-serif-thin',
     fontSize: 27
- }
- // headerShown: false
+  }
+  // headerShown: false
 }
 
 const MainStackNavigator = () => {
@@ -48,7 +48,7 @@ const MainStackNavigator = () => {
         name='Login' component={Login} options={{
           title: t('login')
         }}
-        />
+      />
 
       <Stack.Screen
         name='GetReviews' component={GetReviews}
@@ -220,9 +220,10 @@ const LoginStackNavigator = () => {
       <Stack.Screen
         name='Login' component={Login} options={{
           title: t('login')
-        }} />
+        }}
+      />
 
-        <Stack.Screen
+      <Stack.Screen
         name='SignUp' component={SignUp} options={{
           title: t('sign_up')
         }}

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Alert, View, ToastAndroid, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Alert, View, ToastAndroid } from 'react-native'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
 import Filter from 'bad-words'
 import { getSessionToken } from '../../utils/asyncStorage'
-import { Container, H1, Form, Item, Input, Label, H3, Text, Col, Button,Grid, Spinner, Icon, Textarea } from 'native-base';
+import { Container, H1, Item, Input, Text, Button, Spinner, Icon, Textarea } from 'native-base'
 
 class UpdateReview extends Component {
   constructor (props) {
@@ -128,60 +128,64 @@ render () {
     )
   } else {
     return (
-     <Container>
+      <Container>
 
         <H1 style={commonStyles.h1}>{t('update_your_review_for')} {this.state.location_name}</H1>
 
         <Item>
-      <Icon active name='star-outline' />
-      <Input   placeholder={t('update_review_overall_rating')}
-      onChangeText={(overallRating) => this.setState({ overallRating })}
-      value={this.state.overallRating}
-      ariaLabel={t('update_review_overall_rating')}
-      />
-    </Item>
+          <Icon active name='star-outline' />
+          <Input
+            placeholder={t('update_review_overall_rating')}
+            onChangeText={(overallRating) => this.setState({ overallRating })}
+            value={this.state.overallRating}
+            ariaLabel={t('update_review_overall_rating')}
+          />
+        </Item>
 
-    <Item>
-      <Icon active name='cash-outline' />
-      <Input placeholder={t('update_review_price_rating')}
-     onChangeText={(priceRating) => this.setState({ priceRating })}
-     value={this.state.priceRating}
-     ariaLabel={t('update_review_price_rating')}
-      />
-    </Item>
+        <Item>
+          <Icon active name='cash-outline' />
+          <Input
+            placeholder={t('update_review_price_rating')}
+            onChangeText={(priceRating) => this.setState({ priceRating })}
+            value={this.state.priceRating}
+            ariaLabel={t('update_review_price_rating')}
+          />
+        </Item>
 
-    <Item>
-      <Icon active name='checkbox-outline' />
-      <Input   placeholder={t('update_review_quality_rating')}
-     onChangeText={(qualityRating) => this.setState({ qualityRating })}
-     value={this.state.qualityRating}
-     ariaLabel={t('update_review_quality_rating')}
-      />
-    </Item>
+        <Item>
+          <Icon active name='checkbox-outline' />
+          <Input
+            placeholder={t('update_review_quality_rating')}
+            onChangeText={(qualityRating) => this.setState({ qualityRating })}
+            value={this.state.qualityRating}
+            ariaLabel={t('update_review_quality_rating')}
+          />
+        </Item>
 
-    <Item>
-      <Icon active name='water-outline' />
-      <Input   placeholder={t('update_review_cleanliness_rating')}
-      onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
-      value={this.state.clenlinessRating}
-      ariaLabel={t('update_review_cleanliness_rating')}
-      />
-    </Item>
+        <Item>
+          <Icon active name='water-outline' />
+          <Input
+            placeholder={t('update_review_cleanliness_rating')}
+            onChangeText={(clenlinessRating) => this.setState({ clenlinessRating })}
+            value={this.state.clenlinessRating}
+            ariaLabel={t('update_review_cleanliness_rating')}
+          />
+        </Item>
 
-    <Textarea rowSpan={2} bordered 
-    placeholder={t('update_review')}
-    onChangeText={(reviewBody) => this.setState({ reviewBody })}
-    value={this.state.reviewBody}
-    ariaLabel={t('update_review')}
-    
-    />
+        <Textarea
+          rowSpan={2} bordered
+          placeholder={t('update_review')}
+          onChangeText={(reviewBody) => this.setState({ reviewBody })}
+          value={this.state.reviewBody}
+          ariaLabel={t('update_review')}
+        />
 
-        <Button block primary style={commonStyles.button} ariaRole='button'  onPress={() => this.updateReview()}>
-        <Ionicons name='create' size={25} color='white' />
-        <Text style={commonStyles.buttonText}> {t('update_btn')} </Text>
+        <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.updateReview()}>
+          <Ionicons name='create' size={25} color='white' />
+          <Text style={commonStyles.buttonText}> {t('update_btn')} </Text>
         </Button>
 
-        </Container>
+      </Container>
     )
   }
 }

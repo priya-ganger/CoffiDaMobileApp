@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import Stars from 'react-native-stars'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken } from '../../utils/asyncStorage'
-import { Container, H1, H2, Text, Col, Button,Grid, Spinner } from 'native-base';
+import { Container, H1, H2, Text, Col, Button, Grid, Spinner } from 'native-base'
 
 class GetReviews extends Component {
   constructor (props) {
@@ -164,7 +164,7 @@ class GetReviews extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-         <Spinner color='green' />
+          <Spinner color='green' />
         </View>
       )
     } else {
@@ -172,8 +172,8 @@ class GetReviews extends Component {
         <Container>
           <H1 style={commonStyles.h1}>{t('reviews_table')}</H1>
 
-          <Button block  primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('AddReview', { locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}>
-          <Ionicons name='add-circle' size={25} color='white' />
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('AddReview', { locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}>
+            <Ionicons name='add-circle' size={25} color='white' />
             <Text style={commonStyles.buttonText}>{t('add_review')}</Text>
           </Button>
 
@@ -183,91 +183,91 @@ class GetReviews extends Component {
               <View>
                 <H2 style={commonStyles.h2}> {t('name_of_cafe')} {this.state.locationData.location_name}</H2>
                 <Grid primary style={commonStyles.grid}>
-                <Col style={specific.ratingCol}>
-                <Text style={commonStyles.headingCentreText}>Ratings:</Text>
-                <Text style={commonStyles.headingText}> {t('review_overall_rating')} {item.overall_rating}</Text>
-                
-                <Stars
-                  display={item.overall_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
+                  <Col style={specific.ratingCol}>
+                    <Text style={commonStyles.headingCentreText}>Ratings:</Text>
+                    <Text style={commonStyles.headingText}> {t('review_overall_rating')} {item.overall_rating}</Text>
 
-                <Text style={commonStyles.headingText}> {t('review_price_rating')} {item.price_rating}</Text>
-                <Stars
-                  display={item.price_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
+                    <Stars
+                      display={item.overall_rating}
+                      half
+                      spacing={4}
+                      starSize={100}
+                      count={5}
+                      fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                      emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                      halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+                    />
 
-                <Text style={commonStyles.headingText}> {t('review_quality_rating')} {item.quality_rating}</Text>
-                <Stars
-                  display={item.quality_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
+                    <Text style={commonStyles.headingText}> {t('review_price_rating')} {item.price_rating}</Text>
+                    <Stars
+                      display={item.price_rating}
+                      half
+                      spacing={4}
+                      starSize={100}
+                      count={5}
+                      fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                      emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                      halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+                    />
 
-                <Text style={commonStyles.headingText}> {t('review_cleanliness_rating')} {item.clenliness_rating}</Text>
-                <Stars
-                  display={item.clenliness_rating}
-                  half
-                  spacing={4}
-                  starSize={100}
-                  count={5}
-                  fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
-                  emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
-                  halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
-                />
+                    <Text style={commonStyles.headingText}> {t('review_quality_rating')} {item.quality_rating}</Text>
+                    <Stars
+                      display={item.quality_rating}
+                      half
+                      spacing={4}
+                      starSize={100}
+                      count={5}
+                      fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                      emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                      halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+                    />
 
-            <Text style={commonStyles.headingText}> {t('likes')} {item.likes} </Text>
+                    <Text style={commonStyles.headingText}> {t('review_cleanliness_rating')} {item.clenliness_rating}</Text>
+                    <Stars
+                      display={item.clenliness_rating}
+                      half
+                      spacing={4}
+                      starSize={100}
+                      count={5}
+                      fullStar={<Ionicons name='star' size={15} style={[commonStyles.starRating]} />}
+                      emptyStar={<Ionicons name='star-outline' size={15} style={[commonStyles.starRating, commonStyles.starRatingEmpty]} />}
+                      halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
+                    />
+
+                    <Text style={commonStyles.headingText}> {t('likes')} {item.likes} </Text>
                   </Col>
                   <Col style={specific.reviewCol}>
-                <Text style={commonStyles.headingCentreText}> {t('review')} </Text>
-                <Text style={commonStyles.headingText}> {item.review_body}</Text>
-               
-                </Col>
+                    <Text style={commonStyles.headingCentreText}> {t('review')} </Text>
+                    <Text style={commonStyles.headingText}> {item.review_body}</Text>
+
+                  </Col>
                 </Grid>
 
-          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}>
-          <Ionicons name='thumbs-up-outline' size={25} color='white' />
-          <Text style={commonStyles.buttonText}>{t('like')}</Text>
-          </Button>
+                <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.likeReview(this.state.locationData.location_id, item.review_id)}>
+                  <Ionicons name='thumbs-up-outline' size={25} color='white' />
+                  <Text style={commonStyles.buttonText}>{t('like')}</Text>
+                </Button>
 
-          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}>
-          <Ionicons name='thumbs-down-outline' size={25} color='white' />
-          <Text style={commonStyles.buttonText}>{t('unlike')}</Text>
-          </Button>
+                <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.unlikeReview(this.state.locationData.location_id, item.review_id)}>
+                  <Ionicons name='thumbs-down-outline' size={25} color='white' />
+                  <Text style={commonStyles.buttonText}>{t('unlike')}</Text>
+                </Button>
 
-          <Button block primary style={commonStyles.button} ariaRole='button'  onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}>
-          <Ionicons name='trash' size={25} color='white' />
-          <Text style={commonStyles.buttonText}> {t('delete')} </Text>
-          </Button>
+                <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}>
+                  <Ionicons name='trash' size={25} color='white' />
+                  <Text style={commonStyles.buttonText}> {t('delete')} </Text>
+                </Button>
 
-          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}>
-          <Ionicons name='create' size={25} color='white' />
-          <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
-          </Button>
+                <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}>
+                  <Ionicons name='create' size={25} color='white' />
+                  <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
+                </Button>
 
               </View>
             )}
             keyExtractor={(item) => item.review_id.toString()}
           />
-       </Container>
+        </Container>
       )
     }
   }
@@ -283,6 +283,6 @@ const specific = StyleSheet.create({
     backgroundColor: '#635DB7',
     height: 270
   }
-  
+
 })
 export default GetReviews
