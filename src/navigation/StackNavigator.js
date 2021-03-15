@@ -73,13 +73,6 @@ const MainStackNavigator = () => {
       />
 
       <Stack.Screen
-        name='Camera' component={Camera}
-        options={{
-          title: t('camera')
-        }}
-      />
-
-      <Stack.Screen
         name='UpdateReview' component={UpdateReview}
         options={{
           title: t('update_your_review')
@@ -88,12 +81,6 @@ const MainStackNavigator = () => {
 
       <Stack.Screen
         name='Favourites' component={Favourites}
-      />
-
-      <Stack.Screen
-        name='Photo' component={Photo} options={{
-          title: 'Photo'
-        }}
       />
 
       <Stack.Screen
@@ -175,6 +162,20 @@ const YourReviewsStackNavigator = () => {
           title: t('your_reviews')
         }}
       />
+
+      <Stack.Screen
+        name='Photo' component={Photo} options={{
+          title: 'Photo'
+        }}
+      />
+
+      <Stack.Screen
+        name='Camera' component={Camera}
+        options={{
+          title: t('camera')
+        }}
+      />
+
     </Stack.Navigator>
   )
 }

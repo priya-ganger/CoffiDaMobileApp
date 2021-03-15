@@ -17,7 +17,9 @@ class YourReviews extends Component {
       first_name: '',
       last_name: '',
       email: '',
-      password: ''
+      password: '',
+      location_id: '',
+      review_id: ''
     }
   }
 
@@ -62,6 +64,30 @@ getUserData = async () => {
     .catch((error) => {
       ToastAndroid.show(error, ToastAndroid.SHORT)
     })
+}
+
+getAPhoto = async () => {
+  if (this.camera) {
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
+      {
+        headers: {
+          'Content-Type': 'image/jpeg',
+          'X-Authorization': await getSessionToken()
+        }
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          Alert.alert('Success')
+        } else if (response.status === 404) {
+          Alert.alert('Not Found, try again.')
+        } else if (response.status === 500) {
+          Alert.alert('Server Error. Try again.')
+        }
+      })
+      .catch((error) => {
+        ToastAndroid.show(error, ToastAndroid.SHORT)
+      })
+  }
 }
 
 render () {
@@ -142,6 +168,11 @@ render () {
               <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
                 <Ionicons name='camera' size={25} color='white' />
                 <Text style={commonStyles.buttonText}> {t('add_photo')} </Text>
+              </Button>
+
+              <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Photo', { locId: item.location.location_id, revId: item.review.review_id })}>
+                <Ionicons name='image' size={25} color='white' />
+                <Text style={commonStyles.buttonText}>{t('view_photo')} </Text>
               </Button>
 
             </View>

@@ -70,63 +70,6 @@ takeAPhoto = async () => {
   }
 }
 
-deleteAPhoto = async () => {
-  if (this.camera) {
-    const options = { quality: 0.5, base64: true }
-    const data = await this.camera.takePictureAsync(options)
-
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
-      {
-        method: 'delete',
-        headers: {
-          'Content-Type': 'image/jpeg',
-          'X-Authorization': await getSessionToken()
-        },
-        body: data
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          Alert.alert('Image has been deleted!')
-        } else if (response.status === 403) {
-          Alert.alert('Forbidden. Try again later.')
-        } else if (response.status === 401) {
-          Alert.alert('Unauthorised. Please login.')
-        } else if (response.status === 404) {
-          Alert.alert('Not Found, try again.')
-        } else if (response.status === 500) {
-          Alert.alert('Server Error. Try again.')
-        }
-      })
-      .catch((error) => {
-        ToastAndroid.show(error, ToastAndroid.SHORT)
-      })
-  }
-}
-
-getAPhoto = async () => {
-  if (this.camera) {
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
-      {
-        headers: {
-          'Content-Type': 'image/jpeg',
-          'X-Authorization': await getSessionToken()
-        }
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          Alert.alert('Success')
-        } else if (response.status === 404) {
-          Alert.alert('Not Found, try again.')
-        } else if (response.status === 500) {
-          Alert.alert('Server Error. Try again.')
-        }
-      })
-      .catch((error) => {
-        ToastAndroid.show(error, ToastAndroid.SHORT)
-      })
-  }
-}
-
 render () {
   return (
     <View style={commonStyles.container}>
@@ -146,16 +89,6 @@ render () {
       <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.takeAPhoto()}>
         <Ionicons name='camera' size={25} color='white' />
         <Text style={commonStyles.buttonText}>{t('capture')} </Text>
-      </Button>
-
-      <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Photo', { locId: this.state.location_id, revId: this.state.review_id })}>
-        <Ionicons name='image' size={25} color='white' />
-        <Text style={commonStyles.buttonText}>{t('view_photo')} </Text>
-      </Button>
-
-      <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => { this.deleteAPhoto() }}>
-        <Ionicons name='trash' size={25} color='white' />
-        <Text style={commonStyles.buttonText}>{t('delete_photo')} </Text>
       </Button>
 
     </View>
