@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { MainStackNavigator, FavouritesStackNavigator, SearchStackNavigator, YourReviewsStackNavigator, SettingsStackNavigator, ProfileStackNavigator } from './StackNavigator'
+import { MainStackNavigator, FavouritesStackNavigator, SearchStackNavigator, YourReviewsStackNavigator, ProfileStackNavigator } from './StackNavigator'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t } from '../locales'
 
@@ -19,8 +19,6 @@ const BottomTabNavigator = () => {
             iconName = focused ? 'heart' : 'heart-outline'
           } else if (route.name === t('reviews')) {
             iconName = focused ? 'clipboard' : 'clipboard-outline'
-          } else if (route.name === t('settings')) {
-            iconName = focused ? 'cog' : 'cog-outline'
           } else if (route.name === t('profile')) {
             iconName = focused ? 'person' : 'person-outline'
           } else if (route.name === t('search')) {
@@ -29,6 +27,7 @@ const BottomTabNavigator = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />
         }
+        
       })}
       tabBarOptions={{
         activeTintColor: 'tomato',
@@ -38,7 +37,6 @@ const BottomTabNavigator = () => {
       <Tab.Screen name={t('home')} component={MainStackNavigator} />
       <Tab.Screen name={t('favourites')} component={FavouritesStackNavigator} />
       <Tab.Screen name={t('reviews')} component={YourReviewsStackNavigator} />
-      <Tab.Screen name={t('settings')} component={SettingsStackNavigator} />
       <Tab.Screen name={t('profile')} component={ProfileStackNavigator} />
       <Tab.Screen name={t('search')} component={SearchStackNavigator} />
 

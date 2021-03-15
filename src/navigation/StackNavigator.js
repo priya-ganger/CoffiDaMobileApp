@@ -5,7 +5,7 @@ import Search from '../components/search'
 import Favourites from '../components/favourites'
 import Camera from '../components/reviews/image/camera'
 import Profile from '../components/accountManagement/profile'
-import Settings from '../components/settings'
+import About from '../components/about'
 import Login from '../components/accountManagement/login'
 import SignUp from '../components/accountManagement/signup'
 import LogOut from '../components/accountManagement/logout'
@@ -15,6 +15,7 @@ import UpdateReview from '../components/reviews/updateReview'
 import Photo from '../components/reviews/image/photo'
 import YourReviews from '../components/reviews/yourReviews'
 import Map from '../components/map'
+import LikedReviews from '../components/reviews/likedReviews'
 import { t } from '../locales'
 
 const Stack = createStackNavigator()
@@ -102,14 +103,21 @@ const MainStackNavigator = () => {
         }}
       />
 
+      <Stack.Screen
+        name='LikedReviews' component={LikedReviews}
+        options={{
+          title: 'Liked Reviews'
+        }}
+      />
+
     </Stack.Navigator>
   )
 }
 
-const SettingsStackNavigator = () => {
+const AboutStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name={t('settings')} component={Settings} />
+      <Stack.Screen name={'About'} component={About} />
     </Stack.Navigator>
   )
 }
@@ -119,6 +127,19 @@ const FavouritesStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
         name='Favourites' component={Favourites}
+        options={{
+          title: t('your_favourites')
+        }}
+      />
+    </Stack.Navigator>
+  )
+}
+
+const LikedReviewsStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen
+        name='LikedReviews' component={LikedReviews}
         options={{
           title: t('your_favourites')
         }}
@@ -256,4 +277,4 @@ const LogOutStackNavigator = () => {
   )
 }
 
-export { LoginStackNavigator, MainStackNavigator, SettingsStackNavigator, MapStackNavigator, UpdateReviewStackNavigator, FavouritesStackNavigator, YourReviewsStackNavigator, SearchStackNavigator, CameraStackNavigator, PhotoStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator }
+export { LoginStackNavigator, MainStackNavigator, LikedReviewsStackNavigator, AboutStackNavigator, MapStackNavigator, UpdateReviewStackNavigator, FavouritesStackNavigator, YourReviewsStackNavigator, SearchStackNavigator, CameraStackNavigator, PhotoStackNavigator, ProfileStackNavigator, GetReviewsStackNavigator, AddReviewStackNavigator, SignUpStackNavigator, LogOutStackNavigator }

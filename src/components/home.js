@@ -143,7 +143,7 @@ class Home extends Component {
 
           <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => navigation.navigate('Search')}>
             <Ionicons name='search' size={25} color='white' />
-            <Text style={commonStyles.buttonText}>{t('search')}</Text>
+            <Text style={commonStyles.buttonText}>{'Go to Search'}</Text>
           </Button>
           <FlatList
             data={this.state.locationData}

@@ -8,7 +8,7 @@ import { t, getLanguage } from '../locales'
 import Geolocation from 'react-native-geolocation-service'
 import { getDistance } from 'geolib'
 import { getSessionToken } from '../utils/asyncStorage'
-import { Container, Item, Icon, Input, H2, H3, Text, Col, Button, Grid, Spinner } from 'native-base'
+import { Container, Item, Icon, Input, H2, H3, Text, Col, Button, Grid, Spinner, Header } from 'native-base'
 
 async function requestLocationPermission () {
   try {
@@ -86,7 +86,11 @@ class Search extends Component {
           Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 500) {
           Alert.alert('Server Error. Try again.')
-        } else {
+        
+      } else if (response.status === 304) {
+        Alert.alert('Not Modified')
+      }
+         else {
           Alert.alert('Something went wrong')
         }
       })
@@ -108,21 +112,26 @@ class Search extends Component {
       url += 'q=' + this.state.q + '&'
     }
 
+
+    // if (this.state.overall_rating > 0) {
+    //   url += 'overall_rating=' + this.state.overall_rating + '&'
+    // }
+
     if (this.state.overall_rating > 0) {
-      url += 'overall_rating=' + this.state.overall_rating + '&'
+      url += 'overall_rating=' + this.state.overall_rating
     }
 
-    if (this.state.price_rating > 0) {
-      url += 'price_rating=' + this.state.price_rating + '&'
-    }
+    // if (this.state.price_rating > 0) {
+    //   url += 'price_rating=' + this.state.price_rating + '&'
+    // }
 
-    if (this.state.quality_rating > 0) {
-      url += 'quality_rating=' + this.state.quality_rating + '&'
-    }
+    // if (this.state.quality_rating > 0) {
+    //   url += 'quality_rating=' + this.state.quality_rating + '&'
+    // }
 
-    if (this.state.clenliness_rating > 0) {
-      url += 'clenliness_rating=' + this.state.clenliness_rating + '&'
-    }
+    // if (this.state.clenliness_rating > 0) {
+    //   url += 'clenliness_rating=' + this.state.clenliness_rating + '&'
+    // }
 
     this.getLocationData(url)
   }
@@ -174,7 +183,27 @@ class Search extends Component {
       return (
         <Container>
           {/* <Text style={commonStyles.title}>{t('name_of_cafe')}</Text> */}
+        
+          <Header searchBar rounded>
           <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Search" 
+            onChangeText={(q) => this.setState({ q: q })}
+            value={this.state.q}
+            ariaLabel={t('type_here')}
+            />
+            <Icon name="ios-people" />
+          </Item>
+          <Button transparent>
+            <Text>Search</Text>
+          </Button>
+        </Header>
+        
+        
+        
+        
+        
+          {/* <Item>
             <Icon active name='search-outline' />
             <Input
               placeholder={t('type_here')}
@@ -182,7 +211,7 @@ class Search extends Component {
               value={this.state.q}
               ariaLabel={t('type_here')}
             />
-          </Item>
+          </Item> */}
 
           <Text style={commonStyles.h2}>Overall Rating</Text>
           <AirbnbRating
@@ -197,6 +226,11 @@ class Search extends Component {
           <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.search()}>
             <Ionicons name='search' size={25} color='white' />
             <Text style={commonStyles.buttonText}>{t('search')}</Text>
+          </Button>
+
+          <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('LikedReviews')}>
+            <Ionicons name='ios-thumbs-up-outline' size={25} color='white' />
+            <Text style={commonStyles.buttonText}>{t('your_liked_reviews')}</Text>
           </Button>
 
           <FlatList

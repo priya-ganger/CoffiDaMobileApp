@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, ToastAndroid, Alert } from 'react-native'
+import { View, ToastAndroid, Alert, FlatList } from 'react-native'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken, getUserId } from '../../utils/asyncStorage'
-import { Container, H1, H2, Form, Spinner, Item, Input, Text, Button, Icon, Card, CardItem, Body } from 'native-base'
+import { Container, Left, Body, Right, Segment,H1, H2, Form, Spinner, Item, Input, Text, Button, Icon, Card, CardItem, Header} from 'native-base'
 
 class Profile extends Component {
   constructor (props) {
@@ -120,6 +120,7 @@ render () {
       <Container>
         <H1 style={commonStyles.h1}>{t('current_details')}</H1>
 
+
         <Card>
           <CardItem style={commonStyles.card}>
             <Body>
@@ -173,47 +174,6 @@ render () {
             />
           </Item>
         </Form>
-
-        {/* <Text style={commonStyles.subheadingText}>{t('first_name')}</Text>
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('first_name')}
-          onChangeText={(firstName) => this.setState({ firstName })}
-          value={this.state.firstName}
-          ariaLabel={t('first_name')}
-          ref={input => { this.firstName_textInput = input }}
-        />
-
-        <Text style={commonStyles.subheadingText}>{t('second_name')}</Text>
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('second_name')}
-          onChangeText={(lastName) => this.setState({ lastName })}
-          value={this.state.lastName}
-          ariaLabel={t('second_name')}
-          ref={input => { this.lastName_textInput = input }}
-        />
-
-        <Text style={commonStyles.subheadingText}>{t('email_address')}</Text>
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('email_address')}
-          onChangeText={(email) => this.setState({ email })}
-          value={this.state.email}
-          ariaLabel={t('email_address')}
-          ref={input => { this.email_textInput = input }}
-        />
-
-        <Text style={commonStyles.subheadingText}>{t('password')}</Text>
-        <TextInput
-          style={commonStyles.input}
-          placeholder={t('password')}
-          onChangeText={(password) => this.setState({ password })}
-          value={this.state.password}
-          secureTextEntry
-          ariaLabel={t('password')}
-          ref={input => { this.password_textInput = input }}
-        /> */}
 
         <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.updateUserInfo()}>
           <Ionicons name='create' size={25} color='white' />

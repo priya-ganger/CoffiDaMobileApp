@@ -149,19 +149,6 @@ render () {
           keyExtractor={(item, index) => item.review.review_id.toString()}
         />
 
-        {/* <Text style={commonStyles.title}>{t('your_liked_reviews')}</Text>
-        <FlatList
-          data={this.state.userData.liked_reviews}
-          renderItem={({ item }) => (
-            <View>
-              <Text style={commonStyles.subheadingText}>{t('name_of_cafe')} {item.location.location_name}</Text>
-              <Text style={commonStyles.subheadingText}>{t('review')} {item.review.review_body}</Text>
-              <Text> </Text>
-            </View>
-          )}
-          keyExtractor={(item, index) => item.review.review_id.toString()}
-        /> */}
-
       </Container>
     )
   }

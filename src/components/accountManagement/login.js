@@ -18,9 +18,8 @@ class Login extends Component {
       login = async () => {
         if (this.state.email === '' || this.state.password === '') {
           Alert.alert('Enter an email address and password.')
-        }
-
-        return fetch('http://10.0.2.2:3333/api/1.0.0/user/login', {
+        } else {
+          return fetch('http://10.0.2.2:3333/api/1.0.0/user/login', {
           method: 'post',
           headers: {
             'Content-Type': 'application/json'
@@ -31,6 +30,7 @@ class Login extends Component {
             if (response.status === 200) {
               return response.json()
             } else if (response.status === 400) {
+              
               // this.props.navigation.navigate('Login')
               // ToastAndroid.show('Incorrect email address or password.Try again.')
               Alert.alert('Incorrect email address or password.Try again.')
@@ -42,6 +42,9 @@ class Login extends Component {
           })
           .then(async (responseJson) => {
             await AsyncStorage.setItem('session_token', responseJson.token)
+            console.log(responseJson.token)
+            Alert.alert(responseJson.token)
+            
             await AsyncStorage.setItem('user_id', JSON.stringify(responseJson.id))
             this.props.navigation.navigate('Home')
           })
@@ -49,6 +52,9 @@ class Login extends Component {
             ToastAndroid.show(error, ToastAndroid.SHORT)
           })
       }
+        }
+
+        
 
       componentDidMount () {
         this.props.navigation.addListener('focus', () => {
