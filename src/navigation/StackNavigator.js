@@ -73,7 +73,7 @@ const MainStackNavigator = () => {
       />
 
       <Stack.Screen
-        name={t('camera')} component={Camera}
+        name='Camera' component={Camera}
         options={{
           title: t('camera')
         }}
@@ -170,7 +170,7 @@ const YourReviewsStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen
-        name={t('your_reviews')} component={YourReviews}
+        name='YourReviews' component={YourReviews}
         options={{
           title: t('your_reviews')
         }}

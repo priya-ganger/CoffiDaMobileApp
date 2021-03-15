@@ -15,6 +15,12 @@ class Login extends Component {
     }
   }
 
+  componentDidMount () {
+    this.props.navigation.addListener('focus', () => {
+      getLanguage()
+    })
+  }
+
       login = async () => {
         if (this.state.email === '' || this.state.password === '') {
           Alert.alert('Enter an email address and password.')
@@ -41,9 +47,6 @@ class Login extends Component {
             })
             .then(async (responseJson) => {
               await AsyncStorage.setItem('session_token', responseJson.token)
-              console.log(responseJson.token)
-              Alert.alert(responseJson.token)
-
               await AsyncStorage.setItem('user_id', JSON.stringify(responseJson.id))
               this.props.navigation.navigate('Home')
             })
@@ -53,11 +56,7 @@ class Login extends Component {
         }
       }
 
-      componentDidMount () {
-        this.props.navigation.addListener('focus', () => {
-          getLanguage()
-        })
-      }
+ 
 
       render () {
         return (
@@ -68,7 +67,7 @@ class Login extends Component {
               <Item>
                 <Icon active name='mail' />
                 <Input
-                  placeholder='Email'
+                  placeholder={t('email_address')}
                   onChangeText={(email) => this.setState({ email })}
                   value={this.state.email}
                   ariaLabel={t('email_address')}
@@ -78,7 +77,7 @@ class Login extends Component {
               <Item>
                 <Icon active name='key' />
                 <Input
-                  placeholder='Password'
+                  placeholder={t('password')}
                   onChangeText={(password) => this.setState({ password })}
                   value={this.state.password}
                   ariaLabel={t('password')}
