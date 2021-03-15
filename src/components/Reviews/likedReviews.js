@@ -75,7 +75,7 @@ class LikedReviews extends Component {
                     <View>
                       <Text style={commonStyles.headingText}>{t('name_of_cafe')} {item.location.location_name}</Text>
                       <CardItem style={specific.reviewCard}>
-                        <Text style={commonStyles.headingText}>{t('review')} {item.review.review_body}</Text>
+                        <Text style={commonStyles.headingDarkText}>{t('review')} {item.review.review_body}</Text>
                         <Text> </Text>
                       </CardItem>
                     </View>
@@ -94,11 +94,11 @@ class LikedReviews extends Component {
 
 const specific = StyleSheet.create({
   reviewCard: {
-    backgroundColor: '#00CE9F', height: 100
+    backgroundColor: '#FFFB7A', height: 100
   },
 
   cafeNameCard: {
-    backgroundColor: '#635DB7', height: 600
+    backgroundColor: '#887149', height: 600
   }
 
 })

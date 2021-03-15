@@ -160,7 +160,7 @@ render () {
                 </Col>
 
                 <Col style={specific.reviewCol}>
-                  <Text style={commonStyles.headingText}> {t('review_body')} {item.review.review_body}</Text>
+                  <Text style={commonStyles.headingDarkText}> {t('review_body')} {item.review.review_body}</Text>
                 </Col>
 
               </Grid>
@@ -188,12 +188,12 @@ render () {
 
 const specific = StyleSheet.create({
   reviewCol: {
-    backgroundColor: '#00CE9F',
+    backgroundColor: '#FFFB7A',
     height: 270
   },
 
   ratingCol: {
-    backgroundColor: '#635DB7',
+    backgroundColor: '#887149',
     height: 270
   }
 

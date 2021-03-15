@@ -22,7 +22,7 @@ const Stack = createStackNavigator()
 
 const screenOptionStyle = {
   headerStyle: {
-    backgroundColor: '#635DB7'
+    backgroundColor: '#887149'
     // backgroundColor: '#23193D'
   },
   headerTintColor: 'white',
@@ -89,8 +89,6 @@ const MainStackNavigator = () => {
           title: ''
         }}
       />
-
-    
 
     </Stack.Navigator>
   )
@@ -185,8 +183,8 @@ const SearchStackNavigator = () => {
         options={{
           title: 'Liked Reviews'
         }}
-      />      
-      
+      />
+
     </Stack.Navigator>
   )
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, View, Image, PermissionsAndroid, FlatList, ToastAndroid } from 'react-native'
+import { Alert, View, Image, PermissionsAndroid, FlatList, ToastAndroid, StyleSheet } from 'react-native'
 import { AirbnbRating } from 'react-native-ratings'
 import { commonStyles } from '../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -163,9 +163,10 @@ class Search extends Component {
     } else {
       return (
         <Container>
-          <Header searchBar rounded>
+          <Header searchBar rounded style={specific.col}>
             <Item>
               <Icon name='ios-search' />
+
               <Input
                 placeholder={t('search')}
                 onChangeText={(q) => this.setState({ q: q })}
@@ -248,5 +249,13 @@ class Search extends Component {
     }
   }
 }
+
+const specific = StyleSheet.create({
+  col: {
+    backgroundColor: '#887149'
+
+  }
+
+})
 
 export default Search

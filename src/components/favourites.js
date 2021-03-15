@@ -97,7 +97,7 @@ class Favourites extends Component {
 
 const specific = StyleSheet.create({
   col: {
-    backgroundColor: '#635DB7',
+    backgroundColor: '#887149',
     height: 150
   },
 
