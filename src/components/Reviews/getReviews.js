@@ -184,7 +184,7 @@ class GetReviews extends Component {
                 <H2 style={commonStyles.h2}> {t('name_of_cafe')} {this.state.locationData.location_name}</H2>
                 <Grid primary style={commonStyles.grid}>
                   <Col style={specific.ratingCol}>
-                    <Text style={commonStyles.headingCentreText}>Ratings:</Text>
+                    <Text style={commonStyles.headingCentreText}>{t('ratings')}</Text>
                     <Text style={commonStyles.headingText}> {t('review_overall_rating')} {item.overall_rating}</Text>
 
                     <Stars

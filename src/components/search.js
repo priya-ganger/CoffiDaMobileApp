@@ -86,11 +86,9 @@ class Search extends Component {
           Alert.alert('Unauthorised. Please login.')
         } else if (response.status === 500) {
           Alert.alert('Server Error. Try again.')
-        
-      } else if (response.status === 304) {
-        Alert.alert('Not Modified')
-      }
-         else {
+        } else if (response.status === 304) {
+          Alert.alert('Not Modified')
+        } else {
           Alert.alert('Something went wrong')
         }
       })
@@ -112,26 +110,9 @@ class Search extends Component {
       url += 'q=' + this.state.q + '&'
     }
 
-
-    // if (this.state.overall_rating > 0) {
-    //   url += 'overall_rating=' + this.state.overall_rating + '&'
-    // }
-
     if (this.state.overall_rating > 0) {
       url += 'overall_rating=' + this.state.overall_rating
     }
-
-    // if (this.state.price_rating > 0) {
-    //   url += 'price_rating=' + this.state.price_rating + '&'
-    // }
-
-    // if (this.state.quality_rating > 0) {
-    //   url += 'quality_rating=' + this.state.quality_rating + '&'
-    // }
-
-    // if (this.state.clenliness_rating > 0) {
-    //   url += 'clenliness_rating=' + this.state.clenliness_rating + '&'
-    // }
 
     this.getLocationData(url)
   }
@@ -182,38 +163,23 @@ class Search extends Component {
     } else {
       return (
         <Container>
-          {/* <Text style={commonStyles.title}>{t('name_of_cafe')}</Text> */}
-        
           <Header searchBar rounded>
-          <Item>
-            <Icon name="ios-search" />
-            <Input placeholder="Search" 
-            onChangeText={(q) => this.setState({ q: q })}
-            value={this.state.q}
-            ariaLabel={t('type_here')}
-            />
-            <Icon name="ios-people" />
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
-        </Header>
-        
-        
-        
-        
-        
-          {/* <Item>
-            <Icon active name='search-outline' />
-            <Input
-              placeholder={t('type_here')}
-              onChangeText={(q) => this.setState({ q: q })}
-              value={this.state.q}
-              ariaLabel={t('type_here')}
-            />
-          </Item> */}
+            <Item>
+              <Icon name='ios-search' />
+              <Input
+                placeholder={t('search')}
+                onChangeText={(q) => this.setState({ q: q })}
+                value={this.state.q}
+                ariaLabel={t('search')}
+              />
+              <Icon name='ios-people' />
+            </Item>
+            <Button transparent>
+              <Text>{t('search')}</Text>
+            </Button>
+          </Header>
 
-          <Text style={commonStyles.h2}>Overall Rating</Text>
+          <Text style={commonStyles.h2}>{t('overall_rating')}</Text>
           <AirbnbRating
             size={15}
             defaultRating={0}
@@ -259,7 +225,7 @@ class Search extends Component {
                         halfStar={<Ionicons name='star-half' size={15} style={[commonStyles.starRating]} />}
                       />
 
-                      <Text style={commonStyles.headingText}> Distance: {dis} M  ({dis / 1000} KM) </Text>
+                      <Text style={commonStyles.headingText}> {t('distance')}: {dis} M  ({dis / 1000} KM) </Text>
 
                     </Col>
 
@@ -270,7 +236,7 @@ class Search extends Component {
                   </Grid>
                   <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Map', { distance: dis })}>
                     <Ionicons name='map' size={25} color='white' />
-                    <Text style={commonStyles.buttonText}>Find on map </Text>
+                    <Text style={commonStyles.buttonText}>{t('find_on_map')} </Text>
                   </Button>
                 </View>
               )

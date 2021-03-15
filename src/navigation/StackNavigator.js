@@ -117,7 +117,12 @@ const MainStackNavigator = () => {
 const AboutStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name={'About'} component={About} />
+      <Stack.Screen
+        name='About' component={About}
+        options={{
+          title: t('about')
+        }}
+      />
     </Stack.Navigator>
   )
 }

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { View, ToastAndroid, Alert, FlatList } from 'react-native'
+import { View, ToastAndroid, Alert, FlatList, StyleSheet } from 'react-native'
 import { commonStyles } from '../../styles/common'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken, getUserId } from '../../utils/asyncStorage'
-import { Container, Left, Body, Right, Segment,H1, H2, Form, Spinner, Item, Input, Text, Button, Icon, Card, CardItem, Header} from 'native-base'
+import { Container, Body, H1, Spinner, Text, Card, CardItem } from 'native-base'
 
 class LikedReviews extends Component {
   constructor (props) {
@@ -55,43 +54,53 @@ class LikedReviews extends Component {
       })
   }
 
-render () {
-  const item = this.state.userData
-  if (this.state.isLoading) {
-    return (
-      <View>
-        <Spinner color='green' />
-      </View>
-    )
-  } else {
-    return (
-      <Container>
-    <H1 style={commonStyles.h1}>{t('your_liked_reviews')}  </H1>
-        <Card>
-            <CardItem style={{ backgroundColor: '#635DB7', height: 800 }}>
+  render () {
+    if (this.state.isLoading) {
+      return (
+        <View>
+          <Spinner color='green' />
+        </View>
+      )
+    } else {
+      return (
+        <Container>
+          <H1 style={commonStyles.h1}>{t('your_liked_reviews')}  </H1>
+          <Card>
+            <CardItem style={specific.cafeNameCard}>
               <Body>
-         
-        <FlatList
-          data={this.state.userData.liked_reviews}
-          renderItem={({ item }) => (
-            <View>
-              <Text style={commonStyles.headingText} >{t('name_of_cafe')} {item.location.location_name}</Text>
-              <CardItem style={{ backgroundColor: '#00CE9F', height: 100 }}>
-              <Text style={commonStyles.headingText} >{t('review')} {item.review.review_body}</Text>
-              <Text> </Text>
-              </CardItem>
-            </View>
-          )}
-          keyExtractor={(item, index) => item.review.review_id.toString()}
-        />
-        </Body>
+
+                <FlatList
+                  data={this.state.userData.liked_reviews}
+                  renderItem={({ item }) => (
+                    <View>
+                      <Text style={commonStyles.headingText}>{t('name_of_cafe')} {item.location.location_name}</Text>
+                      <CardItem style={specific.reviewCard}>
+                        <Text style={commonStyles.headingText}>{t('review')} {item.review.review_body}</Text>
+                        <Text> </Text>
+                      </CardItem>
+                    </View>
+                  )}
+                  keyExtractor={(item, index) => item.review.review_id.toString()}
+                />
+              </Body>
             </CardItem>
           </Card>
-       
-      </Container>
-    )
+
+        </Container>
+      )
+    }
   }
 }
-}
+
+const specific = StyleSheet.create({
+  reviewCard: {
+    backgroundColor: '#00CE9F', height: 100
+  },
+
+  cafeNameCard: {
+    backgroundColor: '#635DB7', height: 800
+  }
+
+})
 
 export default LikedReviews

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, Alert, PermissionsAndroid, ToastAndroid } from 'react-native'
+import { View, Alert, PermissionsAndroid, ToastAndroid } from 'react-native'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'
 import Geolocation from 'react-native-geolocation-service'
 import { t, getLanguage } from '../locales'
 import { getSessionToken } from '../utils/asyncStorage'
+import { Spinner } from 'native-base'
 
 async function requestLocationPermission () {
   try {
@@ -126,7 +127,7 @@ class Map extends Component {
     if (this.state.isLoading) {
       return (
         <View>
-          <Text>Loading...</Text>
+          <Spinner color='green' />
         </View>
       )
     } else {

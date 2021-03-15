@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, ToastAndroid, Alert, FlatList } from 'react-native'
+import { View, ToastAndroid, Alert } from 'react-native'
 import { commonStyles } from '../../styles/common'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { t, getLanguage } from '../../locales'
 import { getSessionToken, getUserId } from '../../utils/asyncStorage'
-import { Container, Left, Body, Right, Segment,H1, H2, Form, Spinner, Item, Input, Text, Button, Icon, Card, CardItem, Header} from 'native-base'
+import { Container, Body, H1, H2, Form, Spinner, Item, Input, Text, Button, Icon, Card, CardItem } from 'native-base'
 
 class Profile extends Component {
   constructor (props) {
@@ -119,7 +119,6 @@ render () {
     return (
       <Container>
         <H1 style={commonStyles.h1}>{t('current_details')}</H1>
-
 
         <Card>
           <CardItem style={commonStyles.card}>

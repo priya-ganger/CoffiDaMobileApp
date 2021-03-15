@@ -107,12 +107,14 @@
     "add_a_review": "Add a Review",
     "camera": "Camera",
     "update_your_review": "Update your review",
-
-    "settings": "Settings",
-
+    "about": "About",
     "favourites": "Favourites",
-    "profile": "Profile"
-    
-
-
+    "profile": "Profile",
+    "go_to_search": "Go to Search",
+    "ratings": "Ratings:",
+    "your_local_cafes": "Your Local Cafes",
+    "overall_rating": "Overall Rating",
+    "find_on_map": "Find on map",
+    "your_favourite_cafes": "Your Favourite Cafes",
+    "about_description":"CoffiDa is platform for reviewing the best local coffee spots. Anybody can use CoffiDa for finding the best local Café’s. You can publish reviews. Reviews consist of a series of ratings (e.g. quality, price, cleanliness) along with a short body of text for describing their experience. You can also comment on, and like other reviews."
 }

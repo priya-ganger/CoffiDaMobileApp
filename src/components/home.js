@@ -139,11 +139,11 @@ class Home extends Component {
     } else {
       return (
         <Container>
-          <H1 style={commonStyles.h1}>Your Local Cafes</H1>
+          <H1 style={commonStyles.h1}>{t('your_local_cafes')}</H1>
 
           <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => navigation.navigate('Search')}>
             <Ionicons name='search' size={25} color='white' />
-            <Text style={commonStyles.buttonText}>{'Go to Search'}</Text>
+            <Text style={commonStyles.buttonText}>{t('go_to_search')}</Text>
           </Button>
           <FlatList
             data={this.state.locationData}
@@ -153,7 +153,7 @@ class Home extends Component {
                 <H3 style={commonStyles.h3}> {t('cafe_town')} {item.location_town}</H3>
                 <Grid primary style={commonStyles.grid}>
                   <Col style={commonStyles.col}>
-                    <Text style={commonStyles.headingCentreText}>Ratings:</Text>
+                    <Text style={commonStyles.headingCentreText}>{t('ratings')}</Text>
                     <Text style={commonStyles.headingText}> {t('cafe_avg_overall_rating')} {item.avg_overall_rating}</Text>
                     <Stars
                       display={item.avg_overall_rating}

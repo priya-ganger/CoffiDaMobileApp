@@ -13,7 +13,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name={t('sign_up')} component={SignUpStackNavigator} />
 
       <Drawer.Screen name={t('home')} component={TabNavigator} />
-      <Drawer.Screen name={'About'} component={AboutStackNavigator} />
+      <Drawer.Screen name='About' component={AboutStackNavigator} />
       <Drawer.Screen name={t('log_out')} component={LogOutStackNavigator} />
 
     </Drawer.Navigator>

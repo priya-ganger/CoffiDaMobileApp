@@ -67,7 +67,7 @@ class Favourites extends Component {
     } else {
       return (
         <Container>
-          <H1 style={commonStyles.h1}>Your Favourite Cafes</H1>
+          <H1 style={commonStyles.h1}>{t('your_favourite_cafes')}</H1>
           <FlatList
             data={this.state.userData.favourite_locations}
             renderItem={({ item }) => (

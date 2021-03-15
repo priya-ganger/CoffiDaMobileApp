@@ -93,11 +93,6 @@ updateReview = async () => {
     })
       .then((response) => {
         if (response.status === 200) {
-          // this.overallRating_textInput.clear()
-          // this.priceRating_textInput.clear()
-          // this.qualityRating_textInput.clear()
-          // this.clenlinessRating_textInput.clear()
-          // this.reviewBody_textInput.clear()
           Alert.alert('Your review has been updated!')
           return response.JSON
         } else if (response.status === 400) {
