@@ -150,7 +150,7 @@ class Map extends Component {
             description={t('distance_from_you') + this.state.dis.toString() + 'M'}
                                                    />)}
           <Marker
-            coordinate={this.state.location}
+            coordinate={{ latitude: Number(this.state.location.latitude), longitude: Number(this.state.location.longitude) }}
             title={t('my_location')}
             pinColor='#474744'
           />

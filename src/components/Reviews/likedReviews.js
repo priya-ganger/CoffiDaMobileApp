@@ -98,7 +98,7 @@ const specific = StyleSheet.create({
   },
 
   cafeNameCard: {
-    backgroundColor: '#635DB7', height: 800
+    backgroundColor: '#635DB7', height: 600
   }
 
 })
