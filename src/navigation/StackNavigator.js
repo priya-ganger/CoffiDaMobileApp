@@ -90,12 +90,7 @@ const MainStackNavigator = () => {
         }}
       />
 
-      <Stack.Screen
-        name='LikedReviews' component={LikedReviews}
-        options={{
-          title: 'Liked Reviews'
-        }}
-      />
+    
 
     </Stack.Navigator>
   )
@@ -184,6 +179,14 @@ const SearchStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name='Search' component={Search} />
+
+      <Stack.Screen
+        name='LikedReviews' component={LikedReviews}
+        options={{
+          title: 'Liked Reviews'
+        }}
+      />      
+      
     </Stack.Navigator>
   )
 }

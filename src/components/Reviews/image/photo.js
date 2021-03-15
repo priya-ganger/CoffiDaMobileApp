@@ -39,10 +39,6 @@ class Photo extends Component {
   }
 
   deleteAPhoto = async () => {
-    // if (this.camera) {
-    //  const options = { quality: 0.5, base64: true }
-    //  const data = await this.camera.takePictureAsync(options)
-
     return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id + '/photo',
       {
         method: 'delete',
@@ -50,7 +46,6 @@ class Photo extends Component {
           'Content-Type': 'image/jpeg',
           'X-Authorization': await getSessionToken()
         }
-        //  body: data
       })
       .then((response) => {
         if (response.status === 200) {
