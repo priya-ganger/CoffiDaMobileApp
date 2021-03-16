@@ -176,7 +176,6 @@ class GetReviews extends Component {
             <Ionicons name='add-circle' size={25} color='white' />
             <Text style={commonStyles.buttonText}>{t('add_review')}</Text>
           </Button>
-
           <FlatList
             data={this.state.locationData.location_reviews}
             renderItem={({ item }) => (
@@ -267,6 +266,7 @@ class GetReviews extends Component {
             )}
             keyExtractor={(item) => item.review_id.toString()}
           />
+
         </Container>
       )
     }
