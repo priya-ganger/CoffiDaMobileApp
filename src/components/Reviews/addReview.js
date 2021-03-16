@@ -44,47 +44,52 @@ class AddReview extends Component {
   }
 
 addReview = async () => {
-  const filter = new Filter()
-  filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake',
-    'cakes', 'pastry', 'teas', 'cupcakes', 'cheesecakes', 'fruitcakes'
-  )
-
-  console.log(filter.clean(this.state.reviewBody))
-  const toAddReview = {
-
-    overall_rating: parseInt(this.state.overallRating),
-    price_rating: parseInt(this.state.priceRating),
-    quality_rating: parseInt(this.state.qualityRating),
-    clenliness_rating: parseInt(this.state.clenlinessRating),
-    review_body: (filter.clean(this.state.reviewBody))
+  if(this.state.overallRating === '' || this.state.priceRating === '' || this.state.qualityRating === '' || this.state.clenlinessRating === '' || this.state.clenlinessRating === ''){
+    Alert.alert('All fields are required.')
   }
-  return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Authorization': await getSessionToken()
-    },
-    body: JSON.stringify(toAddReview)
-
-  })
-    .then((response) => {
-      if (response.status === 201) {
-        Alert.alert('Your review has been added!')
-      } else if (response.status === 400) {
-        Alert.alert('Bad Request. Try again.')
-      } else if (response.status === 401) {
-        Alert.alert('Unauthorised. Please login.')
-      } else if (response.status === 404) {
-        Alert.alert('Not Found.Try again.')
-      } else if (response.status === 500) {
-        Alert.alert('Server Error. Try again.')
-      } else {
-        Alert.alert('Something went wrong')
-      }
+  else {
+    const filter = new Filter()
+    filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake',
+      'cakes', 'pastry', 'teas', 'cupcakes', 'cheesecakes', 'fruitcakes'
+    )
+  
+    console.log(filter.clean(this.state.reviewBody))
+    const toAddReview = {
+  
+      overall_rating: parseInt(this.state.overallRating),
+      price_rating: parseInt(this.state.priceRating),
+      quality_rating: parseInt(this.state.qualityRating),
+      clenliness_rating: parseInt(this.state.clenlinessRating),
+      review_body: (filter.clean(this.state.reviewBody))
+    }
+    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Authorization': await getSessionToken()
+      },
+      body: JSON.stringify(toAddReview)
+  
     })
-    .catch((error) => {
-      ToastAndroid.show(error, ToastAndroid.SHORT)
-    })
+      .then((response) => {
+        if (response.status === 201) {
+          Alert.alert('Your review has been added!')
+        } else if (response.status === 400) {
+          Alert.alert('Bad Request. Try again.')
+        } else if (response.status === 401) {
+          Alert.alert('Unauthorised. Please login.')
+        } else if (response.status === 404) {
+          Alert.alert('Not Found.Try again.')
+        } else if (response.status === 500) {
+          Alert.alert('Server Error. Try again.')
+        } else {
+          Alert.alert('Something went wrong')
+        }
+      })
+      .catch((error) => {
+        ToastAndroid.show(error, ToastAndroid.SHORT)
+      })
+  }
 }
 
 render () {
