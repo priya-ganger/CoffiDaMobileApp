@@ -122,7 +122,6 @@ deleteReview = async (locationId, reviewId) => {
     })
 }
 
-
 render () {
   if (this.state.isLoading) {
     return (
@@ -199,14 +198,14 @@ render () {
               </Grid>
 
               <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.deleteReview(item.location.location_id, item.review.review_id)}>
-                  <Ionicons name='trash' size={25} color='white' />
-                  <Text style={commonStyles.buttonText}> {t('delete')} </Text>
-                </Button>
+                <Ionicons name='trash' size={25} color='white' />
+                <Text style={commonStyles.buttonText}> {t('delete')} </Text>
+              </Button>
 
-                <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('UpdateReview', { reviewId: item.review.review_id, locationId: item.location.location_id, locationName: item.location.location_name })}>
-                  <Ionicons name='create' size={25} color='white' />
-                  <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
-                </Button>
+              <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('UpdateReview', { reviewId: item.review.review_id, locationId: item.location.location_id, locationName: item.location.location_name })}>
+                <Ionicons name='create' size={25} color='white' />
+                <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
+              </Button>
 
               <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('Camera', { locId: item.location.location_id, revId: item.review.review_id })}>
                 <Ionicons name='camera' size={25} color='white' />

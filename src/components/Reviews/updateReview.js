@@ -36,7 +36,7 @@ class UpdateReview extends Component {
         this.setState({ review_id: this.props.route.params.reviewId })
         this.setState({ location_name: this.props.route.params.locationName })
       }
-        console.log('Location Id: ' + locationId + 'Review Id : ' + reviewId, 'LocationName: ' + locationName)
+      console.log('Location Id: ' + locationId + 'Review Id : ' + reviewId, 'LocationName: ' + locationName)
     })
   }
 
@@ -48,70 +48,65 @@ updateReview = async () => {
   // if(this.state.overallRating === '' && this.state.priceRating === '' && this.state.qualityRating === '' && this.state.clenlinessRating === '' && this.state.clenlinessRating === ''){
   //   Alert.alert('One field is required to update this review.')
   // } else {
-    console.log(sendReviewData)
-    const filter = new Filter()
-    filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake',
-      'cakes', 'pastry', 'teas', 'cupcakes', 'cheesecakes', 'fruitcakes')
-  
-    const sendReviewData = {}
-  
-    if (this.state.overallRating !== '') {
-      sendReviewData.overall_rating = Number(this.state.overallRating)
-    }
-  
-  
-    if (this.state.priceRating !== '') {
-      sendReviewData.price_rating = Number(this.state.priceRating)
-    }
-  
-  
-    if (this.state.qualityRating !== '') {
-      sendReviewData.quality_rating = Number(this.state.qualityRating)
-    }
-  
-  
-    if (this.state.clenlinessRating !== '') {
-      sendReviewData.clenliness_rating = Number(this.state.clenlinessRating)
-    }
-   
-  
-    if (this.state.reviewBody !== '') {
-      sendReviewData.review_body = filter.clean(this.state.reviewBody)
-    }
-   
-    console.log(sendReviewData)
-    fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
-      method: 'patch',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Authorization': await getSessionToken()
-      },
-      body: JSON.stringify(sendReviewData)
-     
+  const filter = new Filter()
+  filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake',
+    'cakes', 'pastry', 'teas', 'cupcakes', 'cheesecakes', 'fruitcakes')
+
+  const sendReviewData = {}
+
+  if (this.state.overallRating !== '') {
+    sendReviewData.overall_rating = Number(this.state.overallRating)
+  }
+
+  if (this.state.priceRating !== '') {
+    sendReviewData.price_rating = Number(this.state.priceRating)
+  }
+
+  if (this.state.qualityRating !== '') {
+    sendReviewData.quality_rating = Number(this.state.qualityRating)
+  }
+
+  if (this.state.clenlinessRating !== '') {
+    sendReviewData.clenliness_rating = Number(this.state.clenlinessRating)
+  }
+
+  if (this.state.reviewBody !== '') {
+    sendReviewData.review_body = filter.clean(this.state.reviewBody)
+  }
+
+  console.log(sendReviewData)
+  fetch('http://10.0.2.2:3333/api/1.0.0/location/' + this.state.location_id + '/review/' + this.state.review_id, {
+    method: 'patch',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Authorization': await getSessionToken()
+    },
+    body: JSON.stringify(sendReviewData)
+
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        Alert.alert('Your review has been updated!')
+        return response.JSON
+      } else if (response.status === 400) {
+        console.log(sendReviewData)
+        Alert.alert('Bad Request. Try again.')
+      } else if (response.status === 401) {
+        Alert.alert('Unauthorised. Please login.')
+      } else if (response.status === 403) {
+        Alert.alert('Forbidden. You can only update your own reviews.')
+      } else if (response.status === 404) {
+        Alert.alert('Not Found.Try again.')
+      } else if (response.status === 500) {
+        Alert.alert('Server Error')
+      } else {
+        Alert.alert('Something went wrong')
+      }
     })
-      .then((response) => {
-        if (response.status === 200) {
-          Alert.alert('Your review has been updated!')
-          return response.JSON
-        } else if (response.status === 400) {
-          console.log(sendReviewData)
-          Alert.alert('Bad Request. Try again.')
-        } else if (response.status === 401) {
-          Alert.alert('Unauthorised. Please login.')
-        } else if (response.status === 403) {
-          Alert.alert('Forbidden. You can only update your own reviews.')
-        } else if (response.status === 404) {
-          Alert.alert('Not Found.Try again.')
-        } else if (response.status === 500) {
-          Alert.alert('Server Error')
-        } else {
-          Alert.alert('Something went wrong')
-        }
-      })
-      .catch((error) => {
-        ToastAndroid.show(error, ToastAndroid.SHORT)
-      })
-  //}
+    .catch((error) => {
+      ToastAndroid.show(error, ToastAndroid.SHORT)
+    })
+  // }
 }
 
 render () {

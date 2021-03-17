@@ -128,7 +128,6 @@ class GetReviews extends Component {
       })
   }
 
- 
   render () {
     if (this.state.isLoading) {
       return (
@@ -220,8 +219,6 @@ class GetReviews extends Component {
                   <Ionicons name='thumbs-down-outline' size={25} color='white' />
                   <Text style={commonStyles.buttonText}>{t('unlike')}</Text>
                 </Button>
-
-               
 
               </View>
             )}

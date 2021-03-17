@@ -44,18 +44,17 @@ class AddReview extends Component {
   }
 
 addReview = async () => {
-  if(this.state.overallRating === '' || this.state.priceRating === '' || this.state.qualityRating === '' || this.state.clenlinessRating === '' || this.state.clenlinessRating === ''){
+  if (this.state.overallRating === '' || this.state.priceRating === '' || this.state.qualityRating === '' || this.state.clenlinessRating === '' || this.state.clenlinessRating === '') {
     Alert.alert('All fields are required.')
-  }
-  else {
+  } else {
     const filter = new Filter()
     filter.addWords('cake', 'pastries', 'tea', 'pastry', 'teas', 'cupcake', 'cheesecake', 'fruitcake',
       'cakes', 'pastry', 'teas', 'cupcakes', 'cheesecakes', 'fruitcakes'
     )
-  
+
     console.log(filter.clean(this.state.reviewBody))
     const toAddReview = {
-  
+
       overall_rating: parseInt(this.state.overallRating),
       price_rating: parseInt(this.state.priceRating),
       quality_rating: parseInt(this.state.qualityRating),
@@ -69,7 +68,7 @@ addReview = async () => {
         'X-Authorization': await getSessionToken()
       },
       body: JSON.stringify(toAddReview)
-  
+
     })
       .then((response) => {
         if (response.status === 201) {

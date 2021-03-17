@@ -23,7 +23,6 @@ const Stack = createStackNavigator()
 const screenOptionStyle = {
   headerStyle: {
     backgroundColor: '#887149'
-    // backgroundColor: '#23193D'
   },
   headerTintColor: 'white',
   headerTitleStyle: {
@@ -31,7 +30,6 @@ const screenOptionStyle = {
     fontFamily: 'sans-serif-thin',
     fontSize: 27
   }
-  // headerShown: false
 }
 
 const MainStackNavigator = () => {
@@ -69,13 +67,6 @@ const MainStackNavigator = () => {
         name='YourReviews' component={YourReviews}
         options={{
           title: t('your_reviews')
-        }}
-      />
-
-      <Stack.Screen
-        name='UpdateReview' component={UpdateReview}
-        options={{
-          title: t('update_your_review')
         }}
       />
 
@@ -166,6 +157,13 @@ const YourReviewsStackNavigator = () => {
         name='Camera' component={Camera}
         options={{
           title: t('camera')
+        }}
+      />
+
+      <Stack.Screen
+        name='UpdateReview' component={UpdateReview}
+        options={{
+          title: t('update_your_review')
         }}
       />
 
