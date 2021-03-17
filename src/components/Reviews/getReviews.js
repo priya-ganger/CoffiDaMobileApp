@@ -128,38 +128,7 @@ class GetReviews extends Component {
       })
   }
 
-  deleteReview = async (locationId, reviewId) => {
-    return fetch('http://10.0.2.2:3333/api/1.0.0/location/' + locationId + '/review/' + reviewId, {
-      method: 'delete',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Authorization': await getSessionToken()
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then((response) => {
-        if (response.status === 200) {
-          Alert.alert('Your review has been deleted!')
-          this.getLocationData()
-        } else if (response.status === 400) {
-          Alert.alert('Bad Request. Try again.')
-        } else if (response.status === 401) {
-          Alert.alert('Unauthorised. Please login.')
-        } else if (response.status === 403) {
-          Alert.alert('Forbidden. You can only delete your own reviews.')
-        } else if (response.status === 404) {
-          Alert.alert('Not Found.Try again.')
-        } else if (response.status === 500) {
-          Alert.alert('Server Error. Try again.')
-        } else {
-          Alert.alert('Something went wrong')
-        }
-      })
-      .catch((error) => {
-        ToastAndroid.show(error, ToastAndroid.SHORT)
-      })
-  }
-
+ 
   render () {
     if (this.state.isLoading) {
       return (
@@ -252,15 +221,7 @@ class GetReviews extends Component {
                   <Text style={commonStyles.buttonText}>{t('unlike')}</Text>
                 </Button>
 
-                <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.deleteReview(this.state.locationData.location_id, item.review_id)}>
-                  <Ionicons name='trash' size={25} color='white' />
-                  <Text style={commonStyles.buttonText}> {t('delete')} </Text>
-                </Button>
-
-                <Button block primary style={commonStyles.button} ariaRole='button' onPress={() => this.props.navigation.navigate('UpdateReview', { locData: item, locationId: this.state.locationData.location_id, locationName: this.state.locationData.location_name })}>
-                  <Ionicons name='create' size={25} color='white' />
-                  <Text style={commonStyles.buttonText}> {t('update_review_btn')} </Text>
-                </Button>
+               
 
               </View>
             )}

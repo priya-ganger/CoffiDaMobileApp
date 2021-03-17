@@ -29,25 +29,14 @@ class UpdateReview extends Component {
     this._unsubscribe =
     this.props.navigation.addListener('focus', () => {
       getLanguage()
-      const { locationId, locData, locationName } = this.props.route.params
+      const { locationId, reviewId, locationName } = this.props.route.params
 
       if (this.props.route.params) {
         this.setState({ location_id: this.props.route.params.locationId })
+        this.setState({ review_id: this.props.route.params.reviewId })
+        this.setState({ location_name: this.props.route.params.locationName })
       }
-
-      if (this.props.route.params) {
-        this.setState({ locData: this.props.route.params.locData })
-      }
-
-      if (this.props.route.params) {
-        this.setState({ review_id: this.props.route.params.locData.review_id })
-
-        if (this.props.route.params) {
-          this.setState({ location_name: this.props.route.params.locationName })
-        }
-
-        console.log('Location Id: ' + locationId + 'LocData: ' + locData, 'LocationName: ' + locationName)
-      }
+        console.log('Location Id: ' + locationId + 'Review Id : ' + reviewId, 'LocationName: ' + locationName)
     })
   }
 
