@@ -1,6 +1,6 @@
 # CoffiDaMobileApp
 ## Mobile Applications Development Assignment - Priya Ganger (16019283)
-## Github repo: 
+## Github repo: https://github.com/priya-ganger/CoffiDaMobileApp
 
 The app includes:
 * All endpoints
