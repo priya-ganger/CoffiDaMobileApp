@@ -4,7 +4,7 @@
 
 The app includes:
 * All endpoints
-* Profanity Extention Task 
+* Profanity Extension Task 
 * Location Distance Extension Task with the use of Google Maps
 * JS Standard as a coding style
 * French translation, aria elements for accessability and styling that meets WCAG standards
