@@ -7,5 +7,5 @@ The app includes:
 * Profanity Extension Task 
 * Location Distance Extension Task with the use of Google Maps
 * JS Standard https://standardjs.com/ as a coding style with a linter (run npx standard)
-* French translation, aria elements for accessability and styling that meets WCAG standards
+* French translation, aria elements for accessibility and styling that meets WCAG standards
 * Nativebase style framework https://nativebase.io/ 
